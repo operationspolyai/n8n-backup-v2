@@ -1,0 +1,843 @@
+{
+  "active": false,
+  "connections": {
+    "Get a task": {
+      "main": [
+        [
+          {
+            "node": "If task is in 📬Assigner Autre Section",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If not a subtask": {
+      "main": [
+        [
+          {
+            "node": "Find ID of the department",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get ClickUpID of president": {
+      "main": [
+        [
+          {
+            "node": "Get ClickUp ID of Vice President",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update permissions": {
+      "main": [
+        [
+          {
+            "node": "Get name of targetted department",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update if creator is the VP of targeted department",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get ClickUp ID of Vice President": {
+      "main": [
+        [
+          {
+            "node": "Update permissions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ClickUp Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get a task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If task is in 📬Assigner Autre Section": {
+      "main": [
+        [
+          {
+            "node": "If not a subtask",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find ID of the department": {
+      "main": [
+        [
+          {
+            "node": "Get ClickUpID of president",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get ClickUp ID of VP of Operations": {
+      "main": [
+        [
+          {
+            "node": "If VP of operations is vice president of task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If VP of operations is vice president of task": {
+      "main": [
+        [
+          {
+            "node": "Update permissions assuming VP is targetted department",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If VP of operations is creating the task not in their department",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update permissions assuming VP is targetted department": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If VP of operations is creating the task in their department1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If VP of operations is creating the task not in their department": {
+      "main": [
+        [
+          {
+            "node": "Update permissions assuming VP made it NOT in their own department",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If VP of operations is creating the task in their department1": {
+      "main": [
+        [
+          {
+            "node": "Update permissions assuming VP made it in their own department",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a task": {
+      "main": [
+        [
+          {
+            "node": "Add a task tag",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get name of targetted department": {
+      "main": [
+        [
+          {
+            "node": "Get name of VP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get name of VP": {
+      "main": [
+        [
+          {
+            "node": "Update a task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update if creator is the VP of targeted department": {
+      "main": [
+        [
+          {
+            "node": "Get name of targetted department",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update if president is making task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update if president is making task": {
+      "main": [
+        [
+          {
+            "node": "Get name of targetted department",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-15T20:04:14.450Z",
+  "id": "qoLy1P77htqyC0iv",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Assign Other Tasks - Private Task",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "get",
+        "id": "={{ $json.task_id }}"
+      },
+      "type": "n8n-nodes-base.clickUp",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        -48
+      ],
+      "id": "e5fb95b9-9a16-428b-88b4-ba78cdce9f34",
+      "name": "Get a task",
+      "credentials": {
+        "clickUpOAuth2Api": {
+          "id": "c6V235Yu48q7DUPg",
+          "name": "ClickUp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "edfec811-5d3f-46a6-8bba-f2553632eee4",
+              "leftValue": "={{!$json[\"parent\"] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        288,
+        -48
+      ],
+      "id": "7ac0a9cf-6ef5-4b7d-a571-6122548f3f47",
+      "name": "If not a subtask"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select \"ClickUpID\" as \"PresidentClickUpID\"from \"Members\" m JOIN \"MemberRole\" mr ON m.\"id\"=mr.\"memberID\" where mr.\"roleID\"=3;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        736,
+        -48
+      ],
+      "id": "2d47bf31-fa9f-4772-a521-7adf72b607b3",
+      "name": "Get ClickUpID of president",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.clickup.com/api/v3/workspaces/{{ $('Get a task').item.json.team_id }}/task/{{ $('Get a task').item.json.id }}/acls",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"entries\": [\n    {\n      \"id\": \"{{ $('Get ClickUpID of president').item.json.PresidentClickUpID }}\",\n      \"kind\": \"user\",\n      \"permission_level\": 5\n    },\n    {\n      \"id\": \"{{ $json.VicePresidentClickUpID }}\",\n      \"kind\": \"user\",\n      \"permission_level\": 5\n    },\n    {\n      \"id\": \"{{ $('Get a task').item.json.creator.id }}\",\n      \"kind\": \"user\",\n      \"permission_level\": 5\n    }\n  ],\n  \"private\": true\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1184,
+        -48
+      ],
+      "id": "79a49ba8-b5dc-4c58-847d-fd157955faf5",
+      "name": "Update permissions",
+      "alwaysOutputData": false,
+      "retryOnFail": false,
+      "credentials": {
+        "clickUpOAuth2Api": {
+          "id": "c6V235Yu48q7DUPg",
+          "name": "ClickUp account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select \"ClickUpID\" as \"VicePresidentClickUpID\" from \"Members\" m JOIN \"MemberDepartment\" md ON m.\"id\"=md.\"memberID\" where md.\"departmentID\"={{ $('Find ID of the department').item.json.DepartmentID }};",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        960,
+        -48
+      ],
+      "id": "24eada49-01f4-4884-97ea-4011c3ce4efb",
+      "name": "Get ClickUp ID of Vice President",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "team": "90131880769",
+        "events": [
+          "taskCreated"
+        ],
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.clickUpTrigger",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        -48
+      ],
+      "id": "9ed51250-139c-4a53-b428-9e131b012fd9",
+      "name": "ClickUp Trigger",
+      "webhookId": "a0082970-0ae6-4e9b-a442-dae883a73c77",
+      "credentials": {
+        "clickUpOAuth2Api": {
+          "id": "c6V235Yu48q7DUPg",
+          "name": "ClickUp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c670f636-c429-4bc7-93a4-145d374f1cff",
+              "leftValue": "={{ $json.folder.name }}",
+              "rightValue": "📬Assigner Autre Section",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        64,
+        -48
+      ],
+      "id": "9b1658e0-2d9a-47db-940d-c1b76ad32198",
+      "name": "If task is in 📬Assigner Autre Section"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select id as \"DepartmentID\" from \"Department\" where \"ClickUpAssignOtherListID\"={{ $('Get a task').item.json.list.id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        512,
+        -48
+      ],
+      "id": "26c191e4-9840-4377-a38c-9f337b7219b2",
+      "name": "Find ID of the department",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select \"ClickUpID\" as \"OperationsVPClickUpID\" from \"Members\" m join \"MemberRole\" mr on m.\"id\"=mr.\"memberID\" join \"MemberDepartment\" md on m.\"id\"=md.\"memberID\" join \"Department\" d on d.\"id\"=\"departmentID\" join \"Role\" r on r.\"id\"=\"roleID\" where \"departmentName\"='Opérations' and \"roleName\"='VP';",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -384,
+        416
+      ],
+      "id": "d290a2fb-4e39-4a7d-8881-ce17ef6d5552",
+      "name": "Get ClickUp ID of VP of Operations",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "fcc5d36e-faab-48e8-95f4-ebd52888d0da",
+              "leftValue": "={{ $('Get ClickUp ID of Vice President').item.json.VicePresidentClickUpID }}",
+              "rightValue": "={{ $json.OperationsVPClickUpID }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -160,
+        416
+      ],
+      "id": "8d98c76a-1d8f-406e-bbb3-028771ac7dbc",
+      "name": "If VP of operations is vice president of task"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.clickup.com/api/v3/workspaces/{{ $('Get a task').item.json.team_id }}/task/{{ $('Get a task').item.json.id }}/acls",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"entries\": [\n    {\n      \"id\": \"{{ $('Get ClickUpID of president').item.json.PresidentClickUpID }}\",\n      \"kind\": \"user\",\n      \"permission_level\": 5\n    },\n    {\n      \"id\": \"{{ $('Get a task').item.json.creator.id }}\",\n      \"kind\": \"user\",\n      \"permission_level\": 5\n    }\n  ],\n  \"private\": true\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        64,
+        320
+      ],
+      "id": "64d39ca6-79bf-4569-9e5c-37c4223fd3b0",
+      "name": "Update permissions assuming VP is targetted department",
+      "alwaysOutputData": false,
+      "retryOnFail": false,
+      "credentials": {
+        "clickUpOAuth2Api": {
+          "id": "c6V235Yu48q7DUPg",
+          "name": "ClickUp account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "83dc20a4-747c-43b5-a7e4-bf83b12f3005",
+              "leftValue": "={{ Number($('Get a task').item.json.creator.id) }}",
+              "rightValue": "={{ $json.OperationsVPClickUpID }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "f2734114-6cee-464b-b408-d9ee220bd9e6",
+              "leftValue": "={{ Number($('Find ID of the department').item.json.DepartmentID) }}",
+              "rightValue": 7,
+              "operator": {
+                "type": "number",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        64,
+        512
+      ],
+      "id": "dc565978-2eb0-488e-82b2-6598b142753a",
+      "name": "If VP of operations is creating the task not in their department"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.clickup.com/api/v3/workspaces/{{ $('Get a task').item.json.team_id }}/task/{{ $('Get a task').item.json.id }}/acls",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"entries\": [\n    {\n      \"id\": \"{{ $('Get ClickUpID of president').item.json.PresidentClickUpID }}\",\n      \"kind\": \"user\",\n      \"permission_level\": 5\n    }\n  ],\n  \"private\": true\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        512,
+        320
+      ],
+      "id": "35bed984-2114-4418-8418-48829b6dfde8",
+      "name": "Update permissions assuming VP made it in their own department",
+      "alwaysOutputData": false,
+      "retryOnFail": false,
+      "credentials": {
+        "clickUpOAuth2Api": {
+          "id": "c6V235Yu48q7DUPg",
+          "name": "ClickUp account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.clickup.com/api/v3/workspaces/{{ $('Get a task').item.json.team_id }}/task/{{ $('Get a task').item.json.id }}/acls",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"entries\": [\n    {\n      \"id\": \"{{ $('Get ClickUpID of president').item.json.PresidentClickUpID }}\",\n      \"kind\": \"user\",\n      \"permission_level\": 5\n    },\n    {\n      \"id\": \"{{ $('Get ClickUp ID of Vice President').item.json.VicePresidentClickUpID }}\",\n      \"kind\": \"user\",\n      \"permission_level\": 5\n    }\n  ],\n  \"private\": true\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        288,
+        512
+      ],
+      "id": "e7852d93-cf7c-4ecd-835f-7f6e5d10ed1f",
+      "name": "Update permissions assuming VP made it NOT in their own department",
+      "alwaysOutputData": false,
+      "retryOnFail": false,
+      "credentials": {
+        "clickUpOAuth2Api": {
+          "id": "c6V235Yu48q7DUPg",
+          "name": "ClickUp account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "83dc20a4-747c-43b5-a7e4-bf83b12f3005",
+              "leftValue": "={{ Number($('Get a task').item.json.creator.id) }}",
+              "rightValue": "={{ $json.OperationsVPClickUpID }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "f2734114-6cee-464b-b408-d9ee220bd9e6",
+              "leftValue": "={{ Number($('Find ID of the department').item.json.DepartmentID) }}",
+              "rightValue": 7,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        288,
+        320
+      ],
+      "id": "bf7ab767-00da-43a9-a44b-dcf1db78fc70",
+      "name": "If VP of operations is creating the task in their department1"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "update",
+        "id": "={{ $('Get a task').item.json.id }}",
+        "updateFields": {
+          "addAssignees": "={{ $('Get ClickUp ID of Vice President').item.json.VicePresidentClickUpID }}",
+          "content": "=Département cible: {{ $('Get name of targetted department').item.json.departmentName }}\nVice-président: {{ $json.VPname }}\nCréateur de la tâche: {{ $('Get a task').item.json.creator.username }}\n",
+          "name": "=📬 {{ $('Get a task').item.json.name }}"
+        }
+      },
+      "type": "n8n-nodes-base.clickUp",
+      "typeVersion": 1,
+      "position": [
+        2304,
+        -48
+      ],
+      "id": "3dbeebb0-76ab-434e-b9c9-b4f00a87b6b4",
+      "name": "Update a task",
+      "credentials": {
+        "clickUpOAuth2Api": {
+          "id": "c6V235Yu48q7DUPg",
+          "name": "ClickUp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select \"departmentName\" from \"Department\" where \"id\"={{ $('Find ID of the department').item.json.DepartmentID }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1856,
+        -48
+      ],
+      "id": "5417488c-06f3-4c9a-b284-3b5aa5be39cc",
+      "name": "Get name of targetted department",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select \"name\" as \"VPname\" from \"Members\" where \"ClickUpID\"={{ $('Get ClickUp ID of Vice President').item.json.VicePresidentClickUpID }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        2080,
+        -48
+      ],
+      "id": "60d87ba8-c891-4ce2-8cae-8a454f3bbe8a",
+      "name": "Get name of VP",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "taskTag",
+        "taskId": "={{ $json.id }}",
+        "tagName": "autresec",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.clickUp",
+      "typeVersion": 1,
+      "position": [
+        2528,
+        -48
+      ],
+      "id": "5e01c879-762e-4e19-ba70-39702a8f856c",
+      "name": "Add a task tag",
+      "credentials": {
+        "clickUpOAuth2Api": {
+          "id": "c6V235Yu48q7DUPg",
+          "name": "ClickUp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.clickup.com/api/v3/workspaces/{{ $('Get a task').item.json.team_id }}/task/{{ $('Get a task').item.json.id }}/acls",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"entries\": [\n    {\n      \"id\": \"{{ $('Get ClickUpID of president').item.json.PresidentClickUpID }}\",\n      \"kind\": \"user\",\n      \"permission_level\": 5\n    },\n    {\n      \"id\": \"{{ $json.VicePresidentClickUpID }}\",\n      \"kind\": \"user\",\n      \"permission_level\": 5\n    }\n  ],\n  \"private\": true\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1408,
+        32
+      ],
+      "id": "0ea49375-3c08-461f-b2e6-c90dfb5568d5",
+      "name": "Update if creator is the VP of targeted department",
+      "alwaysOutputData": false,
+      "retryOnFail": false,
+      "credentials": {
+        "clickUpOAuth2Api": {
+          "id": "c6V235Yu48q7DUPg",
+          "name": "ClickUp account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.clickup.com/api/v3/workspaces/{{ $('Get a task').item.json.team_id }}/task/{{ $('Get a task').item.json.id }}/acls",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"entries\": [\n    {\n      \"id\": \"{{ $('Get ClickUpID of president').item.json.PresidentClickUpID }}\",\n      \"kind\": \"user\",\n      \"permission_level\": 5\n    },\n    {\n      \"id\": \"{{ $json.VicePresidentClickUpID }}\",\n      \"kind\": \"user\",\n      \"permission_level\": 5\n    }\n  ],\n  \"private\": true\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1632,
+        96
+      ],
+      "id": "5d776297-6b33-462b-a25e-8ad55efa3167",
+      "name": "Update if president is making task",
+      "alwaysOutputData": false,
+      "retryOnFail": false,
+      "credentials": {
+        "clickUpOAuth2Api": {
+          "id": "c6V235Yu48q7DUPg",
+          "name": "ClickUp account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-15T20:04:14.456Z",
+      "updatedAt": "2025-09-15T20:04:14.456Z",
+      "role": "workflow:owner",
+      "workflowId": "qoLy1P77htqyC0iv",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-15T20:09:10.000Z",
+  "versionId": "e0e1fdb1-116a-4844-8709-7034e1d4ade9"
+}
