@@ -1,0 +1,280 @@
+{
+  "active": false,
+  "connections": {
+    "Join tables": {
+      "main": [
+        [
+          {
+            "node": "Clear sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clear sheet": {
+      "main": [
+        [
+          {
+            "node": "Upload Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Join tables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Join tables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-15T20:13:07.338Z",
+  "id": "StoefqzRb12UeJNo",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Visualize SQL data as CSV",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n    m.\"id\",\n    m.\"name\",\n    m.\"email\",\n    m.\"phone_number\",\n    d.\"departmentName\",\n    r.\"roleName\"\nFROM \"Members\" m\nLEFT JOIN \"MemberRole\" mr \n  ON m.\"id\" = mr.\"memberID\"\nLEFT JOIN \"Role\" r \n  ON r.\"id\" = mr.\"roleID\"\nLEFT JOIN \"MemberDepartment\" md \n  ON m.\"id\" = md.\"memberID\"\nLEFT JOIN \"Department\" d \n  ON d.\"id\" = md.\"departmentID\";",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -160,
+        -144
+      ],
+      "id": "f477922c-de64-49b7-b62e-2895f882df17",
+      "name": "Join tables",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "clear",
+        "documentId": {
+          "__rl": true,
+          "value": "1d8Iv0yEe44K2Yoj1n3nuC3niY__k0M0s0p4V1fvre5g",
+          "mode": "list",
+          "cachedResultName": "SQL Database View",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1d8Iv0yEe44K2Yoj1n3nuC3niY__k0M0s0p4V1fvre5g/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Members",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1d8Iv0yEe44K2Yoj1n3nuC3niY__k0M0s0p4V1fvre5g/edit#gid=0"
+        },
+        "clear": "specificRows",
+        "startIndex": 2,
+        "rowsToDelete": 1000
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        128,
+        -144
+      ],
+      "id": "b07e901c-e7aa-49d6-8d20-d91a9531c084",
+      "name": "Clear sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J3rnaSuqLzWLHSYz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        96
+      ],
+      "id": "88b27581-5ff2-4e5b-9d3e-f72134cc4cd3",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "1ca6dc0e-b49e-4a64-8d2f-ab96e6c49259",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -416,
+        -176
+      ],
+      "id": "b9c54ace-6235-4dbc-8f6d-b3bc9744517e",
+      "name": "Webhook",
+      "webhookId": "1ca6dc0e-b49e-4a64-8d2f-ab96e6c49259"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1d8Iv0yEe44K2Yoj1n3nuC3niY__k0M0s0p4V1fvre5g",
+          "mode": "list",
+          "cachedResultName": "SQL Database View",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1d8Iv0yEe44K2Yoj1n3nuC3niY__k0M0s0p4V1fvre5g/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Members",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1d8Iv0yEe44K2Yoj1n3nuC3niY__k0M0s0p4V1fvre5g/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $json.name }}",
+            "email": "={{ $json.email }}",
+            "phone_number": "={{ $json.phone_number }}",
+            "departmentName": "={{ $json.departmentName }}",
+            "roleName": "={{ $json.roleName }}",
+            "member_id": "={{ $json.id }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "member_id",
+              "displayName": "member_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "phone_number",
+              "displayName": "phone_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "departmentName",
+              "displayName": "departmentName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "roleName",
+              "displayName": "roleName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "useAppend": true
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        400,
+        -128
+      ],
+      "id": "cdba7157-686c-45f8-9887-0cdb4e475d62",
+      "name": "Upload Data",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "maxTries": 2,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J3rnaSuqLzWLHSYz",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-15T20:13:07.340Z",
+      "updatedAt": "2025-09-15T20:13:07.340Z",
+      "role": "workflow:owner",
+      "workflowId": "StoefqzRb12UeJNo",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-15T20:24:12.000Z",
+  "versionId": "32209a0d-4ad5-40a0-851c-34eba9fb14f8"
+}
