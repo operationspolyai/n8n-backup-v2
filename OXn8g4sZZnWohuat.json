@@ -1166,11 +1166,20 @@
   ],
   "staticData": {
     "node:Schedule Trigger": {
-      "recurrenceRules": []
+      "recurrenceRules": [
+        12
+      ]
     }
   },
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2025-09-16T13:22:01.870Z",
+      "updatedAt": "2025-09-16T13:22:01.870Z",
+      "id": "3vgHARwkIxE5UPH8",
+      "name": "Backup"
+    }
+  ],
   "triggerCount": 1,
-  "updatedAt": "2025-09-16T13:21:35.000Z",
-  "versionId": "03f6b1a2-5d6e-49ff-985a-a71750f9f3a7"
+  "updatedAt": "2025-09-16T13:22:12.000Z",
+  "versionId": "b3f836d3-1cae-4405-9807-8c1084fca0d9"
 }
