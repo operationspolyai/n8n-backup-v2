@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Join tables": {
       "main": [
@@ -274,7 +274,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-09-15T20:24:12.000Z",
+  "triggerCount": 1,
+  "updatedAt": "2025-09-15T20:29:08.000Z",
   "versionId": "32209a0d-4ad5-40a0-851c-34eba9fb14f8"
 }
