@@ -1,0 +1,392 @@
+{
+  "active": false,
+  "connections": {
+    "random number": {
+      "main": [
+        [
+          {
+            "node": "If learnml code already exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If learnml code already exists": {
+      "main": [
+        [
+          {
+            "node": "If exists generate another one",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If exists generate another one": {
+      "main": [
+        [
+          {
+            "node": "random number",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create random code and add member to LearnML database": {
+      "main": [
+        [
+          {
+            "node": "random number",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-16T18:22:01.926Z",
+  "id": "NY5hCxozjLgksZo9",
+  "isArchived": false,
+  "meta": null,
+  "name": "Create random code and add member to LearnML database",
+  "nodes": [
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "LearnMembers",
+          "mode": "list",
+          "cachedResultName": "LearnMembers"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "CV_perm": "={{ $('Create random code and add member to LearnML database').item.json.CV_perm }}",
+            "photo_perm": "={{ $('Create random code and add member to LearnML database').item.json.photo_perm }}",
+            "ai_skill": "={{ $('Create random code and add member to LearnML database').item.json.ai_skill }}",
+            "email": "={{ $('Create random code and add member to LearnML database').item.json.email }}",
+            "name": "={{ $('Create random code and add member to LearnML database').item.json.name }}",
+            "school_level": "={{ $('Create random code and add member to LearnML database').item.json.school_level }}",
+            "school": "={{ $('Create random code and add member to LearnML database').item.json.school }}",
+            "study": "={{ $('Create random code and add member to LearnML database').item.json.study }}",
+            "tech_experience": "={{ $('Create random code and add member to LearnML database').item.json.tech_experience }}",
+            "reason": "={{ $('Create random code and add member to LearnML database').item.json.reason }}",
+            "heared": "={{ $('Create random code and add member to LearnML database').item.json.heared }}",
+            "food": "={{ $('Create random code and add member to LearnML database').item.json.food }}",
+            "t-shirt size": "={{ $('Create random code and add member to LearnML database').item.json[\"t-shirt size\"] }}",
+            "CV": "={{ $('Create random code and add member to LearnML database').item.json.CV }}",
+            "LinkedIn": "={{ $('Create random code and add member to LearnML database').item.json.LinkedIn }}",
+            "GitHub": "={{ $('Create random code and add member to LearnML database').item.json.GitHub }}",
+            "learnml_code": "={{ $('random number').item.json.randomCode }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "learnml_code",
+              "displayName": "learnml_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "school_level",
+              "displayName": "school_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "school",
+              "displayName": "school",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "study",
+              "displayName": "study",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tech_experience",
+              "displayName": "tech_experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ai_skill",
+              "displayName": "ai_skill",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "heared",
+              "displayName": "heared",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "food",
+              "displayName": "food",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "t-shirt size",
+              "displayName": "t-shirt size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CV",
+              "displayName": "CV",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "LinkedIn",
+              "displayName": "LinkedIn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GitHub",
+              "displayName": "GitHub",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CV_perm",
+              "displayName": "CV_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "photo_perm",
+              "displayName": "photo_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1808,
+        688
+      ],
+      "id": "fea3bcef-2ce7-4aea-a483-4ea9d6202d41",
+      "name": "Insert rows in a table",
+      "alwaysOutputData": false,
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Generate random integer between 0 and 999\nconst num = Math.floor(Math.random() * 1000);\n\n// Pad with leading zeros to always have 3 digits\nreturn {\n  json: {\n    randomCode: String(num).padStart(3, \"0\")\n  }\n};\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1088,
+        544
+      ],
+      "id": "0d3d0508-21d3-4615-850d-30ba092c7a11",
+      "name": "random number"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT EXISTS (\n  SELECT 1\n  FROM \"LearnMembers\"\n  WHERE learnml_code = '{{ $json.randomCode }}'\n);\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1280,
+        560
+      ],
+      "id": "f51b5fdf-2dab-49c4-92d3-49eff3a2086e",
+      "name": "If learnml code already exists",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ebaadca7-0cf6-4faf-8ada-ce5af33db6fd",
+              "leftValue": "={{ $json.exists }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1504,
+        640
+      ],
+      "id": "4ceed23f-4b16-49d9-8fad-9f6d59a63b66",
+      "name": "If exists generate another one"
+    },
+    {
+      "parameters": {
+        "inputSource": "jsonExample",
+        "jsonExample": "{\n  \"id\": 206,\n  \"learnml_code\": 321,\n  \"email\": \"massil.serik@gmail.com\",\n  \"name\": \"Massil Serik\",\n  \"school_level\": \"Université 3e année/University 3rd year\",\n  \"school\": \"Polytechnique Montréal\",\n  \"study\": \"Génie logiciel/Software engineering\",\n  \"tech_experience\": \"Python, Scikit learn, Visualisation de données/Data visualization (Matplotlib etc.), Languages de script/Scripting language (Python, Javascript, Ruby, Lua etc.), Programmation orienté objet/OOP Language (Java, C#, etc.), Back-end web development (Nest, Nuxt, Next, Express, Django, Flask, etc.), Front-end web development (React, Angular, Vue, Svelte, etc.)\",\n  \"ai_skill\": 4,\n  \"reason\": \"Learn with hand on activities\",\n  \"heared\": \"Votre école/Your school\",\n  \"food\": \"Aucun/None\",\n  \"t-shirt size\": \"M\",\n  \"CV\": \"https://drive.google.com/open?id=1S3b9Zh88iWbqCDkT8LgDzlugy-yCGFOi\",\n  \"LinkedIn\": \"linkedin.com/in/massil-serik-28a0a8266\",\n  \"GitHub\": null,\n  \"CV_perm\": true,\n  \"photo_perm\": true,\n  \"role\": \"Speaker\",\n  \"food1\": false,\n  \"food2\": false\n}\n"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        672,
+        512
+      ],
+      "id": "969a79fd-6d10-4bf6-a96b-9d09a7cf114b",
+      "name": "Create random code and add member to LearnML database"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-16T18:22:01.931Z",
+      "updatedAt": "2025-09-16T18:22:01.931Z",
+      "role": "workflow:owner",
+      "workflowId": "NY5hCxozjLgksZo9",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-16T19:59:08.000Z",
+  "versionId": "9d2a2b63-eebb-41f5-a846-29f0567723ef"
+}
