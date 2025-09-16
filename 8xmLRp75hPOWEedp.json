@@ -1,0 +1,1085 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Speakers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If email exists": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Call 'Create random code and add member to LearnML database'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If email exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'Create random code and add member to LearnML database'": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Speakers": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If email exists1": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Call 'Create random code and add member to LearnML database'1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If email exists1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'Create random code and add member to LearnML database'1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-16T16:58:02.947Z",
+  "id": "8xmLRp75hPOWEedp",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Sync LearnML Database",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        48,
+        416
+      ],
+      "id": "d0c87ab9-5f73-42e0-9b3a-805aeadfda49",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1GrRnFhmYo820LT_sfgN4XeC4EajNbu5ydHC-iF3dof4/edit?gid=2127875639#gid=2127875639",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2127875639,
+          "mode": "list",
+          "cachedResultName": "Réponses au formulaire 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GrRnFhmYo820LT_sfgN4XeC4EajNbu5ydHC-iF3dof4/edit#gid=2127875639"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        32
+      ],
+      "id": "e2a42c32-d7b7-4ff1-a96e-77990d1c2f3a",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J3rnaSuqLzWLHSYz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT EXISTS (\n  SELECT 1\n  FROM \"LearnMembers\"\n  WHERE TRIM(LOWER(email)) = TRIM(LOWER('{{ $json[\"Adresse e-mail\"] }}'))\n);\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        880,
+        -144
+      ],
+      "id": "e9758057-e301-42d5-94cb-5bc17a32f691",
+      "name": "If email exists",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ebaadca7-0cf6-4faf-8ada-ce5af33db6fd",
+              "leftValue": "={{ $json.exists }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1104,
+        -144
+      ],
+      "id": "a85907ba-092a-4f75-8105-d6b46d09446d",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        640,
+        -160
+      ],
+      "id": "5c689d27-df28-4620-b73c-71f8c1b57112",
+      "name": "Loop Over Items",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "NY5hCxozjLgksZo9",
+          "cachedResultName": "Create random code and add member to LearnML database"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ai_skill": "={{ $('Loop Over Items').item.json[\"Sur une échelle de 0 à 10, comment évalueriez-vous vos compétences et connaissances en IA et en apprentissage automatique ?\\nOn a scale from 0 to 10, how would you evaluate your ML/AI skills and knowledge?\"] }}",
+            "email": "={{ $('Loop Over Items').item.json['Adresse e-mail'] }}  ",
+            "name": "={{ $('Loop Over Items').item.json[\"Votre Nom complet: Prénom Nom\\nYour Full name\"] }}",
+            "school_level": "={{ $('Loop Over Items').item.json[\"Niveau scolaire actuel \\nCurrent school level or highest obtained\"] }}",
+            "school": "={{ $('Loop Over Items').item.json[\"Nom de votre établissement actuel\\nName of the institution you currently attend\"] }}",
+            "study": "={{ $('Loop Over Items').item.json[\"Votre domaine d'étude\\nYour current field of study\"] }}",
+            "tech_experience": "={{ $('Loop Over Items').item.json[\"Quelles technologies connaissez-vous?\\nWhich technologies do you have experience with?\"] }}",
+            "reason": "={{ $('Loop Over Items').item.json[\"Pourquoi voulez-vous participer?\\nWhy do you want to participate?\"] }}",
+            "heared": "={{ $('Loop Over Items').item.json[\"Où avez-vous entendu parler de nous ?\\nWhere did you hear about us?\"] }}",
+            "food": "={{ $('Loop Over Items').item.json[\"Restrictions alimentaires\\nFood restrictions\"] }}",
+            "t-shirt size": "={{ $('Loop Over Items').item.json[\"Votre taille de t-shirt \\nYour T-shirt size  (unisex) \"] }}",
+            "CV": "={{ $('Loop Over Items').item.json[\"Votre CV/Resume (PDF)\"] }}",
+            "LinkedIn": "={{ $('Loop Over Items').item.json[\"Votre LinkedIn \"] }}",
+            "GitHub": "={{ $('Loop Over Items').item.json[\"Votre Github\"] }}",
+            "CV_perm": "={{ $('Loop Over Items').item.json[\"Accordez-vous que l'on partage votre CV avec nos sponsors ? \\nPermission to share your CV with our fantastic sponsors\"] ==\"Je consens à ce que PolyAI partage mon CV avec les entreprises sponsorisant l’événement.\"}}",
+            "photo_perm": "={{ $('Loop Over Items').item.json[\"Autorisation d’apparaître sur les photos prises lors de l’événement\\nPermission to be in pictures taken of the event\"] ==\"Je consens à ce que PolyAI prenne des photos de l’événement sur lesquelles je pourrais apparaître.\"}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "learnml_code",
+              "displayName": "learnml_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "school_level",
+              "displayName": "school_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "school",
+              "displayName": "school",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "study",
+              "displayName": "study",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "tech_experience",
+              "displayName": "tech_experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "ai_skill",
+              "displayName": "ai_skill",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": false
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "heared",
+              "displayName": "heared",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "food",
+              "displayName": "food",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "t-shirt size",
+              "displayName": "t-shirt size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "CV",
+              "displayName": "CV",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "LinkedIn",
+              "displayName": "LinkedIn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "GitHub",
+              "displayName": "GitHub",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CV_perm",
+              "displayName": "CV_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
+            },
+            {
+              "id": "photo_perm",
+              "displayName": "photo_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        1360,
+        -128
+      ],
+      "id": "21c75866-a2ff-43e4-b2d2-0d246779020f",
+      "name": "Call 'Create random code and add member to LearnML database'"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "LearnMembers",
+          "mode": "list",
+          "cachedResultName": "LearnMembers"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "CV_perm": "={{ $('Loop Over Items').item.json[\"Accordez-vous que l'on partage votre CV avec nos sponsors ? \\nPermission to share your CV with our fantastic sponsors\"] ==\"Je consens à ce que PolyAI partage mon CV avec les entreprises sponsorisant l’événement.\"}}",
+            "photo_perm": "={{ $('Loop Over Items').item.json[\"Autorisation d’apparaître sur les photos prises lors de l’événement\\nPermission to be in pictures taken of the event\"] ==\"Je consens à ce que PolyAI prenne des photos de l’événement sur lesquelles je pourrais apparaître.\"}}",
+            "ai_skill": "={{ $('Loop Over Items').item.json[\"Sur une échelle de 0 à 10, comment évalueriez-vous vos compétences et connaissances en IA et en apprentissage automatique ?\\nOn a scale from 0 to 10, how would you evaluate your ML/AI skills and knowledge?\"] }}",
+            "email": "={{ $('Loop Over Items').item.json['Adresse e-mail'] }}  ",
+            "name": "={{ $('Loop Over Items').item.json[\"Votre Nom complet: Prénom Nom\\nYour Full name\"] }}",
+            "school_level": "={{ $('Loop Over Items').item.json[\"Niveau scolaire actuel \\nCurrent school level or highest obtained\"] }}",
+            "school": "={{ $('Loop Over Items').item.json[\"Nom de votre établissement actuel\\nName of the institution you currently attend\"] }}",
+            "study": "={{ $('Loop Over Items').item.json[\"Votre domaine d'étude\\nYour current field of study\"] }}",
+            "tech_experience": "={{ $('Loop Over Items').item.json[\"Quelles technologies connaissez-vous?\\nWhich technologies do you have experience with?\"] }}",
+            "reason": "={{ $('Loop Over Items').item.json[\"Pourquoi voulez-vous participer?\\nWhy do you want to participate?\"] }}",
+            "heared": "={{ $('Loop Over Items').item.json[\"Où avez-vous entendu parler de nous ?\\nWhere did you hear about us?\"] }}",
+            "food": "={{ $('Loop Over Items').item.json[\"Restrictions alimentaires\\nFood restrictions\"] }}",
+            "t-shirt size": "={{ $('Loop Over Items').item.json[\"Votre taille de t-shirt \\nYour T-shirt size  (unisex) \"] }}",
+            "CV": "={{ $('Loop Over Items').item.json[\"Votre CV/Resume (PDF)\"] }}",
+            "LinkedIn": "={{ $('Loop Over Items').item.json[\"Votre LinkedIn \"] }}",
+            "GitHub": "={{ $('Loop Over Items').item.json[\"Votre Github\"] }}",
+            "learnml_code": "={{ $('random number').item.json.randomCode }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "learnml_code",
+              "displayName": "learnml_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "school_level",
+              "displayName": "school_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "school",
+              "displayName": "school",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "study",
+              "displayName": "study",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tech_experience",
+              "displayName": "tech_experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ai_skill",
+              "displayName": "ai_skill",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "heared",
+              "displayName": "heared",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "food",
+              "displayName": "food",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "t-shirt size",
+              "displayName": "t-shirt size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CV",
+              "displayName": "CV",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "LinkedIn",
+              "displayName": "LinkedIn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GitHub",
+              "displayName": "GitHub",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CV_perm",
+              "displayName": "CV_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "photo_perm",
+              "displayName": "photo_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1840,
+        -96
+      ],
+      "id": "6048a957-0f4e-4fbc-8fb0-67f16af729e2",
+      "name": "Insert rows in a table",
+      "alwaysOutputData": false,
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "12f117a0-b791-4cae-8fe5-8c488069325e",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        -144
+      ],
+      "id": "71788285-73f9-436d-b67b-8748a3b06a94",
+      "name": "Webhook",
+      "webhookId": "12f117a0-b791-4cae-8fe5-8c488069325e"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1mvNLTngvPOJrXAajm2nTNelcjl2v_MOZ7WoLbiEBmkE",
+          "mode": "list",
+          "cachedResultName": "LearnML 2025 Volunteers and Speakers",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mvNLTngvPOJrXAajm2nTNelcjl2v_MOZ7WoLbiEBmkE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Feuille 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mvNLTngvPOJrXAajm2nTNelcjl2v_MOZ7WoLbiEBmkE/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        384,
+        384
+      ],
+      "id": "31818869-0b2b-4cbf-9cdf-8097f0d28b3f",
+      "name": "Speakers",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J3rnaSuqLzWLHSYz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT EXISTS (\n  SELECT 1\n  FROM \"LearnMembers\"\n  WHERE TRIM(LOWER(email)) = TRIM(LOWER('{{ $json.email }}'))\n);\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        976,
+        320
+      ],
+      "id": "e1ad9e58-7a8b-44ff-a88a-ff98a05687bd",
+      "name": "If email exists1",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ebaadca7-0cf6-4faf-8ada-ce5af33db6fd",
+              "leftValue": "={{ $json.exists }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1200,
+        320
+      ],
+      "id": "7e05d7bd-984c-4c2a-b0dc-9f59d2105397",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        736,
+        304
+      ],
+      "id": "c0018a5b-53f1-40c3-8a7f-2a598756725a",
+      "name": "Loop Over Items1",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "NY5hCxozjLgksZo9",
+          "cachedResultName": "Create random code and add member to LearnML database"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $('Loop Over Items1').item.json.email }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "learnml_code",
+              "displayName": "learnml_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "school_level",
+              "displayName": "school_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "school",
+              "displayName": "school",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "study",
+              "displayName": "study",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "tech_experience",
+              "displayName": "tech_experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "ai_skill",
+              "displayName": "ai_skill",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "heared",
+              "displayName": "heared",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "food",
+              "displayName": "food",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "t-shirt size",
+              "displayName": "t-shirt size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "CV",
+              "displayName": "CV",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "LinkedIn",
+              "displayName": "LinkedIn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "GitHub",
+              "displayName": "GitHub",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV_perm",
+              "displayName": "CV_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": true
+            },
+            {
+              "id": "photo_perm",
+              "displayName": "photo_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        1456,
+        336
+      ],
+      "id": "57942649-c09f-41a1-9d15-1455127055b1",
+      "name": "Call 'Create random code and add member to LearnML database'1"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-16T16:58:02.949Z",
+      "updatedAt": "2025-09-16T16:58:02.949Z",
+      "role": "workflow:owner",
+      "workflowId": "8xmLRp75hPOWEedp",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-09-15T22:57:19.790Z",
+      "updatedAt": "2025-09-15T22:57:19.790Z",
+      "id": "HSLYlejXa7chb6L9",
+      "name": "LearnML"
+    },
+    {
+      "createdAt": "2025-09-15T22:57:07.793Z",
+      "updatedAt": "2025-09-15T22:57:07.793Z",
+      "id": "LcPqd2vpWXLOYZdI",
+      "name": "Discord Bot"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-09-16T19:51:36.000Z",
+  "versionId": "3a718b73-196b-4c86-9d61-849e7e083b6e"
+}
