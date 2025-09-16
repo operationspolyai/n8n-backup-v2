@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Joins": {
       "main": [
@@ -108,6 +108,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-09-16T00:21:55.000Z",
+  "updatedAt": "2025-09-16T16:54:39.000Z",
   "versionId": "37e21686-2940-4e35-9262-24f565f0614a"
 }
