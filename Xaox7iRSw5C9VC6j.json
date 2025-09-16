@@ -1,0 +1,181 @@
+{
+  "active": false,
+  "connections": {
+    "Add a role to a member": {
+      "main": [
+        [
+          {
+            "node": "Get many members",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-15T21:03:21.507Z",
+  "id": "Xaox7iRSw5C9VC6j",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Discord Bot",
+  "nodes": [
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1417165264461762563",
+          "mode": "list",
+          "cachedResultName": "LearnML",
+          "cachedResultUrl": "https://discord.com/channels/1417165264461762563"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1417261355236593667",
+          "mode": "list",
+          "cachedResultName": "bot-test",
+          "cachedResultUrl": "https://discord.com/channels/1417165264461762563/1417261355236593667"
+        },
+        "content": "OMFSDGMDS OSDFMG SDF USDF",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        304,
+        0
+      ],
+      "id": "a23b8277-b0b9-4d3c-a73c-1e950aacaef6",
+      "name": "Send a message",
+      "webhookId": "f80f89d4-e130-4760-a2e3-0e131c603cbf",
+      "credentials": {
+        "discordBotApi": {
+          "id": "cxGK7pRlQxV7O0GJ",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bef32957-6e8a-43f2-9394-f77a21d515d8",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "4a1e4e56-e25c-4f68-bff2-47a11651ff03",
+      "name": "Ping",
+      "webhookId": "bef32957-6e8a-43f2-9394-f77a21d515d8"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "b0d0f9a3-3181-4089-b57b-3ecad4b61dd5",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        80,
+        -176
+      ],
+      "id": "d67423b2-2aad-43fc-9df3-508a557104ba",
+      "name": "role-channel",
+      "webhookId": "b0d0f9a3-3181-4089-b57b-3ecad4b61dd5"
+    },
+    {
+      "parameters": {
+        "resource": "member",
+        "operation": "roleAdd",
+        "guildId": {
+          "__rl": true,
+          "value": "1417165264461762563",
+          "mode": "list",
+          "cachedResultName": "LearnML",
+          "cachedResultUrl": "https://discord.com/channels/1417165264461762563"
+        },
+        "userId": {
+          "__rl": true,
+          "value": "249519957069529098",
+          "mode": "list",
+          "cachedResultName": "aurelionsol80"
+        },
+        "role": [
+          "1417263365553651843"
+        ]
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        704,
+        -144
+      ],
+      "id": "39237968-d88b-447c-9072-eaf6747537fc",
+      "name": "Add a role to a member",
+      "webhookId": "6b712158-405e-4d06-8c39-580670aeb0b0",
+      "credentials": {
+        "discordBotApi": {
+          "id": "cxGK7pRlQxV7O0GJ",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "member",
+        "guildId": {
+          "__rl": true,
+          "value": "1417165264461762563",
+          "mode": "list",
+          "cachedResultName": "LearnML",
+          "cachedResultUrl": "https://discord.com/channels/1417165264461762563"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        912,
+        -144
+      ],
+      "id": "5c94a85d-94ee-4228-b9a7-4934759ffcc0",
+      "name": "Get many members",
+      "webhookId": "7505cd21-c56d-49e0-9df4-6bac267ef3ff",
+      "credentials": {
+        "discordBotApi": {
+          "id": "cxGK7pRlQxV7O0GJ",
+          "name": "Discord Bot account"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-15T21:03:21.511Z",
+      "updatedAt": "2025-09-15T21:03:21.511Z",
+      "role": "workflow:owner",
+      "workflowId": "Xaox7iRSw5C9VC6j",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-15T22:57:00.000Z",
+  "versionId": "e4f68383-395d-4d55-9a45-9fc47e5937bd"
+}
