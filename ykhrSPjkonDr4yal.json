@@ -1,0 +1,223 @@
+{
+  "active": true,
+  "connections": {
+    "Google Calendar Trigger": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get an event": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get an event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-16T01:08:55.547Z",
+  "id": "ykhrSPjkonDr4yal",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "LearnML Schedule Announcement",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "calendarId": {
+          "__rl": true,
+          "value": "feb34736b6bb1c6e03b0dfee20039b9460f1336f5ffab1bb1e181d85ac0b00b4@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "LearnML"
+        },
+        "triggerOn": "eventStarted",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ddcf96b0-6018-4594-9a3f-5f28604dd17a",
+      "name": "Google Calendar Trigger",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "oULtXBL1wQQgGVyV",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1417165264461762563",
+          "mode": "list",
+          "cachedResultName": "LearnML",
+          "cachedResultUrl": "https://discord.com/channels/1417165264461762563"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1417166341701636198",
+          "mode": "list",
+          "cachedResultName": "📅calendrier",
+          "cachedResultUrl": "https://discord.com/channels/1417165264461762563/1417166341701636198"
+        },
+        "content": "={{ $json.myNewField }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ],
+      "id": "ba6efc23-a9f6-4fd8-9c69-e6f65d86ede2",
+      "name": "Send a message",
+      "webhookId": "c1c16933-57a1-4f5f-87ee-9a08f051eb8b",
+      "credentials": {
+        "discordBotApi": {
+          "id": "cxGK7pRlQxV7O0GJ",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Grab the description field from the first input item\nconst raw = $input.first().json.description || \"\";\n\n// 1. Replace <br> tags with newlines\nlet cleaned = raw.replace(/<br\\s*\\/?>/gi, \"\\n\");\n\n// 2. Remove <p> and </p>\ncleaned = cleaned.replace(/<\\/?p[^>]*>/gi, \"\");\n\n// 3. Remove any other weird tags like <prp?> or unknown HTML\ncleaned = cleaned.replace(/<[^>]+>/g, \"\");\n\n// 4. Trim whitespace and collapse multiple newlines into one blank line\ncleaned = cleaned.replace(/\\n\\s*\\n\\s*\\n+/g, \"\\n\\n\").trim();\n\n// Put it back into the JSON of the first item\n$input.first().json.myNewField = cleaned;\n\n// Return the modified input items\nreturn $input.all();\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        272,
+        0
+      ],
+      "id": "2857e51e-2841-45a1-afd4-e57d8303c73f",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "calendar": {
+          "__rl": true,
+          "value": "feb34736b6bb1c6e03b0dfee20039b9460f1336f5ffab1bb1e181d85ac0b00b4@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "LearnML"
+        },
+        "eventId": "4v67n8djvufmrdss0m5tprikbg",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        112,
+        -176
+      ],
+      "id": "e18b3e32-e09a-4e9a-9e5c-b9c865f586df",
+      "name": "Get an event",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "oULtXBL1wQQgGVyV",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -112,
+        -192
+      ],
+      "id": "d27e5a8a-b049-4fe5-902c-c5945bf24d34",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-16T01:08:55.551Z",
+      "updatedAt": "2025-09-16T01:08:55.551Z",
+      "role": "workflow:owner",
+      "workflowId": "ykhrSPjkonDr4yal",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": {
+    "node:Google Calendar Trigger": {
+      "lastTimeChecked": "2025-09-16T02:55:34Z"
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2025-09-15T22:57:19.790Z",
+      "updatedAt": "2025-09-15T22:57:19.790Z",
+      "id": "HSLYlejXa7chb6L9",
+      "name": "LearnML"
+    },
+    {
+      "createdAt": "2025-09-15T22:57:07.793Z",
+      "updatedAt": "2025-09-15T22:57:07.793Z",
+      "id": "LcPqd2vpWXLOYZdI",
+      "name": "Discord Bot"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-09-16T02:55:34.000Z",
+  "versionId": "376ce17a-7a46-4ea7-aa5a-4c7c6d20c83a"
+}
