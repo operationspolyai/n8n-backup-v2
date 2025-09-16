@@ -1,22 +1,22 @@
 {
   "active": true,
   "connections": {
-    "When clicking ‘Execute workflow’": {
+    "Submitting volunteer role": {
       "main": [
         [
           {
-            "node": "Send message for volunteer",
+            "node": "Get many members",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Submitting volunteer role": {
+    "Get many members": {
       "main": [
         [
           {
-            "node": "Get many members",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -29,17 +29,6 @@
         [
           {
             "node": "If",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get many members": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -63,6 +52,58 @@
           }
         ]
       ]
+    },
+    "Get many members1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Add a role to a member1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add speaker": {
+      "main": [
+        [
+          {
+            "node": "Get many members1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-09-16T15:14:23.333Z",
@@ -74,17 +115,6 @@
   "name": "Sending form by email to auto assign role",
   "nodes": [
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        0,
-        0
-      ],
-      "id": "1302a0ec-cc9b-4c3c-b9e8-2a16ee89fcd8",
-      "name": "When clicking ‘Execute workflow’"
-    },
-    {
       "parameters": {
         "httpMethod": "POST",
         "path": "24a6dfec-2a3c-4d85-8542-a73ac95e6628",
@@ -93,8 +123,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        784,
-        32
+        0,
+        400
       ],
       "id": "fe45efa0-e6b5-4a2a-9b85-22ef3635adb2",
       "name": "Submitting volunteer role",
@@ -110,8 +140,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        288,
-        16
+        -512,
+        400
       ],
       "id": "3e010815-436e-47c8-bd04-71d6597211e9",
       "name": "Send message for volunteer",
@@ -134,13 +164,15 @@
           "cachedResultUrl": "https://discord.com/channels/1417165264461762563"
         },
         "returnAll": true,
-        "options": {}
+        "options": {
+          "simplify": false
+        }
       },
       "type": "n8n-nodes-base.discord",
       "typeVersion": 2,
       "position": [
-        1040,
-        32
+        256,
+        400
       ],
       "id": "1ed17606-0ee1-4a28-9f44-873b290330fa",
       "name": "Get many members",
@@ -159,10 +191,10 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        1472,
-        -64
+        464,
+        400
       ],
-      "id": "57b927fd-146b-463d-8b88-abb1dc37e341",
+      "id": "08b5193d-dae7-4dc4-be91-577578eaac0d",
       "name": "Loop Over Items"
     },
     {
@@ -171,14 +203,14 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict",
+            "typeValidation": "loose",
             "version": 2
           },
           "conditions": [
             {
-              "id": "fc54e7a4-f3c7-40a1-befd-11f0dda1a99f",
-              "leftValue": "={{ $('Loop Over Items').item.json.user.username }}",
-              "rightValue": "={{ $('Submitting volunteer role').item.json.body.responses[1].trim() }}\n",
+              "id": "c6d1a054-e978-4083-bfb3-6e12d897e1ef",
+              "leftValue": "={{ $json.user.username }}",
+              "rightValue": "={{ $('Submitting volunteer role').item.json.body.responses[1] }}",
               "operator": {
                 "type": "string",
                 "operation": "equals",
@@ -194,10 +226,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1856,
-        -48
+        784,
+        416
       ],
-      "id": "c82743fd-6357-40ef-89cb-8d5302837ef1",
+      "id": "b14bc329-fae4-4d53-95dd-0477a539a4a0",
       "name": "If"
     },
     {
@@ -223,18 +255,172 @@
       "type": "n8n-nodes-base.discord",
       "typeVersion": 2,
       "position": [
-        2096,
-        -64
+        1056,
+        400
       ],
-      "id": "aa678d9f-e890-42d5-a3de-01887b1d3eac",
+      "id": "31749b4b-b999-4c23-a7f7-d983ab7f121c",
       "name": "Add a role to a member",
-      "webhookId": "73c80772-6c2f-471d-b66f-af7e1042867a",
+      "webhookId": "28b6259c-62a4-47e9-8afd-fd39e333ac00",
       "credentials": {
         "discordBotApi": {
           "id": "cxGK7pRlQxV7O0GJ",
           "name": "Discord Bot account"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "member",
+        "guildId": {
+          "__rl": true,
+          "value": "1417165264461762563",
+          "mode": "list",
+          "cachedResultName": "LearnML",
+          "cachedResultUrl": "https://discord.com/channels/1417165264461762563"
+        },
+        "returnAll": true,
+        "options": {
+          "simplify": false
+        }
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        288,
+        800
+      ],
+      "id": "09e22dc3-9625-44c4-bff6-e01bfc4480f2",
+      "name": "Get many members1",
+      "webhookId": "89e11b87-3967-44aa-b558-3f7b3136354a",
+      "credentials": {
+        "discordBotApi": {
+          "id": "cxGK7pRlQxV7O0GJ",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        496,
+        800
+      ],
+      "id": "7ad83569-09dc-4949-9099-c9f27a97792f",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c6d1a054-e978-4083-bfb3-6e12d897e1ef",
+              "leftValue": "={{ $json.user.username }}",
+              "rightValue": "={{ $('Add speaker').item.json.body.responses[1] }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        816,
+        816
+      ],
+      "id": "c6c01a1c-acfc-4fb9-a417-0df5785d01b1",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "resource": "member",
+        "operation": "roleAdd",
+        "guildId": {
+          "__rl": true,
+          "value": "1417165264461762563",
+          "mode": "list",
+          "cachedResultName": "LearnML",
+          "cachedResultUrl": "https://discord.com/channels/1417165264461762563"
+        },
+        "userId": {
+          "__rl": true,
+          "value": "={{ $json.user.id }}",
+          "mode": "id"
+        },
+        "role": [
+          "1417263674833375324"
+        ]
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        1088,
+        800
+      ],
+      "id": "2ee13356-2f5e-49da-8e6d-538209d9ed2d",
+      "name": "Add a role to a member1",
+      "webhookId": "28b6259c-62a4-47e9-8afd-fd39e333ac00",
+      "credentials": {
+        "discordBotApi": {
+          "id": "cxGK7pRlQxV7O0GJ",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "80alexanderr@gmail.com",
+        "subject": "Réclamer le rôle de conférencier",
+        "message": "<p><strong>Chers intervenants,</strong></p>\n\n<p>Afin d’accéder au rôle de conférencier sur le serveur <strong>Discord LearnML</strong>, nous vous invitons à remplir le formulaire ci-dessous :</p>\n\n<p>👉 <a href=\"https://docs.google.com/forms/d/e/1FAIpQLScZdz6i0r9SXupZWn4BHaRLM0eMl4am2mjQ2cdkJ3oldcXkZg/viewform?usp=sharing&ouid=104645489322864562877\">Formulaire d’inscription des conférenciers</a></p>\n\n<p>Merci pour votre implication et pour enrichir notre communauté avec vos interventions ! 🎤✨</p>\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -512,
+        688
+      ],
+      "id": "c0a72505-08c6-42ad-a2e2-84884f57a136",
+      "name": "Send message for speaker",
+      "webhookId": "73e92393-d09c-4184-ba2d-367885a6413c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "unquhRC3gfJ50lma",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "12a36965-e1a2-40fb-b507-7819142e374e",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        16,
+        800
+      ],
+      "id": "f3ba2d47-8ccc-40b2-b94e-5177e5c415ba",
+      "name": "Add speaker",
+      "webhookId": "12a36965-e1a2-40fb-b507-7819142e374e"
     }
   ],
   "origin": "n8n",
@@ -270,7 +456,7 @@
       "name": "Discord Bot"
     }
   ],
-  "triggerCount": 1,
-  "updatedAt": "2025-09-16T16:00:10.000Z",
-  "versionId": "9c66e57b-c347-4cfe-92ee-32e024c7450c"
+  "triggerCount": 2,
+  "updatedAt": "2025-09-16T16:36:32.000Z",
+  "versionId": "7eec3502-6451-465c-bebd-63f10050d312"
 }
