@@ -1,11 +1,11 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
-    "Daily Schedule": {
+    "Code": {
       "main": [
         [
           {
-            "node": "Collect all tables",
+            "node": "List tables",
             "type": "main",
             "index": 0
           }
@@ -16,7 +16,29 @@
       "main": [
         [
           {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List tables1": {
+      "main": [
+        [
+          {
             "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Daily Schedule": {
+      "main": [
+        [
+          {
+            "node": "List files from repository [GITHUB]",
             "type": "main",
             "index": 0
           }
@@ -41,22 +63,84 @@
         ]
       ]
     },
-    "Code": {
+    "Convert to File1": {
       "main": [
         [
           {
-            "node": "List tables",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Collect all tables": {
+    "Update file [GITHUB]": {
       "main": [
         [
           {
-            "node": "Loop Over Items",
+            "node": "Split to single items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file [GITHUB]": {
+      "main": [
+        [
+          {
+            "node": "Split to single items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split to single items": {
+      "main": [
+        [
+          {
+            "node": "Check if file exists in repository",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Combine file names [GITHUB]": {
+      "main": [
+        [
+          {
+            "node": "List tables1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if file exists in repository": {
+      "main": [
+        [
+          {
+            "node": "Update file [GITHUB]",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Upload file [GITHUB]",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List files from repository [GITHUB]": {
+      "main": [
+        [
+          {
+            "node": "Combine file names [GITHUB]",
             "type": "main",
             "index": 0
           }
@@ -78,17 +162,17 @@
           "interval": [
             {
               "field": "hours",
-              "hoursInterval": 24
+              "hoursInterval": 4
             }
           ]
         }
       },
-      "id": "e29a5c86-7970-4250-8300-87e17a5d5f85",
+      "id": "d137ec34-fbbc-47ca-a993-09fbd67a1473",
       "name": "Daily Schedule",
       "type": "n8n-nodes-base.scheduleTrigger",
       "position": [
-        -544,
-        -32
+        400,
+        -80
       ],
       "typeVersion": 1.2
     },
@@ -108,12 +192,12 @@
         "returnAll": true,
         "options": {}
       },
-      "id": "316a6f95-4792-4d22-9bb2-05b4a230ffe4",
+      "id": "3b00aaec-b7ec-4858-9dd0-565de962407e",
       "name": "List tables",
       "type": "n8n-nodes-base.postgres",
       "position": [
-        224,
-        128
+        1568,
+        80
       ],
       "typeVersion": 2.6,
       "credentials": {
@@ -127,12 +211,12 @@
       "parameters": {
         "options": {}
       },
-      "id": "33df5ca8-d2b3-4847-9eed-c1722ce0ee54",
+      "id": "6d188f73-1972-4952-a278-4d8489bcc7fc",
       "name": "Loop Over Items",
       "type": "n8n-nodes-base.splitInBatches",
       "position": [
-        -144,
-        -32
+        1200,
+        -80
       ],
       "typeVersion": 3
     },
@@ -140,124 +224,30 @@
       "parameters": {
         "jsCode": "return $input.all();"
       },
-      "id": "39352928-2c72-45e4-9757-e0ff59e8ac81",
+      "id": "00dcefec-0411-4d99-9ca0-705fc7e5facf",
       "name": "Code",
       "type": "n8n-nodes-base.code",
       "position": [
-        16,
-        128
-      ],
-      "typeVersion": 2,
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "batchSize": 1,
-        "options": {}
-      },
-      "id": "de95335d-df1e-4468-821d-fd2c4e355392",
-      "name": "Split to single items",
-      "type": "n8n-nodes-base.splitInBatches",
-      "position": [
-        688,
-        -48
+        1360,
+        80
       ],
       "typeVersion": 2
     },
     {
       "parameters": {
-        "content": "## Get postgres table data\nReturn a list of existing tables and data in the postgres.  \nConvert them to csv",
-        "height": 547,
-        "width": 998,
-        "color": 5
-      },
-      "id": "145b825d-f613-41e5-92d1-037ab99d0470",
-      "name": "Sticky Note",
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        -400,
-        -192
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "content": "## Make a list of existing files\nCreate backup if its a new table. \nUpdate backup if there is new data in the table",
-        "height": 547,
-        "width": 694,
-        "color": 7
-      },
-      "id": "b600fd94-5f95-4da4-b2e2-47a7a17807c8",
-      "name": "Sticky Note1",
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        624,
-        -192
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "content": "![postgres table](https://articles.emp0.com/wp-content/uploads/2025/08/backup-postgres-to-github-tables.png)",
-        "height": 195,
-        "width": 374,
-        "color": 7
-      },
-      "id": "798a98dd-9a5d-4962-8ea0-50e5c41e6c17",
-      "name": "Sticky Note3",
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        -80,
-        384
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "content": "![github backup](https://articles.emp0.com/wp-content/uploads/2025/08/backup-postgres-to-github-repo.png)",
-        "height": 259,
-        "width": 694,
-        "color": 7
-      },
-      "id": "5e20cea6-1bfc-4390-8dd8-66802631a71f",
-      "name": "Sticky Note4",
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        624,
-        384
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "resource": "folder",
-        "driveId": {
-          "__rl": true,
-          "mode": "list",
-          "value": "My Drive"
-        },
-        "folderId": {
-          "__rl": true,
-          "mode": "list",
-          "value": "root",
-          "cachedResultName": "/ (Root folder)"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        1024,
-        16
-      ],
-      "id": "bbfd6c88-6a58-4ecd-927c-0b089309e832",
-      "name": "Create folder",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "yZgYj2QPpVHC4eCc",
-          "name": "Google Drive account"
+        "binaryPropertyName": "=data",
+        "options": {
+          "fileName": "={{ $('List tables1').item.json.table_name }}"
         }
-      }
+      },
+      "id": "39177c6f-289c-40bf-adf9-69dd863c101a",
+      "name": "Convert to File1",
+      "type": "n8n-nodes-base.convertToFile",
+      "position": [
+        1776,
+        80
+      ],
+      "typeVersion": 1.1
     },
     {
       "parameters": {
@@ -284,12 +274,12 @@
         },
         "options": {}
       },
-      "id": "3db58cde-b57f-4ae3-8dde-a7229090b85a",
-      "name": "Collect all tables",
+      "id": "eb6638d7-a078-45f7-a5ce-b8644bdd0f74",
+      "name": "List tables1",
       "type": "n8n-nodes-base.postgres",
       "position": [
-        -336,
-        -32
+        1008,
+        -80
       ],
       "typeVersion": 2.6,
       "credentials": {
@@ -298,6 +288,248 @@
           "name": "Postgres account"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "list",
+        "owner": {
+          "__rl": true,
+          "value": "https://github.com/operationspolyai",
+          "mode": "url"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "sql-backup",
+          "mode": "list",
+          "cachedResultName": "sql-backup",
+          "cachedResultUrl": "https://github.com/operationspolyai/sql-backup"
+        },
+        "filePath": "="
+      },
+      "id": "2e497dc4-d8df-4339-a54d-d5149f4708e7",
+      "name": "List files from repository [GITHUB]",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        576,
+        -80
+      ],
+      "webhookId": "f7310d6a-1573-4848-9757-f9a75e359e73",
+      "typeVersion": 1,
+      "alwaysOutputData": true,
+      "credentials": {
+        "githubApi": {
+          "id": "n0Y167j70TL0upr1",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "aggregateItems",
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "name"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6dacce94-ecfc-4280-8d90-e6806205756e",
+      "name": "Combine file names [GITHUB]",
+      "type": "n8n-nodes-base.itemLists",
+      "position": [
+        768,
+        -80
+      ],
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "3b3f886d-4ca8-4f04-a61f-e0351d4e78c4",
+      "name": "Split to single items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "position": [
+        2032,
+        -96
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $node['Combine file names [GITHUB]'].json.name }}",
+              "operation": "contains",
+              "value2": "={{ $binary.data.fileName }}"
+            }
+          ]
+        }
+      },
+      "id": "93c19ef1-4d6c-432f-ab3d-6d61213cab79",
+      "name": "Check if file exists in repository",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        2272,
+        -112
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "https://github.com/operationspolyai",
+          "mode": "url"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "sql-backup",
+          "mode": "list",
+          "cachedResultName": "sql-backup",
+          "cachedResultUrl": "https://github.com/operationspolyai/sql-backup"
+        },
+        "filePath": "={{ $binary.data.fileName }}",
+        "binaryData": true,
+        "commitMessage": "=backup-{{ $now.toMillis() }}"
+      },
+      "id": "3c622f89-2fc7-4fc8-9e8a-e8f5d18fc2f8",
+      "name": "Update file [GITHUB]",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        2496,
+        -112
+      ],
+      "webhookId": "fb5f5095-cf60-4421-8b83-91041cfc8929",
+      "typeVersion": 1,
+      "credentials": {
+        "githubApi": {
+          "id": "n0Y167j70TL0upr1",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "https://github.com/operationspolyai",
+          "mode": "url"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "sql-backup",
+          "mode": "list",
+          "cachedResultName": "sql-backup",
+          "cachedResultUrl": "https://github.com/operationspolyai/sql-backup"
+        },
+        "filePath": "={{ $binary.data.fileName }}",
+        "binaryData": true,
+        "commitMessage": "={{ 'backup-' + new Date().toISOString().slice(0,10) }}\n"
+      },
+      "id": "f9a8c27b-6fdc-437d-bbd2-204b3229e630",
+      "name": "Upload file [GITHUB]",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        2496,
+        96
+      ],
+      "webhookId": "17b56fbd-32da-4e39-ae22-8c01a7b4bbb6",
+      "typeVersion": 1,
+      "credentials": {
+        "githubApi": {
+          "id": "n0Y167j70TL0upr1",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Get postgres table data\nReturn a list of existing tables and data in the postgres.  \nConvert them to csv",
+        "height": 547,
+        "width": 998,
+        "color": 5
+      },
+      "id": "f8fb4bf8-a9ef-483d-95fb-decff1701827",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        944,
+        -240
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Make a list of existing files\nCreate backup if its a new table. \nUpdate backup if there is new data in the table",
+        "height": 547,
+        "width": 694,
+        "color": 7
+      },
+      "id": "61b9cb37-8e0e-4f55-8e26-ed93a75861b1",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1968,
+        -240
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "![postgres table](https://articles.emp0.com/wp-content/uploads/2025/08/backup-postgres-to-github-tables.png)",
+        "height": 195,
+        "width": 374,
+        "color": 7
+      },
+      "id": "55574399-e323-48a2-939a-a063175ef829",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1264,
+        336
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "![github backup](https://articles.emp0.com/wp-content/uploads/2025/08/backup-postgres-to-github-repo.png)",
+        "height": 259,
+        "width": 694,
+        "color": 7
+      },
+      "id": "8a48f991-2244-4895-ab41-65d596031e5c",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1968,
+        336
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Get list of current tables\nReturn a list of existing files in GitHub repository. \nSome of them are tables, \nSome are readme files",
+        "height": 547,
+        "width": 390,
+        "color": 7
+      },
+      "id": "4801ae45-c071-4fa0-b990-9b3f051e509e",
+      "name": "Sticky Note8",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        528,
+        -240
+      ],
+      "typeVersion": 1
     }
   ],
   "origin": "n8n",
@@ -318,9 +550,18 @@
       "projectId": "1KxArspnjifF9NPY"
     }
   ],
-  "staticData": null,
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    },
+    "node:Daily Schedule": {
+      "recurrenceRules": [
+        4
+      ]
+    }
+  },
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-09-16T00:26:09.000Z",
-  "versionId": "98eeddb4-d14b-47b6-8570-6c20958658ef"
+  "triggerCount": 1,
+  "updatedAt": "2025-09-16T01:02:10.000Z",
+  "versionId": "801323be-41f0-4107-8032-7ff0eff06c39"
 }
