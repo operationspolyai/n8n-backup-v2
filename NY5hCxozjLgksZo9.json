@@ -91,7 +91,13 @@
             "CV": "={{ $('Create random code and add member to LearnML database').item.json.CV }}",
             "LinkedIn": "={{ $('Create random code and add member to LearnML database').item.json.LinkedIn }}",
             "GitHub": "={{ $('Create random code and add member to LearnML database').item.json.GitHub }}",
-            "learnml_code": "={{ $('random number').item.json.randomCode }}"
+            "learnml_code": "={{ $('random number').item.json.randomCode }}",
+            "food1": "={{ $('Create random code and add member to LearnML database').item.json.food1 }}",
+            "food2": "={{ $('Create random code and add member to LearnML database').item.json.food2 }}",
+            "entry1": "={{ $('Create random code and add member to LearnML database').item.json.entry1 }}",
+            "role": "={{ $('Create random code and add member to LearnML database').item.json.role }}",
+            "entry2": "={{ $('Create random code and add member to LearnML database').item.json.entry2 }}",
+            "sent_email_code": false
           },
           "matchingColumns": [
             "id"
@@ -260,6 +266,66 @@
               "display": true,
               "type": "boolean",
               "canBeUsedToMatch": true
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "entry1",
+              "displayName": "entry1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "food1",
+              "displayName": "food1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "food2",
+              "displayName": "food2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "entry2",
+              "displayName": "entry2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "sent_email_code",
+              "displayName": "sent_email_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -354,7 +420,7 @@
     {
       "parameters": {
         "inputSource": "jsonExample",
-        "jsonExample": "{\n  \"id\": 206,\n  \"learnml_code\": 321,\n  \"email\": \"massil.serik@gmail.com\",\n  \"name\": \"Massil Serik\",\n  \"school_level\": \"Université 3e année/University 3rd year\",\n  \"school\": \"Polytechnique Montréal\",\n  \"study\": \"Génie logiciel/Software engineering\",\n  \"tech_experience\": \"Python, Scikit learn, Visualisation de données/Data visualization (Matplotlib etc.), Languages de script/Scripting language (Python, Javascript, Ruby, Lua etc.), Programmation orienté objet/OOP Language (Java, C#, etc.), Back-end web development (Nest, Nuxt, Next, Express, Django, Flask, etc.), Front-end web development (React, Angular, Vue, Svelte, etc.)\",\n  \"ai_skill\": 4,\n  \"reason\": \"Learn with hand on activities\",\n  \"heared\": \"Votre école/Your school\",\n  \"food\": \"Aucun/None\",\n  \"t-shirt size\": \"M\",\n  \"CV\": \"https://drive.google.com/open?id=1S3b9Zh88iWbqCDkT8LgDzlugy-yCGFOi\",\n  \"LinkedIn\": \"linkedin.com/in/massil-serik-28a0a8266\",\n  \"GitHub\": null,\n  \"CV_perm\": true,\n  \"photo_perm\": true,\n  \"role\": \"Speaker\",\n  \"food1\": false,\n  \"food2\": false\n}\n"
+        "jsonExample": "{\n  \"id\": 206,\n  \"learnml_code\": 321,\n  \"email\": \"massil.serik@gmail.com\",\n  \"name\": \"Massil Serik\",\n  \"school_level\": \"Université 3e année/University 3rd year\",\n  \"school\": \"Polytechnique Montréal\",\n  \"study\": \"Génie logiciel/Software engineering\",\n  \"tech_experience\": \"Python, Scikit learn, Visualisation de données/Data visualization (Matplotlib etc.), Languages de script/Scripting language (Python, Javascript, Ruby, Lua etc.), Programmation orienté objet/OOP Language (Java, C#, etc.), Back-end web development (Nest, Nuxt, Next, Express, Django, Flask, etc.), Front-end web development (React, Angular, Vue, Svelte, etc.)\",\n  \"ai_skill\": 4,\n  \"reason\": \"Learn with hand on activities\",\n  \"heared\": \"Votre école/Your school\",\n  \"food\": \"Aucun/None\",\n  \"t-shirt size\": \"M\",\n  \"CV\": \"https://drive.google.com/open?id=1S3b9Zh88iWbqCDkT8LgDzlugy-yCGFOi\",\n  \"LinkedIn\": \"linkedin.com/in/massil-serik-28a0a8266\",\n  \"GitHub\": null,\n  \"CV_perm\": true,\n  \"photo_perm\": true,\n  \"role\": \"Speaker\",\n  \"entry1\": false,\n  \"entry2\": false,\n  \"food1\": false,\n  \"food2\": false\n}\n"
       },
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
@@ -387,6 +453,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-16T19:59:08.000Z",
-  "versionId": "9d2a2b63-eebb-41f5-a846-29f0567723ef"
+  "updatedAt": "2025-09-16T20:14:19.000Z",
+  "versionId": "874bba2a-2ef5-4879-ac56-c369a297f34d"
 }
