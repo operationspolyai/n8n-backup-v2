@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "When clicking ‘Execute workflow’": {
       "main": [
@@ -8,15 +8,14 @@
             "node": "Speakers",
             "type": "main",
             "index": 0
-          }
-        ]
-      ]
-    },
-    "Get row(s) in sheet": {
-      "main": [
-        [
+          },
           {
-            "node": "Loop Over Items",
+            "node": "Volunteers",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Partcipates",
             "type": "main",
             "index": 0
           }
@@ -79,7 +78,7 @@
       "main": [
         [
           {
-            "node": "Get row(s) in sheet",
+            "node": "Partcipates",
             "type": "main",
             "index": 0
           }
@@ -148,6 +147,80 @@
           }
         ]
       ]
+    },
+    "If email exists2": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Call 'Create random code and add member to LearnML database'2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items2": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If email exists2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'Create random code and add member to LearnML database'2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Volunteers": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Partcipates": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-09-16T16:58:02.947Z",
@@ -163,42 +236,11 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        48,
-        416
+        -96,
+        336
       ],
       "id": "d0c87ab9-5f73-42e0-9b3a-805aeadfda49",
       "name": "When clicking ‘Execute workflow’"
-    },
-    {
-      "parameters": {
-        "documentId": {
-          "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1GrRnFhmYo820LT_sfgN4XeC4EajNbu5ydHC-iF3dof4/edit?gid=2127875639#gid=2127875639",
-          "mode": "url"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": 2127875639,
-          "mode": "list",
-          "cachedResultName": "Réponses au formulaire 1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GrRnFhmYo820LT_sfgN4XeC4EajNbu5ydHC-iF3dof4/edit#gid=2127875639"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        224,
-        32
-      ],
-      "id": "e2a42c32-d7b7-4ff1-a96e-77990d1c2f3a",
-      "name": "Get row(s) in sheet",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "J3rnaSuqLzWLHSYz",
-          "name": "Google Sheets account"
-        }
-      }
     },
     {
       "parameters": {
@@ -295,7 +337,11 @@
             "LinkedIn": "={{ $('Loop Over Items').item.json[\"Votre LinkedIn \"] }}",
             "GitHub": "={{ $('Loop Over Items').item.json[\"Votre Github\"] }}",
             "CV_perm": "={{ $('Loop Over Items').item.json[\"Accordez-vous que l'on partage votre CV avec nos sponsors ? \\nPermission to share your CV with our fantastic sponsors\"] ==\"Je consens à ce que PolyAI partage mon CV avec les entreprises sponsorisant l’événement.\"}}",
-            "photo_perm": "={{ $('Loop Over Items').item.json[\"Autorisation d’apparaître sur les photos prises lors de l’événement\\nPermission to be in pictures taken of the event\"] ==\"Je consens à ce que PolyAI prenne des photos de l’événement sur lesquelles je pourrais apparaître.\"}}"
+            "photo_perm": "={{ $('Loop Over Items').item.json[\"Autorisation d’apparaître sur les photos prises lors de l’événement\\nPermission to be in pictures taken of the event\"] ==\"Je consens à ce que PolyAI prenne des photos de l’événement sur lesquelles je pourrais apparaître.\"}}",
+            "entry1": false,
+            "entry2": false,
+            "food1": false,
+            "food2": false
           },
           "matchingColumns": [],
           "schema": [
@@ -471,6 +517,56 @@
             {
               "id": "photo_perm",
               "displayName": "photo_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "entry1",
+              "displayName": "entry1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
+            },
+            {
+              "id": "entry2",
+              "displayName": "entry2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
+            },
+            {
+              "id": "food1",
+              "displayName": "food1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
+            },
+            {
+              "id": "food2",
+              "displayName": "food2",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -847,7 +943,12 @@
         "workflowInputs": {
           "mappingMode": "defineBelow",
           "value": {
-            "email": "={{ $('Loop Over Items1').item.json.email }}"
+            "email": "={{ $('Loop Over Items1').item.json.email }}",
+            "role": "={{\"Speaker\"}}",
+            "entry1": false,
+            "entry2": false,
+            "food1": false,
+            "food2": false
           },
           "matchingColumns": [],
           "schema": [
@@ -1029,6 +1130,56 @@
               "canBeUsedToMatch": true,
               "type": "boolean",
               "removed": true
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "entry1",
+              "displayName": "entry1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
+            },
+            {
+              "id": "entry2",
+              "displayName": "entry2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
+            },
+            {
+              "id": "food1",
+              "displayName": "food1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
+            },
+            {
+              "id": "food2",
+              "displayName": "food2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -1044,6 +1195,403 @@
       ],
       "id": "57942649-c09f-41a1-9d15-1455127055b1",
       "name": "Call 'Create random code and add member to LearnML database'1"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT EXISTS (\n  SELECT 1\n  FROM \"LearnMembers\"\n  WHERE TRIM(LOWER(email)) = TRIM(LOWER('{{ $json.email }}'))\n);\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        768,
+        720
+      ],
+      "id": "52769aaf-be56-44b2-9df9-fb845d79b901",
+      "name": "If email exists2",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ebaadca7-0cf6-4faf-8ada-ce5af33db6fd",
+              "leftValue": "={{ $json.exists }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        992,
+        720
+      ],
+      "id": "bfb647da-e5e5-4994-a82b-3463ea212b6c",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        528,
+        704
+      ],
+      "id": "77b62eff-0d71-4224-b3e6-1caa06d2263f",
+      "name": "Loop Over Items2",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "NY5hCxozjLgksZo9",
+          "cachedResultName": "Create random code and add member to LearnML database"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $('Loop Over Items2').item.json['Adresse e-mail'] }}",
+            "role": "={{\"Volunteer\"}}",
+            "entry1": false,
+            "entry2": false,
+            "food1": false,
+            "food2": false
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "learnml_code",
+              "displayName": "learnml_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "school_level",
+              "displayName": "school_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "school",
+              "displayName": "school",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "study",
+              "displayName": "study",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "tech_experience",
+              "displayName": "tech_experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "ai_skill",
+              "displayName": "ai_skill",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "heared",
+              "displayName": "heared",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "food",
+              "displayName": "food",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "t-shirt size",
+              "displayName": "t-shirt size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "CV",
+              "displayName": "CV",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "LinkedIn",
+              "displayName": "LinkedIn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "GitHub",
+              "displayName": "GitHub",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV_perm",
+              "displayName": "CV_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": true
+            },
+            {
+              "id": "photo_perm",
+              "displayName": "photo_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": true
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "entry1",
+              "displayName": "entry1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
+            },
+            {
+              "id": "entry2",
+              "displayName": "entry2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
+            },
+            {
+              "id": "food1",
+              "displayName": "food1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
+            },
+            {
+              "id": "food2",
+              "displayName": "food2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        1248,
+        736
+      ],
+      "id": "54e4d652-8285-4493-8dc2-b7384813f96f",
+      "name": "Call 'Create random code and add member to LearnML database'2"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1gNRnSc-bL5kgq7-N-Vv7jHtNuRmxf_otCAdqj0ARbLg",
+          "mode": "list",
+          "cachedResultName": "Inscription Bénévoles LearnML 2025 (réponses)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gNRnSc-bL5kgq7-N-Vv7jHtNuRmxf_otCAdqj0ARbLg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 207231578,
+          "mode": "list",
+          "cachedResultName": "Réponses au formulaire 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gNRnSc-bL5kgq7-N-Vv7jHtNuRmxf_otCAdqj0ARbLg/edit#gid=207231578"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        176,
+        784
+      ],
+      "id": "67f4f0ba-0dd8-4f6f-aae5-475759bf54d6",
+      "name": "Volunteers",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J3rnaSuqLzWLHSYz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1GrRnFhmYo820LT_sfgN4XeC4EajNbu5ydHC-iF3dof4/edit?gid=2127875639#gid=2127875639",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2127875639,
+          "mode": "list",
+          "cachedResultName": "Réponses au formulaire 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GrRnFhmYo820LT_sfgN4XeC4EajNbu5ydHC-iF3dof4/edit#gid=2127875639"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        32
+      ],
+      "id": "e2a42c32-d7b7-4ff1-a96e-77990d1c2f3a",
+      "name": "Partcipates",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J3rnaSuqLzWLHSYz",
+          "name": "Google Sheets account"
+        }
+      }
     }
   ],
   "origin": "n8n",
@@ -1080,6 +1628,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-09-16T19:51:36.000Z",
-  "versionId": "3a718b73-196b-4c86-9d61-849e7e083b6e"
+  "updatedAt": "2025-09-16T20:51:47.000Z",
+  "versionId": "4109c8cb-2393-4c68-bd07-d5a0c846e601"
 }
