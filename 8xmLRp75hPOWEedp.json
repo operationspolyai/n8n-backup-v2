@@ -5,12 +5,12 @@
       "main": [
         [
           {
-            "node": "Speakers",
+            "node": "Volunteers",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Volunteers",
+            "node": "Speakers",
             "type": "main",
             "index": 0
           },
@@ -341,7 +341,8 @@
             "entry1": false,
             "entry2": false,
             "food1": false,
-            "food2": false
+            "food2": false,
+            "role": "={{\"Participate\"}}"
           },
           "matchingColumns": [],
           "schema": [
@@ -532,7 +533,7 @@
               "display": true,
               "canBeUsedToMatch": true,
               "type": "string",
-              "removed": true
+              "removed": false
             },
             {
               "id": "entry1",
@@ -948,7 +949,8 @@
             "entry1": false,
             "entry2": false,
             "food1": false,
-            "food2": false
+            "food2": false,
+            "name": "={{ $('Speakers').item.json.name }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -990,7 +992,7 @@
               "display": true,
               "canBeUsedToMatch": true,
               "type": "string",
-              "removed": true
+              "removed": false
             },
             {
               "id": "school_level",
@@ -1281,7 +1283,9 @@
             "entry1": false,
             "entry2": false,
             "food1": false,
-            "food2": false
+            "food2": false,
+            "name": "={{ $('Volunteers').item.json['Prénom'] }}",
+            "food": "={{ $('Volunteers').item.json['Allergies et restrictions alimentaires'] }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -1323,7 +1327,7 @@
               "display": true,
               "canBeUsedToMatch": true,
               "type": "string",
-              "removed": true
+              "removed": false
             },
             {
               "id": "school_level",
@@ -1403,7 +1407,7 @@
               "display": true,
               "canBeUsedToMatch": true,
               "type": "string",
-              "removed": true
+              "removed": false
             },
             {
               "id": "t-shirt size",
@@ -1628,6 +1632,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-09-16T20:51:47.000Z",
-  "versionId": "4109c8cb-2393-4c68-bd07-d5a0c846e601"
+  "updatedAt": "2025-09-17T18:19:17.000Z",
+  "versionId": "3508ff1d-c7d9-4498-8c5d-cf287625df96"
 }
