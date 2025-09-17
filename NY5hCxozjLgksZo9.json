@@ -51,12 +51,47 @@
           }
         ]
       ]
+    },
+    "Insert rows in a table": {
+      "main": [
+        []
+      ]
+    },
+    "Update rows in a table": {
+      "main": [
+        []
+      ]
+    },
+    "If email exists1": {
+      "main": [
+        [
+          {
+            "node": "If email exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If email exists": {
+      "main": [
+        [
+          {
+            "node": "Update rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
     }
   },
   "createdAt": "2025-09-16T18:22:01.926Z",
   "id": "NY5hCxozjLgksZo9",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Create random code and add member to LearnML database",
   "nodes": [
     {
@@ -92,12 +127,7 @@
             "LinkedIn": "={{ $('Create random code and add member to LearnML database').item.json.LinkedIn }}",
             "GitHub": "={{ $('Create random code and add member to LearnML database').item.json.GitHub }}",
             "learnml_code": "={{ $('random number').item.json.randomCode }}",
-            "food1": "={{ $('Create random code and add member to LearnML database').item.json.food1 }}",
-            "food2": "={{ $('Create random code and add member to LearnML database').item.json.food2 }}",
-            "entry1": "={{ $('Create random code and add member to LearnML database').item.json.entry1 }}",
-            "role": "={{ $('Create random code and add member to LearnML database').item.json.role }}",
-            "entry2": "={{ $('Create random code and add member to LearnML database').item.json.entry2 }}",
-            "sent_email_code": false
+            "role": "={{ $('Create random code and add member to LearnML database').item.json.role }}"
           },
           "matchingColumns": [
             "id"
@@ -285,7 +315,7 @@
               "display": true,
               "type": "boolean",
               "canBeUsedToMatch": true,
-              "removed": false
+              "removed": true
             },
             {
               "id": "food1",
@@ -295,7 +325,7 @@
               "display": true,
               "type": "boolean",
               "canBeUsedToMatch": true,
-              "removed": false
+              "removed": true
             },
             {
               "id": "food2",
@@ -305,7 +335,7 @@
               "display": true,
               "type": "boolean",
               "canBeUsedToMatch": true,
-              "removed": false
+              "removed": true
             },
             {
               "id": "entry2",
@@ -315,7 +345,7 @@
               "display": true,
               "type": "boolean",
               "canBeUsedToMatch": true,
-              "removed": false
+              "removed": true
             },
             {
               "id": "sent_email_code",
@@ -325,7 +355,17 @@
               "display": true,
               "type": "boolean",
               "canBeUsedToMatch": true,
-              "removed": false
+              "removed": true
+            },
+            {
+              "id": "sent_email_form",
+              "displayName": "sent_email_form",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
             }
           ],
           "attemptToConvertTypes": false,
@@ -336,8 +376,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1808,
-        688
+        1824,
+        656
       ],
       "id": "fea3bcef-2ce7-4aea-a483-4ea9d6202d41",
       "name": "Insert rows in a table",
@@ -347,7 +387,8 @@
           "id": "tcgfUQhBwsAuROjj",
           "name": "Postgres account"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -430,6 +471,359 @@
       ],
       "id": "969a79fd-6d10-4bf6-a96b-9d09a7cf114b",
       "name": "Create random code and add member to LearnML database"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "LearnMembers",
+          "mode": "list",
+          "cachedResultName": "LearnMembers"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "CV_perm": "={{ $('Create random code and add member to LearnML database').item.json.CV_perm }}",
+            "photo_perm": "={{ $('Create random code and add member to LearnML database').item.json.photo_perm }}",
+            "email": "={{ $('Create random code and add member to LearnML database').item.json.email }}",
+            "learnml_code": "={{ $('random number').item.json.randomCode }}",
+            "name": "={{ $('Create random code and add member to LearnML database').item.json.name }}",
+            "school_level": "={{ $('Create random code and add member to LearnML database').item.json.school_level }}",
+            "school": "={{ $('Create random code and add member to LearnML database').item.json.school }}",
+            "study": "={{ $('Create random code and add member to LearnML database').item.json.study }}",
+            "tech_experience": "={{ $('Create random code and add member to LearnML database').item.json.tech_experience }}",
+            "ai_skill": "={{ $('Create random code and add member to LearnML database').item.json.ai_skill }}",
+            "reason": "={{ $('Create random code and add member to LearnML database').item.json.reason }}",
+            "heared": "={{ $('Create random code and add member to LearnML database').item.json.heared }}",
+            "food": "={{ $('Create random code and add member to LearnML database').item.json.food }}",
+            "t-shirt size": "={{ $('Create random code and add member to LearnML database').item.json['t-shirt size'] }}",
+            "CV": "={{ $('Create random code and add member to LearnML database').item.json.CV }}",
+            "LinkedIn": "={{ $('Create random code and add member to LearnML database').item.json.LinkedIn }}",
+            "GitHub": "={{ $('Create random code and add member to LearnML database').item.json.GitHub }}",
+            "role": "={{ $('Create random code and add member to LearnML database').item.json.role }}"
+          },
+          "matchingColumns": [
+            "email"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "learnml_code",
+              "displayName": "learnml_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "school_level",
+              "displayName": "school_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "school",
+              "displayName": "school",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "study",
+              "displayName": "study",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tech_experience",
+              "displayName": "tech_experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ai_skill",
+              "displayName": "ai_skill",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "heared",
+              "displayName": "heared",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "food",
+              "displayName": "food",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "t-shirt size",
+              "displayName": "t-shirt size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CV",
+              "displayName": "CV",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "LinkedIn",
+              "displayName": "LinkedIn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GitHub",
+              "displayName": "GitHub",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CV_perm",
+              "displayName": "CV_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "photo_perm",
+              "displayName": "photo_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "entry1",
+              "displayName": "entry1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food1",
+              "displayName": "food1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food2",
+              "displayName": "food2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry2",
+              "displayName": "entry2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sent_email_code",
+              "displayName": "sent_email_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sent_email_form",
+              "displayName": "sent_email_form",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        2176,
+        1040
+      ],
+      "id": "6e3b5c53-30df-43d9-ae43-759ffbaf51bc",
+      "name": "Update rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "474f85b2-128d-4e78-94c6-310e00915afe",
+              "leftValue": "={{ $json.exists }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1904,
+        1104
+      ],
+      "id": "9b2cde08-8f66-430e-b137-431b0189de80",
+      "name": "If email exists",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT EXISTS (\n  SELECT 1\n  FROM \"LearnMembers\"\n  WHERE TRIM(LOWER(email)) = TRIM(LOWER('{{ $json[\"Adresse e-mail\"] }}'))\n);\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1680,
+        1088
+      ],
+      "id": "b0c90afd-ccd8-48bc-a05a-3e203ebcf7a9",
+      "name": "If email exists1",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      },
+      "disabled": true
     }
   ],
   "origin": "n8n",
@@ -453,6 +847,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-16T20:14:19.000Z",
-  "versionId": "874bba2a-2ef5-4879-ac56-c369a297f34d"
+  "updatedAt": "2025-09-17T17:53:52.000Z",
+  "versionId": "279e718f-6885-4e6c-8d05-3a867f5d994e"
 }
