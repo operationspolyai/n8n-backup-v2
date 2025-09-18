@@ -1,0 +1,63 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-09-17T23:54:33.652Z",
+  "id": "XhV2AAiANNrSQTGk",
+  "isArchived": false,
+  "meta": null,
+  "name": "Send Discord CV",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "b0b5b35e-261c-4fdc-a78c-716117f00fe6",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "30b28810-8e6e-4cd1-9f9a-4369b43d97f8",
+      "name": "Webhook",
+      "webhookId": "b0b5b35e-261c-4fdc-a78c-716117f00fe6"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-17T23:54:33.656Z",
+      "updatedAt": "2025-09-17T23:54:33.656Z",
+      "role": "workflow:owner",
+      "workflowId": "XhV2AAiANNrSQTGk",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-09-15T22:57:19.790Z",
+      "updatedAt": "2025-09-15T22:57:19.790Z",
+      "id": "HSLYlejXa7chb6L9",
+      "name": "LearnML"
+    },
+    {
+      "createdAt": "2025-09-15T22:57:07.793Z",
+      "updatedAt": "2025-09-15T22:57:07.793Z",
+      "id": "LcPqd2vpWXLOYZdI",
+      "name": "Discord Bot"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-09-17T23:59:15.000Z",
+  "versionId": "c3d51a0f-6ba4-4d45-8b3e-31c830a63412"
+}
