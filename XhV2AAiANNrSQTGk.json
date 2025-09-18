@@ -1,10 +1,51 @@
 {
-  "active": false,
-  "connections": {},
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Select rows from a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2025-09-17T23:54:33.652Z",
   "id": "XhV2AAiANNrSQTGk",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Send Discord CV",
   "nodes": [
     {
@@ -22,6 +63,103 @@
       "id": "30b28810-8e6e-4cd1-9f9a-4369b43d97f8",
       "name": "Webhook",
       "webhookId": "b0b5b35e-261c-4fdc-a78c-716117f00fe6"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "LearnMembers",
+          "mode": "list",
+          "cachedResultName": "LearnMembers"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "learnml_code",
+              "value": "={{ $json.body.responses[1] }}"
+            },
+            {
+              "column": "role",
+              "value": "Participate"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        208,
+        0
+      ],
+      "id": "b5966879-76c5-4387-b11d-a55583b05f38",
+      "name": "Select rows from a table",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1417165264461762563",
+          "mode": "list",
+          "cachedResultName": "LearnML 2025",
+          "cachedResultUrl": "https://discord.com/channels/1417165264461762563"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1418021455874228384",
+          "mode": "list",
+          "cachedResultName": "📜soumettre-cv",
+          "cachedResultUrl": "https://discord.com/channels/1417165264461762563/1418021455874228384"
+        },
+        "content": "={{ $json.formatted }}",
+        "options": {
+          "flags": [
+            "SUPPRESS_EMBEDS",
+            "SUPPRESS_NOTIFICATIONS"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        736,
+        16
+      ],
+      "id": "fa95e696-2a0b-4489-9f6c-87e5ce25430f",
+      "name": "Send a message",
+      "webhookId": "268aac23-3c51-42d4-843b-a79ca64a6961",
+      "credentials": {
+        "discordBotApi": {
+          "id": "cxGK7pRlQxV7O0GJ",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\n\n// Helper to safely add lines\nfunction addLine(prefix, value, suffix = \"\") {\n  return value ? `${prefix}${value}${suffix}\\n` : \"\";\n}\n\nlet output = `## ${item.name}\\n`;\n\noutput += addLine(\"📍 \", item.school);\noutput += addLine(\"🎓 \", item.study, item.school_level ? ` *${item.school_level}*` : \"\");\noutput += addLine(\"👀 \", item.tech_experience);\n\n// Links (only add if present)\nif (item.LinkedIn) output += `- [LinkedIn](${item.LinkedIn})\\n`;\nif (item.GitHub) output += `- [GitHub](${item.GitHub})\\n`;\nif (item.CV) output += `- [CV](${item.CV})\\n`;\n\nreturn [{ json: { formatted: output.trim() } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        16
+      ],
+      "id": "508546a7-c95a-413b-b0d6-13f45a857699",
+      "name": "Code in JavaScript"
     }
   ],
   "origin": "n8n",
@@ -58,6 +196,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-09-17T23:59:15.000Z",
-  "versionId": "c3d51a0f-6ba4-4d45-8b3e-31c830a63412"
+  "updatedAt": "2025-09-18T00:33:04.000Z",
+  "versionId": "04017417-a20d-47f2-8e6f-8be792c22380"
 }
