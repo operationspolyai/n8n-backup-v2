@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Get a task": {
       "main": [
@@ -215,6 +215,28 @@
         [
           {
             "node": "Get name of targetted department",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List all webhooks": {
+      "main": [
+        [
+          {
+            "node": "delete webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "List all webhooks",
             "type": "main",
             "index": 0
           }
@@ -815,6 +837,68 @@
         }
       },
       "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "method": "DELETE",
+        "url": "=https://api.clickup.com/api/v2/webhook/{{ $json.webhooks[0].id }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {}
+      },
+      "id": "48330b29-ef15-488b-a852-d0540c0dca51",
+      "name": "delete webhook",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1264,
+        512
+      ],
+      "notesInFlow": true,
+      "alwaysOutputData": true,
+      "credentials": {
+        "clickUpApi": {
+          "id": "fIoIi2KGIDCcmVaL",
+          "name": "ClickUp account 2"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "notes": "Needs to be a HTTP Request Node, because n8n sends it as a number but String is required."
+    },
+    {
+      "parameters": {
+        "url": "=https://api.clickup.com/api/v2/team/90131880769/webhook",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {}
+      },
+      "id": "710f0939-0a2f-4761-bb8f-72201a65d354",
+      "name": "List all webhooks",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1040,
+        512
+      ],
+      "notesInFlow": true,
+      "credentials": {
+        "clickUpApi": {
+          "id": "fIoIi2KGIDCcmVaL",
+          "name": "ClickUp account 2"
+        }
+      },
+      "notes": "Needs to be a HTTP Request Node, because n8n sends it as a number but String is required."
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        864,
+        496
+      ],
+      "id": "1f975470-c968-423b-8917-9c6ec30b0546",
+      "name": "When clicking ‘Execute workflow’"
     }
   ],
   "origin": "n8n",
@@ -835,9 +919,14 @@
       "projectId": "1KxArspnjifF9NPY"
     }
   ],
-  "staticData": null,
+  "staticData": {
+    "node:ClickUp Trigger": {
+      "webhookId": "4b204b6e-7567-41be-b714-ee06a2d5f64d",
+      "secret": "8BMJPDLU9ABRCBB1C4MVO3LC96W6ZMR9Y4ZQ05EVMH3IKIQ8Z6UNV9OE9CJCH2VH"
+    }
+  },
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-09-17T13:53:49.000Z",
-  "versionId": "e0e1fdb1-116a-4844-8709-7034e1d4ade9"
+  "triggerCount": 1,
+  "updatedAt": "2025-09-17T23:21:02.000Z",
+  "versionId": "1f4cb566-480e-49af-a71d-5c48925bd278"
 }
