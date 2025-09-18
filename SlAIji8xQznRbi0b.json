@@ -1,0 +1,556 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Select Volunteers and Speakers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select Volunteers and Speakers": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Update rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If email sent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If email sent": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update rows in a table": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-17T21:28:01.769Z",
+  "id": "SlAIji8xQznRbi0b",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Send Emails to LearnML",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        0
+      ],
+      "id": "cc4004d9-25d9-4704-bbad-825202a9a8fb",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "LearnMembers",
+          "mode": "list",
+          "cachedResultName": "LearnMembers"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "role",
+              "value": "Speaker"
+            },
+            {
+              "column": "role",
+              "value": "Volunteer"
+            }
+          ]
+        },
+        "combineConditions": "OR",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        32,
+        0
+      ],
+      "id": "90477033-d4f2-4ac5-a0da-4ed86f9d48d8",
+      "name": "Select Volunteers and Speakers",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "80alexanderr@gmail.com",
+        "subject": "Invitation et code secret LearnML Discord",
+        "message": "=<!DOCTYPE html> <html>   <head>     <meta charset=\"UTF-8\" />     <title>Invitation LearnML 2025</title>   </head>   <body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #333;\">     <p>Bonjour {{ $('Loop Over Items').item.json.name }},</p>      <p>       Tu es <strong>officiellement invité(e)</strong> à       <strong>LearnML 2025</strong> 🎉       </p>      <p>       On est super contents de t’avoir avec nous!         En pièce jointe de ce courriel, tu trouveras :     </p>      <ul>       <li>         👉 <strong>Ton accès au serveur Discord</strong> : super important pour         rester à jour avec les annonces, recevoir les notifications         automatiques, poser tes questions et connecter avec les autres         participants.       </li>       <li>         🔑 <strong>Ton code secret LearnML</strong> : ce code est         <em>unique pour toi</em> et tu dois absolument le noter ou le         mémoriser avant l’événement.           Tu en auras besoin pour :         <ul>           <li>Te <strong>présenter à l’accueil</strong> et confirmer ta présence ✅</li>           <li>Réclamer ton <strong>déjeuner gratuit</strong> 🍕</li>         </ul>       </li>     </ul>      <p style=\"font-size: 18px; font-weight: bold; margin-top: 30px;\">       Voici ton code secret LearnML :     </p>      <p       style=\"         font-size: 48px;         font-weight: bold;         color: #c62828;         text-align: center;         margin: 20px 0;       \"     >       {{ $json.learnml_code }}     </p>      <p style=\"text-align: center; margin: 40px 0;\">       <a         href=\"https://discord.gg/aqJ7d46k\"         style=\"           background-color: #5865f2;           color: #fff;           padding: 15px 30px;           text-decoration: none;           font-size: 18px;           font-weight: bold;           border-radius: 8px;           display: inline-block;         \"       >         🔗 Rejoindre le serveur Discord       </a>     </p>      <p style=\"text-align: center; font-size: 14px; color: #555;\">       Si jamais le bouton ne fonctionne pas, copie-colle ce lien dans ton       navigateur :<br />       <a href=\"https://discord.gg/aqJ7d46k\">https://discord.gg/aqJ7d46k</a>     </p>      <p>       Garde ce code avec toi en tout temps — c’est ta clé pour profiter à fond       de LearnML 2025!     </p>      <p>       On a hâte de te voir participer aux ateliers pratiques, apprendre des       conférenciers invités et créer des liens avec d’autres passionnés de       l’IA.     </p>      <p>À très bientôt à LearnML 2025! 🚀</p>   </body> </html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1296,
+        48
+      ],
+      "id": "7b9e1ef6-305d-4fae-b1a0-1a37d451a8a7",
+      "name": "Send a message",
+      "webhookId": "6671ea87-8a90-4f28-8b76-0d86ace773bf",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "unquhRC3gfJ50lma",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        704,
+        48
+      ],
+      "id": "74b10b92-1a47-416f-a3f9-8f42d29b49c3",
+      "name": "Loop Over Items",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3c82d2dc-ebec-4d96-afa4-5bda4f86a901",
+              "leftValue": "={{ $json.sent_email_code }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        992,
+        48
+      ],
+      "id": "612ed30e-8c14-413f-b087-54efb56bfbb1",
+      "name": "If email sent"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "LearnMembers",
+          "mode": "list",
+          "cachedResultName": "LearnMembers"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $('Loop Over Items').item.json.email }}",
+            "sent_email_code": true
+          },
+          "matchingColumns": [
+            "email"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "learnml_code",
+              "displayName": "learnml_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "school_level",
+              "displayName": "school_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "school",
+              "displayName": "school",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "study",
+              "displayName": "study",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "tech_experience",
+              "displayName": "tech_experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ai_skill",
+              "displayName": "ai_skill",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "heared",
+              "displayName": "heared",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food",
+              "displayName": "food",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "t-shirt size",
+              "displayName": "t-shirt size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV",
+              "displayName": "CV",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "LinkedIn",
+              "displayName": "LinkedIn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "GitHub",
+              "displayName": "GitHub",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV_perm",
+              "displayName": "CV_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "photo_perm",
+              "displayName": "photo_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry1",
+              "displayName": "entry1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food1",
+              "displayName": "food1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food2",
+              "displayName": "food2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry2",
+              "displayName": "entry2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sent_email_code",
+              "displayName": "sent_email_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "sent_email_form",
+              "displayName": "sent_email_form",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1520,
+        64
+      ],
+      "id": "a756eaca-c566-4b3f-a1a3-afaca9e54f07",
+      "name": "Update rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "12f117a0-b791-4cae-8fe5-8c488069325e",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -256,
+        320
+      ],
+      "id": "25d72503-5eda-4f41-b558-dafdbb75af52",
+      "name": "Someone fills out form",
+      "webhookId": "12f117a0-b791-4cae-8fe5-8c488069325e"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-17T21:28:01.772Z",
+      "updatedAt": "2025-09-17T21:28:01.772Z",
+      "role": "workflow:owner",
+      "workflowId": "SlAIji8xQznRbi0b",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-09-15T22:57:19.790Z",
+      "updatedAt": "2025-09-15T22:57:19.790Z",
+      "id": "HSLYlejXa7chb6L9",
+      "name": "LearnML"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-17T22:38:38.000Z",
+  "versionId": "e6878f92-8f06-4965-a5bc-2a4b535c26d7"
+}
