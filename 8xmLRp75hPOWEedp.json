@@ -1201,7 +1201,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT EXISTS (\n  SELECT 1\n  FROM \"LearnMembers\"\n  WHERE TRIM(LOWER(email)) = TRIM(LOWER('{{ $json.email }}'))\n);\n",
+        "query": "SELECT EXISTS (\n  SELECT 1\n  FROM \"LearnMembers\"\n  WHERE TRIM(LOWER(email)) = TRIM(LOWER('{{ $json['Adresse e-mail'] }}'))\n);\n",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -1632,6 +1632,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-09-17T18:19:17.000Z",
-  "versionId": "3508ff1d-c7d9-4498-8c5d-cf287625df96"
+  "updatedAt": "2025-09-18T12:49:40.000Z",
+  "versionId": "4f3e1f36-a5b8-465a-8d67-cf6dffe64902"
 }
