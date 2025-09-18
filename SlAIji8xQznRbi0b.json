@@ -140,13 +140,7 @@
     },
     "Select Participate": {
       "main": [
-        [
-          {
-            "node": "Loop Over Items1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     }
   },
@@ -216,7 +210,7 @@
     },
     {
       "parameters": {
-        "sendTo": "80alexanderr@gmail.com",
+        "sendTo": "={{ $('Loop Over Items').item.json.email }}",
         "subject": "Invitation et code secret LearnML Discord",
         "message": "=<!DOCTYPE html> <html>   <head>     <meta charset=\"UTF-8\" />     <title>Invitation LearnML 2025</title>   </head>   <body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #333;\">     <p>Bonjour {{ $('Loop Over Items').item.json.name }},</p>      <p>       Tu es <strong>officiellement invité(e)</strong> à       <strong>LearnML 2025</strong> 🎉       </p>      <p>       On est super contents de t’avoir avec nous!         En pièce jointe de ce courriel, tu trouveras :     </p>      <ul>       <li>         👉 <strong>Ton accès au serveur Discord</strong> : super important pour         rester à jour avec les annonces, recevoir les notifications         automatiques, poser tes questions et connecter avec les autres         participants.       </li>       <li>         🔑 <strong>Ton code secret LearnML</strong> : ce code est         <em>unique pour toi</em> et tu dois absolument le noter ou le         mémoriser avant l’événement.           Tu en auras besoin pour :         <ul>           <li>Te <strong>présenter à l’accueil</strong> et confirmer ta présence ✅</li>           <li>Réclamer ton <strong>déjeuner gratuit</strong> 🍕</li>         </ul>       </li>     </ul>      <p style=\"font-size: 18px; font-weight: bold; margin-top: 30px;\">       Voici ton code secret LearnML :     </p>      <p       style=\"         font-size: 48px;         font-weight: bold;         color: #c62828;         text-align: center;         margin: 20px 0;       \"     >       {{ $json.learnml_code }}     </p>      <p style=\"text-align: center; margin: 40px 0;\">       <a         href=\"https://discord.gg/aqJ7d46k\"         style=\"           background-color: #5865f2;           color: #fff;           padding: 15px 30px;           text-decoration: none;           font-size: 18px;           font-weight: bold;           border-radius: 8px;           display: inline-block;         \"       >         🔗 Rejoindre le serveur Discord       </a>     </p>      <p style=\"text-align: center; font-size: 14px; color: #555;\">       Si jamais le bouton ne fonctionne pas, copie-colle ce lien dans ton       navigateur :<br />       <a href=\"https://discord.gg/aqJ7d46k\">https://discord.gg/aqJ7d46k</a>     </p>      <p>       Garde ce code avec toi en tout temps — c’est ta clé pour profiter à fond       de LearnML 2025!     </p>      <p>       On a hâte de te voir participer aux ateliers pratiques, apprendre des       conférenciers invités et créer des liens avec d’autres passionnés de       l’IA.     </p>      <p>À très bientôt à LearnML 2025! 🚀</p>   </body> </html>",
         "options": {}
@@ -249,7 +243,7 @@
       ],
       "id": "74b10b92-1a47-416f-a3f9-8f42d29b49c3",
       "name": "Loop Over Items",
-      "executeOnce": true
+      "executeOnce": false
     },
     {
       "parameters": {
@@ -589,8 +583,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -256,
-        320
+        -288,
+        560
       ],
       "id": "25d72503-5eda-4f41-b558-dafdbb75af52",
       "name": "Someone fills out form",
@@ -607,7 +601,7 @@
       "typeVersion": 2.1,
       "position": [
         1168,
-        448
+        624
       ],
       "id": "191425c7-1c03-4185-a692-322f72b987ab",
       "name": "Send a message1",
@@ -617,7 +611,8 @@
           "id": "unquhRC3gfJ50lma",
           "name": "Gmail account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -627,7 +622,7 @@
       "typeVersion": 3,
       "position": [
         576,
-        448
+        624
       ],
       "id": "b5bb06bc-2937-4b0f-a455-4d5650ebb54c",
       "name": "Loop Over Items1",
@@ -662,7 +657,7 @@
       "typeVersion": 2.2,
       "position": [
         864,
-        448
+        624
       ],
       "id": "801f26b9-359a-4723-8361-f342948b20a9",
       "name": "If email sent1"
@@ -951,7 +946,7 @@
       "typeVersion": 2.6,
       "position": [
         1392,
-        464
+        640
       ],
       "id": "cc073d8e-1599-481e-b25f-ebeb4b6d4813",
       "name": "Update rows in a table1",
@@ -992,7 +987,7 @@
       "typeVersion": 2.6,
       "position": [
         128,
-        416
+        592
       ],
       "id": "275e0e7f-7e5d-4b78-9da5-bd317e00465e",
       "name": "Select Participate",
@@ -1032,6 +1027,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-09-18T01:14:06.000Z",
-  "versionId": "0c4ae906-ba32-4739-ad16-96d13671870c"
+  "updatedAt": "2025-09-18T13:03:28.000Z",
+  "versionId": "796743d3-3150-4aba-b57b-ffb6ae361603"
 }
