@@ -268,6 +268,28 @@
           }
         ]
       ]
+    },
+    "When volunteer applies": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Select rows from a table1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-09-16T15:14:23.333Z",
@@ -304,7 +326,7 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        -768,
+        -560,
         944
       ],
       "id": "3e010815-436e-47c8-bd04-71d6597211e9",
@@ -702,7 +724,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -1840,
+        -1632,
         944
       ],
       "id": "c7fcb45b-79da-49be-a2b0-3aa54e699276",
@@ -721,7 +743,7 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        -1568,
+        -1360,
         960
       ],
       "id": "b92bb2f9-0acb-49b2-8182-5355ba3c9b8a",
@@ -750,7 +772,7 @@
       "type": "n8n-nodes-base.discord",
       "typeVersion": 2,
       "position": [
-        -1072,
+        -864,
         976
       ],
       "id": "87592a14-bdc0-425d-9192-23ecc599c6aa",
@@ -1353,7 +1375,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -528,
+        -320,
         960
       ],
       "id": "aa000488-48b0-414d-ac91-08c5efe2bda6",
@@ -1427,11 +1449,41 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -1296,
+        -1088,
         944
       ],
       "id": "86d38554-d8ea-47fe-a4f4-a28b96c20a8d",
       "name": "If email has been sent already1"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "43803498-e6af-42c0-a73f-430fc132a915",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -2368,
+        944
+      ],
+      "id": "6c9a9cfb-9904-4122-9527-ceae8321a79b",
+      "name": "When volunteer applies",
+      "webhookId": "43803498-e6af-42c0-a73f-430fc132a915"
+    },
+    {
+      "parameters": {
+        "amount": 15
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -2112,
+        944
+      ],
+      "id": "55de0d5f-3c13-436c-a43b-884121536522",
+      "name": "Wait",
+      "webhookId": "5e4d0af7-d91e-41ec-96ce-96c0d665a5b0"
     }
   ],
   "origin": "n8n",
@@ -1467,7 +1519,7 @@
       "name": "Discord Bot"
     }
   ],
-  "triggerCount": 2,
-  "updatedAt": "2025-09-18T21:04:03.000Z",
-  "versionId": "c482b43c-5186-46f0-aa2a-c7386b16f588"
+  "triggerCount": 3,
+  "updatedAt": "2025-09-19T13:45:12.000Z",
+  "versionId": "3d79c083-046e-4cd4-b897-2700c71b892e"
 }
