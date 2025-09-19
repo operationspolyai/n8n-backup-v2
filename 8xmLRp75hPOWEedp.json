@@ -1623,15 +1623,9 @@
       "updatedAt": "2025-09-15T22:57:19.790Z",
       "id": "HSLYlejXa7chb6L9",
       "name": "LearnML"
-    },
-    {
-      "createdAt": "2025-09-15T22:57:07.793Z",
-      "updatedAt": "2025-09-15T22:57:07.793Z",
-      "id": "LcPqd2vpWXLOYZdI",
-      "name": "Discord Bot"
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-09-18T12:49:40.000Z",
-  "versionId": "4f3e1f36-a5b8-465a-8d67-cf6dffe64902"
+  "updatedAt": "2025-09-18T21:05:15.000Z",
+  "versionId": "523e7bb7-e950-432c-8ef9-decd45184de3"
 }
