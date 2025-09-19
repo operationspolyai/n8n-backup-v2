@@ -223,13 +223,7 @@
     },
     "List all webhooks": {
       "main": [
-        [
-          {
-            "node": "delete webhook",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "When clicking ‘Execute workflow’": {
@@ -851,7 +845,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        1264,
+        1328,
         512
       ],
       "notesInFlow": true,
@@ -898,7 +892,8 @@
         496
       ],
       "id": "1f975470-c968-423b-8917-9c6ec30b0546",
-      "name": "When clicking ‘Execute workflow’"
+      "name": "When clicking ‘Execute workflow’",
+      "disabled": true
     }
   ],
   "origin": "n8n",
@@ -921,12 +916,12 @@
   ],
   "staticData": {
     "node:ClickUp Trigger": {
-      "webhookId": "4b204b6e-7567-41be-b714-ee06a2d5f64d",
-      "secret": "8BMJPDLU9ABRCBB1C4MVO3LC96W6ZMR9Y4ZQ05EVMH3IKIQ8Z6UNV9OE9CJCH2VH"
+      "webhookId": "d2773400-2ca9-4eca-a3d3-d48db964e1a2",
+      "secret": "TS2C4J7C0XF2SFLJ7PQ327SGYOD3O8JX1CB6W7FC8U6PVMNO85TLD011SKY4KOXS"
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-09-17T23:21:02.000Z",
-  "versionId": "1f4cb566-480e-49af-a71d-5c48925bd278"
+  "updatedAt": "2025-09-18T20:47:04.000Z",
+  "versionId": "e1541a54-5479-4263-91ed-45b82d018ec7"
 }
