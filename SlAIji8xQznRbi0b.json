@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "When clicking ‘Execute workflow’": {
       "main": [
@@ -159,6 +159,39 @@
           }
         ]
       ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Select Participate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When volunteer applies": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Select Volunteers and Speakers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-09-17T21:28:01.769Z",
@@ -174,8 +207,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        96,
-        448
+        0,
+        416
       ],
       "id": "cc4004d9-25d9-4704-bbad-825202a9a8fb",
       "name": "When clicking ‘Execute workflow’"
@@ -601,7 +634,7 @@
       "typeVersion": 2.1,
       "position": [
         -288,
-        560
+        592
       ],
       "id": "25d72503-5eda-4f41-b558-dafdbb75af52",
       "name": "Someone fills out form",
@@ -628,8 +661,7 @@
           "id": "unquhRC3gfJ50lma",
           "name": "Gmail account"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -972,8 +1004,7 @@
           "id": "tcgfUQhBwsAuROjj",
           "name": "Postgres account"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -1046,8 +1077,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        -80,
-        640
+        -16,
+        624
       ],
       "id": "369a00b1-ad4b-4566-9d5c-5102b2e2e417",
       "name": "Wait",
@@ -1066,6 +1097,36 @@
       "id": "6d21c778-31e1-402e-a19f-edf7877c52ee",
       "name": "Random wait",
       "webhookId": "153c3742-21c4-4d42-883b-23ed8d945bc4"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "43803498-e6af-42c0-a73f-430fc132a915",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -544,
+        16
+      ],
+      "id": "67ec9817-0cde-4124-8f79-a1337009dec7",
+      "name": "When volunteer applies",
+      "webhookId": "43803498-e6af-42c0-a73f-430fc132a915"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -192,
+        16
+      ],
+      "id": "b7a3c0a7-3884-4256-b2b3-0ce0da9502bc",
+      "name": "Wait1",
+      "webhookId": "bc8c6ca6-5e99-42fa-a018-9bbafe5abd1c"
     }
   ],
   "origin": "n8n",
@@ -1095,7 +1156,7 @@
       "name": "LearnML"
     }
   ],
-  "triggerCount": 0,
-  "updatedAt": "2025-09-19T03:08:58.000Z",
-  "versionId": "c3c52055-50c1-4e75-9ca7-e179f439ba91"
+  "triggerCount": 2,
+  "updatedAt": "2025-09-19T13:44:19.000Z",
+  "versionId": "68b5bcbb-1f5d-4040-8d32-342ef4e51ffd"
 }
