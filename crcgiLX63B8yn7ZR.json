@@ -1829,8 +1829,15 @@
     }
   ],
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2025-09-15T22:57:19.790Z",
+      "updatedAt": "2025-09-15T22:57:19.790Z",
+      "id": "HSLYlejXa7chb6L9",
+      "name": "LearnML"
+    }
+  ],
   "triggerCount": 1,
-  "updatedAt": "2025-09-17T22:19:19.000Z",
-  "versionId": "624d0163-173f-4ac9-af4d-86b34ce5a5f8"
+  "updatedAt": "2025-09-18T21:04:42.000Z",
+  "versionId": "9396755d-3ec8-4c71-a5b2-63345e3649c8"
 }
