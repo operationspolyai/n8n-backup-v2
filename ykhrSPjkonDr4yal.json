@@ -200,7 +200,7 @@
   ],
   "staticData": {
     "node:Google Calendar Trigger": {
-      "lastTimeChecked": "2025-09-18T12:00:47Z"
+      "lastTimeChecked": "2025-09-18T21:04:20Z"
     }
   },
   "tags": [
@@ -218,6 +218,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-09-16T02:55:34.000Z",
+  "updatedAt": "2025-09-18T21:04:20.000Z",
   "versionId": "376ce17a-7a46-4ea7-aa5a-4c7c6d20c83a"
 }
