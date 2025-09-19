@@ -150,7 +150,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const item = $input.first().json;\n\n// Helper to safely add lines\nfunction addLine(prefix, value, suffix = \"\") {\n  return value ? `${prefix}${value}${suffix}\\n` : \"\";\n}\n\nlet output = `## ${item.name}\\n`;\n\noutput += addLine(\"📍 \", item.school);\noutput += addLine(\"🎓 \", item.study, item.school_level ? ` *${item.school_level}*` : \"\");\noutput += addLine(\"👀 \", item.tech_experience);\n\n// Links (only add if present)\nif (item.LinkedIn) output += `- [LinkedIn](${item.LinkedIn})\\n`;\nif (item.GitHub) output += `- [GitHub](${item.GitHub})\\n`;\nif (item.CV) output += `- [CV](${item.CV})\\n`;\n\nreturn [{ json: { formatted: output.trim() } }];\n"
+        "jsCode": "const item = $input.first().json;\n\n// Ensure links are Discord-friendly (fully qualified)\nfunction normalizeUrl(url) {\n  if (!url) return \"\";\n  let u = String(url).trim();\n  if (!u) return \"\";\n\n  // If it already has a scheme (e.g., https://, http://, mailto:, tel:), keep it\n  if (/^[a-z][a-z0-9+.+-]*:/.test(u)) return u;\n\n  // If it's protocol-relative (starts with //), assume https\n  if (/^\\/\\//.test(u)) return \"https:\" + u;\n\n  // Otherwise, prepend https://\n  return \"https://\" + u.replace(/^\\/+/, \"\");\n}\n\n// Helper to safely add lines\nfunction addLine(prefix, value, suffix = \"\") {\n  if (!value) return \"\";\n  const v = Array.isArray(value) ? value.filter(Boolean).join(\", \") : value;\n  return `${prefix}${v}${suffix}\\n`;\n}\n\nlet output = `## ${item.name}\\n`;\n\noutput += addLine(\"📍 \", item.school);\noutput += addLine(\"🎓 \", item.study, item.school_level ? ` *${item.school_level}*` : \"\");\noutput += addLine(\"👀 \", item.tech_experience);\n\n// Links (only add if present), normalized for Discord\nconst linkedIn = normalizeUrl(item.LinkedIn);\nconst gitHub   = normalizeUrl(item.GitHub);\nconst cv       = normalizeUrl(item.CV);\n\nif (linkedIn) output += `- [LinkedIn](${linkedIn})\\n`;\nif (gitHub)   output += `- [GitHub](${gitHub})\\n`;\nif (cv)       output += `- [CV](${cv})\\n`;\n\nreturn [{ json: { formatted: output.trim() } }];\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -196,6 +196,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-09-18T21:04:07.000Z",
-  "versionId": "04017417-a20d-47f2-8e6f-8be792c22380"
+  "updatedAt": "2025-09-19T13:11:46.000Z",
+  "versionId": "d4ee36d9-b7cb-42c7-8d69-03257514b5e0"
 }
