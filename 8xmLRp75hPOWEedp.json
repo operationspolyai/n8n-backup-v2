@@ -221,6 +221,17 @@
           }
         ]
       ]
+    },
+    "When volunteer applies": {
+      "main": [
+        [
+          {
+            "node": "Volunteers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-09-16T16:58:02.947Z",
@@ -1596,6 +1607,22 @@
           "name": "Google Sheets account"
         }
       }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "43803498-e6af-42c0-a73f-430fc132a915",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -144,
+        880
+      ],
+      "id": "23c6b5c0-fc62-4b9c-a0f9-ef29c3949161",
+      "name": "When volunteer applies",
+      "webhookId": "43803498-e6af-42c0-a73f-430fc132a915"
     }
   ],
   "origin": "n8n",
@@ -1625,7 +1652,7 @@
       "name": "LearnML"
     }
   ],
-  "triggerCount": 1,
-  "updatedAt": "2025-09-18T21:05:15.000Z",
-  "versionId": "523e7bb7-e950-432c-8ef9-decd45184de3"
+  "triggerCount": 2,
+  "updatedAt": "2025-09-19T13:45:25.000Z",
+  "versionId": "d15c1168-921d-408b-add3-e2ff1ae8fbe2"
 }
