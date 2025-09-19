@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Select Volunteers and Speakers",
+            "node": "Select Participate",
             "type": "main",
             "index": 0
           }
@@ -109,7 +109,7 @@
         ],
         [
           {
-            "node": "Send a message1",
+            "node": "Random wait",
             "type": "main",
             "index": 0
           }
@@ -131,7 +131,7 @@
       "main": [
         [
           {
-            "node": "Select Participate",
+            "node": "Wait",
             "type": "main",
             "index": 0
           }
@@ -140,7 +140,24 @@
     },
     "Select Participate": {
       "main": [
-        []
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Random wait": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -157,8 +174,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -288,
-        0
+        96,
+        448
       ],
       "id": "cc4004d9-25d9-4704-bbad-825202a9a8fb",
       "name": "When clicking ‘Execute workflow’"
@@ -592,16 +609,16 @@
     },
     {
       "parameters": {
-        "sendTo": "80alexanderr@gmail.com",
+        "sendTo": "={{ $json.email }}",
         "subject": "Invitation et code secret LearnML Discord",
-        "message": "=<!DOCTYPE html> <html>   <head>     <meta charset=\"UTF-8\" />     <title>Invitation LearnML 2025</title>   </head>   <body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #333;\">     <p>Bonjour {{ $('Loop Over Items1').item.json.name }},</p>      <p>       Tu es <strong>officiellement invité(e)</strong> à       <strong>LearnML 2025</strong> 🎉       </p>      <p>       On est super contents de t’avoir avec nous!         En pièce jointe de ce courriel, tu trouveras :     </p>      <ul>       <li>         👉 <strong>Ton accès au serveur Discord</strong> : super important pour         rester à jour avec les annonces, recevoir les notifications         automatiques, poser tes questions et connecter avec les autres         participants.       </li>       <li>         🔑 <strong>Ton code secret LearnML</strong> : ce code est         <em>unique pour toi</em> et tu dois absolument le noter ou le         mémoriser avant l’événement.           Tu en auras besoin pour :         <ul>           <li>Te <strong>présenter à l’accueil</strong> et confirmer ta présence ✅</li>           <li>Réclamer ton <strong>déjeuner gratuit</strong> 🍕</li>         </ul>       </li>     </ul>      <p style=\"font-size: 18px; font-weight: bold; margin-top: 30px;\">       Voici ton code secret LearnML :     </p>      <p       style=\"         font-size: 48px;         font-weight: bold;         color: #c62828;         text-align: center;         margin: 20px 0;       \"     >       {{ $json.learnml_code }}     </p>      <p style=\"text-align: center; margin: 40px 0;\">       <a         href=\"https://discord.gg/aqJ7d46k\"         style=\"           background-color: #5865f2;           color: #fff;           padding: 15px 30px;           text-decoration: none;           font-size: 18px;           font-weight: bold;           border-radius: 8px;           display: inline-block;         \"       >         🔗 Rejoindre le serveur Discord       </a>     </p>      <p style=\"text-align: center; font-size: 14px; color: #555;\">       Si jamais le bouton ne fonctionne pas, copie-colle ce lien dans ton       navigateur :<br />       <a href=\"https://discord.gg/aqJ7d46k\">https://discord.gg/aqJ7d46k</a>     </p>      <p>       Garde ce code avec toi en tout temps — c’est ta clé pour profiter à fond       de LearnML 2025!     </p>      <p>       On a hâte de te voir participer aux ateliers pratiques, apprendre des       conférenciers invités et créer des liens avec d’autres passionnés de       l’IA.     </p>      <p>À très bientôt à LearnML 2025! 🚀</p>   </body> </html>",
+        "message": "=<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\" />\n    <title>Invitation LearnML 2025</title>\n  </head>\n  <body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #333;\">\n    <p>Bonjour {{ $('Loop Over Items1').item.json.name }},</p>\n\n    <p>\n      Tu es <strong>officiellement invité(e)</strong> à\n      <strong>LearnML 2025</strong> 🎉\n    </p>\n\n    <p>\n      On est super contents de t’avoir avec nous!  \n      En pièce jointe de ce courriel, tu trouveras :\n    </p>\n\n    <ul>\n      <li>\n        👉 <strong>Ton accès au serveur Discord</strong> : super important pour\n        rester à jour avec les annonces, recevoir les notifications\n        automatiques, poser tes questions et connecter avec les autres\n        participants.\n      </li>\n      <li>\n        🔑 <strong>Ton code secret LearnML</strong> : ce code est\n        <em>unique pour toi</em> et tu dois absolument le noter ou le\n        mémoriser avant l’événement.  \n        Tu en auras besoin pour :\n        <ul>\n          <li>📝 Te <strong>présenter à l’accueil</strong> et confirmer ta présence ✅</li>\n          <li>🍕 Réclamer ton <strong>déjeuner gratuit</strong></li>\n        </ul>\n      </li>\n    </ul>\n\n    <p style=\"font-size: 18px; font-weight: bold; margin-top: 30px;\">\n      Voici ton code secret LearnML :\n    </p>\n    <p\n      style=\"\n        font-size: 48px;\n        font-weight: bold;\n        color: #c62828;\n        text-align: center;\n        margin: 20px 0;\n      \"\n    >\n      {{ $json.learnml_code }}\n    </p>\n\n    <p style=\"text-align: center; margin: 40px 0;\">\n      <a\n        href=\"https://discord.gg/aqJ7d46k\"\n        style=\"\n          background-color: #5865f2;\n          color: #fff;\n          padding: 15px 30px;\n          text-decoration: none;\n          font-size: 18px;\n          font-weight: bold;\n          border-radius: 8px;\n          display: inline-block;\n        \"\n      >\n        🔗 Rejoindre le serveur Discord\n      </a>\n    </p>\n\n    <p style=\"text-align: center; font-size: 14px; color: #555;\">\n      Si jamais le bouton ne fonctionne pas, copie-colle ce lien dans ton\n      navigateur :<br />\n      <a href=\"https://discord.gg/aqJ7d46k\">https://discord.gg/aqJ7d46k</a>\n    </p>\n\n    <h3 style=\"margin-top: 40px;\">📍 Informations pratiques</h3>\n    <ul>\n      <li>\n        🏛️ <strong>Adresse de l’événement :</strong> \n        <a href=\"https://maps.app.goo.gl/JN4VRG9KfLWby4nb6\">\n          Lassonde Pavilion, 2500 Chemin de Polytechnique, Montréal, QC H3T 1J4\n        </a>\n      </li>\n      <li>\n        🚗 <strong>Stationnement :</strong> \n        <a href=\"https://maps.app.goo.gl/y7XdyrosGCvR2cGs9\">\n          2900 Edouard Montpetit Blvd, Montréal, QC H3T 1J4\n        </a> (20$/h)\n      </li>\n      <li>🚶 <strong>Piéton :</strong> Entrée principale du Lassonde</li>\n      <li>⏰ <strong>Heure d’arrivée :</strong> les inscriptions débutent à <strong>8h45</strong></li>\n      <li>🎤 <strong>Conférenciers invités :</strong></li>\n      <ul>\n        <li>Ranwa Al-Mallah</li>\n        <li>Omar Abdul-Wahab</li>\n        <li>Sara Beddouch</li>\n        <li>Lahcen Fatah</li>\n        <li>Mouhamed Abdul Aziz Diop</li>\n        <li>Véronique Tremblay</li>\n        <li>Christopher Teil</li>\n        <li>Sylvain Miklohoun</li>\n        <li>Patricia Gautrin</li>\n      </ul>\n    </ul>\n\n    <h3 style=\"margin-top: 30px;\">🍴 À prévoir</h3>\n    <ul>\n      <li>🥗 <strong>Nourriture servie GRATUITEMENT</strong> – inutile d’apporter ton repas</li>\n      <li>💻 Apporte <strong>ton ordinateur et ton chargeur</strong>, en t’assurant qu’il soit bien chargé à l’avance (⚠️ pas de prise dans la salle)</li>\n      <li>💧 Apporte une <strong>bouteille d’eau réutilisable</strong></li>\n    </ul>\n\n    <p\n      style=\"\n        background-color: #fff3cd;\n        border: 2px solid #f0ad4e;\n        padding: 15px;\n        font-size: 20px;\n        font-weight: bold;\n        color: #c62828;\n        text-align: center;\n        border-radius: 8px;\n        margin: 40px 0;\n      \"\n    >\n      🔑 Garde ton code avec toi en tout temps — \n      c’est ta <u>clé</u> pour profiter à fond de LearnML 2025!\n    </p>\n\n    <p>\n      On a hâte de te voir participer aux ateliers pratiques, apprendre des\n      conférenciers invités et créer des liens avec d’autres passionnés de\n      l’IA 🤖.\n    </p>\n\n    <p>À très bientôt à LearnML 2025! 🚀</p>\n  </body>\n</html>\n",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        1168,
-        624
+        1344,
+        640
       ],
       "id": "191425c7-1c03-4185-a692-322f72b987ab",
       "name": "Send a message1",
@@ -626,7 +643,7 @@
       ],
       "id": "b5bb06bc-2937-4b0f-a455-4d5650ebb54c",
       "name": "Loop Over Items1",
-      "executeOnce": true
+      "executeOnce": false
     },
     {
       "parameters": {
@@ -945,7 +962,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1392,
+        1536,
         640
       ],
       "id": "cc073d8e-1599-481e-b25f-ebeb4b6d4813",
@@ -955,7 +972,8 @@
           "id": "tcgfUQhBwsAuROjj",
           "name": "Postgres account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -986,8 +1004,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        128,
-        592
+        304,
+        608
       ],
       "id": "275e0e7f-7e5d-4b78-9da5-bd317e00465e",
       "name": "Select Participate",
@@ -997,6 +1015,57 @@
           "name": "Postgres account"
         }
       }
+    },
+    {
+      "parameters": {
+        "sendTo": "80alexanderr@gmail.com",
+        "subject": "Invitation et code secret LearnML Discord",
+        "message": "=<!DOCTYPE html> <html>   <head>     <meta charset=\"UTF-8\" />     <title>Invitation LearnML 2025</title>   </head>   <body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #333;\">     <p>Bonjour {{ $('Loop Over Items1').item.json.name }},</p>      <p>       Tu es <strong>officiellement invité(e)</strong> à       <strong>LearnML 2025</strong> 🎉       </p>      <p>       On est super contents de t’avoir avec nous!         En pièce jointe de ce courriel, tu trouveras :     </p>      <ul>       <li>         👉 <strong>Ton accès au serveur Discord</strong> : super important pour         rester à jour avec les annonces, recevoir les notifications         automatiques, poser tes questions et connecter avec les autres         participants.       </li>       <li>         🔑 <strong>Ton code secret LearnML</strong> : ce code est         <em>unique pour toi</em> et tu dois absolument le noter ou le         mémoriser avant l’événement.           Tu en auras besoin pour :         <ul>           <li>Te <strong>présenter à l’accueil</strong> et confirmer ta présence ✅</li>           <li>Réclamer ton <strong>déjeuner gratuit</strong> 🍕</li>         </ul>       </li>     </ul>      <p style=\"font-size: 18px; font-weight: bold; margin-top: 30px;\">       Voici ton code secret LearnML :     </p>      <p       style=\"         font-size: 48px;         font-weight: bold;         color: #c62828;         text-align: center;         margin: 20px 0;       \"     >       {{ $json.learnml_code }}     </p>      <p style=\"text-align: center; margin: 40px 0;\">       <a         href=\"https://discord.gg/aqJ7d46k\"         style=\"           background-color: #5865f2;           color: #fff;           padding: 15px 30px;           text-decoration: none;           font-size: 18px;           font-weight: bold;           border-radius: 8px;           display: inline-block;         \"       >         🔗 Rejoindre le serveur Discord       </a>     </p>      <p style=\"text-align: center; font-size: 14px; color: #555;\">       Si jamais le bouton ne fonctionne pas, copie-colle ce lien dans ton       navigateur :<br />       <a href=\"https://discord.gg/aqJ7d46k\">https://discord.gg/aqJ7d46k</a>     </p>      <p>       Garde ce code avec toi en tout temps — c’est ta clé pour profiter à fond       de LearnML 2025!     </p>      <p>       On a hâte de te voir participer aux ateliers pratiques, apprendre des       conférenciers invités et créer des liens avec d’autres passionnés de       l’IA.     </p>      <p>À très bientôt à LearnML 2025! 🚀</p>   </body> </html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1472,
+        1040
+      ],
+      "id": "170b3978-f4cf-4612-a257-bf821b9c8280",
+      "name": "Send a message2",
+      "webhookId": "6671ea87-8a90-4f28-8b76-0d86ace773bf",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "unquhRC3gfJ50lma",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -80,
+        640
+      ],
+      "id": "369a00b1-ad4b-4566-9d5c-5102b2e2e417",
+      "name": "Wait",
+      "webhookId": "bc8c6ca6-5e99-42fa-a018-9bbafe5abd1c"
+    },
+    {
+      "parameters": {
+        "amount": "={{ Math.floor(Math.random()*3)+1 }}\n"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1120,
+        640
+      ],
+      "id": "6d21c778-31e1-402e-a19f-edf7877c52ee",
+      "name": "Random wait",
+      "webhookId": "153c3742-21c4-4d42-883b-23ed8d945bc4"
     }
   ],
   "origin": "n8n",
@@ -1027,6 +1096,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-09-18T21:04:01.000Z",
-  "versionId": "796743d3-3150-4aba-b57b-ffb6ae361603"
+  "updatedAt": "2025-09-19T03:08:58.000Z",
+  "versionId": "c3c52055-50c1-4e75-9ca7-e179f439ba91"
 }
