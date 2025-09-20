@@ -578,7 +578,7 @@
           "conditions": [
             {
               "id": "04e56a32-b919-4b41-90bf-8bba2ee2819b",
-              "leftValue": "={{ $json.food1 }}",
+              "leftValue": "={{ $json.food2 }}",
               "rightValue": "",
               "operator": {
                 "type": "boolean",
@@ -1532,7 +1532,8 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "entry2": true
+            "entry2": true,
+            "learnml_code": "={{ $json.learnml_code }}"
           },
           "matchingColumns": [
             "learnml_code"
@@ -1838,6 +1839,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-09-18T21:04:42.000Z",
-  "versionId": "9396755d-3ec8-4c71-a5b2-63345e3649c8"
+  "updatedAt": "2025-09-20T01:20:51.000Z",
+  "versionId": "044d6d50-ced9-4870-a996-23834e781fe2"
 }
