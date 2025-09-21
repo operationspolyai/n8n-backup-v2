@@ -1,0 +1,116 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Find all photos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find all photos": {
+      "main": [
+        [
+          {
+            "node": "Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-21T16:19:34.975Z",
+  "id": "XvUerKlX9GmeBtpN",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Create google form",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "5abe6687-93e7-446f-89bd-53d55d6be342",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": ".jpg",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1QqPcpE8vXa4DMVxRnzQwkIy5nNrpbWp1",
+            "mode": "list",
+            "cachedResultName": "LearnML 2025 Photos and Videos",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1QqPcpE8vXa4DMVxRnzQwkIy5nNrpbWp1"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "1c447156-9875-4985-bf20-e68f4e06147e",
+      "name": "Find all photos",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "yZgYj2QPpVHC4eCc",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "defineForm": "json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        592,
+        16
+      ],
+      "id": "9c775860-9daa-4f47-b6b2-bdb9c1ef6494",
+      "name": "Form",
+      "webhookId": "cddabb6b-41a2-4fc8-81fc-62acbee932cc"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-21T16:19:34.978Z",
+      "updatedAt": "2025-09-21T16:19:34.978Z",
+      "role": "workflow:owner",
+      "workflowId": "XvUerKlX9GmeBtpN",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-21T16:51:06.000Z",
+  "versionId": "318dfc53-2612-470a-8bb6-6b80057c546e"
+}
