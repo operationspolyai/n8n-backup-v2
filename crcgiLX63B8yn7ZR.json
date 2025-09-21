@@ -79,7 +79,13 @@
     },
     "Accept Sat Entry": {
       "main": [
-        []
+        [
+          {
+            "node": "Call 'Live Discord Bot stats'",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "If already claimed food": {
@@ -167,6 +173,61 @@
         [
           {
             "node": "Accept Sun Entry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Accept Sun Entry": {
+      "main": [
+        [
+          {
+            "node": "Call 'Live Discord Bot stats'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Decline Sat Lunch": {
+      "main": [
+        [
+          {
+            "node": "Call 'Live Discord Bot stats'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Accept Sat Lunch": {
+      "main": [
+        [
+          {
+            "node": "Call 'Live Discord Bot stats'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Decline Sun Lunch": {
+      "main": [
+        [
+          {
+            "node": "Call 'Live Discord Bot stats'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Accept Sun Lunch": {
+      "main": [
+        [
+          {
+            "node": "Call 'Live Discord Bot stats'",
             "type": "main",
             "index": 0
           }
@@ -1809,6 +1870,29 @@
           "name": "Postgres account"
         }
       }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "6sKA2DhAqcZkgllM",
+          "mode": "list",
+          "cachedResultName": "Live Discord Bot stats"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        1968,
+        272
+      ],
+      "id": "af361ca6-0693-4ac8-bdf3-1e803b4eb5e3",
+      "name": "Call 'Live Discord Bot stats'"
     }
   ],
   "origin": "n8n",
@@ -1839,6 +1923,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-09-20T01:20:51.000Z",
-  "versionId": "044d6d50-ced9-4870-a996-23834e781fe2"
+  "updatedAt": "2025-09-21T01:21:44.000Z",
+  "versionId": "d612c2c4-72d4-4155-b507-247e9e517510"
 }
