@@ -1,0 +1,332 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Entry1 count",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Food1 count",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Entry2 count",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "food2 count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Entry1 count": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Food1 count": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Entry2 count": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "food2 count": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Entry1 count",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Food1 count",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Entry2 count",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "food2 count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-21T00:23:26.024Z",
+  "id": "6sKA2DhAqcZkgllM",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Live Discord Bot stats",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        128
+      ],
+      "id": "611b4a38-5f97-4b4e-ac21-71305e07d6a5",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select count(entry1) as \"entry1count\" from \"LearnMembers\" where entry1=true",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        240,
+        0
+      ],
+      "id": "e8a1d979-659d-410d-8482-a32ffc78e441",
+      "name": "Entry1 count",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select count(food1) as \"food1count\" from \"LearnMembers\" where food1=true",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        272,
+        240
+      ],
+      "id": "409c4f63-66b4-43be-baa5-d71f05951804",
+      "name": "Food1 count",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select count(entry2) as \"entry2count\" from \"LearnMembers\" where entry2=true",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        272,
+        448
+      ],
+      "id": "72c36643-a302-43ee-8df3-5cd7bb2353ef",
+      "name": "Entry2 count",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select count(food2) as \"food2count\" from \"LearnMembers\" where food2=true",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        288,
+        656
+      ],
+      "id": "208d95a2-1e4a-464a-909b-7cd158b741a7",
+      "name": "food2 count",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add percentage fields\nconst entry1count = Number($input.first().json.entry1count);\nconst food1count = Number($input.first().json.food1count);\nconst entry2count = Number($input.first().json.entry2count);\nconst food2count = Number($input.first().json.food2count);\n\n// Calculate percentages and round to nearest 10th\nconst food1percent = entry1count > 0 ? Math.round((food1count / entry1count) * 1000) / 10 : 0;\nconst food2percent = entry2count > 0 ? Math.round((food2count / entry2count) * 1000) / 10 : 0;\n\n$input.first().json.food1Percentage = food1percent;\n$input.first().json.food2Percentage = food2percent;\n\nreturn $input.all();\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        944,
+        384
+      ],
+      "id": "ec4429b6-dd09-4c5e-993e-8ff502bf24c0",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "mode": "combineBySql",
+        "numberInputs": 4,
+        "query": "SELECT *\nFROM input1\nLEFT JOIN input2 ON input1.name = input2.id\nLEFT JOIN input3 ON input1.name = input3.id\nLEFT JOIN input4 ON input1.name = input4.id;\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        704,
+        368
+      ],
+      "id": "b0531162-3707-46e2-b858-e2186efbcd98",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1417165264461762563",
+          "mode": "list",
+          "cachedResultName": "LearnML 2025",
+          "cachedResultUrl": "https://discord.com/channels/1417165264461762563"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1419117561433296956",
+          "mode": "list",
+          "cachedResultName": "live-stats",
+          "cachedResultUrl": "https://discord.com/channels/1417165264461762563/1419117561433296956"
+        },
+        "content": "=---------\n### Saturday\nCurrent Entries:  {{ $json.entry1count }}\nCurrent Lunch Entries: {{ $json.food1count }}\nPercentage Who Ate: {{ $json.food1Percentage }}%\n\n### Sunday\nCurrent Entries:  {{ $json.entry2count }}\nCurrent Lunch Entries: {{ $json.food2count }}\nPercentage Who Ate: {{ $json.food2Percentage }}%\n---------\n",
+        "options": {
+          "flags": [
+            "SUPPRESS_NOTIFICATIONS"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        1168,
+        384
+      ],
+      "id": "eda5021e-7726-49ba-bb1c-f20f5ca0e49e",
+      "name": "Send a message",
+      "webhookId": "2789b7d8-3a1a-46f6-910a-045fc1e2fad7",
+      "credentials": {
+        "discordBotApi": {
+          "id": "cxGK7pRlQxV7O0GJ",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -336,
+        336
+      ],
+      "id": "827de200-eab9-4bcb-9952-926534e32f65",
+      "name": "When Executed by Another Workflow"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-21T00:23:26.034Z",
+      "updatedAt": "2025-09-21T00:23:26.034Z",
+      "role": "workflow:owner",
+      "workflowId": "6sKA2DhAqcZkgllM",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-21T01:20:41.000Z",
+  "versionId": "90a32be8-9ce7-40cb-b272-476ef2d331f4"
+}
