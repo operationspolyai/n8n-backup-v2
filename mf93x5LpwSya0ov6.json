@@ -556,7 +556,7 @@
     },
     "node:Daily Schedule": {
       "recurrenceRules": [
-        4
+        8
       ]
     }
   },
