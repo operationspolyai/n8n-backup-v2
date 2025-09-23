@@ -566,10 +566,7 @@
       "parameters": {
         "rule": {
           "interval": [
-            {
-              "field": "hours",
-              "hoursInterval": 4
-            }
+            {}
           ]
         }
       },
@@ -1180,6 +1177,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-09-16T13:22:12.000Z",
-  "versionId": "b3f836d3-1cae-4405-9807-8c1084fca0d9"
+  "updatedAt": "2025-09-23T01:15:45.000Z",
+  "versionId": "70f4a421-753d-4f97-9fc0-79a95df14bf9"
 }
