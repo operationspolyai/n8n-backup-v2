@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "When clicking ‘Execute workflow’": {
       "main": [
@@ -402,6 +402,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-09-19T02:02:24.000Z",
+  "updatedAt": "2025-09-23T18:17:07.000Z",
   "versionId": "dcbec432-1cd3-4762-b6eb-1b016d767673"
 }
