@@ -812,8 +812,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1840,
-        -96
+        1872,
+        -80
       ],
       "id": "6048a957-0f4e-4fbc-8fb0-67f16af729e2",
       "name": "Insert rows in a table",
@@ -1653,6 +1653,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-09-19T18:43:21.000Z",
-  "versionId": "9b03b034-cc99-4f3f-99be-39dfc9298e02"
+  "updatedAt": "2025-09-30T01:46:09.000Z",
+  "versionId": "0de5349a-30e2-4352-96d8-35666fbe7547"
 }
