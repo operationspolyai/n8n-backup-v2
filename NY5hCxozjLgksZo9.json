@@ -103,9 +103,9 @@
         },
         "table": {
           "__rl": true,
-          "value": "LearnMembers",
+          "value": "CodeMembers",
           "mode": "list",
-          "cachedResultName": "LearnMembers"
+          "cachedResultName": "CodeMembers"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -406,7 +406,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT EXISTS (\n  SELECT 1\n  FROM \"LearnMembers\"\n  WHERE learnml_code = '{{ $json.randomCode }}'\n);\n",
+        "query": "SELECT EXISTS (\n  SELECT 1\n  FROM \"CodeMembers\"\n  WHERE learnml_code = '{{ $json.randomCode }}'\n);\n",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -854,6 +854,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-09-18T21:04:36.000Z",
-  "versionId": "3fe9c298-2fd4-4256-a551-53746bcf4e5f"
+  "updatedAt": "2025-10-02T02:33:33.000Z",
+  "versionId": "2a1ce187-21c1-4006-91be-ec0b22158dfa"
 }
