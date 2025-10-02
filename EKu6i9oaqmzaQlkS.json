@@ -1,0 +1,166 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-10-02T01:29:04.950Z",
+  "id": "EKu6i9oaqmzaQlkS",
+  "isArchived": false,
+  "meta": null,
+  "name": "Sync forms to Mongo",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "20476599-8ec2-4af9-ab57-083b89ae6bdd",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -384,
+        -32
+      ],
+      "id": "fc97b50e-c0da-4c2c-9187-cf8da9913cfc",
+      "name": "CodeML Form Submit",
+      "webhookId": "20476599-8ec2-4af9-ab57-083b89ae6bdd"
+    },
+    {
+      "parameters": {
+        "content": "I added some sample mock data for trigger. Although, personally, I do not use the trigger's data. I loop through entire google sheets and add any new emails after this trigger is activated"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        -208
+      ],
+      "id": "fcc6da3d-558f-4138-aa5c-a2d07510f349",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1SEsmTorlmudNkf2cW4DVkENrE4kAb0XnwaLTJ7T5wLU",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2065923140,
+          "mode": "list",
+          "cachedResultName": "Réponses au formulaire 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SEsmTorlmudNkf2cW4DVkENrE4kAb0XnwaLTJ7T5wLU/edit#gid=2065923140"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -720,
+        -240
+      ],
+      "id": "fd23499e-edb2-410b-8574-795788aa2e22",
+      "name": "Partcipates",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J3rnaSuqLzWLHSYz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Here is the CodeML data",
+        "height": 80
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -768,
+        -336
+      ],
+      "id": "6ff2b4f7-b80a-41bc-a896-1d6336df28e5",
+      "name": "Sticky Note1"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {
+    "CodeML Form Submit": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.n8npolyai.ca",
+            "x-real-ip": "35.187.143.69",
+            "x-forwarded-for": "35.187.143.69",
+            "x-forwarded-proto": "https",
+            "content-length": "1289",
+            "content-type": "application/json",
+            "user-agent": "Mozilla/5.0 (compatible; Google-Apps-Script; beanserver; +https://script.google.com; id: UAEmdDd-L0ehcecPG-3wu1fOTX0bcPQuOUe8)",
+            "accept-encoding": "gzip, deflate, br"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "spreadsheetId": "1SEsmTorlmudNkf2cW4DVkENrE4kAb0XnwaLTJ7T5wLU",
+            "sheetName": "Réponses au formulaire 1",
+            "submittedBy": "comitepolyai@gmail.com",
+            "submittedAt": "2025-10-02T01:56:43.670Z",
+            "responses": [
+              "01/10/2025 21:56:42",
+              "lightningbeat80@gmail.com",
+              "",
+              "test",
+              "lightningbeat80@gmail.com",
+              "High school/École secondaire",
+              "Polytechnique Montréal",
+              "Software engineering/Génie logiciel",
+              "Python",
+              "10",
+              "test",
+              "Friends/Amis",
+              "Vegetarian/Végétarien",
+              "S",
+              "https://www.linkedin.com/in/alexander-roberge",
+              "",
+              "https://drive.google.com/open?id=1_C2Mkafrcn7ROR94m6apNBeXJyuXN45B",
+              "I consent for PolyAI to share my CV with the companies sponsoring the event/J’accepte que PolyAI partage mon CV avec les entreprises sponsorisant l’événement.",
+              "I consent for PolyAI to take pictures of the event that I might be in/J’accepte que PolyAI prenne des photos de l’événement sur lesquelles je pourrais apparaître.",
+              "I agree not to share any data or information obtained during the event unless official authorization is given by both PolyAI's executive staff and the owner of the data/J’accepte de ne partager aucune donnée ou information obtenue lors de l’événement sans l’autorisation officielle à la fois de l’équipe exécutive de PolyAI et du propriétaire des données.",
+              "test"
+            ]
+          },
+          "webhookUrl": "https://n8n.n8npolyai.ca/webhook-test/d9b151b8-7c2b-4809-8526-b190a52ba14b",
+          "executionMode": "test"
+        }
+      }
+    ]
+  },
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-02T01:29:04.952Z",
+      "updatedAt": "2025-10-02T01:29:04.952Z",
+      "role": "workflow:owner",
+      "workflowId": "EKu6i9oaqmzaQlkS",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-10-02T01:40:11.040Z",
+      "updatedAt": "2025-10-02T01:40:11.040Z",
+      "id": "UJLN9QCfCgyUh2VV",
+      "name": "CodeML"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-02T02:11:14.000Z",
+  "versionId": "51b120e7-aa8c-4b78-aa71-d41cde2317fa"
+}
