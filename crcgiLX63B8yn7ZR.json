@@ -1877,6 +1877,7 @@
           "__rl": true,
           "value": "6sKA2DhAqcZkgllM",
           "mode": "list",
+          "cachedResultUrl": "/workflow/6sKA2DhAqcZkgllM",
           "cachedResultName": "Live Discord Bot stats"
         },
         "workflowInputs": {
@@ -1923,6 +1924,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-09-30T18:41:56.000Z",
-  "versionId": "d612c2c4-72d4-4155-b507-247e9e517510"
+  "updatedAt": "2025-10-03T00:52:40.000Z",
+  "versionId": "01ae7730-d57e-468f-8162-a46c114d9a34"
 }
