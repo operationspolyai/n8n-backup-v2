@@ -1,0 +1,2805 @@
+{
+  "active": false,
+  "connections": {
+    "Select rows from a table": {
+      "main": [
+        [
+          {
+            "node": "Update entry status 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update entry status 1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code scanned": {
+      "main": [
+        [
+          {
+            "node": "Get global max food",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If action": {
+      "main": [
+        [
+          {
+            "node": "Action",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Scan",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get global max food": {
+      "main": [
+        [
+          {
+            "node": "If action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table1": {
+      "main": [
+        [
+          {
+            "node": "Update entry status ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update entry status ": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table2": {
+      "main": [
+        [
+          {
+            "node": "If over food limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add count to food": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook2": {
+      "main": [
+        []
+      ]
+    },
+    "If over food limit": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Add count to food",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add count to food1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table4": {
+      "main": [
+        [
+          {
+            "node": "Add count to food1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table3": {
+      "main": [
+        [
+          {
+            "node": "Add count to snack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add count to snack": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scan": {
+      "main": [
+        [
+          {
+            "node": "Select rows from a table",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Select rows from a table1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Select rows from a table2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Select rows from a table3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Action": {
+      "main": [
+        [
+          {
+            "node": "Select rows from a table4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Select rows from a table5",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add count to food2": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table5": {
+      "main": [
+        [
+          {
+            "node": "Add count to food2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row(s)": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-03T00:52:58.492Z",
+  "id": "6BeF8wdyc8TKLYNu",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "AppScript logic",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeMembers",
+          "mode": "list",
+          "cachedResultName": "CodeMembers"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "learnml_code",
+              "value": "={{ $('Code scanned').item.json.body.code }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -864,
+        -288
+      ],
+      "id": "ef81c707-0b8d-4578-b9cf-d54a8db25ce3",
+      "name": "Select rows from a table",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeMembers",
+          "mode": "list",
+          "cachedResultName": "CodeMembers"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "entry1": true,
+            "learnml_code": "={{ $('Code scanned').item.json.body.code }}"
+          },
+          "matchingColumns": [
+            "learnml_code"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "learnml_code",
+              "displayName": "learnml_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "school_level",
+              "displayName": "school_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "school",
+              "displayName": "school",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "study",
+              "displayName": "study",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "tech_experience",
+              "displayName": "tech_experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ai_skill",
+              "displayName": "ai_skill",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "heared",
+              "displayName": "heared",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food",
+              "displayName": "food",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "t-shirt size",
+              "displayName": "t-shirt size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV",
+              "displayName": "CV",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "LinkedIn",
+              "displayName": "LinkedIn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "GitHub",
+              "displayName": "GitHub",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV_perm",
+              "displayName": "CV_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "photo_perm",
+              "displayName": "photo_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry1",
+              "displayName": "entry1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "food1",
+              "displayName": "food1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food2",
+              "displayName": "food2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry2",
+              "displayName": "entry2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sent_email_code",
+              "displayName": "sent_email_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sent_email_form",
+              "displayName": "sent_email_form",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -640,
+        -288
+      ],
+      "id": "b13db12e-3733-4074-86a9-a3ca442ea78f",
+      "name": "Update entry status 1",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "d520b45c-b17f-4644-bf78-0139a4e2539f",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1760,
+        -192
+      ],
+      "id": "286fc343-a672-4708-babb-8aacf3d8c831",
+      "name": "Code scanned",
+      "webhookId": "d520b45c-b17f-4644-bf78-0139a4e2539f"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "0b4441fd-30f4-4e9d-9d58-0f704e9f0584",
+              "leftValue": "={{ $('Code scanned').item.json.body.action }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1312,
+        -192
+      ],
+      "id": "bf3bd6e5-c6d9-4ea9-8795-efbe269689a4",
+      "name": "If action"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"decision\": \"confirmed\",\n  \"message\": \"Checked in successfully\",\n  \"person\": {\n    \"name\": \"{{ $json.name }}\",\n    \"email\": \"{{ $json.email }}\",\n    \"tshirt_size\": \"{{ $json['t-shirt size'] }}\",\n    \"food_pref\": \"{{ $json.food }}\",\n    \"food_count\": {{ $json.food_count }},\n    \"snack_count\": {{ $json.snack_count }}\n  },\n  \"max_food\": {{ $('Get global max food').item.json.max_food }}\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -416,
+        -288
+      ],
+      "id": "c559f57c-62a8-42e2-a31b-345d46288080",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "McCjhDF0OsXmbkVY",
+          "mode": "list",
+          "cachedResultName": "CodeML",
+          "cachedResultUrl": "/projects/1KxArspnjifF9NPY/datatables/McCjhDF0OsXmbkVY"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -1536,
+        -192
+      ],
+      "id": "469af73d-2c0c-4920-ba90-cffe68316ff1",
+      "name": "Get global max food"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeMembers",
+          "mode": "list",
+          "cachedResultName": "CodeMembers"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "learnml_code",
+              "value": "={{ $('Code scanned').item.json.body.code }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -864,
+        -96
+      ],
+      "id": "5597aa61-8cd5-450e-84fa-0858897c6efa",
+      "name": "Select rows from a table1",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeMembers",
+          "mode": "list",
+          "cachedResultName": "CodeMembers"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "learnml_code": "={{ $('Code scanned').item.json.body.code }}",
+            "entry2": true
+          },
+          "matchingColumns": [
+            "learnml_code"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "learnml_code",
+              "displayName": "learnml_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "school_level",
+              "displayName": "school_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "school",
+              "displayName": "school",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "study",
+              "displayName": "study",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "tech_experience",
+              "displayName": "tech_experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ai_skill",
+              "displayName": "ai_skill",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "heared",
+              "displayName": "heared",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food",
+              "displayName": "food",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "t-shirt size",
+              "displayName": "t-shirt size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV",
+              "displayName": "CV",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "LinkedIn",
+              "displayName": "LinkedIn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "GitHub",
+              "displayName": "GitHub",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV_perm",
+              "displayName": "CV_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "photo_perm",
+              "displayName": "photo_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry1",
+              "displayName": "entry1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry2",
+              "displayName": "entry2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "sent_email_code",
+              "displayName": "sent_email_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sent_email_form",
+              "displayName": "sent_email_form",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food_count",
+              "displayName": "food_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "snack_count",
+              "displayName": "snack_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -640,
+        -96
+      ],
+      "id": "b12ebd5d-c1d3-44a0-8145-e125ce74b16d",
+      "name": "Update entry status ",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"decision\": \"confirmed\",\n  \"message\": \"Checked in successfully\",\n  \"person\": {\n    \"name\": \"{{ $json.name }}\",\n    \"email\": \"{{ $json.email }}\",\n    \"tshirt_size\": \"{{ $json['t-shirt size'] }}\",\n    \"food_pref\": \"{{ $json.food }}\",\n    \"food_count\": {{ $json.food_count }},\n    \"snack_count\": {{ $json.snack_count }}\n  },\n  \"max_food\": {{ $('Get global max food').item.json.max_food }}\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -416,
+        -96
+      ],
+      "id": "221383e1-3c48-4dd0-af7c-10fbc151afb4",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeMembers",
+          "mode": "list",
+          "cachedResultName": "CodeMembers"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "learnml_code",
+              "value": "={{ $('Code scanned').item.json.body.code }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -864,
+        192
+      ],
+      "id": "14270829-f1e2-426a-8f17-6a79a249d964",
+      "name": "Select rows from a table2",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeMembers",
+          "mode": "list",
+          "cachedResultName": "CodeMembers"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "learnml_code": "={{ $('Code scanned').item.json.body.code }}",
+            "food_count": "={{ Number($json.food_count)+1}}"
+          },
+          "matchingColumns": [
+            "learnml_code"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "learnml_code",
+              "displayName": "learnml_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "school_level",
+              "displayName": "school_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "school",
+              "displayName": "school",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "study",
+              "displayName": "study",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "tech_experience",
+              "displayName": "tech_experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ai_skill",
+              "displayName": "ai_skill",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "heared",
+              "displayName": "heared",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food",
+              "displayName": "food",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "t-shirt size",
+              "displayName": "t-shirt size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV",
+              "displayName": "CV",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "LinkedIn",
+              "displayName": "LinkedIn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "GitHub",
+              "displayName": "GitHub",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV_perm",
+              "displayName": "CV_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "photo_perm",
+              "displayName": "photo_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry1",
+              "displayName": "entry1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry2",
+              "displayName": "entry2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sent_email_code",
+              "displayName": "sent_email_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sent_email_form",
+              "displayName": "sent_email_form",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food_count",
+              "displayName": "food_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "snack_count",
+              "displayName": "snack_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -416,
+        288
+      ],
+      "id": "9ab2de7b-ad07-4613-b26d-c141f72a7018",
+      "name": "Add count to food",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"decision\": \"confirmed\",\n  \"message\": \"This person is hungry\",\n  \"person\": {\n    \"name\": \"{{ $json.name }}\",\n    \"email\": \"{{ $json.email }}\",\n    \"tshirt_size\": \"{{ $json['t-shirt size'] }}\",\n    \"food_pref\": \"{{ $json.food }}\",\n    \"food_count\": {{ $json.food_count }},\n    \"snack_count\": {{ $json.snack_count }}\n  },\n  \"max_food\": {{ $('Get global max food').item.json.max_food }}\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -192,
+        288
+      ],
+      "id": "31508e7d-2d95-49ab-bb81-6d3d18ce2c36",
+      "name": "Respond to Webhook2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ea3aab5f-8de5-40c3-a081-600d453025e7",
+              "leftValue": "={{ $json.food_count }}",
+              "rightValue": "={{ $('Get global max food').item.json.max_food }}",
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            },
+            {
+              "id": "be13bd52-3b4d-40f0-8304-6c7c1af6c3bf",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -640,
+        192
+      ],
+      "id": "748ca2dd-9a10-4d08-9cc3-8535c659f91d",
+      "name": "If over food limit"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"decision\": \"denied\",\n  \"message\": \"Over food limit\",\n  \"person\": {\n    \"name\": \"{{ $json.name }}\",\n    \"email\": \"{{ $json.email }}\",\n    \"tshirt_size\": \"{{ $json['t-shirt size'] }}\",\n    \"food_pref\": \"{{ $json.food }}\",\n    \"food_count\": {{ $json.food_count }},\n    \"snack_count\": {{ $json.snack_count }}\n  },\n  \"max_food\": {{ $('Get global max food').item.json.max_food }}\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -416,
+        96
+      ],
+      "id": "99d53d52-a177-4ad2-a1fc-cd28d86a8438",
+      "name": "Respond to Webhook3"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeMembers",
+          "mode": "list",
+          "cachedResultName": "CodeMembers"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "learnml_code": "={{ $('Code scanned').item.json.body.code }}",
+            "food_count": "={{ Number($json.food_count)+1}}"
+          },
+          "matchingColumns": [
+            "learnml_code"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "learnml_code",
+              "displayName": "learnml_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "school_level",
+              "displayName": "school_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "school",
+              "displayName": "school",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "study",
+              "displayName": "study",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "tech_experience",
+              "displayName": "tech_experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ai_skill",
+              "displayName": "ai_skill",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "heared",
+              "displayName": "heared",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food",
+              "displayName": "food",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "t-shirt size",
+              "displayName": "t-shirt size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV",
+              "displayName": "CV",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "LinkedIn",
+              "displayName": "LinkedIn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "GitHub",
+              "displayName": "GitHub",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV_perm",
+              "displayName": "CV_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "photo_perm",
+              "displayName": "photo_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry1",
+              "displayName": "entry1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry2",
+              "displayName": "entry2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sent_email_code",
+              "displayName": "sent_email_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sent_email_form",
+              "displayName": "sent_email_form",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food_count",
+              "displayName": "food_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "snack_count",
+              "displayName": "snack_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -640,
+        -864
+      ],
+      "id": "797779fa-84f8-4366-adf4-98e1325c5bf4",
+      "name": "Add count to food1",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"decision\": \"confirmed\",\n  \"message\": \"This person is hungry\",\n  \"person\": {\n    \"name\": \"{{ $json.name }}\",\n    \"email\": \"{{ $json.email }}\",\n    \"tshirt_size\": \"{{ $json['t-shirt size'] }}\",\n    \"food_pref\": \"{{ $json.food }}\",\n    \"food_count\": {{ $json.food_count }},\n    \"snack_count\": {{ $json.snack_count }}\n  },\n  \"max_food\": {{ $('Get global max food').item.json.max_food }}\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -416,
+        -864
+      ],
+      "id": "f5914e1a-f973-44e3-804a-b64bd4f76278",
+      "name": "Respond to Webhook4"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeMembers",
+          "mode": "list",
+          "cachedResultName": "CodeMembers"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "learnml_code",
+              "value": "={{ $('Code scanned').item.json.body.code }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -864,
+        -864
+      ],
+      "id": "9148191a-6f0d-474e-9403-fe8f7cfec476",
+      "name": "Select rows from a table4",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeMembers",
+          "mode": "list",
+          "cachedResultName": "CodeMembers"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "learnml_code",
+              "value": "={{ $('Code scanned').item.json.body.code }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -864,
+        480
+      ],
+      "id": "87eacba8-f22f-4128-a5d3-9cce123f998f",
+      "name": "Select rows from a table3",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeMembers",
+          "mode": "list",
+          "cachedResultName": "CodeMembers"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "learnml_code": "={{ $('Code scanned').item.json.body.code }}",
+            "snack_count": "={{ Number($json.snack_count)+1}}"
+          },
+          "matchingColumns": [
+            "learnml_code"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "learnml_code",
+              "displayName": "learnml_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "school_level",
+              "displayName": "school_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "school",
+              "displayName": "school",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "study",
+              "displayName": "study",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "tech_experience",
+              "displayName": "tech_experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ai_skill",
+              "displayName": "ai_skill",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "heared",
+              "displayName": "heared",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food",
+              "displayName": "food",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "t-shirt size",
+              "displayName": "t-shirt size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV",
+              "displayName": "CV",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "LinkedIn",
+              "displayName": "LinkedIn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "GitHub",
+              "displayName": "GitHub",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV_perm",
+              "displayName": "CV_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "photo_perm",
+              "displayName": "photo_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry1",
+              "displayName": "entry1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry2",
+              "displayName": "entry2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sent_email_code",
+              "displayName": "sent_email_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sent_email_form",
+              "displayName": "sent_email_form",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food_count",
+              "displayName": "food_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "snack_count",
+              "displayName": "snack_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -640,
+        480
+      ],
+      "id": "7585b388-eb25-4ce9-9af6-8456797a46cd",
+      "name": "Add count to snack",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"decision\": \"confirmed\",\n  \"message\": \"Snack confirmed\",\n  \"person\": {\n    \"name\": \"{{ $json.name }}\",\n    \"email\": \"{{ $json.email }}\",\n    \"tshirt_size\": \"{{ $json['t-shirt size'] }}\",\n    \"food_pref\": \"{{ $json.food }}\",\n    \"food_count\": {{ $json.food_count }},\n    \"snack_count\": {{ $json.snack_count }}\n  },\n  \"max_food\": {{ $('Get global max food').item.json.max_food }}\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -416,
+        480
+      ],
+      "id": "e60cc964-5498-4d3d-8ff4-9f878f51d362",
+      "name": "Respond to Webhook5"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Code scanned').item.json.body.mode }}",
+                    "rightValue": "sat_entry",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "3fe5b559-8c7a-4768-bbd3-1ef7b00bed74"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "sat_entry"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "354ff296-d0ad-473d-a7db-61578391049c",
+                    "leftValue": "={{ $('Code scanned').item.json.body.mode }}",
+                    "rightValue": "sun_entry",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "sun_entry"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "eb444dca-5fef-4bf2-81d0-dcd94ad268a7",
+                    "leftValue": "={{ $('Code scanned').item.json.body.mode }}",
+                    "rightValue": "food",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "food"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "8231c304-11c9-4727-8255-0561c8bcff8f",
+                    "leftValue": "={{ $('Code scanned').item.json.body.mode }}",
+                    "rightValue": "snack",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "snack"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -1088,
+        64
+      ],
+      "id": "7b09067a-23b4-42d7-9992-84cb99e24498",
+      "name": "Scan"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Code scanned').item.json.body.action }}",
+                    "rightValue": "bypassFood",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "98391737-29a7-4d63-90bc-76501a1fe513"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "bypassFood"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "76b771cb-3926-4db1-91eb-8b0ca52de13d",
+                    "leftValue": "={{ $('Code scanned').item.json.body.action }}",
+                    "rightValue": "removeSnack",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "removeSnack"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "1ae13c0d-a231-47fb-b178-6415cf2a97a0",
+                    "leftValue": "={{ $('Code scanned').item.json.body.action }}",
+                    "rightValue": "updateMaxFood",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "updateMaxFood"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -1088,
+        -688
+      ],
+      "id": "8bde7ef1-3a95-4edb-b385-4add2408fda8",
+      "name": "Action"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeMembers",
+          "mode": "list",
+          "cachedResultName": "CodeMembers"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "learnml_code": "={{ $('Code scanned').item.json.body.code }}",
+            "snack_count": "={{ Number($json.snack_count)-1}}"
+          },
+          "matchingColumns": [
+            "learnml_code"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "learnml_code",
+              "displayName": "learnml_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "school_level",
+              "displayName": "school_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "school",
+              "displayName": "school",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "study",
+              "displayName": "study",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "tech_experience",
+              "displayName": "tech_experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ai_skill",
+              "displayName": "ai_skill",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "heared",
+              "displayName": "heared",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food",
+              "displayName": "food",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "t-shirt size",
+              "displayName": "t-shirt size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV",
+              "displayName": "CV",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "LinkedIn",
+              "displayName": "LinkedIn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "GitHub",
+              "displayName": "GitHub",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV_perm",
+              "displayName": "CV_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "photo_perm",
+              "displayName": "photo_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry1",
+              "displayName": "entry1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry2",
+              "displayName": "entry2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sent_email_code",
+              "displayName": "sent_email_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sent_email_form",
+              "displayName": "sent_email_form",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food_count",
+              "displayName": "food_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "snack_count",
+              "displayName": "snack_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -640,
+        -672
+      ],
+      "id": "2867c235-a860-4315-8476-34166e60975b",
+      "name": "Add count to food2",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"decision\": \"confirmed\",\n  \"message\": \"Snack removed\",\n  \"person\": {\n    \"name\": \"{{ $json.name }}\",\n    \"email\": \"{{ $json.email }}\",\n    \"tshirt_size\": \"{{ $json['t-shirt size'] }}\",\n    \"food_pref\": \"{{ $json.food }}\",\n    \"food_count\": {{ $json.food_count }},\n    \"snack_count\": {{ $json.snack_count }}\n  },\n  \"max_food\": {{ $('Get global max food').item.json.max_food }}\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -416,
+        -672
+      ],
+      "id": "715693dc-e328-4f4c-a792-a91b435db417",
+      "name": "Respond to Webhook6"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeMembers",
+          "mode": "list",
+          "cachedResultName": "CodeMembers"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "learnml_code",
+              "value": "={{ $('Code scanned').item.json.body.code }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -864,
+        -672
+      ],
+      "id": "55865f43-bb80-471a-a19e-b7759818d990",
+      "name": "Select rows from a table5",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "McCjhDF0OsXmbkVY",
+          "mode": "list",
+          "cachedResultName": "CodeML",
+          "cachedResultUrl": "/projects/1KxArspnjifF9NPY/datatables/McCjhDF0OsXmbkVY"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "max_food": "={{ $('Code scanned').item.json.body.value }}"
+          },
+          "matchingColumns": [
+            "max_food"
+          ],
+          "schema": [
+            {
+              "id": "max_food",
+              "displayName": "max_food",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -864,
+        -480
+      ],
+      "id": "013edbfe-060e-4398-a15f-e9ba41e31c6b",
+      "name": "Update row(s)"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"decision\": \"confirmed\",\n  \"message\": \"Max food updated to {{ $('Code scanned').item.json.body.value }}\",\n  \"max_food\": {{ $('Code scanned').item.json.body.value }}\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -640,
+        -480
+      ],
+      "id": "93b4f56f-4f03-4432-8253-5c4deb4c8a1d",
+      "name": "Respond to Webhook7"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-03T00:52:58.496Z",
+      "updatedAt": "2025-10-03T00:52:58.496Z",
+      "role": "workflow:owner",
+      "workflowId": "6BeF8wdyc8TKLYNu",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-03T03:05:47.000Z",
+  "versionId": "ac247b91-592f-44f5-9fd1-9238f6f3bdd4"
+}
