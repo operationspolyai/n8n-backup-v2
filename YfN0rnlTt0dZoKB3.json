@@ -398,6 +398,16 @@
               "removed": false
             },
             {
+              "id": "food_count",
+              "displayName": "food_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
               "id": "entry1",
               "displayName": "entry1",
               "required": false,
@@ -410,26 +420,6 @@
             {
               "id": "entry2",
               "displayName": "entry2",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "canBeUsedToMatch": true,
-              "type": "boolean",
-              "removed": true
-            },
-            {
-              "id": "food1",
-              "displayName": "food1",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "canBeUsedToMatch": true,
-              "type": "boolean",
-              "removed": true
-            },
-            {
-              "id": "food2",
-              "displayName": "food2",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -523,6 +513,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-10-02T02:45:06.000Z",
-  "versionId": "dd109ff7-9dfd-4b5a-872f-39d28d4374ac"
+  "updatedAt": "2025-10-02T20:50:27.000Z",
+  "versionId": "c725867f-abdc-4817-84c5-5251b7187892"
 }
