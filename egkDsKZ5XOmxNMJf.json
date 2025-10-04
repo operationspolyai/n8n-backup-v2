@@ -1,0 +1,786 @@
+{
+  "active": false,
+  "connections": {
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If email sent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If email sent1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Random wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update rows in a table1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Random wait": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Select Participants",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select Participants": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate QR Code": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        []
+      ]
+    },
+    "Code in Python (Beta)": {
+      "main": [
+        []
+      ]
+    },
+    "When participant applies": {
+      "main": [
+        []
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Update rows in a table1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Generate QR Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Select Participants",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-03T14:23:36.953Z",
+  "id": "egkDsKZ5XOmxNMJf",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Send emails invite",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        528,
+        224
+      ],
+      "id": "f4d76876-d8d4-441a-a066-359e925bdd01",
+      "name": "Loop Over Items1",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3c82d2dc-ebec-4d96-afa4-5bda4f86a901",
+              "leftValue": "={{ $json.sent_email_code }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        816,
+        224
+      ],
+      "id": "758b2047-3095-4fbc-aea6-402a6062bfb9",
+      "name": "If email sent1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeMembers",
+          "mode": "list",
+          "cachedResultName": "CodeMembers"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $('Loop Over Items1').item.json.email }}",
+            "sent_email_code": true
+          },
+          "matchingColumns": [
+            "email"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "learnml_code",
+              "displayName": "learnml_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "school_level",
+              "displayName": "school_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "school",
+              "displayName": "school",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "study",
+              "displayName": "study",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "tech_experience",
+              "displayName": "tech_experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ai_skill",
+              "displayName": "ai_skill",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "heared",
+              "displayName": "heared",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food",
+              "displayName": "food",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "t-shirt size",
+              "displayName": "t-shirt size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV",
+              "displayName": "CV",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "LinkedIn",
+              "displayName": "LinkedIn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "GitHub",
+              "displayName": "GitHub",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CV_perm",
+              "displayName": "CV_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "photo_perm",
+              "displayName": "photo_perm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry1",
+              "displayName": "entry1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food1",
+              "displayName": "food1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "food2",
+              "displayName": "food2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "entry2",
+              "displayName": "entry2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sent_email_code",
+              "displayName": "sent_email_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "sent_email_form",
+              "displayName": "sent_email_form",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1968,
+        256
+      ],
+      "id": "7e836376-c1cf-4c22-8c2b-6480155a678a",
+      "name": "Update rows in a table1",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "amount": "={{ Math.floor(Math.random()*3)+1 }}\n"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1088,
+        240
+      ],
+      "id": "5fd8e657-0d51-4eb1-85b7-de46d4039b4b",
+      "name": "Random wait",
+      "webhookId": "153c3742-21c4-4d42-883b-23ed8d945bc4",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "amount": 12,
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -64,
+        240
+      ],
+      "id": "d1e6219e-2fcc-4da1-af1b-b09869c6570c",
+      "name": "Wait",
+      "webhookId": "bc8c6ca6-5e99-42fa-a018-9bbafe5abd1c"
+    },
+    {
+      "parameters": {
+        "method": "=GET",
+        "url": "=https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ $('Loop Over Items1').item.json.learnml_code }}",
+        "options": {}
+      },
+      "id": "1ab12bfb-2711-4074-a0d5-094bd3006e9b",
+      "name": "Generate QR Code",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1568,
+        256
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeMembers",
+          "mode": "list",
+          "cachedResultName": "CodeMembers"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "role",
+              "value": "Participate"
+            }
+          ]
+        },
+        "combineConditions": "OR",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        192,
+        208
+      ],
+      "id": "3123c69d-6b4f-43f7-a063-ac03d28369c7",
+      "name": "Select Participants",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// qrcode-generator (full library by Kazuhiko Arase, MIT License)\n// Source: https://github.com/kazuhikoarase/qrcode-generator\n// Minified version inlined below:\n\n/*! qrcode-generator v1.4.4 (c) Kazuhiko Arase */\nvar qrcode=function(){function t(t,e){if(void 0===t.length)throw new Error(t.length+\"/\"+e);var r=function(){for(var r=0;r<t.length&&0==t[r];)r+=1;for(var n=new Array(t.length-r+e),o=0;o<t.length-r;o+=1)n[o]=t[o+r];return n}();return r}function e(t,e){this.num=t,this.dup=e}function r(t,e){this.totalCount=t,this.dataCount=e}function n(){var t=[];return{getBuffer:function(){return t},getAt:function(e){return t[e]},put:function(e,r){for(var n=0;n<r;n+=1)t.push(1==(e>>>r-n-1&1))},getLengthInBits:function(){return t.length}}}function o(t,e){if(void 0===t.length)throw new Error(t.length+\"/\"+e);for(var r=0;r<t.length&&0==t[r];)r+=1;for(var n=new Array(t.length-r+e),o=0;o<t.length-r;o+=1)n[o]=t[o+r];return n}function i(t){for(var e=0,r=0;r<t.length;r+=1)e^=t[r]<<t.length-r-1;return e}function u(t,e){this.typeNumber=t,this.errorCorrectLevel=e,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}u.prototype={addData:function(t){var e=new c(t);this.dataList.push(e),this.dataCache=null},isDark:function(t,e){if(t<0||this.moduleCount<=t||e<0||this.moduleCount<=e)throw new Error(t+\",\"+e);return this.modules[t][e]},getModuleCount:function(){return this.moduleCount},make:function(){this.makeImpl(!1,this.getBestMaskPattern())},makeImpl:function(t,e){this.moduleCount=4*this.typeNumber+17,this.modules=new Array(this.moduleCount);for(var r=0;r<this.moduleCount;r+=1){this.modules[r]=new Array(this.moduleCount);for(var n=0;n<this.moduleCount;n+=1)this.modules[r][n]=null}this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this.moduleCount-7,0),this.setupPositionProbePattern(0,this.moduleCount-7),this.setupTimingPattern(),this.setupTypeInfo(t,e),this.typeNumber>=7&&this.setupTypeNumber(t),this.dataCache=this.createData(this.typeNumber,this.errorCorrectLevel,this.dataList),this.mapData(this.dataCache,e)},setupPositionProbePattern:function(t,e){for(var r=-1;r<=7;r+=1)if(!(t+r<=-1||this.moduleCount<=t+r))for(var n=-1;n<=7;n+=1)e+n<=-1||this.moduleCount<=e+n||(r>=0&&r<=6&&(0==n||6==n)||n>=0&&n<=6&&(0==r||6==r)||r>=2&&r<=4&&n>=2&&n<=4?this.modules[t+r][e+n]=!0:this.modules[t+r][e+n]=!1)},getBestMaskPattern:function(){for(var t=0,e=0,r=0;r<8;r+=1){this.makeImpl(!0,r);var n=f.getLostPoint(this);(0==r||n<t)&&(t=n,e=r)}return e},createData:function(t,e,r){var n=h.getRSBlocks(t,e),o=new n.constructor;for(var i=[],u=0;u<r.length;u+=1){var c=r[u];i.push(c.getLength()),i.push(c.mode),i=i.concat(c.parsedData)}return i},mapData:function(t,e){for(var r=0,n=this.moduleCount-1,o=-1,i=t.length,u=0;u<i;u+=1){for(var c=0;c<8;c+=1){if(this.modules[n][r]===null){var h=!1;u<i&&0!=(t[u]>>>7-c&1)&&(h=!0),this.modules[n][r]=h}r+=o}o*=-1,n-=1}}},u.PAD0=236,u.PAD1=17;var c=function(t){this.mode=4,this.data=t,this.parsedData=[];for(var e=0;e<this.data.length;e+=1)this.parsedData.push(this.data.charCodeAt(e))};c.prototype={getLength:function(){return this.parsedData.length},write:function(t){for(var e=0;e<this.parsedData.length;e+=1)t.put(this.parsedData[e],8)}};var h={getRSBlocks:function(t,e){return[new r(26,19)]}};var f={getLostPoint:function(t){return 0}};return function(t,e){var r=new u(t||1,e||\"L\");return r}}();\n\n// --- end of qrcode-generator inline ---\n\n// Loop over items and attach QR code\nfor (const item of $input.all()) {\n  const inputNumber = item.json.learnml_code; // <- no fallback\n\n  const qr = qrcode(0, 'L');\n  qr.addData(String(inputNumber));\n  qr.make();\n\n  function qrToSVG(qr, cellSize = 8, margin = 4) {\n    const size = qr.getModuleCount() * cellSize + margin * 2;\n    let svg = `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"${size}\" height=\"${size}\" shape-rendering=\"crispEdges\">`;\n    svg += `<rect width=\"100%\" height=\"100%\" fill=\"white\"/>`;\n    for (let r = 0; r < qr.getModuleCount(); r++) {\n      for (let c = 0; c < qr.getModuleCount(); c++) {\n        if (qr.isDark(r, c)) {\n          svg += `<rect x=\"${c * cellSize + margin}\" y=\"${r * cellSize + margin}\" width=\"${cellSize}\" height=\"${cellSize}\" fill=\"black\"/>`;\n        }\n      }\n    }\n    svg += `</svg>`;\n    return \"data:image/svg+xml;base64,\" + Buffer.from(svg).toString(\"base64\");\n  }\n\n  item.json.qrcode = qrToSVG(qr);\n}\n\nreturn $input.all();\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1392,
+        80
+      ],
+      "id": "74aa4262-4522-4225-a149-3b64531f3183",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "import qrcode\nimport base64\nfrom io import BytesIO\n\n# Loop over all input items\nfor item in _input.all():\n    val = str(item.json[\"learnml_code\"])  # get the 3-digit number\n\n    # enforce 3 digits\n    if not (len(val) == 3 and val.isdigit()):\n        raise ValueError(\"learnml_code must be exactly 3 digits\")\n\n    # generate QR code\n    img = qrcode.make(val)\n\n    # encode as base64 PNG\n    buf = BytesIO()\n    img.save(buf, format=\"PNG\")\n    b64 = base64.b64encode(buf.getvalue()).decode()\n\n    # attach QR code as data URL\n    item.json[\"qrcode\"] = f\"data:image/png;base64,{b64}\"\n\n# return all updated items\nreturn _input.all()\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1600,
+        -16
+      ],
+      "id": "2a636b63-7cf0-4448-b303-cb683b95a98a",
+      "name": "Code in Python (Beta)"
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n Function node (JavaScript)\nconst QRCode = require('qrcode');\n\nconst inputNumber = $json[\"number\"] || \"123\";  // replace with your input (3-digit number)\n\nreturn new Promise((resolve, reject) => {\n  QRCode.toDataURL(inputNumber, { errorCorrectionLevel: 'H' }, function (err, url) {\n    if (err) {\n      reject(err);\n    } else {\n      resolve([{ json: { qrcode: url } }]);\n    }\n  });\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1456,
+        -160
+      ],
+      "id": "b8ad0c50-8e63-4d27-97bf-bf65311eada9",
+      "name": "Code in JavaScript1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "35a3cd04-ea8d-497f-b833-016c9f69695f",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -368,
+        256
+      ],
+      "id": "97a3feaf-1e05-4619-81c3-f3578c7e2cd0",
+      "name": "When participant applies",
+      "webhookId": "35a3cd04-ea8d-497f-b833-016c9f69695f"
+    },
+    {
+      "parameters": {
+        "sendTo": "=80alexanderr@gmail.com",
+        "subject": "Welcome to CodeML!",
+        "message": "=<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\" />\n    <title>Invitation CodeML 2025</title>\n  </head>\n  <body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #333;\">\n    <p>Hey {{ $json.output }},</p>\n\n    <p>\n      You are <strong>officially invited</strong> to\n      <strong>CodeML 2025</strong> 🎉\n    </p>\n\n    <p>\n      We’re excited to have you with us!  \n      Attached to this email, you’ll find:\n    </p>\n\n    <ul>\n      <li>\n        👉 <strong>Your access to the Discord server</strong>: this is important to\n        stay updated with announcements, receive automatic notifications,\n        ask questions, and connect with other participants.\n      </li>\n      <li>\n        🔑 <strong>Your unique CodeML QR code</strong> \n        (<span style=\"background-color: #fff9c4; padding: 2px 6px; border-radius: 4px;\">\n          📎 attached to this email\n        </span>).  \n        You will need it to check in and access event essentials.\n      </li>\n    </ul>\n\n    <p style=\"text-align: center; margin: 40px 0;\">\n      <a\n        href=\"https://discord.gg/SnBcD9jmZG\"\n        style=\"\n          background-color: #5865f2;\n          color: #fff;\n          padding: 15px 30px;\n          text-decoration: none;\n          font-size: 18px;\n          font-weight: bold;\n          border-radius: 8px;\n          display: inline-block;\n        \"\n      >\n        🔗 Join the Discord Server\n      </a>\n    </p>\n\n    <p style=\"text-align: center; font-size: 14px; color: #555;\">\n      If the button doesn’t work, copy and paste this link into your browser:<br />\n      <a href=\"https://discord.gg/SnBcD9jmZG\">https://discord.gg/SnBcD9jmZG</a>\n    </p>\n\n    <h3 style=\"margin-top: 40px;\">📍 Event Information</h3>\n    <ul>\n      <li>\n        🏛️ <strong>Event Location:</strong> [Insert venue address here]\n      </li>\n      <li>\n        🚗 <strong>Parking:</strong> [Insert parking details here]\n      </li>\n      <li>\n        ⏰ <strong>Arrival Time:</strong> [Insert arrival/start time here]\n      </li>\n      <li>\n        📝 <strong>Entrance Instructions:</strong> [Insert entrance instructions here]\n      </li>\n    </ul>\n\n    <h3 style=\"margin-top: 30px;\">🍴 What to Bring</h3>\n    <ul>\n      <li>🥗 <strong>No need to bring food</strong> – meals will be provided</li>\n      <li>💻 <strong>Your laptop & charger</strong></li>\n      <li>💧 <strong>A reusable water bottle</strong></li>\n    </ul>\n\n    <p\n      style=\"\n        background-color: #fff3cd;\n        border: 2px solid #f0ad4e;\n        padding: 15px;\n        font-size: 20px;\n        font-weight: bold;\n        color: #c62828;\n        text-align: center;\n        border-radius: 8px;\n        margin: 40px 0;\n      \"\n    >\n      🔑 Keep your QR code with you at all times — \n      it’s your <u>key</u> to enjoying the full CodeML 2025 experience!\n    </p>\n\n    <p>\n      <strong>Tip:</strong> When showing your QR code at check-in, make sure to zoom in on your screen so it’s easier for staff to scan ✅\n    </p>\n\n    <!-- Backup code section -->\n    <p style=\"margin-top: 50px; font-size: 14px; color: #555; text-align: center;\">\n      ⚠️ If your QR code does not work, please provide this backup code to staff:\n    </p>\n    <p\n      style=\"\n        font-size: 20px;\n        font-weight: bold;\n        color: #c62828;\n        text-align: center;\n        margin: 10px 0 40px 0;\n      \"\n    >\n      {{ $('Loop Over Items1').item.json.learnml_code }}\n    </p>\n\n    <p>See you soon at CodeML 2025! 🚀</p>\n  </body>\n</html>\n",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {}
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1744,
+        256
+      ],
+      "id": "0289dd62-bc2d-4736-8ab5-4e511bd273fa",
+      "name": "Send a message",
+      "webhookId": "6671ea87-8a90-4f28-8b76-0d86ace773bf",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "unquhRC3gfJ50lma",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "remember to send to actual people ",
+        "height": 80
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1712,
+        144
+      ],
+      "id": "5b8669fc-079a-42b6-817d-e52bab35dfad",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Grab and send only the first name of the person, nothing else. No other text like \"Here you go\": {{ $json.name }}\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1264,
+        240
+      ],
+      "id": "7e7e423e-ca61-489f-9be1-a09cf9f6ac78",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-nano",
+          "mode": "list",
+          "cachedResultName": "gpt-5-nano"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1200,
+        496
+      ],
+      "id": "73864a65-d42d-44ad-806c-5286580b1772",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "5GmqoqFkGTvtDKjA",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        400
+      ],
+      "id": "d2f1f48d-5433-4691-9787-11c16db41eab",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "maxItems": 5
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        336,
+        128
+      ],
+      "id": "ea3d2c86-aba8-4b90-b6c6-df46cd615a03",
+      "name": "Limit"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-03T14:23:36.958Z",
+      "updatedAt": "2025-10-03T14:23:36.958Z",
+      "role": "workflow:owner",
+      "workflowId": "egkDsKZ5XOmxNMJf",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-04T00:50:00.000Z",
+  "versionId": "aab2bda7-426f-4394-8bf0-bdd7b40e8a17"
+}
