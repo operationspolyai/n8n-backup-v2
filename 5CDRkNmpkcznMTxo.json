@@ -1,0 +1,563 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Entry1 count",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Entry2 count",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "snack sum",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Food sum",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Entry2 count": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Get max food",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Entry1 count": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "snack sum": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Food sum": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete a message": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get last message": {
+      "main": [
+        [
+          {
+            "node": "Delete a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Entry1 count",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Food sum",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Entry2 count",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "snack sum",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get max food": {
+      "main": [
+        [
+          {
+            "node": "Get last message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-04T02:52:16.497Z",
+  "id": "5CDRkNmpkcznMTxo",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Discord bot live stats",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        96
+      ],
+      "id": "c99b627d-a521-4bf4-9efe-73ce08c46c59",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select count(entry2) as \"entry2count\" from \"CodeMembers\" where entry2=TRUE",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -176,
+        480
+      ],
+      "id": "82c521a2-2379-49de-8622-e1bc554ad725",
+      "name": "Entry2 count",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get first input item\nconst item = $input.first().json;\n\n// Convert fields to numbers\nconst entry1count = Number(item.entry1count);   // lunch entries\nconst entry2count = Number(item.entry2count);   // snack entries\nconst food_sum   = Number(item.food_sum);       // total lunch count\nconst snack_sum  = Number(item.snack_sum);      // total snack count\n\n// Total entries\nconst totalCount = entry1count + entry2count;\n\n// Calculate averages based on total count, round to 1 decimal\nconst avgLunch = totalCount > 0 ? Math.round((food_sum / totalCount) * 10) / 10 : 0;\nconst avgSnack = totalCount > 0 ? Math.round((snack_sum / totalCount) * 10) / 10 : 0;\n\n// Add results back into the JSON\nitem.totalCount = totalCount;\nitem.avgLunch = avgLunch;\nitem.avgSnack = avgSnack;\n\nreturn $input.all();\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        272,
+        384
+      ],
+      "id": "a7062d33-2a7d-4eaf-9df4-19fee64299e8",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "mode": "combineBySql",
+        "numberInputs": 4,
+        "query": "SELECT *\nFROM input1\nLEFT JOIN input2 ON input1.name = input2.id\nLEFT JOIN input3 ON input1.name = input3.id\nLEFT JOIN input4 ON input1.name = input4.id;\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        48,
+        352
+      ],
+      "id": "c2fe8ff1-339f-4517-8e74-1467652b1e44",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1422648726324772908",
+          "mode": "list",
+          "cachedResultName": "CodeML 2025",
+          "cachedResultUrl": "https://discord.com/channels/1422648726324772908"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1422648731454668999",
+          "mode": "list",
+          "cachedResultName": "📊live-stats",
+          "cachedResultUrl": "https://discord.com/channels/1422648726324772908/1422648731454668999"
+        },
+        "content": "=Total Participants: {{ $('Code in JavaScript').item.json.totalCount }}\n\n### Saturday\nEntries:  {{ $('Code in JavaScript').item.json.entry1count }}\n\n### Sunday\nEntries:  {{ $('Code in JavaScript').item.json.entry2count }}\n\n### Food\nCount: {{ $('Code in JavaScript').item.json.food_sum }}\nAverage: {{ $('Code in JavaScript').item.json.avgLunch }}\nMax Food Allowed: {{ $('Get max food').item.json.max_food }}\n\n### Snacks\nCount: {{ $('Code in JavaScript').item.json.snack_sum }}\nAverage: {{ $('Code in JavaScript').item.json.avgSnack }}\n\n",
+        "options": {
+          "flags": [
+            "SUPPRESS_NOTIFICATIONS"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        1168,
+        384
+      ],
+      "id": "c98b32da-efe3-4a71-8794-e90c9cacc72b",
+      "name": "Send a message",
+      "webhookId": "2789b7d8-3a1a-46f6-910a-045fc1e2fad7",
+      "credentials": {
+        "discordBotApi": {
+          "id": "cxGK7pRlQxV7O0GJ",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select SUM(food_count) as \"food_sum\" from \"CodeMembers\"\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -176,
+        288
+      ],
+      "id": "d05e4160-7431-426d-8d77-aaf7b96ca6b2",
+      "name": "Food sum",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select count(entry1) as \"entry1count\" from \"CodeMembers\" where entry1=TRUE",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -176,
+        96
+      ],
+      "id": "23cdde69-953e-4795-a80a-bc142e992629",
+      "name": "Entry1 count",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select sum(snack_count) as \"snack_sum\" from \"CodeMembers\"",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -176,
+        672
+      ],
+      "id": "8be76edb-4606-461e-9722-266a6229b7fa",
+      "name": "snack sum",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "deleteMessage",
+        "guildId": {
+          "__rl": true,
+          "value": "1422648726324772908",
+          "mode": "list",
+          "cachedResultName": "CodeML 2025",
+          "cachedResultUrl": "https://discord.com/channels/1422648726324772908"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1422648731454668999",
+          "mode": "list",
+          "cachedResultName": "📊live-stats",
+          "cachedResultUrl": "https://discord.com/channels/1422648726324772908/1422648731454668999"
+        },
+        "messageId": "={{ $json.id }}"
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        944,
+        384
+      ],
+      "id": "2c15d41b-6a45-4e55-8874-0c108ac580e8",
+      "name": "Delete a message",
+      "webhookId": "79e4ec6b-8915-4555-b7ac-f6399247ea44",
+      "credentials": {
+        "discordBotApi": {
+          "id": "cxGK7pRlQxV7O0GJ",
+          "name": "Discord Bot account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "getAll",
+        "guildId": {
+          "__rl": true,
+          "value": "1422648726324772908",
+          "mode": "list",
+          "cachedResultName": "CodeML 2025",
+          "cachedResultUrl": "https://discord.com/channels/1422648726324772908"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1422648731454668999",
+          "mode": "list",
+          "cachedResultName": "📊live-stats",
+          "cachedResultUrl": "https://discord.com/channels/1422648726324772908/1422648731454668999"
+        },
+        "limit": 1,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        720,
+        384
+      ],
+      "id": "d36df7bf-9898-4883-b00e-c3adad056a12",
+      "name": "Get last message",
+      "webhookId": "cc844102-e4eb-4148-8569-f73ddd1f89fd",
+      "credentials": {
+        "discordBotApi": {
+          "id": "cxGK7pRlQxV7O0GJ",
+          "name": "Discord Bot account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -400,
+        672
+      ],
+      "id": "98d39f02-1be5-4151-af0d-7480f2eb3b51",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "McCjhDF0OsXmbkVY",
+          "mode": "list",
+          "cachedResultName": "CodeML",
+          "cachedResultUrl": "/projects/1KxArspnjifF9NPY/datatables/McCjhDF0OsXmbkVY"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        496,
+        384
+      ],
+      "id": "14fc8f32-abd4-4d1b-b574-e180f289d74f",
+      "name": "Get max food"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "i3n4I8uEfllKlJfB",
+          "mode": "list",
+          "cachedResultName": "CodeMLRegisterHistory",
+          "cachedResultUrl": "/projects/1KxArspnjifF9NPY/datatables/i3n4I8uEfllKlJfB"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "SatEntry": "={{ $('Code in JavaScript').item.json.entry1count }}",
+            "SunEntry": "={{ $('Code in JavaScript').item.json.entry2count }}",
+            "TotalFood": "={{ $('Code in JavaScript').item.json.food_sum }}",
+            "TotalSnacks": "={{ $('Code in JavaScript').item.json.snack_sum }}",
+            "MaxFood": "={{ $('Get max food').item.json.max_food }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "SatEntry",
+              "displayName": "SatEntry",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "SunEntry",
+              "displayName": "SunEntry",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "TotalFood",
+              "displayName": "TotalFood",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "TotalSnacks",
+              "displayName": "TotalSnacks",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "MaxFood",
+              "displayName": "MaxFood",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        1376,
+        384
+      ],
+      "id": "e9fa3c96-73b7-44a6-9ffa-00f86cb13305",
+      "name": "Insert row"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-04T02:52:16.502Z",
+      "updatedAt": "2025-10-04T02:52:16.502Z",
+      "role": "workflow:owner",
+      "workflowId": "5CDRkNmpkcznMTxo",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-04T03:52:56.000Z",
+  "versionId": "171b9beb-1e2b-4c00-a337-4d6cd9c28e28"
+}
