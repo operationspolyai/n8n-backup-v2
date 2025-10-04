@@ -57,7 +57,12 @@
       "main": [
         [
           {
-            "node": "Partcipates",
+            "node": "VIPs",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Volunteers",
             "type": "main",
             "index": 0
           }
@@ -85,12 +90,151 @@
           }
         ]
       ]
+    },
+    "Volunteer submits": {
+      "main": [
+        [
+          {
+            "node": "Volunteers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If email exists": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If email exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Volunteers": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert rows in a table": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If email exists1": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Insert rows in a table1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If email exists1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert rows in a table1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "VIPs": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-10-02T01:28:48.520Z",
   "id": "YfN0rnlTt0dZoKB3",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Sync forms to SQL",
   "nodes": [
     {
@@ -185,7 +329,7 @@
           "value": "NY5hCxozjLgksZo9",
           "mode": "list",
           "cachedResultUrl": "/workflow/NY5hCxozjLgksZo9",
-          "cachedResultName": "Create random code and add member to LearnML database"
+          "cachedResultName": "Create random code and add member to CodeML database"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
@@ -204,7 +348,8 @@
             "t-shirt size": "={{ $('Loop Over Items2').item.json['Your T-shirt size/Votre taille de T-shirt  (unisex) '] }}",
             "LinkedIn": "={{ $('Loop Over Items2').item.json['Your LinkedIn link/Votre lien LinkedIn'] }}",
             "GitHub": "={{ $('Loop Over Items2').item.json['Your GitHub link/Votre lien GitHub'] }}",
-            "CV": "={{ $('Loop Over Items2').item.json['Your CV in PDF format\\nVotre CV en format PDF'] }}"
+            "CV": "={{ $('Loop Over Items2').item.json['Your CV in PDF format\\nVotre CV en format PDF'] }}",
+            "discord": "={{ $('Loop Over Items2').item.json['Votre compte Discord\\nYour Discord username'] }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -339,6 +484,16 @@
               "removed": false
             },
             {
+              "id": "discord",
+              "displayName": "discord",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
               "id": "CV",
               "displayName": "CV",
               "required": false,
@@ -447,8 +602,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        176,
-        -64
+        272,
+        928
       ],
       "id": "bd7a51a8-77e5-45b8-93b3-14715ddc7abc",
       "name": "When clicking ‘Execute workflow’"
@@ -477,6 +632,401 @@
       ],
       "id": "fc335347-4d7f-4ed4-a017-0baaf128fd66",
       "name": "Partcipates",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J3rnaSuqLzWLHSYz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "82e50f07-ac87-44bf-9aab-9d02e4562f34",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        176,
+        544
+      ],
+      "id": "3f567edf-7fc5-44d0-8abd-8804979f036f",
+      "name": "Volunteer submits",
+      "webhookId": "82e50f07-ac87-44bf-9aab-9d02e4562f34"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1ygcl-veh4FZVDBjvQVYlbC4yhdivE74iEJik3T52wHA",
+          "mode": "list",
+          "cachedResultName": "Inscription Bénévoles CodeML 2025 (réponses)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ygcl-veh4FZVDBjvQVYlbC4yhdivE74iEJik3T52wHA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2045703377,
+          "mode": "list",
+          "cachedResultName": "Réponses au formulaire 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ygcl-veh4FZVDBjvQVYlbC4yhdivE74iEJik3T52wHA/edit#gid=2045703377"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        464,
+        464
+      ],
+      "id": "9f4026f0-197b-434a-bb6b-ec2d0c60ecd7",
+      "name": "Volunteers",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J3rnaSuqLzWLHSYz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT EXISTS (\n  SELECT 1\n  FROM \"CodeVolunteers\"\n  WHERE TRIM(LOWER(email)) = TRIM(LOWER('{{ $json['Adresse e-mail'] }}'))\n);\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1024,
+        512
+      ],
+      "id": "d3154d86-3a52-4647-98c3-a03bafcee46d",
+      "name": "If email exists",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ebaadca7-0cf6-4faf-8ada-ce5af33db6fd",
+              "leftValue": "={{ $json.exists }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1248,
+        512
+      ],
+      "id": "aff91ffb-55e0-47d3-ba5b-3ec59ad16f49",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        784,
+        496
+      ],
+      "id": "724a8f54-0390-455e-9f1a-87f3c66c1f27",
+      "name": "Loop Over Items",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeVolunteers",
+          "mode": "list",
+          "cachedResultName": "CodeVolunteers"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $('Loop Over Items').item.json['Adresse e-mail'] }}",
+            "first_name": "={{ $('Loop Over Items').item.json['Prénom'] }}",
+            "second_name": "={{ $('Loop Over Items').item.json['Nom de famille'] }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "first_name",
+              "displayName": "first_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "second_name",
+              "displayName": "second_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "form_sent",
+              "displayName": "form_sent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1520,
+        576
+      ],
+      "id": "329e4d16-9154-4f39-b608-b53dd212b59b",
+      "name": "Insert rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT EXISTS (\n  SELECT 1\n  FROM \"CodeVIP\"\n  WHERE TRIM(LOWER(email)) = TRIM(LOWER('{{ $json.Email }}'))\n);\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1072,
+        960
+      ],
+      "id": "2215d7f7-1c19-4515-98b9-40397b8f9f35",
+      "name": "If email exists1",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ebaadca7-0cf6-4faf-8ada-ce5af33db6fd",
+              "leftValue": "={{ $json.exists }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1296,
+        960
+      ],
+      "id": "c3e50186-4d13-409d-811d-03ecf3ecd55d",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        832,
+        944
+      ],
+      "id": "d80fff1d-c107-4b83-8abb-3a6f28104de8",
+      "name": "Loop Over Items1",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeVIP",
+          "mode": "list",
+          "cachedResultName": "CodeVIP"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $('Loop Over Items1').item.json.Email }}",
+            "name": "={{ $('Loop Over Items1').item.json.Name }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "form_sent",
+              "displayName": "form_sent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1568,
+        1024
+      ],
+      "id": "47d26d3c-a196-449d-b05b-f155094fc02e",
+      "name": "Insert rows in a table1",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1d9eJurBqatyK7jRWjJq3V9xfEY8t4B58zv-Ot1VOy3A",
+          "mode": "list",
+          "cachedResultName": "CodeML 2025 VIPs",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1d9eJurBqatyK7jRWjJq3V9xfEY8t4B58zv-Ot1VOy3A/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1d9eJurBqatyK7jRWjJq3V9xfEY8t4B58zv-Ot1VOy3A/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        480,
+        928
+      ],
+      "id": "f297bb37-efce-4f1c-8ded-137ab33b2eb7",
+      "name": "VIPs",
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "J3rnaSuqLzWLHSYz",
@@ -512,7 +1062,7 @@
       "name": "CodeML"
     }
   ],
-  "triggerCount": 1,
-  "updatedAt": "2025-10-02T20:50:27.000Z",
-  "versionId": "c725867f-abdc-4817-84c5-5251b7187892"
+  "triggerCount": 2,
+  "updatedAt": "2025-10-03T18:34:55.000Z",
+  "versionId": "5ea246e8-7ede-41f3-ad00-33e224807248"
 }
