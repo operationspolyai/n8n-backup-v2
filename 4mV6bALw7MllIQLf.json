@@ -1,0 +1,998 @@
+{
+  "active": true,
+  "connections": {
+    "Loop Over Items3": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If email has been sent already1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark email sent1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If email has been sent already1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send message for volunteer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select volunteers": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send message for volunteer": {
+      "main": [
+        [
+          {
+            "node": "Mark email sent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Select volunteers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many members": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Add a role to a member",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CodeML volunteer form": {
+      "main": [
+        [
+          {
+            "node": "Get many members",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When volunteer submits": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items4": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If email has been sent already",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark email sent": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If email has been sent already": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send message for VIP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select VIPs": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send message for VIP": {
+      "main": [
+        [
+          {
+            "node": "Mark email sent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many members1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Add a role to a member1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "VIP form submit": {
+      "main": [
+        [
+          {
+            "node": "Get many members1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Select volunteers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-03T16:49:13.351Z",
+  "id": "4mV6bALw7MllIQLf",
+  "isArchived": false,
+  "meta": null,
+  "name": "Sending special Discord role forms",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        128,
+        -192
+      ],
+      "id": "b49b9b05-6353-48ca-a5cd-729b195a30af",
+      "name": "Loop Over Items3",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeVolunteers",
+          "mode": "list",
+          "cachedResultName": "CodeVolunteers"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $('Loop Over Items3').item.json.email }}",
+            "form_sent": true
+          },
+          "matchingColumns": [
+            "email"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "first_name",
+              "displayName": "first_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "second_name",
+              "displayName": "second_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "form_sent",
+              "displayName": "form_sent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1168,
+        -192
+      ],
+      "id": "e8eba067-4ce7-4da4-8498-5b193c60b1f6",
+      "name": "Mark email sent1",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "42c6ea8d-7cfd-4e01-9bb3-e1d0ba7f09c9",
+              "leftValue": "={{ $json.form_sent }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        400,
+        -208
+      ],
+      "id": "ed0f5286-3a6f-4073-a080-79adda43a5ef",
+      "name": "If email has been sent already1"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeVolunteers",
+          "mode": "list",
+          "cachedResultName": "CodeVolunteers"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -144,
+        -208
+      ],
+      "id": "66d021bb-c3cb-40b1-ae56-d3be76f4b5d8",
+      "name": "Select volunteers",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Loop Over Items3').item.json.email }}",
+        "subject": "You're a volunteer at CodeML!",
+        "message": "=<p><strong>Hello {{ $json.first_name }},</strong></p>\n\n<p>\nTo gain access to the volunteer role on the <strong>CodeML Discord server</strong>,  \nplease fill out the form below:\n</p>\n\n<p>\n👉 <a href=\"https://forms.gle/ZTpzhk3HpHsYdmhU6\">Volunteer Discord Role</a>\n</p>\n\n<p style=\"text-align: center; margin: 30px 0;\">\n  <a\n    href=\"https://discord.gg/SnBcD9jmZG\"\n    style=\"\n      background-color: #5865f2;\n      color: #fff;\n      padding: 12px 24px;\n      text-decoration: none;\n      font-size: 16px;\n      font-weight: bold;\n      border-radius: 6px;\n      display: inline-block;\n    \"\n  >\n    🔗 Join the CodeML Discord\n  </a>\n</p>\n\n<p style=\"text-align: center; font-size: 14px; color: #555;\">\n  If the button doesn’t work, copy and paste this link into your browser:<br />\n  <a href=\"https://discord.gg/SnBcD9jmZG\">https://discord.gg/SnBcD9jmZG</a>\n</p>\n\n<p>\nOn Discord, you’ll be able to get more information and ask questions as a volunteer.  \nThank you for your help by contributing to the event — it means a lot. 🌟\n</p>\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        784,
+        -208
+      ],
+      "id": "daa5c7bb-10a3-4d13-9135-2fdda3279915",
+      "name": "Send message for volunteer",
+      "webhookId": "73e92393-d09c-4184-ba2d-367885a6413c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "unquhRC3gfJ50lma",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -592,
+        112
+      ],
+      "id": "2e575bed-aa17-4ce8-ab80-93481f7506e7",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "member",
+        "guildId": {
+          "__rl": true,
+          "value": "1422648726324772908",
+          "mode": "list",
+          "cachedResultName": "CodeML 2025",
+          "cachedResultUrl": "https://discord.com/channels/1422648726324772908"
+        },
+        "returnAll": true,
+        "options": {
+          "simplify": false
+        }
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        1536,
+        -256
+      ],
+      "id": "fd084fe9-20f9-4b4d-86ce-547c8a55bb87",
+      "name": "Get many members",
+      "webhookId": "89e11b87-3967-44aa-b558-3f7b3136354a",
+      "credentials": {
+        "discordBotApi": {
+          "id": "cxGK7pRlQxV7O0GJ",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1744,
+        -256
+      ],
+      "id": "3bf0ede0-f988-4c17-81af-724358fec8d6",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c6d1a054-e978-4083-bfb3-6e12d897e1ef",
+              "leftValue": "={{ $json.user.username }}",
+              "rightValue": "={{ $('CodeML volunteer form').item.json.body.responses[1] }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2064,
+        -240
+      ],
+      "id": "7ae07c60-de59-4bcd-ae45-3661df6b9d2e",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "resource": "member",
+        "operation": "roleAdd",
+        "guildId": {
+          "__rl": true,
+          "value": "1422648726324772908",
+          "mode": "list",
+          "cachedResultName": "CodeML 2025",
+          "cachedResultUrl": "https://discord.com/channels/1422648726324772908"
+        },
+        "userId": {
+          "__rl": true,
+          "value": "={{ $json.user.id }}",
+          "mode": "id"
+        },
+        "role": [
+          "1422648726324772910"
+        ]
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        2336,
+        -256
+      ],
+      "id": "b79d79ba-eb89-46b5-9398-355413f3889c",
+      "name": "Add a role to a member",
+      "webhookId": "28b6259c-62a4-47e9-8afd-fd39e333ac00",
+      "credentials": {
+        "discordBotApi": {
+          "id": "cxGK7pRlQxV7O0GJ",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "5bffe6bf-a5be-4efa-b50d-26576d2d3a27",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        1248,
+        -368
+      ],
+      "id": "0b558d53-70f3-42c1-9830-c5849dd99243",
+      "name": "CodeML volunteer form",
+      "webhookId": "5bffe6bf-a5be-4efa-b50d-26576d2d3a27"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "09db7800-1a4c-4176-b659-c4aacd4aa28e",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -640,
+        -240
+      ],
+      "id": "70c2099b-f3cc-421c-ad25-5c925f02f465",
+      "name": "When volunteer submits",
+      "webhookId": "09db7800-1a4c-4176-b659-c4aacd4aa28e"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        256,
+        320
+      ],
+      "id": "e698c54a-ad38-4b33-bfec-e2e9c6d99dfb",
+      "name": "Loop Over Items4",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeVIP",
+          "mode": "list",
+          "cachedResultName": "CodeVIP"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $('Loop Over Items4').item.json.email }}",
+            "form_sent": true
+          },
+          "matchingColumns": [
+            "email"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "first_name",
+              "displayName": "first_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "second_name",
+              "displayName": "second_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "form_sent",
+              "displayName": "form_sent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1296,
+        320
+      ],
+      "id": "d4c18a58-f188-4255-a41a-4e371b242788",
+      "name": "Mark email sent",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "42c6ea8d-7cfd-4e01-9bb3-e1d0ba7f09c9",
+              "leftValue": "={{ $json.form_sent }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        528,
+        304
+      ],
+      "id": "8e9d83b5-31a0-4166-9995-bb54cf74ae09",
+      "name": "If email has been sent already"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "CodeVIP",
+          "mode": "list",
+          "cachedResultName": "CodeVIP"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -16,
+        304
+      ],
+      "id": "2d827bd7-2065-47bd-8ba3-f021e6b7a3c6",
+      "name": "Select VIPs",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "=80alexanderr@gmail.com",
+        "subject": "You're a VIP at CodeML!",
+        "message": "=<p><strong>Hello {{ $json.name }},</strong></p>\n\n<p>\nTo gain access to your VIP role on the <strong>CodeML Discord server</strong>,  \nplease fill out the form below:\n</p>\n\n<p>\n👉 <a href=\"https://forms.gle/WZiiY2fDp3sZevnz9\">VIP Discord Role</a>\n</p>\n\n<p style=\"text-align: center; margin: 30px 0;\">\n  <a\n    href=\"https://discord.gg/SnBcD9jmZG\"\n    style=\"\n      background-color: #5865f2;\n      color: #fff;\n      padding: 12px 24px;\n      text-decoration: none;\n      font-size: 16px;\n      font-weight: bold;\n      border-radius: 6px;\n      display: inline-block;\n    \"\n  >\n    🔗 Join the CodeML Discord\n  </a>\n</p>\n\n<p style=\"text-align: center; font-size: 14px; color: #555;\">\n  If the button doesn’t work, copy and paste this link into your browser:<br />\n  <a href=\"https://discord.gg/SnBcD9jmZG\">https://discord.gg/SnBcD9jmZG</a>\n</p>\n\n<p>\nOn Discord, you’ll be able to get more information and connect with the team as a VIP.  \nThank you for being part of the event — it means a lot. 🌟\n</p>\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        912,
+        304
+      ],
+      "id": "cab9c58c-858f-4b47-b252-78c986c6de51",
+      "name": "Send message for VIP",
+      "webhookId": "73e92393-d09c-4184-ba2d-367885a6413c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "unquhRC3gfJ50lma",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "member",
+        "guildId": {
+          "__rl": true,
+          "value": "1422648726324772908",
+          "mode": "list",
+          "cachedResultName": "CodeML 2025",
+          "cachedResultUrl": "https://discord.com/channels/1422648726324772908"
+        },
+        "returnAll": true,
+        "options": {
+          "simplify": false
+        }
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        1936,
+        384
+      ],
+      "id": "3f407764-0416-4ade-a387-9465e7f02b6d",
+      "name": "Get many members1",
+      "webhookId": "89e11b87-3967-44aa-b558-3f7b3136354a",
+      "credentials": {
+        "discordBotApi": {
+          "id": "cxGK7pRlQxV7O0GJ",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2144,
+        384
+      ],
+      "id": "c3d5e954-8547-4188-8816-552b27f72195",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c6d1a054-e978-4083-bfb3-6e12d897e1ef",
+              "leftValue": "={{ $json.user.username }}",
+              "rightValue": "={{ $('VIP form submit').item.json.body.responses[1] }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2464,
+        400
+      ],
+      "id": "01c2ab22-452e-44eb-927f-70a42b804418",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "resource": "member",
+        "operation": "roleAdd",
+        "guildId": {
+          "__rl": true,
+          "value": "1422648726324772908",
+          "mode": "list",
+          "cachedResultName": "CodeML 2025",
+          "cachedResultUrl": "https://discord.com/channels/1422648726324772908"
+        },
+        "userId": {
+          "__rl": true,
+          "value": "={{ $json.user.id }}",
+          "mode": "id"
+        },
+        "role": [
+          "1422648726324772911"
+        ]
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        2736,
+        384
+      ],
+      "id": "a316d98a-4556-4469-b178-bdbab6afe952",
+      "name": "Add a role to a member1",
+      "webhookId": "28b6259c-62a4-47e9-8afd-fd39e333ac00",
+      "credentials": {
+        "discordBotApi": {
+          "id": "cxGK7pRlQxV7O0GJ",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "a1be0072-b194-485c-a08d-69c42b79d304",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        1696,
+        352
+      ],
+      "id": "e81d37bb-3556-466a-95ac-030e25e33820",
+      "name": "VIP form submit",
+      "webhookId": "a1be0072-b194-485c-a08d-69c42b79d304"
+    },
+    {
+      "parameters": {
+        "amount": 12,
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -400,
+        -224
+      ],
+      "id": "263f3013-d0e1-4a82-9068-ef9f4dbb7ab3",
+      "name": "Wait",
+      "webhookId": "91a812d6-9a82-43eb-a1ba-22c9ac07851d"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-03T16:49:13.355Z",
+      "updatedAt": "2025-10-03T16:49:13.355Z",
+      "role": "workflow:owner",
+      "workflowId": "4mV6bALw7MllIQLf",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 3,
+  "updatedAt": "2025-10-03T18:37:20.000Z",
+  "versionId": "0c338314-7097-4acb-a7ee-5b84f8ef708e"
+}
