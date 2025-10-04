@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Select rows from a table": {
       "main": [
@@ -109,7 +109,13 @@
     },
     "Respond to Webhook2": {
       "main": [
-        []
+        [
+          {
+            "node": "Call 'Discord bot live stats'",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "If over food limit": {
@@ -263,6 +269,83 @@
           }
         ]
       ]
+    },
+    "Respond to Webhook4": {
+      "main": [
+        [
+          {
+            "node": "Call 'Discord bot live stats'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook6": {
+      "main": [
+        [
+          {
+            "node": "Call 'Discord bot live stats'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook7": {
+      "main": [
+        [
+          {
+            "node": "Call 'Discord bot live stats'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        [
+          {
+            "node": "Call 'Discord bot live stats'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Call 'Discord bot live stats'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook3": {
+      "main": [
+        [
+          {
+            "node": "Call 'Discord bot live stats'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook5": {
+      "main": [
+        [
+          {
+            "node": "Call 'Discord bot live stats'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-10-03T00:52:58.492Z",
@@ -300,7 +383,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -864,
+        -640,
         -288
       ],
       "id": "ef81c707-0b8d-4578-b9cf-d54a8db25ce3",
@@ -595,7 +678,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -640,
+        -416,
         -288
       ],
       "id": "b13db12e-3733-4074-86a9-a3ca442ea78f",
@@ -668,7 +751,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        -416,
+        -192,
         -288
       ],
       "id": "c559f57c-62a8-42e2-a31b-345d46288080",
@@ -728,7 +811,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -864,
+        -640,
         -96
       ],
       "id": "5597aa61-8cd5-450e-84fa-0858897c6efa",
@@ -1023,7 +1106,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -640,
+        -416,
         -96
       ],
       "id": "b12ebd5d-c1d3-44a0-8145-e125ce74b16d",
@@ -1044,7 +1127,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        -416,
+        -192,
         -96
       ],
       "id": "221383e1-3c48-4dd0-af7c-10fbc151afb4",
@@ -1452,7 +1535,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        -416,
+        -192,
         96
       ],
       "id": "99d53d52-a177-4ad2-a1fc-cd28d86a8438",
@@ -1741,7 +1824,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -640,
+        -416,
         -864
       ],
       "id": "797779fa-84f8-4366-adf4-98e1325c5bf4",
@@ -1762,7 +1845,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        -416,
+        -192,
         -864
       ],
       "id": "f5914e1a-f973-44e3-804a-b64bd4f76278",
@@ -1795,7 +1878,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -864,
+        -640,
         -864
       ],
       "id": "9148191a-6f0d-474e-9403-fe8f7cfec476",
@@ -1834,7 +1917,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -864,
+        -640,
         480
       ],
       "id": "87eacba8-f22f-4128-a5d3-9cce123f998f",
@@ -2129,7 +2212,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -640,
+        -416,
         480
       ],
       "id": "7585b388-eb25-4ce9-9af6-8456797a46cd",
@@ -2150,7 +2233,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        -416,
+        -192,
         480
       ],
       "id": "e60cc964-5498-4d3d-8ff4-9f878f51d362",
@@ -2358,7 +2441,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.3,
       "position": [
-        -1088,
+        -864,
         -688
       ],
       "id": "8bde7ef1-3a95-4edb-b385-4add2408fda8",
@@ -2647,7 +2730,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -640,
+        -416,
         -672
       ],
       "id": "2867c235-a860-4315-8476-34166e60975b",
@@ -2668,7 +2751,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        -416,
+        -192,
         -672
       ],
       "id": "715693dc-e328-4f4c-a792-a91b435db417",
@@ -2701,7 +2784,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -864,
+        -640,
         -672
       ],
       "id": "55865f43-bb80-471a-a19e-b7759818d990",
@@ -2757,7 +2840,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -864,
+        -416,
         -480
       ],
       "id": "013edbfe-060e-4398-a15f-e9ba41e31c6b",
@@ -2772,11 +2855,35 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        -640,
+        -192,
         -480
       ],
       "id": "93b4f56f-4f03-4432-8253-5c4deb4c8a1d",
       "name": "Respond to Webhook7"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "5CDRkNmpkcznMTxo",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/5CDRkNmpkcznMTxo",
+          "cachedResultName": "Discord bot live stats"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        32,
+        -192
+      ],
+      "id": "bae43f67-1b1f-45b0-a745-63c372e7da67",
+      "name": "Call 'Discord bot live stats'"
     }
   ],
   "origin": "n8n",
@@ -2799,7 +2906,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-10-03T03:05:47.000Z",
-  "versionId": "ac247b91-592f-44f5-9fd1-9238f6f3bdd4"
+  "triggerCount": 1,
+  "updatedAt": "2025-10-04T03:29:42.000Z",
+  "versionId": "6d51ac1d-f7c0-4a42-a9b7-5c861de77e4b"
 }
