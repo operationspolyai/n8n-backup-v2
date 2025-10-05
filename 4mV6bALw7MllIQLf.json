@@ -958,7 +958,7 @@
     },
     {
       "parameters": {
-        "amount": 12,
+        "amount": 2,
         "unit": "minutes"
       },
       "type": "n8n-nodes-base.wait",
@@ -993,6 +993,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2025-10-03T18:37:20.000Z",
-  "versionId": "0c338314-7097-4acb-a7ee-5b84f8ef708e"
+  "updatedAt": "2025-10-04T15:54:11.000Z",
+  "versionId": "ca533905-02e9-4c1f-9c33-437e1dc32ba0"
 }
