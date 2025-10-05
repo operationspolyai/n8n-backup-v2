@@ -162,6 +162,28 @@
           }
         ]
       ]
+    },
+    "Insert row": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-10-04T02:52:16.497Z",
@@ -535,6 +557,131 @@
       ],
       "id": "e9fa3c96-73b7-44a6-9ffa-00f86cb13305",
       "name": "Insert row"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "i3n4I8uEfllKlJfB",
+          "mode": "list",
+          "cachedResultName": "CodeMLRegisterHistory",
+          "cachedResultUrl": "/projects/1KxArspnjifF9NPY/datatables/i3n4I8uEfllKlJfB"
+        },
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        1584,
+        384
+      ],
+      "id": "0423f16c-a185-4c6e-9197-0b1b2ea24cb7",
+      "name": "Get row(s)"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1fn5zCq_bxD6YNO4kQYoaLIllkgYlxaSLYjWrnR_p4O0",
+          "mode": "list",
+          "cachedResultName": "CodeML 2025 Live Register History ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1fn5zCq_bxD6YNO4kQYoaLIllkgYlxaSLYjWrnR_p4O0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1fn5zCq_bxD6YNO4kQYoaLIllkgYlxaSLYjWrnR_p4O0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Created": "={{ new Date($json.createdAt).toLocaleString(\"en-US\", { timeZone: \"UTC\" }).replace(\",\", \"\") }}\n",
+            "SatEntry": "={{ $json.SatEntry }}",
+            "SunEntry": "={{ $json.SunEntry }}",
+            "TotalFood": "={{ $json.TotalFood }}",
+            "TotalSnacks": "={{ $json.TotalSnacks }}",
+            "MaxFood": "={{ $json.MaxFood }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Created",
+              "displayName": "Created",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "SatEntry",
+              "displayName": "SatEntry",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "SunEntry",
+              "displayName": "SunEntry",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TotalFood",
+              "displayName": "TotalFood",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TotalSnacks",
+              "displayName": "TotalSnacks",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "MaxFood",
+              "displayName": "MaxFood",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1792,
+        384
+      ],
+      "id": "6e890db6-05f4-4d7f-9ceb-ab2dddf50a82",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J3rnaSuqLzWLHSYz",
+          "name": "Google Sheets account"
+        }
+      }
     }
   ],
   "origin": "n8n",
@@ -558,6 +705,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-04T03:52:56.000Z",
-  "versionId": "171b9beb-1e2b-4c00-a337-4d6cd9c28e28"
+  "updatedAt": "2025-10-04T04:04:40.000Z",
+  "versionId": "fd1eed7d-b06b-4f7e-b459-c7f8875ab712"
 }
