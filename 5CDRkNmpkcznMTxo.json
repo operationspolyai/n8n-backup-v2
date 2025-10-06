@@ -681,7 +681,8 @@
           "id": "J3rnaSuqLzWLHSYz",
           "name": "Google Sheets account"
         }
-      }
+      },
+      "disabled": true
     }
   ],
   "origin": "n8n",
@@ -705,6 +706,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-04T04:04:40.000Z",
-  "versionId": "fd1eed7d-b06b-4f7e-b459-c7f8875ab712"
+  "updatedAt": "2025-10-05T18:47:40.000Z",
+  "versionId": "216d4e39-361d-41cc-9ac0-ac33c5f7ab21"
 }
