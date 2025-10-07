@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Loop Over Items1": {
       "main": [
@@ -68,7 +68,7 @@
       "main": [
         [
           {
-            "node": "Limit",
+            "node": "Loop Over Items1",
             "type": "main",
             "index": 0
           }
@@ -98,7 +98,13 @@
     },
     "When participant applies": {
       "main": [
-        []
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Send a message": {
@@ -139,17 +145,6 @@
         [
           {
             "node": "Select Participants",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Limit": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items1",
             "type": "main",
             "index": 0
           }
@@ -507,8 +502,7 @@
           "id": "tcgfUQhBwsAuROjj",
           "name": "Postgres account"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -522,12 +516,10 @@
       ],
       "id": "5fd8e657-0d51-4eb1-85b7-de46d4039b4b",
       "name": "Random wait",
-      "webhookId": "153c3742-21c4-4d42-883b-23ed8d945bc4",
-      "disabled": true
+      "webhookId": "153c3742-21c4-4d42-883b-23ed8d945bc4"
     },
     {
       "parameters": {
-        "amount": 12,
         "unit": "minutes"
       },
       "type": "n8n-nodes-base.wait",
@@ -584,8 +576,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        192,
-        208
+        224,
+        224
       ],
       "id": "3123c69d-6b4f-43f7-a063-ac03d28369c7",
       "name": "Select Participants",
@@ -603,8 +595,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1392,
-        80
+        1360,
+        -128
       ],
       "id": "74aa4262-4522-4225-a149-3b64531f3183",
       "name": "Code in JavaScript"
@@ -617,8 +609,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1600,
-        -16
+        1632,
+        -176
       ],
       "id": "2a636b63-7cf0-4448-b303-cb683b95a98a",
       "name": "Code in Python (Beta)"
@@ -630,8 +622,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1456,
-        -160
+        1488,
+        -320
       ],
       "id": "b8ad0c50-8e63-4d27-97bf-bf65311eada9",
       "name": "Code in JavaScript1",
@@ -646,8 +638,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -368,
-        256
+        -288,
+        240
       ],
       "id": "97a3feaf-1e05-4619-81c3-f3578c7e2cd0",
       "name": "When participant applies",
@@ -655,7 +647,7 @@
     },
     {
       "parameters": {
-        "sendTo": "=80alexanderr@gmail.com",
+        "sendTo": "={{ $('Loop Over Items1').item.json.email }}",
         "subject": "Welcome to CodeML!",
         "message": "=<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\" />\n    <title>Invitation CodeML 2025</title>\n  </head>\n  <body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #333;\">\n    <p>Hey {{ $json.output }},</p>\n\n    <p>\n      You are <strong>officially invited</strong> to\n      <strong>CodeML 2025</strong> 🎉\n    </p>\n\n    <p>\n      We’re excited to have you with us!  \n      Attached to this email, you’ll find:\n    </p>\n\n    <ul>\n      <li>\n        👉 <strong>Your access to the Discord server</strong>: this is important to\n        stay updated with announcements, receive automatic notifications,\n        ask questions, and connect with other participants.\n      </li>\n      <li>\n        🔑 <strong>Your unique CodeML QR code</strong> \n        (<span style=\"background-color: #fff9c4; padding: 2px 6px; border-radius: 4px;\">\n          📎 attached to this email\n        </span>).  \n        You will need it to check in and access event essentials.\n      </li>\n    </ul>\n\n    <p style=\"text-align: center; margin: 40px 0;\">\n      <a\n        href=\"https://discord.gg/SnBcD9jmZG\"\n        style=\"\n          background-color: #5865f2;\n          color: #fff;\n          padding: 15px 30px;\n          text-decoration: none;\n          font-size: 18px;\n          font-weight: bold;\n          border-radius: 8px;\n          display: inline-block;\n        \"\n      >\n        🔗 Join the Discord Server\n      </a>\n    </p>\n\n    <p style=\"text-align: center; font-size: 14px; color: #555;\">\n      If the button doesn’t work, copy and paste this link into your browser:<br />\n      <a href=\"https://discord.gg/SnBcD9jmZG\">https://discord.gg/SnBcD9jmZG</a>\n    </p>\n\n    <h3 style=\"margin-top: 40px;\">📍 Event Information</h3>\n    <ul>\n      <li>\n        🏛️ <strong>Event Location:</strong> \n        <a href=\"https://maps.app.goo.gl/NVN7mi7PVmumxZjH7\">\n          2500 Chem. de Polytechnique, Montréal, QC H3T 0A3\n        </a>\n      </li>\n      <li>\n        🚗 <strong>Parking:</strong> \n        <a href=\"https://maps.app.goo.gl/y7XdyrosGCvR2cGs9\">\n          2900 Edouard Montpetit Blvd, Montréal, QC H3T 1J4\n        </a> (20$/day)\n      </li>\n      <li>\n        ⏰ <strong>Registration starts at:</strong> 9:00 a.m. (3rd floor)\n      </li>\n      <li>\n        🚶 <strong>Entrance Instructions:</strong> Main entrance of the Lassonde Pavilion\n      </li>\n    </ul>\n\n    <h3 style=\"margin-top: 30px;\">🍴 What to Bring</h3>\n    <ul>\n      <li>🥗 <strong>No need to bring food</strong> – snacks are also provided</li>\n      <li>💻 <strong>Bring your charged laptop & charger</strong></li>\n      <li>💧 <strong>Bring your own water bottle</strong></li>\n      <li>🛏️ <strong>Sleeping bag (optional)</strong></li>\n    </ul>\n\n    <p\n      style=\"\n        background-color: #fff3cd;\n        border: 2px solid #f0ad4e;\n        padding: 15px;\n        font-size: 20px;\n        font-weight: bold;\n        color: #c62828;\n        text-align: center;\n        border-radius: 8px;\n        margin: 40px 0;\n      \"\n    >\n      🔑 Keep your QR code with you at all times — \n      it’s your <u>key</u> to enjoying the full CodeML 2025 experience!\n    </p>\n\n    <p>\n      <strong>Tip:</strong> When showing your QR code at check-in, make sure to zoom in on your screen so it’s easier for staff to scan ✅\n    </p>\n\n    <!-- Backup code section -->\n    <p style=\"margin-top: 50px; font-size: 14px; color: #555; text-align: center;\">\n      ⚠️ If your QR code does not work, please provide this backup code to staff:\n    </p>\n    <p\n      style=\"\n        font-size: 20px;\n        font-weight: bold;\n        color: #c62828;\n        text-align: center;\n        margin: 10px 0 40px 0;\n      \"\n    >\n      {{ $('Loop Over Items1').item.json.learnml_code }}\n    </p>\n\n    <p>See you soon at CodeML 2025! 🚀</p>\n  </body>\n</html>",
         "options": {
@@ -690,8 +682,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1712,
-        144
+        1888,
+        -128
       ],
       "id": "5b8669fc-079a-42b6-817d-e52bab35dfad",
       "name": "Sticky Note"
@@ -746,19 +738,6 @@
       ],
       "id": "d2f1f48d-5433-4691-9787-11c16db41eab",
       "name": "When clicking ‘Execute workflow’"
-    },
-    {
-      "parameters": {
-        "maxItems": 2
-      },
-      "type": "n8n-nodes-base.limit",
-      "typeVersion": 1,
-      "position": [
-        336,
-        128
-      ],
-      "id": "ea3d2c86-aba8-4b90-b6c6-df46cd615a03",
-      "name": "Limit"
     }
   ],
   "origin": "n8n",
@@ -781,7 +760,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-10-06T00:22:48.000Z",
-  "versionId": "8fb9b55d-f3c6-45c1-a3c9-052220956502"
+  "triggerCount": 1,
+  "updatedAt": "2025-10-06T13:05:51.000Z",
+  "versionId": "c978ee26-4386-453a-9049-1a421f8bc2b0"
 }
