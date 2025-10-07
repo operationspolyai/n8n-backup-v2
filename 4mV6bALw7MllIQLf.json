@@ -68,7 +68,7 @@
       "main": [
         [
           {
-            "node": "Select volunteers",
+            "node": "Select VIPs",
             "type": "main",
             "index": 0
           }
@@ -474,8 +474,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -592,
-        112
+        -400,
+        272
       ],
       "id": "2e575bed-aa17-4ce8-ab80-93481f7506e7",
       "name": "When clicking ‘Execute workflow’"
@@ -805,8 +805,8 @@
     {
       "parameters": {
         "sendTo": "=80alexanderr@gmail.com",
-        "subject": "You're a VIP at CodeML!",
-        "message": "=<p><strong>Hello {{ $json.name }},</strong></p>\n\n<p>\nTo gain access to your VIP role on the <strong>CodeML Discord server</strong>,  \nplease fill out the form below:\n</p>\n\n<p>\n👉 <a href=\"https://forms.gle/WZiiY2fDp3sZevnz9\">VIP Discord Role</a>\n</p>\n\n<p style=\"text-align: center; margin: 30px 0;\">\n  <a\n    href=\"https://discord.gg/SnBcD9jmZG\"\n    style=\"\n      background-color: #5865f2;\n      color: #fff;\n      padding: 12px 24px;\n      text-decoration: none;\n      font-size: 16px;\n      font-weight: bold;\n      border-radius: 6px;\n      display: inline-block;\n    \"\n  >\n    🔗 Join the CodeML Discord\n  </a>\n</p>\n\n<p style=\"text-align: center; font-size: 14px; color: #555;\">\n  If the button doesn’t work, copy and paste this link into your browser:<br />\n  <a href=\"https://discord.gg/SnBcD9jmZG\">https://discord.gg/SnBcD9jmZG</a>\n</p>\n\n<p>\nOn Discord, you’ll be able to get more information and connect with the team as a VIP.  \nThank you for being part of the event — it means a lot. 🌟\n</p>\n",
+        "subject": "You're a Partner at CodeML!",
+        "message": "=<p><strong>Hello {{ $json.name }},</strong></p>\n\n<p>\nTo gain access to your <strong>Partner</strong> role on the <strong>CodeML Discord server</strong>,  \nplease fill out the form below:\n</p>\n\n<p>\n👉 <a href=\"https://forms.gle/WZiiY2fDp3sZevnz9\">Partner Discord Role</a>\n</p>\n\n<p style=\"text-align: center; margin: 30px 0;\">\n  <a\n    href=\"https://discord.gg/SnBcD9jmZG\"\n    style=\"\n      background-color: #5865f2;\n      color: #fff;\n      padding: 12px 24px;\n      text-decoration: none;\n      font-size: 16px;\n      font-weight: bold;\n      border-radius: 6px;\n      display: inline-block;\n    \"\n  >\n    🔗 Join the CodeML Discord\n  </a>\n</p>\n\n<p style=\"text-align: center; font-size: 14px; color: #555;\">\n  If the button doesn’t work, copy and paste this link into your browser:<br />\n  <a href=\"https://discord.gg/SnBcD9jmZG\">https://discord.gg/SnBcD9jmZG</a>\n</p>\n\n<p>\nOn Discord, you’ll be able to get more information and connect with the team as a <strong>Partner</strong>.  \nThank you for being part of the event — it means a lot. 🌟\n</p>\n",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
@@ -993,6 +993,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2025-10-04T15:54:11.000Z",
-  "versionId": "ca533905-02e9-4c1f-9c33-437e1dc32ba0"
+  "updatedAt": "2025-10-06T22:32:23.000Z",
+  "versionId": "d9f9624f-f6b1-49b3-b38c-f49c0e4b5f2b"
 }
