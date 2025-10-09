@@ -23,6 +23,16 @@
             "node": "Food sum",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Food sum1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "snack sum1",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -148,6 +158,16 @@
             "node": "snack sum",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Food sum1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "snack sum1",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -184,6 +204,28 @@
           }
         ]
       ]
+    },
+    "Food sum1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 4
+          }
+        ]
+      ]
+    },
+    "snack sum1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 5
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-10-04T02:52:16.497Z",
@@ -199,8 +241,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -400,
-        96
+        -464,
+        128
       ],
       "id": "c99b627d-a521-4bf4-9efe-73ce08c46c59",
       "name": "When clicking ‘Execute workflow’"
@@ -215,7 +257,7 @@
       "typeVersion": 2.6,
       "position": [
         -176,
-        480
+        640
       ],
       "id": "82c521a2-2379-49de-8622-e1bc554ad725",
       "name": "Entry2 count",
@@ -228,7 +270,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Get first input item\nconst item = $input.first().json;\n\n// Convert fields to numbers\nconst entry1count = Number(item.entry1count);   // lunch entries\nconst entry2count = Number(item.entry2count);   // snack entries\nconst food_sum   = Number(item.food_sum);       // total lunch count\nconst snack_sum  = Number(item.snack_sum);      // total snack count\n\n// Total entries\nconst totalCount = entry1count + entry2count;\n\n// Calculate averages based on total count, round to 1 decimal\nconst avgLunch = totalCount > 0 ? Math.round((food_sum / totalCount) * 10) / 10 : 0;\nconst avgSnack = totalCount > 0 ? Math.round((snack_sum / totalCount) * 10) / 10 : 0;\n\n// Add results back into the JSON\nitem.totalCount = totalCount;\nitem.avgLunch = avgLunch;\nitem.avgSnack = avgSnack;\n\nreturn $input.all();\n"
+        "jsCode": "const item = $input.first().json;\n\nconst entry1count = Number(item.entry1count || 0);   // Saturday entries\nconst entry2count = Number(item.entry2count || 0);   // Sunday entries\nconst food_sum   = Number(item.food_sum || 0);       // Saturday lunches\nconst snack_sum  = Number(item.snack_sum || 0);      // Saturday snacks\nconst food_sum1  = Number(item.food_sum1 || 0);      // Sunday lunches\nconst snack_sum1 = Number(item.snack_sum1 || 0);     // Sunday snacks\n\n// Saturday\nconst sat_total = entry1count;\nconst sat_avgLunch = sat_total > 0 ? Math.round((food_sum / sat_total) * 10) / 10 : 0;\nconst sat_avgSnack = sat_total > 0 ? Math.round((snack_sum / sat_total) * 10) / 10 : 0;\n\n// Sunday\nconst sun_total = entry2count;\nconst sun_avgLunch = sun_total > 0 ? Math.round((food_sum1 / sun_total) * 10) / 10 : 0;\nconst sun_avgSnack = sun_total > 0 ? Math.round((snack_sum1 / sun_total) * 10) / 10 : 0;\n\n// Combined\nconst totalCount = sat_total + sun_total;\nconst avgLunch = totalCount > 0 ? Math.round(((food_sum + food_sum1) / totalCount) * 10) / 10 : 0;\nconst avgSnack = totalCount > 0 ? Math.round(((snack_sum + snack_sum1) / totalCount) * 10) / 10 : 0;\n\n// Add to output\nitem.sat_total = sat_total;\nitem.sat_avgLunch = sat_avgLunch;\nitem.sat_avgSnack = sat_avgSnack;\n\nitem.sun_total = sun_total;\nitem.sun_avgLunch = sun_avgLunch;\nitem.sun_avgSnack = sun_avgSnack;\n\nitem.totalCount = totalCount;\nitem.avgLunch = avgLunch;\nitem.avgSnack = avgSnack;\n\nreturn $input.all();\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -242,8 +284,8 @@
     {
       "parameters": {
         "mode": "combineBySql",
-        "numberInputs": 4,
-        "query": "SELECT *\nFROM input1\nLEFT JOIN input2 ON input1.name = input2.id\nLEFT JOIN input3 ON input1.name = input3.id\nLEFT JOIN input4 ON input1.name = input4.id;\n",
+        "numberInputs": 6,
+        "query": "SELECT *\nFROM input1\nLEFT JOIN input2 ON input1.name = input2.id\nLEFT JOIN input3 ON input1.name = input3.id\nLEFT JOIN input4 ON input1.name = input4.id\nLEFT JOIN input5 ON input1.name = input5.id\nLEFT JOIN input6 ON input1.name = input6.id\n",
         "options": {}
       },
       "type": "n8n-nodes-base.merge",
@@ -272,7 +314,7 @@
           "cachedResultName": "📊live-stats",
           "cachedResultUrl": "https://discord.com/channels/1422648726324772908/1422648731454668999"
         },
-        "content": "=Total Participants: {{ $('Code in JavaScript').item.json.totalCount }}\n\n### Saturday\nEntries:  {{ $('Code in JavaScript').item.json.entry1count }}\n\n### Sunday\nEntries:  {{ $('Code in JavaScript').item.json.entry2count }}\n\n### Food\nCount: {{ $('Code in JavaScript').item.json.food_sum }}\nAverage: {{ $('Code in JavaScript').item.json.avgLunch }}\nMax Food Allowed: {{ $('Get max food').item.json.max_food }}\n\n### Snacks\nCount: {{ $('Code in JavaScript').item.json.snack_sum }}\nAverage: {{ $('Code in JavaScript').item.json.avgSnack }}\n\n",
+        "content": "=Total Participants: {{ $('Code in JavaScript').item.json.totalCount }}\n\n### Saturday\nEntries: {{ $('Code in JavaScript').item.json.sat_total }}\nLunch Total: {{ $('Code in JavaScript').item.json.food_sum }}\nLunch Avg: {{ $('Code in JavaScript').item.json.sat_avgLunch }}\n\nSnack Total: {{ $('Code in JavaScript').item.json.snack_sum }}\nSnack Avg: {{ $('Code in JavaScript').item.json.sat_avgSnack }}\n\n### Sunday\nEntries: {{ $('Code in JavaScript').item.json.sun_total }}\nLunch Total: {{ $('Code in JavaScript').item.json.food_sum1 }}\nLunch Avg: {{ $('Code in JavaScript').item.json.sun_avgLunch }}\n\nSnack Total: {{ $('Code in JavaScript').item.json.snack_sum1 }}\nSnack Avg: {{ $('Code in JavaScript').item.json.sun_avgSnack }}\n\n### Max Food Allowed: {{ $('Get max food').item.json.max_food }}\n",
         "options": {
           "flags": [
             "SUPPRESS_NOTIFICATIONS"
@@ -346,8 +388,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -176,
-        672
+        -160,
+        848
       ],
       "id": "8be76edb-4606-461e-9722-266a6229b7fa",
       "name": "snack sum",
@@ -440,8 +482,8 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        -400,
-        672
+        -640,
+        624
       ],
       "id": "98d39f02-1be5-4151-af0d-7480f2eb3b51",
       "name": "When Executed by Another Workflow"
@@ -487,9 +529,11 @@
           "value": {
             "SatEntry": "={{ $('Code in JavaScript').item.json.entry1count }}",
             "SunEntry": "={{ $('Code in JavaScript').item.json.entry2count }}",
-            "TotalFood": "={{ $('Code in JavaScript').item.json.food_sum }}",
-            "TotalSnacks": "={{ $('Code in JavaScript').item.json.snack_sum }}",
-            "MaxFood": "={{ $('Get max food').item.json.max_food }}"
+            "MaxFood": "={{ $('Get max food').item.json.max_food }}",
+            "SatLunch": "={{ $('Code in JavaScript').item.json.food_sum }}",
+            "SunLunch": "={{ $('Code in JavaScript').item.json.food_sum1 }}",
+            "SatSnack": "={{ $('Code in JavaScript').item.json.snack_sum }}",
+            "SunSnack": "={{ $('Code in JavaScript').item.json.snack_sum1 }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -514,32 +558,52 @@
               "removed": false
             },
             {
-              "id": "TotalFood",
-              "displayName": "TotalFood",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "readOnly": false,
-              "removed": false
-            },
-            {
-              "id": "TotalSnacks",
-              "displayName": "TotalSnacks",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "readOnly": false,
-              "removed": false
-            },
-            {
               "id": "MaxFood",
               "displayName": "MaxFood",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "SatLunch",
+              "displayName": "SatLunch",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "SunLunch",
+              "displayName": "SunLunch",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "SatSnack",
+              "displayName": "SatSnack",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "SunSnack",
+              "displayName": "SunSnack",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
               "readOnly": false,
               "removed": false
             }
@@ -577,7 +641,8 @@
         384
       ],
       "id": "0423f16c-a185-4c6e-9197-0b1b2ea24cb7",
-      "name": "Get row(s)"
+      "name": "Get row(s)",
+      "disabled": true
     },
     {
       "parameters": {
@@ -683,6 +748,48 @@
         }
       },
       "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select SUM(food_count1) as \"food_sum1\" from \"CodeMembers\"\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -176,
+        464
+      ],
+      "id": "2a58213d-35d3-4494-9ebd-61f3201f7fb0",
+      "name": "Food sum1",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select sum(snack_count1) as \"snack_sum1\" from \"CodeMembers\"",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -144,
+        1024
+      ],
+      "id": "668404cd-0cb5-48a5-9a3d-83f4040ce049",
+      "name": "snack sum1",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
     }
   ],
   "origin": "n8n",
@@ -706,6 +813,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-05T18:47:40.000Z",
-  "versionId": "216d4e39-361d-41cc-9ac0-ac33c5f7ab21"
+  "updatedAt": "2025-10-08T23:43:56.000Z",
+  "versionId": "4ff37a04-d7d1-4f79-bf91-1335d63c0c31"
 }
