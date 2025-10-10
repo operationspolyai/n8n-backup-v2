@@ -128,7 +128,8 @@
             "GitHub": "={{ $('Create random code and add member to LearnML database').item.json.GitHub }}",
             "learnml_code": "={{ $('random number').item.json.randomCode }}",
             "role": "={{ $('Create random code and add member to LearnML database').item.json.role }}",
-            "discord": "={{ $('Create random code and add member to LearnML database').item.json.discord }}"
+            "discord": "={{ $('Create random code and add member to LearnML database').item.json.discord }}",
+            "walk_in": "={{ new Date() >= new Date(new Date().getFullYear(), 9, 11) }}\n"
           },
           "matchingColumns": [
             "id"
@@ -377,6 +378,36 @@
               "type": "string",
               "canBeUsedToMatch": true,
               "removed": false
+            },
+            {
+              "id": "food_count1",
+              "displayName": "food_count1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "snack_count1",
+              "displayName": "snack_count1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "walk_in",
+              "displayName": "walk_in",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -472,7 +503,7 @@
     {
       "parameters": {
         "inputSource": "jsonExample",
-        "jsonExample": "{\n  \"id\": 206,\n  \"learnml_code\": 321,\n  \"email\": \"massil.serik@gmail.com\",\n  \"name\": \"Massil Serik\",\n  \"school_level\": \"Université 3e année/University 3rd year\",\n  \"school\": \"Polytechnique Montréal\",\n  \"study\": \"Génie logiciel/Software engineering\",\n  \"tech_experience\": \"Python, Scikit learn, Visualisation de données/Data visualization (Matplotlib etc.), Languages de script/Scripting language (Python, Javascript, Ruby, Lua etc.), Programmation orienté objet/OOP Language (Java, C#, etc.), Back-end web development (Nest, Nuxt, Next, Express, Django, Flask, etc.), Front-end web development (React, Angular, Vue, Svelte, etc.)\",\n  \"ai_skill\": 4,\n  \"reason\": \"Learn with hand on activities\",\n  \"heared\": \"Votre école/Your school\",\n  \"food\": \"Aucun/None\",\n  \"t-shirt size\": \"M\",\n  \"discord\": \"test\",\n  \"CV\": \"https://drive.google.com/open?id=1S3b9Zh88iWbqCDkT8LgDzlugy-yCGFOi\",\n  \"LinkedIn\": \"linkedin.com/in/massil-serik-28a0a8266\",\n  \"GitHub\": null,\n  \"CV_perm\": true,\n  \"photo_perm\": true,\n  \"role\": \"Speaker\",\n  \"food_count\": 4,\n  \"entry1\": false,\n  \"entry2\": false\n}\n"
+        "jsonExample": "{\n  \"id\": 206,\n  \"learnml_code\": 321,\n  \"email\": \"massil.serik@gmail.com\",\n  \"name\": \"Massil Serik\",\n  \"school_level\": \"Université 3e année/University 3rd year\",\n  \"school\": \"Polytechnique Montréal\",\n  \"study\": \"Génie logiciel/Software engineering\",\n  \"tech_experience\": \"Python, Scikit learn, Visualisation de données/Data visualization (Matplotlib etc.), Languages de script/Scripting language (Python, Javascript, Ruby, Lua etc.), Programmation orienté objet/OOP Language (Java, C#, etc.), Back-end web development (Nest, Nuxt, Next, Express, Django, Flask, etc.), Front-end web development (React, Angular, Vue, Svelte, etc.)\",\n  \"ai_skill\": 4,\n  \"reason\": \"Learn with hand on activities\",\n  \"heared\": \"Votre école/Your school\",\n  \"food\": \"Aucun/None\",\n  \"t-shirt size\": \"M\",\n  \"discord\": \"test\",\n  \"CV\": \"https://drive.google.com/open?id=1S3b9Zh88iWbqCDkT8LgDzlugy-yCGFOi\",\n  \"LinkedIn\": \"linkedin.com/in/massil-serik-28a0a8266\",\n  \"GitHub\": null,\n  \"CV_perm\": true,\n  \"photo_perm\": true,\n  \"role\": \"Speaker\",\n  \"food_count\": 4,\n  \"entry1\": false,\n  \"entry2\": false,\n  \"walk_in\": false\n}\n"
       },
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
@@ -865,6 +896,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-03T16:24:52.000Z",
-  "versionId": "7af87d92-71ca-4796-b02c-de98be6b3288"
+  "updatedAt": "2025-10-09T16:05:49.000Z",
+  "versionId": "a173c22d-7929-4ffc-a466-319bcd43d680"
 }
