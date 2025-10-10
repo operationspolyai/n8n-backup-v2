@@ -1,6 +1,73 @@
 {
   "active": false,
-  "connections": {},
+  "connections": {
+    "Partcipates": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Partcipates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Duplicates": {
+      "main": [
+        [
+          {
+            "node": "If row does not exist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If row does not exist": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert row": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2025-10-02T01:29:04.950Z",
   "id": "EKu6i9oaqmzaQlkS",
   "isArchived": false,
@@ -30,8 +97,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -448,
-        -208
+        -688,
+        -32
       ],
       "id": "fcc6da3d-558f-4138-aa5c-a2d07510f349",
       "name": "Sticky Note"
@@ -55,8 +122,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -720,
-        -240
+        -1072,
+        -288
       ],
       "id": "fd23499e-edb2-410b-8574-795788aa2e22",
       "name": "Partcipates",
@@ -75,11 +142,170 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -768,
-        -336
+        -960,
+        96
       ],
       "id": "6ff2b4f7-b80a-41bc-a896-1d6336df28e5",
       "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Add a new field called 'myNewField' to the JSON of the item\nconst item = {\n  email: $json[\"Adresse e-mail\"] || $json[\"Your email\\nVotre adresse email\"],\nname: $json[\"Full name\\nNom complet\"],\nschoolLevel: $json[\"Current school level or highest obtained\\nNiveau scolaire actuel ou plus haut diplôme obtenu\"],\nfieldOfStudy: $json[\"Your current field of study\\nVotre domaine d’études actuel\"],\nexperienceWithTechnologies: $json[\"Which technologies do you have experience with?\\nAvec quelles technologies avez-vous de l’expérience ?\"],\nselfEvaluationSkillLevel: $json[\"On a scale from 0 to 10, how would you evaluate your ML/AI skills and knowledge?\\nSur une échelle de 0 à 10, comment évalueriez-vous vos compétences et connaissances en IA/apprentissage automatique ?\"],\nparticipationReason: $json[\"Why do you want to participate?\\nPourquoi souhaitez-vous participer ?\"],\ntShirtSize: $json[\"Your T-shirt size/Votre taille de T-shirt (unisex)\"],\nlinkedInLink: $json[\"Your LinkedIn link/Votre lien LinkedIn\"],\ngithubLink: $json[\"Your GitHub link/Votre lien GitHub\"],\nresumeLink: $json[\"Your CV in PDF format\\nVotre CV en format PDF\"],\nfoodRestrictions: $json[\"Food restrictions/Restrictions alimentaires\"],\n}\n\nreturn item;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -864,
+        -288
+      ],
+      "id": "28962057-417b-4be5-ae1c-64eea8190960",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1248,
+        -288
+      ],
+      "id": "2e0508fa-6a97-4043-9f6b-f6df561b4cf5",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "compare": "selectedFields",
+        "fieldsToCompare": "email",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        -656,
+        -288
+      ],
+      "id": "7a3bd991-7496-401c-b926-5e0a16797bde",
+      "name": "Remove Duplicates"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://server-holy-pond-4966.fly.dev/auth/participant",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"email\": \"{{$('If row does not exist').item.json.email}}\",\n  \"role\": \"participant\",\n  \"name\": \"{{$('If row does not exist').item.json.name}}\",\n  \"schoolLevel\": \"{{$('If row does not exist').item.json.schoolLevel}}\",\n  \"fieldOfStudy\": \"{{$('If row does not exist').item.json.fieldOfStudy}}\",\n  \"experienceWithTechnologies\": \"{{$('If row does not exist').item.json.experienceWithTechnologies}}\",\n  \"selfEvaluationSkillLevel\": \"{{$('If row does not exist').item.json.selfEvaluationSkillLevel}}\",\n  \"participationReason\": \"{{$('If row does not exist').item.json.participationReason}}\",\n  \"tShirtSize\": \"{{$('If row does not exist').item.json.tShirtSize || 'L'}}\",\n  \"linkedInLink\": \"{{$('If row does not exist').item.json.linkedInLink}}\",\n  \"githubLink\": \"{{$('If row does not exist').item.json.githubLink}}\",\n  \"resumeLink\": \"{{$('If row does not exist').item.json.resumeLink}}\",\n  \"foodRestrictions\": \"{{$('If row does not exist').item.json.foodRestrictions}}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -32,
+        -288
+      ],
+      "id": "b215ebe2-6da6-4ca8-9e08-65d89dc6b764",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "operation": "rowNotExists",
+        "dataTableId": {
+          "__rl": true,
+          "value": "aRw6H4BjLtenJ2Qk",
+          "mode": "list",
+          "cachedResultName": "CodeML MongoImport",
+          "cachedResultUrl": "/projects/1KxArspnjifF9NPY/datatables/aRw6H4BjLtenJ2Qk"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "email",
+              "keyValue": "={{ $json.email }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        -288
+      ],
+      "id": "b1b1187a-8526-4969-8ed3-dbd6dd3f677c",
+      "name": "If row does not exist"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "aRw6H4BjLtenJ2Qk",
+          "mode": "list",
+          "cachedResultName": "CodeML MongoImport",
+          "cachedResultUrl": "/projects/1KxArspnjifF9NPY/datatables/aRw6H4BjLtenJ2Qk"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $json.email }}"
+          },
+          "matchingColumns": [
+            "email"
+          ],
+          "schema": [
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        -288
+      ],
+      "id": "db827286-b3aa-4cb8-99b9-6f3f1c39a56d",
+      "name": "Insert row"
+    },
+    {
+      "parameters": {
+        "operation": "deleteRows",
+        "dataTableId": {
+          "__rl": true,
+          "value": "aRw6H4BjLtenJ2Qk",
+          "mode": "list",
+          "cachedResultName": "CodeML MongoImport",
+          "cachedResultUrl": "/projects/1KxArspnjifF9NPY/datatables/aRw6H4BjLtenJ2Qk"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "email",
+              "condition": "isEmpty"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -1184,
+        64
+      ],
+      "id": "93042418-7b48-4365-b1b1-ed3615e0d8af",
+      "name": "Delete row(s)"
     }
   ],
   "origin": "n8n",
@@ -161,6 +387,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-02T02:11:14.000Z",
-  "versionId": "51b120e7-aa8c-4b78-aa71-d41cde2317fa"
+  "updatedAt": "2025-10-10T00:00:29.000Z",
+  "versionId": "53c30480-f782-4573-a0cf-f336cf1c18e5"
 }
