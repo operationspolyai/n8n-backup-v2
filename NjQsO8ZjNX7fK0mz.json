@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Google Calendar Trigger": {
       "main": [
@@ -103,11 +103,7 @@
           "cachedResultUrl": "https://discord.com/channels/1422648726324772908/1422648731454668997"
         },
         "content": "={{ $json.myNewField }}\n\n@everyone",
-        "options": {
-          "flags": [
-            "SUPPRESS_NOTIFICATIONS"
-          ]
-        }
+        "options": {}
       },
       "type": "n8n-nodes-base.discord",
       "typeVersion": 2,
@@ -195,9 +191,13 @@
       "projectId": "1KxArspnjifF9NPY"
     }
   ],
-  "staticData": null,
+  "staticData": {
+    "node:Google Calendar Trigger": {
+      "lastTimeChecked": "2025-10-11T00:32:00Z"
+    }
+  },
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-10-08T21:12:48.000Z",
-  "versionId": "d549b3a4-ebda-457f-8577-b1c0bd8d0650"
+  "triggerCount": 1,
+  "updatedAt": "2025-10-11T00:32:00.000Z",
+  "versionId": "e9b75882-4e47-4a06-932d-7f33336726dc"
 }
