@@ -129,7 +129,7 @@
             "learnml_code": "={{ $('random number').item.json.randomCode }}",
             "role": "={{ $('Create random code and add member to LearnML database').item.json.role }}",
             "discord": "={{ $('Create random code and add member to LearnML database').item.json.discord }}",
-            "walk_in": "={{ new Date() >= new Date(new Date().getFullYear(), 9, 11) }}\n"
+            "walk_in": false
           },
           "matchingColumns": [
             "id"
@@ -896,6 +896,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-09T16:05:49.000Z",
-  "versionId": "a173c22d-7929-4ffc-a466-319bcd43d680"
+  "updatedAt": "2025-10-10T18:49:24.000Z",
+  "versionId": "2622b23d-c495-430f-915d-df75112b4ef1"
 }
