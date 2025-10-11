@@ -53,22 +53,6 @@
         ]
       ]
     },
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        [
-          {
-            "node": "VIPs",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Volunteers",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "CodeML Form submit": {
       "main": [
         [
@@ -222,6 +206,22 @@
         [
           {
             "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Volunteers",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "VIPs",
             "type": "main",
             "index": 0
           }
@@ -606,17 +606,6 @@
       ],
       "id": "749decb2-8ebe-4a2a-acaa-5d35360a1eba",
       "name": "Call 'Create random code and add member to LearnML database'2"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        272,
-        928
-      ],
-      "id": "bd7a51a8-77e5-45b8-93b3-14715ddc7abc",
-      "name": "When clicking ‘Execute workflow’"
     },
     {
       "parameters": {
@@ -1043,6 +1032,17 @@
           "name": "Google Sheets account"
         }
       }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        176,
+        768
+      ],
+      "id": "bd7a51a8-77e5-45b8-93b3-14715ddc7abc",
+      "name": "When clicking ‘Execute workflow’"
     }
   ],
   "origin": "n8n",
@@ -1073,6 +1073,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-10-09T16:01:33.000Z",
-  "versionId": "ae7af790-2868-4211-8903-ddb4c2b1bcf3"
+  "updatedAt": "2025-10-11T00:31:44.000Z",
+  "versionId": "59f35dd4-6935-41c4-b65b-53d7607cc868"
 }
