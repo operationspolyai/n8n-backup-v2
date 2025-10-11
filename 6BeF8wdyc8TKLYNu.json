@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Mode",
+            "node": "Autoswitch days",
             "type": "main",
             "index": 0
           }
@@ -670,6 +670,28 @@
           }
         ]
       ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Autoswitch days",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Autoswitch days": {
+      "main": [
+        [
+          {
+            "node": "Mode",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-10-03T00:52:58.492Z",
@@ -698,7 +720,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        256,
+        464,
         1952
       ],
       "id": "bae43f67-1b1f-45b0-a745-63c372e7da67",
@@ -714,7 +736,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1760,
+        -1984,
         2144
       ],
       "id": "286fc343-a672-4708-babb-8aacf3d8c831",
@@ -742,7 +764,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -1312,
+        -1104,
         2144
       ],
       "id": "469af73d-2c0c-4920-ba90-cffe68316ff1",
@@ -933,7 +955,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.3,
       "position": [
-        -1088,
+        -880,
         2064
       ],
       "id": "ea77f735-365d-4c2a-8b00-f86ec9aa9e10",
@@ -944,9 +966,9 @@
         "assignments": {
           "assignments": [
             {
-              "id": "3a253ce6-e8c3-4e3d-aef3-9a22646b5284",
+              "id": "db1cb288-1ffa-4844-adc4-5982d8d54696",
               "name": "mode",
-              "value": "sat",
+              "value": "={{ $json.result }}",
               "type": "string"
             }
           ]
@@ -956,7 +978,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1536,
+        -1328,
         2144
       ],
       "id": "bbc8b04b-d0af-46f7-88ea-a5a6903ce2fd",
@@ -990,7 +1012,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -640,
+        -432,
         800
       ],
       "id": "c046c14e-f801-4cc7-9d4a-333a4d1328e1",
@@ -1023,7 +1045,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -416,
+        -208,
         704
       ],
       "id": "039026a4-0112-4389-be50-bc4cc3a6b470",
@@ -1348,7 +1370,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -192,
+        16,
         704
       ],
       "id": "a55eba90-3a66-4fbd-9848-52230bc4546a",
@@ -1369,7 +1391,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        32,
+        240,
         704
       ],
       "id": "ab3e05b1-815a-458d-a035-98c247d9b17a",
@@ -1402,7 +1424,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -416,
+        -208,
         896
       ],
       "id": "d6e6b9b0-e78e-49e1-a0c3-aefdcc9be082",
@@ -1727,7 +1749,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -192,
+        16,
         896
       ],
       "id": "b27dfa9b-afc2-4101-b369-be594492a031",
@@ -1748,7 +1770,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        32,
+        240,
         896
       ],
       "id": "c34df4c3-5f31-4160-8463-74afa24a4ff7",
@@ -1782,7 +1804,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -640,
+        -432,
         1184
       ],
       "id": "87da562d-b5ce-4d86-87f9-67612f993c19",
@@ -1815,7 +1837,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -416,
+        -208,
         1088
       ],
       "id": "0846a36f-21d1-4277-a307-c60e9e2033d1",
@@ -2110,7 +2132,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -192,
+        16,
         1088
       ],
       "id": "d8f0a1a2-a2f2-4fa3-90f3-9e0901ab27ae",
@@ -2131,7 +2153,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        32,
+        240,
         1088
       ],
       "id": "da2c9ea5-e9e5-48e0-9bf5-105beef8fd07",
@@ -2164,7 +2186,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -416,
+        -208,
         1280
       ],
       "id": "e9088eb6-4e85-4ef8-9372-287a6d5a5dcd",
@@ -2489,7 +2511,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -192,
+        16,
         1280
       ],
       "id": "1b2e62a3-af31-4260-89c6-ed15584e4db0",
@@ -2510,7 +2532,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        32,
+        240,
         1280
       ],
       "id": "87e678b3-89de-4056-aee2-961fed2ecb44",
@@ -2544,7 +2566,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -864,
+        -656,
         1760
       ],
       "id": "27d12c3e-a25e-45f4-80e9-fe6156535b31",
@@ -2577,7 +2599,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -640,
+        -432,
         1568
       ],
       "id": "149d8019-cd4a-48a6-9bb7-b4006e1d7a8a",
@@ -2872,7 +2894,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -192,
+        16,
         1664
       ],
       "id": "5968899b-37a0-4549-9b96-d18392680fc9",
@@ -2922,7 +2944,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -416,
+        -208,
         1568
       ],
       "id": "b490a9e4-948a-44f9-9ec2-485c713976a7",
@@ -2937,7 +2959,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        32,
+        240,
         1472
       ],
       "id": "cfdf7c79-202e-4803-af2b-e0f25e30237a",
@@ -2952,7 +2974,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        32,
+        240,
         1664
       ],
       "id": "b0fb63fa-13f4-4a4d-ada5-7e814e85f1f0",
@@ -2985,7 +3007,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -640,
+        -432,
         1952
       ],
       "id": "2a2fc686-0e82-4894-9ddb-191da9341a0e",
@@ -3310,7 +3332,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -192,
+        16,
         2048
       ],
       "id": "4234f397-4cf1-4503-9c3e-8044fb833692",
@@ -3360,7 +3382,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -416,
+        -208,
         1952
       ],
       "id": "4b4def18-8518-4b25-a2c9-7ca0d456c32f",
@@ -3375,7 +3397,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        32,
+        240,
         1856
       ],
       "id": "2a641453-3d8a-4d04-9c37-41fe73737f71",
@@ -3390,7 +3412,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        32,
+        240,
         2048
       ],
       "id": "5761a542-06aa-4788-a99b-ea55f0a6a1a3",
@@ -3440,7 +3462,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -864,
+        -656,
         2144
       ],
       "id": "343e96ea-eb53-446d-aa49-173ac282111d",
@@ -3455,7 +3477,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        -640,
+        -432,
         2144
       ],
       "id": "ebe41e12-1c27-4456-aa03-c7da9258b0dc",
@@ -3489,7 +3511,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -640,
+        -432,
         2336
       ],
       "id": "541212e1-599c-4f76-ab84-b7ccf6724002",
@@ -3522,7 +3544,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -416,
+        -208,
         2240
       ],
       "id": "13086f3e-c471-4ce0-af34-d0b061bdc65b",
@@ -3817,7 +3839,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -192,
+        16,
         2240
       ],
       "id": "59705657-d0d6-4197-b411-0663b72acaed",
@@ -3856,7 +3878,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -416,
+        -208,
         2432
       ],
       "id": "a11b933a-f4c0-4abb-8528-cced13500aea",
@@ -4181,7 +4203,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -192,
+        16,
         2432
       ],
       "id": "bdfb0b0b-0ac6-4810-bb46-0fb73f07e29f",
@@ -4202,7 +4224,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        32,
+        240,
         2240
       ],
       "id": "4ab5e598-0373-465f-a89c-4ac8102c8160",
@@ -4217,7 +4239,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        32,
+        240,
         2432
       ],
       "id": "fe50b506-f752-4a6b-b747-b64bde6a84f8",
@@ -4251,7 +4273,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -640,
+        -432,
         2720
       ],
       "id": "7461fbbd-108b-43c1-ac46-7169dddf43b1",
@@ -4284,7 +4306,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -416,
+        -208,
         2624
       ],
       "id": "ae042fe6-a6dc-44df-b4c8-6759bf4e11ea",
@@ -4323,7 +4345,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -416,
+        -208,
         2816
       ],
       "id": "ab13099c-38dc-455a-a549-223706399e4d",
@@ -4344,7 +4366,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        32,
+        240,
         2624
       ],
       "id": "3736b2fa-4a8a-4698-83b1-184a6fd63013",
@@ -4359,7 +4381,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        32,
+        240,
         2816
       ],
       "id": "28e68f28-9a00-4c40-b1dd-6307bba953ba",
@@ -4678,7 +4700,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -192,
+        16,
         2624
       ],
       "id": "17a99968-2234-422f-bacb-80e18a13d636",
@@ -5003,7 +5025,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -192,
+        16,
         2816
       ],
       "id": "9eee9edf-4eff-4221-865c-0291f148989e",
@@ -5043,7 +5065,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -640,
+        -432,
         3104
       ],
       "id": "85169248-7885-4f1a-8b70-dd7925bf540a",
@@ -5076,7 +5098,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -416,
+        -208,
         3008
       ],
       "id": "625e92d2-daaf-4543-af52-5f3fb269cd52",
@@ -5371,7 +5393,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -192,
+        16,
         3008
       ],
       "id": "da13945d-095c-46b1-9a16-08745b7db3f8",
@@ -5392,7 +5414,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        32,
+        240,
         3008
       ],
       "id": "417a7ea9-65b8-451e-9bb5-023e47e5dd67",
@@ -5425,7 +5447,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -416,
+        -208,
         3200
       ],
       "id": "971ac59e-1d06-40da-8086-6493a002474e",
@@ -5750,7 +5772,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -192,
+        16,
         3200
       ],
       "id": "3b1dfff3-145f-4a78-8661-9ecca4080b05",
@@ -5771,11 +5793,35 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        32,
+        240,
         3200
       ],
       "id": "dfd9950c-faa5-48fb-9c52-3723a1ba689c",
       "name": "Respond to Webhook22"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2000,
+        2352
+      ],
+      "id": "6d98167f-b031-4595-9e69-e4e5bb6d74c2",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Force date to local timezone (replace with your TZ if needed)\nconst today = new Date(\n  new Date().toLocaleString(\"en-US\", { timeZone: \"America/New_York\" })\n);\n\nconst y = today.getFullYear();\nconst m = today.getMonth();\nconst d = today.getDate();\n\nlet result = \"\";\n\nif (y === 2025 && m === 9 && d === 11) {\n  result = \"sat\";\n} else if (y === 2025 && m === 9 && d === 12) {\n  result = \"sun\";\n}\n\n// Return debug info\nreturn [\n  {\n    json: {\n      result,\n      debug: { y, m, d },\n    },\n  },\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1664,
+        2144
+      ],
+      "id": "467a3f9a-9096-4c9e-8554-91060bfb6f96",
+      "name": "Autoswitch days"
     }
   ],
   "origin": "n8n",
@@ -5799,6 +5845,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-08T23:39:11.000Z",
-  "versionId": "9f155cec-eaeb-4088-b2c2-d670df857ff3"
+  "updatedAt": "2025-10-11T00:52:56.000Z",
+  "versionId": "720394ae-2c3f-4d34-8089-e379252f2650"
 }
