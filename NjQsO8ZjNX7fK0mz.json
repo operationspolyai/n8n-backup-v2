@@ -97,10 +97,10 @@
         },
         "channelId": {
           "__rl": true,
-          "value": "1422648731454668997",
+          "value": "1422648727620817018",
           "mode": "list",
-          "cachedResultName": "bot-test",
-          "cachedResultUrl": "https://discord.com/channels/1422648726324772908/1422648731454668997"
+          "cachedResultName": "📢announcements",
+          "cachedResultUrl": "https://discord.com/channels/1422648726324772908/1422648727620817018"
         },
         "content": "={{ $json.myNewField }}\n\n@everyone",
         "options": {}
@@ -193,11 +193,11 @@
   ],
   "staticData": {
     "node:Google Calendar Trigger": {
-      "lastTimeChecked": "2025-10-11T00:32:00Z"
+      "lastTimeChecked": "2025-10-12T00:00:47Z"
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-11T00:32:00.000Z",
-  "versionId": "e9b75882-4e47-4a06-932d-7f33336726dc"
+  "updatedAt": "2025-10-11T12:37:43.000Z",
+  "versionId": "5a48ebac-355a-4a80-a553-e4ecc36b4062"
 }
