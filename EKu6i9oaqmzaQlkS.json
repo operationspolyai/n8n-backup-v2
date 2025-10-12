@@ -12,22 +12,22 @@
         ]
       ]
     },
-    "When clicking ‘Execute workflow’": {
+    "Code in JavaScript": {
       "main": [
         [
           {
-            "node": "Partcipates",
+            "node": "Remove Duplicates",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Code in JavaScript": {
+    "When clicking ‘Execute workflow’": {
       "main": [
         [
           {
-            "node": "Remove Duplicates",
+            "node": "Partcipates",
             "type": "main",
             "index": 0
           }
@@ -66,6 +66,17 @@
           }
         ]
       ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-10-02T01:29:04.950Z",
@@ -97,11 +108,54 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -688,
-        -32
+        -544,
+        128
       ],
       "id": "fcc6da3d-558f-4138-aa5c-a2d07510f349",
       "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "Here is the CodeML data",
+        "height": 80
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -960,
+        96
+      ],
+      "id": "6ff2b4f7-b80a-41bc-a896-1d6336df28e5",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "operation": "deleteRows",
+        "dataTableId": {
+          "__rl": true,
+          "value": "aRw6H4BjLtenJ2Qk",
+          "mode": "list",
+          "cachedResultName": "CodeML MongoImport",
+          "cachedResultUrl": "/projects/1KxArspnjifF9NPY/datatables/aRw6H4BjLtenJ2Qk"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "email",
+              "condition": "isEmpty"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -1184,
+        64
+      ],
+      "id": "93042418-7b48-4365-b1b1-ed3615e0d8af",
+      "name": "Delete row(s)"
     },
     {
       "parameters": {
@@ -122,10 +176,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -1072,
-        -288
+        -1152,
+        -384
       ],
-      "id": "fd23499e-edb2-410b-8574-795788aa2e22",
+      "id": "59bcf3ba-7f84-4022-9d6e-9124ea981881",
       "name": "Partcipates",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -136,30 +190,16 @@
     },
     {
       "parameters": {
-        "content": "Here is the CodeML data",
-        "height": 80
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -960,
-        96
-      ],
-      "id": "6ff2b4f7-b80a-41bc-a896-1d6336df28e5",
-      "name": "Sticky Note1"
-    },
-    {
-      "parameters": {
         "mode": "runOnceForEachItem",
         "jsCode": "// Add a new field called 'myNewField' to the JSON of the item\nconst item = {\n  email: $json[\"Adresse e-mail\"] || $json[\"Your email\\nVotre adresse email\"],\nname: $json[\"Full name\\nNom complet\"],\nschoolLevel: $json[\"Current school level or highest obtained\\nNiveau scolaire actuel ou plus haut diplôme obtenu\"],\nfieldOfStudy: $json[\"Your current field of study\\nVotre domaine d’études actuel\"],\nexperienceWithTechnologies: $json[\"Which technologies do you have experience with?\\nAvec quelles technologies avez-vous de l’expérience ?\"],\nselfEvaluationSkillLevel: $json[\"On a scale from 0 to 10, how would you evaluate your ML/AI skills and knowledge?\\nSur une échelle de 0 à 10, comment évalueriez-vous vos compétences et connaissances en IA/apprentissage automatique ?\"],\nparticipationReason: $json[\"Why do you want to participate?\\nPourquoi souhaitez-vous participer ?\"],\ntShirtSize: $json[\"Your T-shirt size/Votre taille de T-shirt (unisex)\"],\nlinkedInLink: $json[\"Your LinkedIn link/Votre lien LinkedIn\"],\ngithubLink: $json[\"Your GitHub link/Votre lien GitHub\"],\nresumeLink: $json[\"Your CV in PDF format\\nVotre CV en format PDF\"],\nfoodRestrictions: $json[\"Food restrictions/Restrictions alimentaires\"],\n}\n\nreturn item;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -864,
-        -288
+        -944,
+        -384
       ],
-      "id": "28962057-417b-4be5-ae1c-64eea8190960",
+      "id": "88f91a82-20d2-43b5-87ec-0e5c5f3d0b73",
       "name": "Code in JavaScript"
     },
     {
@@ -167,10 +207,10 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -1248,
-        -288
+        -1328,
+        -384
       ],
-      "id": "2e0508fa-6a97-4043-9f6b-f6df561b4cf5",
+      "id": "2846fd2b-c381-4427-8f8e-a127cfd48659",
       "name": "When clicking ‘Execute workflow’"
     },
     {
@@ -182,10 +222,10 @@
       "type": "n8n-nodes-base.removeDuplicates",
       "typeVersion": 2,
       "position": [
-        -656,
-        -288
+        -736,
+        -384
       ],
-      "id": "7a3bd991-7496-401c-b926-5e0a16797bde",
+      "id": "4dd79d4a-db99-4484-b140-4f850933a2f7",
       "name": "Remove Duplicates"
     },
     {
@@ -201,11 +241,12 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -32,
-        -288
+        -112,
+        -384
       ],
-      "id": "b215ebe2-6da6-4ca8-9e08-65d89dc6b764",
-      "name": "HTTP Request"
+      "id": "6d7c30d2-6de7-4044-a8e4-93d03c63f64f",
+      "name": "HTTP Request",
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -229,10 +270,10 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -448,
-        -288
+        -528,
+        -384
       ],
-      "id": "b1b1187a-8526-4969-8ed3-dbd6dd3f677c",
+      "id": "4503afa1-41dd-46a1-b2bc-15783f8b8fee",
       "name": "If row does not exist"
     },
     {
@@ -272,40 +313,45 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -240,
-        -288
+        -320,
+        -384
       ],
-      "id": "db827286-b3aa-4cb8-99b9-6f3f1c39a56d",
+      "id": "300d3d7c-e4f5-4ea2-8f8f-6943484b5d2a",
       "name": "Insert row"
     },
     {
       "parameters": {
-        "operation": "deleteRows",
-        "dataTableId": {
-          "__rl": true,
-          "value": "aRw6H4BjLtenJ2Qk",
-          "mode": "list",
-          "cachedResultName": "CodeML MongoImport",
-          "cachedResultUrl": "/projects/1KxArspnjifF9NPY/datatables/aRw6H4BjLtenJ2Qk"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "email",
-              "condition": "isEmpty"
-            }
-          ]
-        },
+        "method": "POST",
+        "url": "https://server-holy-pond-4966.fly.dev/auth/participant",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"email\": \"{{$json.email}}\",\n  \"role\": \"participant\",\n  \"name\": \"{{$json.name}}\",\n  \"schoolLevel\": \"{{$json.schoolLevel}}\",\n  \"fieldOfStudy\": \"{{$json.fieldOfStudy}}\",\n  \"experienceWithTechnologies\": \"{{$json.experienceWithTechnologies}}\",\n  \"selfEvaluationSkillLevel\": \"{{$json.selfEvaluationSkillLevel}}\",\n  \"participationReason\": \"{{$json.participationReason}}\",\n  \"tShirtSize\": \"{{$json.tShirtSize || 'L'}}\",\n  \"linkedInLink\": \"{{$json.linkedInLink}}\",\n  \"githubLink\": \"{{$json.githubLink}}\",\n  \"resumeLink\": \"{{$json.resumeLink}}\",\n  \"foodRestrictions\": \"{{$json.foodRestrictions}}\"\n}\n",
         "options": {}
       },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [
-        -1184,
-        64
+        -640,
+        -192
       ],
-      "id": "93042418-7b48-4365-b1b1-ed3615e0d8af",
-      "name": "Delete row(s)"
+      "id": "74803479-dff6-4107-ac8a-d051f39ea90c",
+      "name": "HTTP Request1",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Add a new field called 'myNewField' to the JSON of the item\nconst item = {\n  email: \"taihnihal@gmail.com\",\nname: \"Nihal Taih\",\nschoolLevel: \" \",\nfieldOfStudy: \" \",\nexperienceWithTechnologies: \" \",\nselfEvaluationSkillLevel: \" \",\nparticipationReason: \" \",\ntShirtSize: \" \",\nlinkedInLink: \" \",\ngithubLink: \" \",\nresumeLink: \" \",\nfoodRestrictions: \" \",\n}\n\nreturn item;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -832,
+        -192
+      ],
+      "id": "bd932522-b88a-46e7-8ebe-5bb6b85d2823",
+      "name": "Code in JavaScript1"
     }
   ],
   "origin": "n8n",
@@ -387,6 +433,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-10T00:00:29.000Z",
-  "versionId": "53c30480-f782-4573-a0cf-f336cf1c18e5"
+  "updatedAt": "2025-10-11T16:13:12.000Z",
+  "versionId": "b25edec0-0dc7-44a1-8d80-aacc13c021de"
 }
