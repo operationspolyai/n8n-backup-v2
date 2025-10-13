@@ -342,7 +342,7 @@
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "// Add a new field called 'myNewField' to the JSON of the item\nconst item = {\n  email: \"taihnihal@gmail.com\",\nname: \"Nihal Taih\",\nschoolLevel: \" \",\nfieldOfStudy: \" \",\nexperienceWithTechnologies: \" \",\nselfEvaluationSkillLevel: \" \",\nparticipationReason: \" \",\ntShirtSize: \" \",\nlinkedInLink: \" \",\ngithubLink: \" \",\nresumeLink: \" \",\nfoodRestrictions: \" \",\n}\n\nreturn item;"
+        "jsCode": "// Add a new field called 'myNewField' to the JSON of the item\nconst item = {\n  email: \"albert@gmail.com\",\n  name: \"Tricheur Polyai\",\nschoolLevel: \" \",\nfieldOfStudy: \" \",\nexperienceWithTechnologies: \" \",\nselfEvaluationSkillLevel: \" \",\nparticipationReason: \" \",\ntShirtSize: \" \",\nlinkedInLink: \" \",\ngithubLink: \" \",\nresumeLink: \" \",\nfoodRestrictions: \" \",\n}\n\nreturn item;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -433,6 +433,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-11T16:13:12.000Z",
-  "versionId": "b25edec0-0dc7-44a1-8d80-aacc13c021de"
+  "updatedAt": "2025-10-12T10:37:19.000Z",
+  "versionId": "7dfd0e02-cc0a-4717-b3a1-c99453de345e"
 }
