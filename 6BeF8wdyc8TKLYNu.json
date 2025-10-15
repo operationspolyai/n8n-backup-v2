@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Code scanned": {
       "main": [
@@ -5845,6 +5845,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-11T10:45:12.000Z",
+  "updatedAt": "2025-10-14T17:45:25.000Z",
   "versionId": "031c9d07-3c94-49b6-9e48-3756af49dba1"
 }
