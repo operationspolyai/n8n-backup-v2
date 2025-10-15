@@ -1,0 +1,80 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-14T17:45:56.005Z",
+  "id": "9ItR7q9BDcCBP6Ls",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "get number of unique people",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "85b1fbdd-7cd7-431c-bf92-9fd209c218ca",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select * from \"CodeMembers\" where \"food_count\" != 0 or \"food_count1\" != 0 or \"snack_count\" != 0 or \"snack_count1\" != 0 or \"entry1\"=true or \"entry2\" = true;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        208,
+        0
+      ],
+      "id": "5e76811f-b435-478b-addd-9338e81f948c",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-14T17:45:56.010Z",
+      "updatedAt": "2025-10-14T17:45:56.010Z",
+      "role": "workflow:owner",
+      "workflowId": "9ItR7q9BDcCBP6Ls",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-14T18:26:06.000Z",
+  "versionId": "64d4b794-c37b-4979-a13c-ee530b6e66c7"
+}
