@@ -11,6 +11,17 @@
           }
         ]
       ]
+    },
+    "Execute a SQL query": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-10-14T17:45:56.005Z",
@@ -52,6 +63,63 @@
           "name": "Postgres account"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1uhw76c3sX7ja8aictpmqq-PmNCYSMMW01QVAdo_P6OQ",
+          "mode": "list",
+          "cachedResultName": "people who showed to codeml",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uhw76c3sX7ja8aictpmqq-PmNCYSMMW01QVAdo_P6OQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uhw76c3sX7ja8aictpmqq-PmNCYSMMW01QVAdo_P6OQ/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $json.email }}"
+          },
+          "matchingColumns": [
+            "email"
+          ],
+          "schema": [
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        416,
+        0
+      ],
+      "id": "ab2b1f8b-2cd2-4063-b8b5-75e10ace524f",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J3rnaSuqLzWLHSYz",
+          "name": "Google Sheets account"
+        }
+      }
     }
   ],
   "origin": "n8n",
@@ -75,6 +143,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-14T18:26:06.000Z",
-  "versionId": "64d4b794-c37b-4979-a13c-ee530b6e66c7"
+  "updatedAt": "2025-10-15T17:36:53.000Z",
+  "versionId": "54db1550-fa47-467b-9c58-5c25c82c7632"
 }
