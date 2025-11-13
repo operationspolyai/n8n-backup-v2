@@ -1,84 +1,6 @@
 {
   "active": false,
-  "connections": {
-    "Partcipates": {
-      "main": [
-        [
-          {
-            "node": "Code in JavaScript",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code in JavaScript": {
-      "main": [
-        [
-          {
-            "node": "Remove Duplicates",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        [
-          {
-            "node": "Partcipates",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Remove Duplicates": {
-      "main": [
-        [
-          {
-            "node": "If row does not exist",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If row does not exist": {
-      "main": [
-        [
-          {
-            "node": "Insert row",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Insert row": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code in JavaScript1": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
+  "connections": {},
   "createdAt": "2025-10-02T01:29:04.950Z",
   "id": "EKu6i9oaqmzaQlkS",
   "isArchived": false,
@@ -108,54 +30,11 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -544,
-        128
+        -448,
+        -208
       ],
       "id": "fcc6da3d-558f-4138-aa5c-a2d07510f349",
       "name": "Sticky Note"
-    },
-    {
-      "parameters": {
-        "content": "Here is the CodeML data",
-        "height": 80
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -960,
-        96
-      ],
-      "id": "6ff2b4f7-b80a-41bc-a896-1d6336df28e5",
-      "name": "Sticky Note1"
-    },
-    {
-      "parameters": {
-        "operation": "deleteRows",
-        "dataTableId": {
-          "__rl": true,
-          "value": "aRw6H4BjLtenJ2Qk",
-          "mode": "list",
-          "cachedResultName": "CodeML MongoImport",
-          "cachedResultUrl": "/projects/1KxArspnjifF9NPY/datatables/aRw6H4BjLtenJ2Qk"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "email",
-              "condition": "isEmpty"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
-      "position": [
-        -1184,
-        64
-      ],
-      "id": "93042418-7b48-4365-b1b1-ed3615e0d8af",
-      "name": "Delete row(s)"
     },
     {
       "parameters": {
@@ -176,10 +55,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -1152,
-        -384
+        -720,
+        -240
       ],
-      "id": "59bcf3ba-7f84-4022-9d6e-9124ea981881",
+      "id": "fd23499e-edb2-410b-8574-795788aa2e22",
       "name": "Partcipates",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -190,168 +69,17 @@
     },
     {
       "parameters": {
-        "mode": "runOnceForEachItem",
-        "jsCode": "// Add a new field called 'myNewField' to the JSON of the item\nconst item = {\n  email: $json[\"Adresse e-mail\"] || $json[\"Your email\\nVotre adresse email\"],\nname: $json[\"Full name\\nNom complet\"],\nschoolLevel: $json[\"Current school level or highest obtained\\nNiveau scolaire actuel ou plus haut diplôme obtenu\"],\nfieldOfStudy: $json[\"Your current field of study\\nVotre domaine d’études actuel\"],\nexperienceWithTechnologies: $json[\"Which technologies do you have experience with?\\nAvec quelles technologies avez-vous de l’expérience ?\"],\nselfEvaluationSkillLevel: $json[\"On a scale from 0 to 10, how would you evaluate your ML/AI skills and knowledge?\\nSur une échelle de 0 à 10, comment évalueriez-vous vos compétences et connaissances en IA/apprentissage automatique ?\"],\nparticipationReason: $json[\"Why do you want to participate?\\nPourquoi souhaitez-vous participer ?\"],\ntShirtSize: $json[\"Your T-shirt size/Votre taille de T-shirt (unisex)\"],\nlinkedInLink: $json[\"Your LinkedIn link/Votre lien LinkedIn\"],\ngithubLink: $json[\"Your GitHub link/Votre lien GitHub\"],\nresumeLink: $json[\"Your CV in PDF format\\nVotre CV en format PDF\"],\nfoodRestrictions: $json[\"Food restrictions/Restrictions alimentaires\"],\n}\n\nreturn item;"
+        "content": "Here is the CodeML data",
+        "height": 80
       },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -944,
-        -384
-      ],
-      "id": "88f91a82-20d2-43b5-87ec-0e5c5f3d0b73",
-      "name": "Code in JavaScript"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
+      "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1328,
-        -384
+        -768,
+        -336
       ],
-      "id": "2846fd2b-c381-4427-8f8e-a127cfd48659",
-      "name": "When clicking ‘Execute workflow’"
-    },
-    {
-      "parameters": {
-        "compare": "selectedFields",
-        "fieldsToCompare": "email",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.removeDuplicates",
-      "typeVersion": 2,
-      "position": [
-        -736,
-        -384
-      ],
-      "id": "4dd79d4a-db99-4484-b140-4f850933a2f7",
-      "name": "Remove Duplicates"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://server-holy-pond-4966.fly.dev/auth/participant",
-        "sendBody": true,
-        "contentType": "raw",
-        "rawContentType": "application/json",
-        "body": "={\n  \"email\": \"{{$('If row does not exist').item.json.email}}\",\n  \"role\": \"participant\",\n  \"name\": \"{{$('If row does not exist').item.json.name}}\",\n  \"schoolLevel\": \"{{$('If row does not exist').item.json.schoolLevel}}\",\n  \"fieldOfStudy\": \"{{$('If row does not exist').item.json.fieldOfStudy}}\",\n  \"experienceWithTechnologies\": \"{{$('If row does not exist').item.json.experienceWithTechnologies}}\",\n  \"selfEvaluationSkillLevel\": \"{{$('If row does not exist').item.json.selfEvaluationSkillLevel}}\",\n  \"participationReason\": \"{{$('If row does not exist').item.json.participationReason}}\",\n  \"tShirtSize\": \"{{$('If row does not exist').item.json.tShirtSize || 'L'}}\",\n  \"linkedInLink\": \"{{$('If row does not exist').item.json.linkedInLink}}\",\n  \"githubLink\": \"{{$('If row does not exist').item.json.githubLink}}\",\n  \"resumeLink\": \"{{$('If row does not exist').item.json.resumeLink}}\",\n  \"foodRestrictions\": \"{{$('If row does not exist').item.json.foodRestrictions}}\"\n}\n",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        -112,
-        -384
-      ],
-      "id": "6d7c30d2-6de7-4044-a8e4-93d03c63f64f",
-      "name": "HTTP Request",
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "operation": "rowNotExists",
-        "dataTableId": {
-          "__rl": true,
-          "value": "aRw6H4BjLtenJ2Qk",
-          "mode": "list",
-          "cachedResultName": "CodeML MongoImport",
-          "cachedResultUrl": "/projects/1KxArspnjifF9NPY/datatables/aRw6H4BjLtenJ2Qk"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "email",
-              "keyValue": "={{ $json.email }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
-      "position": [
-        -528,
-        -384
-      ],
-      "id": "4503afa1-41dd-46a1-b2bc-15783f8b8fee",
-      "name": "If row does not exist"
-    },
-    {
-      "parameters": {
-        "dataTableId": {
-          "__rl": true,
-          "value": "aRw6H4BjLtenJ2Qk",
-          "mode": "list",
-          "cachedResultName": "CodeML MongoImport",
-          "cachedResultUrl": "/projects/1KxArspnjifF9NPY/datatables/aRw6H4BjLtenJ2Qk"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "email": "={{ $json.email }}"
-          },
-          "matchingColumns": [
-            "email"
-          ],
-          "schema": [
-            {
-              "id": "email",
-              "displayName": "email",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
-      "position": [
-        -320,
-        -384
-      ],
-      "id": "300d3d7c-e4f5-4ea2-8f8f-6943484b5d2a",
-      "name": "Insert row"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://server-holy-pond-4966.fly.dev/auth/participant",
-        "sendBody": true,
-        "contentType": "raw",
-        "rawContentType": "application/json",
-        "body": "={\n  \"email\": \"{{$json.email}}\",\n  \"role\": \"participant\",\n  \"name\": \"{{$json.name}}\",\n  \"schoolLevel\": \"{{$json.schoolLevel}}\",\n  \"fieldOfStudy\": \"{{$json.fieldOfStudy}}\",\n  \"experienceWithTechnologies\": \"{{$json.experienceWithTechnologies}}\",\n  \"selfEvaluationSkillLevel\": \"{{$json.selfEvaluationSkillLevel}}\",\n  \"participationReason\": \"{{$json.participationReason}}\",\n  \"tShirtSize\": \"{{$json.tShirtSize || 'L'}}\",\n  \"linkedInLink\": \"{{$json.linkedInLink}}\",\n  \"githubLink\": \"{{$json.githubLink}}\",\n  \"resumeLink\": \"{{$json.resumeLink}}\",\n  \"foodRestrictions\": \"{{$json.foodRestrictions}}\"\n}\n",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        -640,
-        -192
-      ],
-      "id": "74803479-dff6-4107-ac8a-d051f39ea90c",
-      "name": "HTTP Request1",
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "mode": "runOnceForEachItem",
-        "jsCode": "// Add a new field called 'myNewField' to the JSON of the item\nconst item = {\n  email: \"albert@gmail.com\",\n  name: \"Tricheur Polyai\",\nschoolLevel: \" \",\nfieldOfStudy: \" \",\nexperienceWithTechnologies: \" \",\nselfEvaluationSkillLevel: \" \",\nparticipationReason: \" \",\ntShirtSize: \" \",\nlinkedInLink: \" \",\ngithubLink: \" \",\nresumeLink: \" \",\nfoodRestrictions: \" \",\n}\n\nreturn item;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -832,
-        -192
-      ],
-      "id": "bd932522-b88a-46e7-8ebe-5bb6b85d2823",
-      "name": "Code in JavaScript1"
+      "id": "6ff2b4f7-b80a-41bc-a896-1d6336df28e5",
+      "name": "Sticky Note1"
     }
   ],
   "origin": "n8n",
@@ -433,6 +161,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-12T10:37:19.000Z",
-  "versionId": "7dfd0e02-cc0a-4717-b3a1-c99453de345e"
+  "updatedAt": "2025-10-02T02:11:14.000Z",
+  "versionId": "51b120e7-aa8c-4b78-aa71-d41cde2317fa"
 }
