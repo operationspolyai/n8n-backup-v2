@@ -1,6 +1,17 @@
 {
   "active": false,
   "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Select Participants",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Loop Over Items1": {
       "main": [
         [],
@@ -46,7 +57,40 @@
       "main": [
         [
           {
-            "node": "AI Agent",
+            "node": "Generate QR Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When participate applies": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message1": {
+      "main": [
+        [
+          {
+            "node": "Update rows in a table1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Select Participants",
             "type": "main",
             "index": 0
           }
@@ -68,7 +112,7 @@
       "main": [
         [
           {
-            "node": "Send a message",
+            "node": "Send a message1",
             "type": "main",
             "index": 0
           }
@@ -84,71 +128,25 @@
       "main": [
         []
       ]
-    },
-    "When participant applies": {
-      "main": [
-        [
-          {
-            "node": "Select Participants",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Send a message": {
-      "main": [
-        [
-          {
-            "node": "Update rows in a table1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AI Agent": {
-      "main": [
-        [
-          {
-            "node": "Generate QR Code",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenAI Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        [
-          {
-            "node": "Select Participants",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
     }
   },
   "createdAt": "2025-10-03T14:23:36.953Z",
   "id": "egkDsKZ5XOmxNMJf",
   "isArchived": false,
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
-  "name": "Send emails invite",
+  "meta": null,
+  "name": "Send emails",
   "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        -48
+      ],
+      "id": "0d245b15-b543-4ed3-9d39-55667484c1b2",
+      "name": "When clicking ‘Execute workflow’"
+    },
     {
       "parameters": {
         "options": {}
@@ -161,8 +159,7 @@
       ],
       "id": "f4d76876-d8d4-441a-a066-359e925bdd01",
       "name": "Loop Over Items1",
-      "executeOnce": false,
-      "alwaysOutputData": false
+      "executeOnce": true
     },
     {
       "parameters": {
@@ -481,8 +478,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1968,
-        256
+        2000,
+        240
       ],
       "id": "7e836376-c1cf-4c22-8c2b-6480155a678a",
       "name": "Update rows in a table1",
@@ -491,7 +488,8 @@
           "id": "tcgfUQhBwsAuROjj",
           "name": "Postgres account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -505,19 +503,79 @@
       ],
       "id": "5fd8e657-0d51-4eb1-85b7-de46d4039b4b",
       "name": "Random wait",
-      "webhookId": "153c3742-21c4-4d42-883b-23ed8d945bc4"
+      "webhookId": "153c3742-21c4-4d42-883b-23ed8d945bc4",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "e26b1ae0-e4ed-4f89-af91-1349b3ad677f",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -352,
+        240
+      ],
+      "id": "01bad8dc-5d99-4971-aa39-0020c97adb6b",
+      "name": "When participate applies",
+      "webhookId": "e26b1ae0-e4ed-4f89-af91-1349b3ad677f"
+    },
+    {
+      "parameters": {
+        "sendTo": "=80alexanderr@gmail.com",
+        "subject": "Invitation et code secret LearnML Discord",
+        "message": "=<p>Here is your QR code:</p>\n",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {}
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1680,
+        256
+      ],
+      "id": "ffec09ae-0fba-4826-a3c8-51e7e01e2a57",
+      "name": "Send a message1",
+      "webhookId": "6671ea87-8a90-4f28-8b76-0d86ace773bf",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "unquhRC3gfJ50lma",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 15
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -64,
+        224
+      ],
+      "id": "d1e6219e-2fcc-4da1-af1b-b09869c6570c",
+      "name": "Wait",
+      "webhookId": "bc8c6ca6-5e99-42fa-a018-9bbafe5abd1c"
     },
     {
       "parameters": {
         "method": "=GET",
-        "url": "=https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ $('Loop Over Items1').item.json.learnml_code }}",
+        "url": "=https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ $json.learnml_code }}",
         "options": {}
       },
       "id": "1ab12bfb-2711-4074-a0d5-094bd3006e9b",
       "name": "Generate QR Code",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        1568,
+        1344,
         256
       ],
       "typeVersion": 4.2
@@ -551,8 +609,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        224,
-        224
+        256,
+        208
       ],
       "id": "3123c69d-6b4f-43f7-a063-ac03d28369c7",
       "name": "Select Participants",
@@ -570,8 +628,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1360,
-        -128
+        1392,
+        80
       ],
       "id": "74aa4262-4522-4225-a149-3b64531f3183",
       "name": "Code in JavaScript"
@@ -584,8 +642,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1632,
-        -176
+        1600,
+        -16
       ],
       "id": "2a636b63-7cf0-4448-b303-cb683b95a98a",
       "name": "Code in Python (Beta)"
@@ -597,122 +655,12 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1488,
-        -320
+        1456,
+        -160
       ],
       "id": "b8ad0c50-8e63-4d27-97bf-bf65311eada9",
       "name": "Code in JavaScript1",
       "disabled": true
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "35a3cd04-ea8d-497f-b833-016c9f69695f",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2.1,
-      "position": [
-        -384,
-        240
-      ],
-      "id": "97a3feaf-1e05-4619-81c3-f3578c7e2cd0",
-      "name": "When participant applies",
-      "webhookId": "35a3cd04-ea8d-497f-b833-016c9f69695f"
-    },
-    {
-      "parameters": {
-        "sendTo": "={{ $('Loop Over Items1').item.json.email }}",
-        "subject": "Welcome to CodeML!",
-        "message": "=<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\" />\n    <title>Invitation CodeML 2025</title>\n  </head>\n  <body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #333;\">\n    <p>Hey {{ $json.output }},</p>\n\n    <p>\n      You are <strong>officially invited</strong> to\n      <strong>CodeML 2025</strong> 🎉\n    </p>\n\n    <p>\n      We’re excited to have you with us!  \n      Attached to this email, you’ll find:\n    </p>\n\n    <ul>\n      <li>\n        👉 <strong>Your access to the Discord server</strong>: this is important to\n        stay updated with announcements, receive automatic notifications,\n        ask questions, and connect with other participants.\n      </li>\n      <li>\n        🔑 <strong>Your unique CodeML QR code</strong> \n        (<span style=\"background-color: #fff9c4; padding: 2px 6px; border-radius: 4px;\">\n          📎 attached to this email\n        </span>).  \n        You will need it to check in and access event essentials.\n      </li>\n    </ul>\n\n    <p style=\"text-align: center; margin: 40px 0;\">\n      <a\n        href=\"https://discord.gg/SnBcD9jmZG\"\n        style=\"\n          background-color: #5865f2;\n          color: #fff;\n          padding: 15px 30px;\n          text-decoration: none;\n          font-size: 18px;\n          font-weight: bold;\n          border-radius: 8px;\n          display: inline-block;\n        \"\n      >\n        🔗 Join the Discord Server\n      </a>\n    </p>\n\n    <p style=\"text-align: center; font-size: 14px; color: #555;\">\n      If the button doesn’t work, copy and paste this link into your browser:<br />\n      <a href=\"https://discord.gg/SnBcD9jmZG\">https://discord.gg/SnBcD9jmZG</a>\n    </p>\n\n    <h3 style=\"margin-top: 40px;\">📍 Event Information</h3>\n    <ul>\n      <li>\n        🏛️ <strong>Event Location:</strong> \n        <a href=\"https://maps.app.goo.gl/NVN7mi7PVmumxZjH7\">\n          2500 Chem. de Polytechnique, Montréal, QC H3T 0A3\n        </a>\n      </li>\n      <li>\n        🚗 <strong>Parking:</strong> \n        <a href=\"https://maps.app.goo.gl/y7XdyrosGCvR2cGs9\">\n          2900 Edouard Montpetit Blvd, Montréal, QC H3T 1J4\n        </a> (20$/day)\n      </li>\n      <li>\n        ⏰ <strong>Registration starts at:</strong> 9:00 a.m. (3rd floor)\n      </li>\n      <li>\n        🚶 <strong>Entrance Instructions:</strong> Main entrance of the Lassonde Pavilion\n      </li>\n    </ul>\n\n    <h3 style=\"margin-top: 30px;\">🍴 What to Bring</h3>\n    <ul>\n      <li>🥗 <strong>No need to bring food</strong> – snacks are also provided</li>\n      <li>💻 <strong>Bring your charged laptop & charger</strong></li>\n      <li>💧 <strong>Bring your own water bottle</strong></li>\n      <li>🛏️ <strong>Sleeping bag (optional)</strong></li>\n    </ul>\n\n    <p\n      style=\"\n        background-color: #fff3cd;\n        border: 2px solid #f0ad4e;\n        padding: 15px;\n        font-size: 20px;\n        font-weight: bold;\n        color: #c62828;\n        text-align: center;\n        border-radius: 8px;\n        margin: 40px 0;\n      \"\n    >\n      🔑 Keep your QR code with you at all times — \n      it’s your <u>key</u> to enjoying the full CodeML 2025 experience!\n    </p>\n\n    <p>\n      <strong>Tip:</strong> When showing your QR code at check-in, make sure to zoom in on your screen so it’s easier for staff to scan ✅\n    </p>\n\n    <!-- Backup code section -->\n    <p style=\"margin-top: 50px; font-size: 14px; color: #555; text-align: center;\">\n      ⚠️ If your QR code does not work, please provide this backup code to staff:\n    </p>\n    <p\n      style=\"\n        font-size: 20px;\n        font-weight: bold;\n        color: #c62828;\n        text-align: center;\n        margin: 10px 0 40px 0;\n      \"\n    >\n      {{ $('Loop Over Items1').item.json.learnml_code }}\n    </p>\n\n    <p>See you soon at CodeML 2025! 🚀</p>\n  </body>\n</html>",
-        "options": {
-          "attachmentsUi": {
-            "attachmentsBinary": [
-              {}
-            ]
-          }
-        }
-      },
-      "type": "n8n-nodes-base.gmail",
-      "typeVersion": 2.1,
-      "position": [
-        1744,
-        256
-      ],
-      "id": "0289dd62-bc2d-4736-8ab5-4e511bd273fa",
-      "name": "Send a message",
-      "webhookId": "6671ea87-8a90-4f28-8b76-0d86ace773bf",
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "unquhRC3gfJ50lma",
-          "name": "Gmail account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "content": "remember to send to actual people ",
-        "height": 80
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        1888,
-        -128
-      ],
-      "id": "5b8669fc-079a-42b6-817d-e52bab35dfad",
-      "name": "Sticky Note"
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "=Grab and send only the first name of the person, nothing else. No other text like \"Here you go\": {{ $json.name }}\n",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 2.2,
-      "position": [
-        1264,
-        240
-      ],
-      "id": "7e7e423e-ca61-489f-9be1-a09cf9f6ac78",
-      "name": "AI Agent"
-    },
-    {
-      "parameters": {
-        "model": {
-          "__rl": true,
-          "value": "gpt-5-nano",
-          "mode": "list",
-          "cachedResultName": "gpt-5-nano"
-        },
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.2,
-      "position": [
-        1200,
-        496
-      ],
-      "id": "73864a65-d42d-44ad-806c-5286580b1772",
-      "name": "OpenAI Chat Model",
-      "credentials": {
-        "openAiApi": {
-          "id": "5GmqoqFkGTvtDKjA",
-          "name": "OpenAi account"
-        }
-      }
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -224,
-        448
-      ],
-      "id": "d2f1f48d-5433-4691-9787-11c16db41eab",
-      "name": "When clicking ‘Execute workflow’"
     }
   ],
   "origin": "n8n",
@@ -735,7 +683,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 1,
-  "updatedAt": "2025-10-14T17:45:34.000Z",
-  "versionId": "b913abb9-4a6b-4f8e-8390-cf683130f002"
+  "triggerCount": 0,
+  "updatedAt": "2025-10-03T15:22:22.000Z",
+  "versionId": "4703d32d-b57a-4a9e-a257-b8e49aab167e"
 }
