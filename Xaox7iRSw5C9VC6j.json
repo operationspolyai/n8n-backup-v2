@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Add a role to a member": {
       "main": [
@@ -166,8 +168,8 @@
   },
   "shared": [
     {
-      "createdAt": "2025-09-15T21:03:21.511Z",
       "updatedAt": "2025-09-15T21:03:21.511Z",
+      "createdAt": "2025-09-15T21:03:21.511Z",
       "role": "workflow:owner",
       "workflowId": "Xaox7iRSw5C9VC6j",
       "projectId": "1KxArspnjifF9NPY"
