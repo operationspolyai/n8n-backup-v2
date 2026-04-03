@@ -1,0 +1,417 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "List all department folders and their VPs and members",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update permissions": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Each Department Folder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Each Department Folder": {
+      "main": [
+        [
+          {
+            "node": "Get VPs",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get All Members",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create https body to send to update permissions": {
+      "main": [
+        [
+          {
+            "node": "Update permissions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Members": {
+      "main": [
+        [
+          {
+            "node": "Create https body to send to update permissions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List all department folders and their VPs and members": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Each Department Folder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Members1": {
+      "main": [
+        [
+          {
+            "node": "Create https body to send to update permissions1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create https body to send to update permissions1": {
+      "main": [
+        [
+          {
+            "node": "Update permissions for list",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update permissions for list": {
+      "main": [
+        []
+      ]
+    },
+    "Get VPs": {
+      "main": [
+        [
+          {
+            "node": "Get All Members1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-04-02T14:29:19.005Z",
+  "id": "E_xNP5QOZ-P3x6s5MMPnB",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Update department folder permissions",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6e403f15-33b9-4a5a-bcc4-1a36997fb317",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.clickup.com/api/v3/workspaces/90131880769/folder/{{ $('Loop Over Each Department Folder').first().json.ClickUpFolderID }}/acls",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.body }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1104,
+        16
+      ],
+      "id": "fcb33fe6-ef28-46c0-aa1f-01aad58aad42",
+      "name": "Update permissions",
+      "alwaysOutputData": false,
+      "retryOnFail": false,
+      "credentials": {
+        "clickUpOAuth2Api": {
+          "id": "c6V235Yu48q7DUPg",
+          "name": "ClickUp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        480,
+        0
+      ],
+      "id": "e63a0008-420e-4193-b757-0099d3c55f2b",
+      "name": "Loop Over Each Department Folder"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Get the Master List of all club members\nconst allClubMembers = $(\"Get All Members\").all();\n\n// 2. Reference the Loop node directly as requested\nconst folderItems = $(\"Loop Over Each Department Folder\").all();\n\nreturn folderItems.map(item => {\n  // 3. Identify who SHOULD have permission 5 in this folder\n  const deptIdsRaw = item.json.UserIDs || \"\";\n  const deptIds = deptIdsRaw.split(',').map(id => id.trim());\n\n  // 4. Build the entries list for EVERY member in the club\n  const entries = allClubMembers.map(member => {\n    const memberId = member.json.ClickUpID.toString();\n    const isDeptMember = deptIds.includes(memberId);\n\n    return {\n      \"id\": parseInt(memberId),\n      \"kind\": \"user\",\n      \"permission_level\": isDeptMember ? 5 : null\n    };\n  });\n\n  // 5. Output the folder data + the stringified body\n  return {\n    json: {\n      ...item.json, // Preserves ClickUpFolderID, departmentName, UserIDs, Emails\n      body: JSON.stringify({\n        \"entries\": entries,\n        \"private\": true\n      })\n    }\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        16
+      ],
+      "id": "0e487cf1-b5f6-4536-a18a-9999c5dfb50a",
+      "name": "Create https body to send to update permissions"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Members",
+          "mode": "list",
+          "cachedResultName": "Members"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "ClickUpID",
+              "condition": "IS NOT NULL"
+            },
+            {
+              "column": "email",
+              "condition": "!=",
+              "value": "operationspolyai@gmail.com"
+            },
+            {
+              "column": "email",
+              "condition": "IS NOT NULL"
+            },
+            {
+              "column": "email",
+              "condition": "!=",
+              "value": "souhaylsej@gmail.com"
+            },
+            {
+              "column": "email",
+              "condition": "!=",
+              "value": "80alexanderr@gmail.com"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        672,
+        16
+      ],
+      "id": "4c144825-ea32-44ec-a4a0-6d1410d0649b",
+      "name": "Get All Members",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n    \"Department\".\"ClickUpFolderID\",\n    \"Department\".\"departmentName\",\n    STRING_AGG(\"Members\".\"ClickUpID\"::text, ', ') AS \"UserIDs\",\n    STRING_AGG(\"Members\".\"email\", ', ') AS \"Emails\"\nFROM \"Members\"\nJOIN \"MemberDepartment\" ON \"Members\".\"id\" = \"MemberDepartment\".\"memberID\"\nJOIN \"Department\" ON \"Department\".\"id\" = \"MemberDepartment\".\"departmentID\"\nWHERE \"Members\".\"ClickUpID\" IS NOT NULL\nGROUP BY \"Department\".\"id\", \"Department\".\"ClickUpFolderID\", \"Department\".\"departmentName\";",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        240,
+        0
+      ],
+      "id": "6afa1c62-95e6-49b7-9a8a-8e5fec4a9f56",
+      "name": "List all department folders and their VPs and members",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Members",
+          "mode": "list",
+          "cachedResultName": "Members"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "ClickUpID",
+              "condition": "IS NOT NULL"
+            },
+            {
+              "column": "email",
+              "condition": "!=",
+              "value": "operationspolyai@gmail.com"
+            },
+            {
+              "column": "email",
+              "condition": "IS NOT NULL"
+            },
+            {
+              "column": "email",
+              "condition": "!=",
+              "value": "souhaylsej@gmail.com"
+            },
+            {
+              "column": "email",
+              "condition": "!=",
+              "value": "80alexanderr@gmail.com"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1136,
+        -320
+      ],
+      "id": "c70cf64d-5396-41d0-9c57-1a0ecabea6fb",
+      "name": "Get All Members1",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Get the raw lists from the nodes\nconst allMembersRaw = $(\"Get All Members1\").all();\nconst allVPsRaw = $(\"Get VPs\").all();\n\n// 2. Deduplicate Members by ClickUpID using a Map\n// This ensures that even if SQL returns a person twice, they only appear once in our list\nconst uniqueMembersMap = new Map();\nallMembersRaw.forEach(m => {\n  const id = m.json.ClickUpID?.toString();\n  if (id && !uniqueMembersMap.has(id)) {\n    uniqueMembersMap.set(id, m.json);\n  }\n});\n\n// 3. Create a Set of VP IDs for fast lookup\nconst vpIds = new Set(allVPsRaw.map(vp => vp.json.ClickUpID?.toString()));\n\n// 4. Build the unique entries array\nconst entries = Array.from(uniqueMembersMap.values()).map(member => {\n  const memberId = member.ClickUpID.toString();\n  const isVP = vpIds.has(memberId);\n\n  return {\n    \"id\": parseInt(memberId),\n    \"kind\": \"user\",\n    \"permission_level\": isVP ? 5 : null\n  };\n});\n\n// 5. CRITICAL: Return an array with exactly ONE object \n// This prevents n8n from looping and duplicating the output\nreturn [{\n  json: {\n    body: JSON.stringify({\n      \"entries\": entries,\n      \"private\": true\n    })\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1392,
+        -320
+      ],
+      "id": "826786f2-559d-4fc5-b454-cf29b5f4c2c5",
+      "name": "Create https body to send to update permissions1"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.clickup.com/api/v3/workspaces/90131880769/folder/901311011431/acls",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.body }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1632,
+        -320
+      ],
+      "id": "3432dbd2-8dca-4c00-8de5-48e6755fffc4",
+      "name": "Update permissions for list",
+      "alwaysOutputData": false,
+      "retryOnFail": false,
+      "credentials": {
+        "clickUpOAuth2Api": {
+          "id": "c6V235Yu48q7DUPg",
+          "name": "ClickUp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n    \"Members\".\"email\", \n    \"Members\".\"ClickUpID\", \n    \"Department\".\"ClickUpAssignOtherListID\" AS \"OtherDepartmentID\",\n    \"Department\".\"departmentName\"\nFROM \"Members\"\nJOIN \"MemberRole\" ON \"Members\".\"id\" = \"MemberRole\".\"memberID\"\nJOIN \"MemberDepartment\" ON \"Members\".\"id\" = \"MemberDepartment\".\"memberID\"\nJOIN \"Department\" ON \"Department\".\"id\" = \"MemberDepartment\".\"departmentID\"\nWHERE \"MemberRole\".\"roleID\" = 1 \n  AND \"Members\".\"ClickUpID\" IS NOT NULL;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        784,
+        -320
+      ],
+      "id": "5b7d4646-e157-4c04-a606-aff7cc5dc70b",
+      "name": "Get VPs",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-04-02T14:29:19.107Z",
+      "createdAt": "2026-04-02T14:29:19.107Z",
+      "role": "workflow:owner",
+      "workflowId": "E_xNP5QOZ-P3x6s5MMPnB",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-04-02T16:43:45.631Z",
+  "versionId": "a06b6600-cc2f-49ae-bf9e-d48514ceb919"
+}
