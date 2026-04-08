@@ -18,7 +18,7 @@
       "main": [
         [
           {
-            "node": "Loop Over Each Department Folder",
+            "node": "Wait",
             "type": "main",
             "index": 0
           }
@@ -113,6 +113,17 @@
           }
         ]
       ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Each Department Folder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-04-02T14:29:19.005Z",
@@ -143,12 +154,14 @@
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={{ $json.body }}",
-        "options": {}
+        "options": {
+          "timeout": 30000
+        }
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1104,
+        1136,
         16
       ],
       "id": "fcb33fe6-ef28-46c0-aa1f-01aad58aad42",
@@ -160,7 +173,8 @@
           "id": "c6V235Yu48q7DUPg",
           "name": "ClickUp account"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -177,7 +191,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. Get the Master List of all club members\nconst allClubMembers = $(\"Get All Members\").all();\n\n// 2. Reference the Loop node directly as requested\nconst folderItems = $(\"Loop Over Each Department Folder\").all();\n\nreturn folderItems.map(item => {\n  // 3. Identify who SHOULD have permission 5 in this folder\n  const deptIdsRaw = item.json.UserIDs || \"\";\n  const deptIds = deptIdsRaw.split(',').map(id => id.trim());\n\n  // 4. Build the entries list for EVERY member in the club\n  const entries = allClubMembers.map(member => {\n    const memberId = member.json.ClickUpID.toString();\n    const isDeptMember = deptIds.includes(memberId);\n\n    return {\n      \"id\": parseInt(memberId),\n      \"kind\": \"user\",\n      \"permission_level\": isDeptMember ? 5 : null\n    };\n  });\n\n  // 5. Output the folder data + the stringified body\n  return {\n    json: {\n      ...item.json, // Preserves ClickUpFolderID, departmentName, UserIDs, Emails\n      body: JSON.stringify({\n        \"entries\": entries,\n        \"private\": true\n      })\n    }\n  };\n});"
+        "jsCode": "// 1. Get the Master List of all club members\nconst allClubMembers = $(\"Get All Members\").all();\n\n// 2. Reference the Loop node directly as requested\nconst folderItems = $(\"Loop Over Each Department Folder\").all();\n\nreturn folderItems.map(item => {\n  // 3. Identify who SHOULD have permission 5 in this folder\n  const deptIdsRaw = item.json.UserIDs || \"\";\n  const deptIds = deptIdsRaw.split(',').map(id => id.trim());\n\n  // 4. Build the entries list for EVERY member in the club\n  const entries = allClubMembers.map(member => {\n    const memberId = member.json.ClickUpID.toString();\n    const isDeptMember = deptIds.includes(memberId);\n\n    return {\n      \"id\": parseInt(memberId),\n      \"kind\": \"user\",\n      \"permission_level\": isDeptMember ? 5 : null\n    };\n  });\n\n  // 5. Output the folder data + the stringified body\n  return {\n    json: {\n      ...item.json, // Preserves ClickUpFolderID, departmentName, UserIDs, Emails\n      body: JSON.stringify({\n        \"entries\": entries\n      })\n    }\n  };\n});"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -250,7 +264,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT \n    \"Department\".\"ClickUpFolderID\",\n    \"Department\".\"departmentName\",\n    STRING_AGG(\"Members\".\"ClickUpID\"::text, ', ') AS \"UserIDs\",\n    STRING_AGG(\"Members\".\"email\", ', ') AS \"Emails\"\nFROM \"Members\"\nJOIN \"MemberDepartment\" ON \"Members\".\"id\" = \"MemberDepartment\".\"memberID\"\nJOIN \"Department\" ON \"Department\".\"id\" = \"MemberDepartment\".\"departmentID\"\nWHERE \"Members\".\"ClickUpID\" IS NOT NULL\nGROUP BY \"Department\".\"id\", \"Department\".\"ClickUpFolderID\", \"Department\".\"departmentName\";",
+        "query": "SELECT \n    \"Department\".\"ClickUpFolderID\",\n    \"Department\".\"departmentName\",\n    STRING_AGG(\"Members\".\"ClickUpID\"::text, ', ') AS \"UserIDs\",\n    STRING_AGG(\"Members\".\"email\", ', ') AS \"Emails\"\nFROM \"Department\"\nLEFT JOIN \"MemberDepartment\" \n    ON \"Department\".\"id\" = \"MemberDepartment\".\"departmentID\"\nLEFT JOIN \"Members\" \n    ON \"MemberDepartment\".\"memberID\" = \"Members\".\"id\" \n    AND \"Members\".\"ClickUpID\" IS NOT NULL\nGROUP BY \n    \"Department\".\"id\", \n    \"Department\".\"ClickUpFolderID\", \n    \"Department\".\"departmentName\";",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -388,6 +402,20 @@
           "name": "Postgres account"
         }
       }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1344,
+        16
+      ],
+      "id": "176d05dc-027b-4cd9-8150-92b2e1b78d7b",
+      "name": "Wait",
+      "webhookId": "3fda526d-454e-40dd-a7b5-c898c8adc264"
     }
   ],
   "origin": "n8n",
@@ -412,6 +440,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-04-02T16:43:45.631Z",
-  "versionId": "a06b6600-cc2f-49ae-bf9e-d48514ceb919"
+  "updatedAt": "2026-04-08T00:43:21.218Z",
+  "versionId": "0e0b2f58-ea96-4abc-bd67-643200596472"
 }
