@@ -1,7 +1,304 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-04-15T18:02:35.000Z",
+    "createdAt": "2026-04-15T17:59:45.479Z",
+    "versionId": "bae6979b-3104-4174-8e14-5108c8a1f3ae",
+    "workflowId": "4cbd-Z3u2v6s7t-OONVrS",
+    "nodes": [
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          64,
+          -80
+        ],
+        "id": "c2920705-629a-465a-a6b4-56b205854eb7",
+        "name": "When clicking ‘Execute workflow’"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "e764ae3f-ae07-4b04-a358-291d227fe644",
+                "name": "folderID",
+                "value": "1QPfK3-Fm2jPCCcnHI74ohf1LuymuwOoP",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          416,
+          0
+        ],
+        "id": "e8084afd-c3a4-4807-8003-2b51e936a376",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.folderID }}/permissions ",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "googleDriveOAuth2Api",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          624,
+          0
+        ],
+        "id": "f68421f8-b03b-4fde-b2a2-eaef154f0e7c",
+        "name": "HTTP Request",
+        "credentials": {
+          "googleDriveOAuth2Api": {
+            "id": "TNSFiziU0Eq9j2bc",
+            "name": "Google Drive PolyAI"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          1328,
+          0
+        ],
+        "id": "ae711d55-65b3-47ee-94ac-88ab3c2f0d70",
+        "name": "Loop Over Items",
+        "executeOnce": false
+      },
+      {
+        "parameters": {
+          "method": "DELETE",
+          "url": "=https://www.googleapis.com/drive/v3/files/{{ $('Edit Fields').item.json.folderID }}/permissions/{{ $json.id }}",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "googleDriveOAuth2Api",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          1776,
+          80
+        ],
+        "id": "cac416d7-3cda-427b-9f02-eb4f9c496982",
+        "name": "HTTP Request1",
+        "retryOnFail": true,
+        "maxTries": 2,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "googleDriveOAuth2Api": {
+            "id": "TNSFiziU0Eq9j2bc",
+            "name": "Google Drive PolyAI"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "permissions",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          1072,
+          0
+        ],
+        "id": "eb1c60d9-fef2-40ef-88dc-111da193a462",
+        "name": "Split Out"
+      },
+      {
+        "parameters": {
+          "amount": 1,
+          "unit": "minutes"
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          1984,
+          80
+        ],
+        "id": "53299f03-5642-4715-a82a-54aaac60bb97",
+        "name": "Wait",
+        "webhookId": "767d778c-a38a-4990-b45d-b56bafe97434"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "43337381-f214-443d-a023-bba98c3d9a32",
+                "leftValue": "={{ $json.role }}",
+                "rightValue": "owner",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEquals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1536,
+          96
+        ],
+        "id": "64bbe1f0-4a73-43f2-812f-699211a96164",
+        "name": "If not owner"
+      },
+      {
+        "parameters": {
+          "workflowInputs": {
+            "values": [
+              {
+                "name": "folderID"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          368,
+          224
+        ],
+        "id": "ecfe89d6-f69b-4a2c-80e8-584b3698c42a",
+        "name": "When Executed by Another Workflow"
+      }
+    ],
+    "connections": {
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request": {
+        "main": [
+          [
+            {
+              "node": "Split Out",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items": {
+        "main": [
+          [],
+          [
+            {
+              "node": "If not owner",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split Out": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request1": {
+        "main": [
+          [
+            {
+              "node": "Wait",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If not owner": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Poly Ai",
+    "name": "Version bae6979b",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "bae6979b-3104-4174-8e14-5108c8a1f3ae",
   "connections": {
     "When clicking ‘Execute workflow’": {
       "main": [
@@ -98,6 +395,17 @@
           }
         ]
       ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-04-02T21:35:38.787Z",
@@ -111,8 +419,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        0,
-        0
+        64,
+        -80
       ],
       "id": "c2920705-629a-465a-a6b4-56b205854eb7",
       "name": "When clicking ‘Execute workflow’"
@@ -134,7 +442,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        208,
+        416,
         0
       ],
       "id": "e8084afd-c3a4-4807-8003-2b51e936a376",
@@ -150,7 +458,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        416,
+        624,
         0
       ],
       "id": "f68421f8-b03b-4fde-b2a2-eaef154f0e7c",
@@ -169,7 +477,7 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        1120,
+        1328,
         0
       ],
       "id": "ae711d55-65b3-47ee-94ac-88ab3c2f0d70",
@@ -187,7 +495,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1568,
+        1776,
         80
       ],
       "id": "cac416d7-3cda-427b-9f02-eb4f9c496982",
@@ -210,7 +518,7 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        864,
+        1072,
         0
       ],
       "id": "eb1c60d9-fef2-40ef-88dc-111da193a462",
@@ -224,7 +532,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1776,
+        1984,
         80
       ],
       "id": "53299f03-5642-4715-a82a-54aaac60bb97",
@@ -258,11 +566,30 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1328,
+        1536,
         96
       ],
       "id": "64bbe1f0-4a73-43f2-812f-699211a96164",
       "name": "If not owner"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "folderID"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        368,
+        224
+      ],
+      "id": "ecfe89d6-f69b-4a2c-80e8-584b3698c42a",
+      "name": "When Executed by Another Workflow"
     }
   ],
   "origin": "n8n",
@@ -287,6 +614,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-04-02T21:47:32.176Z",
-  "versionId": "4aafb4a5-3fa0-454e-a82d-2995da0c9c6b"
+  "updatedAt": "2026-04-15T17:59:45.478Z",
+  "versionId": "bae6979b-3104-4174-8e14-5108c8a1f3ae"
 }
