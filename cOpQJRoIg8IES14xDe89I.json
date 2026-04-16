@@ -1,0 +1,637 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-04-15T19:45:38.000Z",
+    "createdAt": "2026-04-15T19:45:34.056Z",
+    "versionId": "d6d6ee04-25d3-4833-bf6d-f6c1f5a93f12",
+    "workflowId": "cOpQJRoIg8IES14xDe89I",
+    "nodes": [
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          -32,
+          64
+        ],
+        "id": "b68ff55b-c390-42f8-a1da-aac72527199e",
+        "name": "Loop Over Items1"
+      },
+      {
+        "parameters": {
+          "resource": "folder",
+          "operation": "share",
+          "folderNoRootId": {
+            "__rl": true,
+            "value": "={{ $('Get files and folders with their perms').item.json.ID }}",
+            "mode": "id"
+          },
+          "permissionsUi": {
+            "permissionsValues": {
+              "role": "={{ $('Loop Over Items1').item.json['Permission Level'] }}",
+              "type": "user",
+              "emailAddress": "={{ $('Loop Over Items').item.json.email }}"
+            }
+          },
+          "options": {
+            "sendNotificationEmail": false
+          }
+        },
+        "type": "n8n-nodes-base.googleDrive",
+        "typeVersion": 3,
+        "position": [
+          576,
+          240
+        ],
+        "id": "092ecaf8-cae6-4737-a675-b4b4db7d4dcf",
+        "name": "Share folder",
+        "credentials": {
+          "googleDriveOAuth2Api": {
+            "id": "TNSFiziU0Eq9j2bc",
+            "name": "Google Drive PolyAI"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1EDQ_8NQXva_YLktve1ztAQyXRATDxXjwYbOyMR6G2F0",
+            "mode": "id"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Feuille 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1EDQ_8NQXva_YLktve1ztAQyXRATDxXjwYbOyMR6G2F0/edit#gid=0"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          -304,
+          64
+        ],
+        "id": "12f1bac2-16a1-4a59-abd1-0f797f3c2b61",
+        "name": "Get files and folders with their perms",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "6nN7WKy4HqhioZ6e",
+            "name": "Google Sheets account PolyAI"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.ID }}/permissions?fields=permissions(id,emailAddress)&q=emailAddress='{{ $('Loop Over Items').item.json.email }}'",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "googleDriveOAuth2Api",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          336,
+          544
+        ],
+        "id": "f060a6d3-ce81-4fc9-b8c4-b3762cefcf03",
+        "name": "Get ID",
+        "credentials": {
+          "googleDriveOAuth2Api": {
+            "id": "TNSFiziU0Eq9j2bc",
+            "name": "Google Drive PolyAI"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "DELETE",
+          "url": "=https://www.googleapis.com/drive/v3/files/{{ $('Get files and folders with their perms').item.json.ID }}/permissions/{{ $json.permissionId }}",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "googleDriveOAuth2Api",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          736,
+          544
+        ],
+        "id": "8e8f240c-dba3-413a-bd74-f8f5e6edeb15",
+        "name": "Remove Perms",
+        "retryOnFail": true,
+        "maxTries": 2,
+        "waitBetweenTries": 5000,
+        "alwaysOutputData": false,
+        "credentials": {
+          "googleDriveOAuth2Api": {
+            "id": "TNSFiziU0Eq9j2bc",
+            "name": "Google Drive PolyAI"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Get the target email from your Loop node\nconst targetEmail = $('Loop Over Items').item.json.email;\n\n// Get the permissions list from the previous HTTP node\nconst permissions = items[0].json.permissions;\n\n// Find the permission object that matches the email\nconst match = permissions.find(p => p.emailAddress === targetEmail);\n\nif (!match) {\n  throw new Error(`Permission ID not found for email: ${targetEmail}`);\n}\n\n// Return the ID so the next node can use it\nreturn {\n  permissionId: match.id,\n  targetEmail: match.emailAddress\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          544,
+          544
+        ],
+        "id": "aed2d061-e7da-4104-a5e8-369c80bf124a",
+        "name": "Get ID of targeted email",
+        "executeOnce": false,
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "loose",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "219718a3-910e-49ea-bbb7-725a4648095a",
+                "leftValue": "={{ $json['Permission Level'] }}",
+                "rightValue": "None",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "looseTypeValidation": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          192,
+          176
+        ],
+        "id": "e6629022-f62a-45a1-98f7-4fa7664c33b3",
+        "name": "If delete perms"
+      },
+      {
+        "parameters": {
+          "workflowInputs": {
+            "values": [
+              {
+                "name": "email"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -560,
+          64
+        ],
+        "id": "cb14a064-1c28-4b6b-8943-6724bc4c3f7a",
+        "name": "When Executed by Another Workflow"
+      }
+    ],
+    "connections": {
+      "Loop Over Items1": {
+        "main": [
+          [],
+          [
+            {
+              "node": "If delete perms",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Share folder": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get files and folders with their perms": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get ID": {
+        "main": [
+          [
+            {
+              "node": "Get ID of targeted email",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Remove Perms": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get ID of targeted email": {
+        "main": [
+          [
+            {
+              "node": "Remove Perms",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If delete perms": {
+        "main": [
+          [
+            {
+              "node": "Get ID",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Share folder",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "Get files and folders with their perms",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Poly Ai",
+    "name": "Version d6d6ee04",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "d6d6ee04-25d3-4833-bf6d-f6c1f5a93f12",
+  "connections": {
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If delete perms",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Share folder": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get files and folders with their perms": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get ID": {
+      "main": [
+        [
+          {
+            "node": "Get ID of targeted email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Perms": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get ID of targeted email": {
+      "main": [
+        [
+          {
+            "node": "Remove Perms",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If delete perms": {
+      "main": [
+        [
+          {
+            "node": "Get ID",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Share folder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Get files and folders with their perms",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-04-15T19:43:25.046Z",
+  "id": "cOpQJRoIg8IES14xDe89I",
+  "isArchived": false,
+  "meta": null,
+  "name": "Give or remove perms for a VP for VP-only files/folders",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -32,
+        64
+      ],
+      "id": "b68ff55b-c390-42f8-a1da-aac72527199e",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "operation": "share",
+        "folderNoRootId": {
+          "__rl": true,
+          "value": "={{ $('Loop Over Items1').item.json.ID }}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "={{ $('Loop Over Items1').item.json['Permission Level'] }}",
+            "type": "user",
+            "emailAddress": "={{ $('When Executed by Another Workflow').item.json.email }}"
+          }
+        },
+        "options": {
+          "sendNotificationEmail": false
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        576,
+        240
+      ],
+      "id": "092ecaf8-cae6-4737-a675-b4b4db7d4dcf",
+      "name": "Share folder",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "TNSFiziU0Eq9j2bc",
+          "name": "Google Drive PolyAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1EDQ_8NQXva_YLktve1ztAQyXRATDxXjwYbOyMR6G2F0",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Feuille 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1EDQ_8NQXva_YLktve1ztAQyXRATDxXjwYbOyMR6G2F0/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -304,
+        64
+      ],
+      "id": "12f1bac2-16a1-4a59-abd1-0f797f3c2b61",
+      "name": "Get files and folders with their perms",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6nN7WKy4HqhioZ6e",
+          "name": "Google Sheets account PolyAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.ID }}/permissions?fields=permissions(id,emailAddress)&q=emailAddress='{{ $('When Executed by Another Workflow').item.json.email }}'",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        336,
+        544
+      ],
+      "id": "f060a6d3-ce81-4fc9-b8c4-b3762cefcf03",
+      "name": "Get ID",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "TNSFiziU0Eq9j2bc",
+          "name": "Google Drive PolyAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "DELETE",
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $('Get files and folders with their perms').item.json.ID }}/permissions/{{ $json.permissionId }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        736,
+        544
+      ],
+      "id": "8e8f240c-dba3-413a-bd74-f8f5e6edeb15",
+      "name": "Remove Perms",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 5000,
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "TNSFiziU0Eq9j2bc",
+          "name": "Google Drive PolyAI"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the target email from your Loop node\nconst targetEmail = $('When Executed by Another Workflow').first().json.email;\n\n// Get the permissions list from the previous HTTP node\nconst permissions = items[0].json.permissions;\n\n// Find the permission object that matches the email\nconst match = permissions.find(p => p.emailAddress === targetEmail);\n\nif (!match) {\n  throw new Error(`Permission ID not found for email: ${targetEmail}`);\n}\n\n// Return the ID so the next node can use it\nreturn {\n  permissionId: match.id,\n  targetEmail: match.emailAddress\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        544,
+        544
+      ],
+      "id": "aed2d061-e7da-4104-a5e8-369c80bf124a",
+      "name": "Get ID of targeted email",
+      "executeOnce": false,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "219718a3-910e-49ea-bbb7-725a4648095a",
+              "leftValue": "={{ $json['Permission Level'] }}",
+              "rightValue": "None",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        192,
+        176
+      ],
+      "id": "e6629022-f62a-45a1-98f7-4fa7664c33b3",
+      "name": "If delete perms"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "email"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -560,
+        64
+      ],
+      "id": "cb14a064-1c28-4b6b-8943-6724bc4c3f7a",
+      "name": "When Executed by Another Workflow"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-04-15T19:43:25.052Z",
+      "createdAt": "2026-04-15T19:43:25.052Z",
+      "role": "workflow:owner",
+      "workflowId": "cOpQJRoIg8IES14xDe89I",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-04-15T19:48:16.940Z",
+  "versionId": "2db90fe5-7d01-42ea-a014-b59ff44cffd6"
+}
