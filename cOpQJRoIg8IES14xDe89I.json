@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-04-15T19:45:38.000Z",
-    "createdAt": "2026-04-15T19:45:34.056Z",
-    "versionId": "d6d6ee04-25d3-4833-bf6d-f6c1f5a93f12",
+    "updatedAt": "2026-04-16T13:39:09.000Z",
+    "createdAt": "2026-04-16T13:39:03.324Z",
+    "versionId": "52602f31-4602-4473-90e5-06ec853bc306",
     "workflowId": "cOpQJRoIg8IES14xDe89I",
     "nodes": [
       {
@@ -25,14 +25,14 @@
           "operation": "share",
           "folderNoRootId": {
             "__rl": true,
-            "value": "={{ $('Get files and folders with their perms').item.json.ID }}",
+            "value": "={{ $('Loop Over Items1').item.json.ID }}",
             "mode": "id"
           },
           "permissionsUi": {
             "permissionsValues": {
               "role": "={{ $('Loop Over Items1').item.json['Permission Level'] }}",
               "type": "user",
-              "emailAddress": "={{ $('Loop Over Items').item.json.email }}"
+              "emailAddress": "={{ $('When Executed by Another Workflow').item.json.email }}"
             }
           },
           "options": {
@@ -42,8 +42,8 @@
         "type": "n8n-nodes-base.googleDrive",
         "typeVersion": 3,
         "position": [
-          576,
-          240
+          896,
+          192
         ],
         "id": "092ecaf8-cae6-4737-a675-b4b4db7d4dcf",
         "name": "Share folder",
@@ -87,7 +87,7 @@
       },
       {
         "parameters": {
-          "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.ID }}/permissions?fields=permissions(id,emailAddress)&q=emailAddress='{{ $('Loop Over Items').item.json.email }}'",
+          "url": "=https://www.googleapis.com/drive/v3/files/{{ $('Loop Over Items1').item.json.ID }}/permissions?fields=permissions(id,emailAddress)&q=emailAddress='{{ $('When Executed by Another Workflow').item.json.email }}'",
           "authentication": "predefinedCredentialType",
           "nodeCredentialType": "googleDriveOAuth2Api",
           "options": {}
@@ -110,7 +110,7 @@
       {
         "parameters": {
           "method": "DELETE",
-          "url": "=https://www.googleapis.com/drive/v3/files/{{ $('Get files and folders with their perms').item.json.ID }}/permissions/{{ $json.permissionId }}",
+          "url": "=https://www.googleapis.com/drive/v3/files/{{ $('Loop Over Items1').item.json.ID }}/permissions/{{ $json.permissionId }}",
           "authentication": "predefinedCredentialType",
           "nodeCredentialType": "googleDriveOAuth2Api",
           "options": {}
@@ -137,7 +137,7 @@
       },
       {
         "parameters": {
-          "jsCode": "// Get the target email from your Loop node\nconst targetEmail = $('Loop Over Items').item.json.email;\n\n// Get the permissions list from the previous HTTP node\nconst permissions = items[0].json.permissions;\n\n// Find the permission object that matches the email\nconst match = permissions.find(p => p.emailAddress === targetEmail);\n\nif (!match) {\n  throw new Error(`Permission ID not found for email: ${targetEmail}`);\n}\n\n// Return the ID so the next node can use it\nreturn {\n  permissionId: match.id,\n  targetEmail: match.emailAddress\n};"
+          "jsCode": "// Get the target email from your Loop node\nconst targetEmail = $('When Executed by Another Workflow').first().json.email;\n\n// Get the permissions list from the previous HTTP node\nconst permissions = items[0].json.permissions;\n\n// Find the permission object that matches the email\nconst match = permissions.find(p => p.emailAddress === targetEmail);\n\nif (!match) {\n  throw new Error(`Permission ID not found for email: ${targetEmail}`);\n}\n\n// Return the ID so the next node can use it\nreturn {\n  permissionId: match.id,\n  targetEmail: match.emailAddress\n};"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -202,6 +202,62 @@
         ],
         "id": "cb14a064-1c28-4b6b-8943-6724bc4c3f7a",
         "name": "When Executed by Another Workflow"
+      },
+      {
+        "parameters": {
+          "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.ID }}/permissions?fields=permissions(id,emailAddress)&q=emailAddress='{{ $('When Executed by Another Workflow').item.json.email }}'",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "googleDriveOAuth2Api",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          432,
+          192
+        ],
+        "id": "faba6353-9e29-4503-b47f-28370f819d62",
+        "name": "Get ID1",
+        "credentials": {
+          "googleDriveOAuth2Api": {
+            "id": "TNSFiziU0Eq9j2bc",
+            "name": "Google Drive PolyAI"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "loose",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "21122696-b3a1-402f-97f5-42c13729290c",
+                "leftValue": "={{ $json.permissions.toJsonString() }}",
+                "rightValue": "={{ $('When Executed by Another Workflow').item.json.email }}",
+                "operator": {
+                  "type": "string",
+                  "operation": "contains"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "looseTypeValidation": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          640,
+          192
+        ],
+        "id": "b70bea8e-1227-4a40-b6bd-8da57612132c",
+        "name": "If email is already shared"
       }
     ],
     "connections": {
@@ -283,7 +339,7 @@
           ],
           [
             {
-              "node": "Share folder",
+              "node": "Get ID1",
               "type": "main",
               "index": 0
             }
@@ -300,14 +356,43 @@
             }
           ]
         ]
+      },
+      "Get ID1": {
+        "main": [
+          [
+            {
+              "node": "If email is already shared",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If email is already shared": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Share folder",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Poly Ai",
-    "name": "Version d6d6ee04",
+    "name": "Version 52602f31",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "d6d6ee04-25d3-4833-bf6d-f6c1f5a93f12",
+  "activeVersionId": "52602f31-4602-4473-90e5-06ec853bc306",
   "connections": {
     "Loop Over Items1": {
       "main": [
@@ -387,7 +472,7 @@
         ],
         [
           {
-            "node": "Share folder",
+            "node": "Get ID1",
             "type": "main",
             "index": 0
           }
@@ -399,6 +484,35 @@
         [
           {
             "node": "Get files and folders with their perms",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get ID1": {
+      "main": [
+        [
+          {
+            "node": "If email is already shared",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If email is already shared": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Share folder",
             "type": "main",
             "index": 0
           }
@@ -448,8 +562,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        576,
-        240
+        896,
+        192
       ],
       "id": "092ecaf8-cae6-4737-a675-b4b4db7d4dcf",
       "name": "Share folder",
@@ -493,7 +607,7 @@
     },
     {
       "parameters": {
-        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.ID }}/permissions?fields=permissions(id,emailAddress)&q=emailAddress='{{ $('When Executed by Another Workflow').item.json.email }}'",
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $('Loop Over Items1').item.json.ID }}/permissions?fields=permissions(id,emailAddress)&q=emailAddress='{{ $('When Executed by Another Workflow').item.json.email }}'",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "googleDriveOAuth2Api",
         "options": {}
@@ -516,7 +630,7 @@
     {
       "parameters": {
         "method": "DELETE",
-        "url": "=https://www.googleapis.com/drive/v3/files/{{ $('Get files and folders with their perms').item.json.ID }}/permissions/{{ $json.permissionId }}",
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $('Loop Over Items1').item.json.ID }}/permissions/{{ $json.permissionId }}",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "googleDriveOAuth2Api",
         "options": {}
@@ -608,6 +722,62 @@
       ],
       "id": "cb14a064-1c28-4b6b-8943-6724bc4c3f7a",
       "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.ID }}/permissions?fields=permissions(id,emailAddress)&q=emailAddress='{{ $('When Executed by Another Workflow').item.json.email }}'",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        432,
+        192
+      ],
+      "id": "faba6353-9e29-4503-b47f-28370f819d62",
+      "name": "Get ID1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "TNSFiziU0Eq9j2bc",
+          "name": "Google Drive PolyAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "21122696-b3a1-402f-97f5-42c13729290c",
+              "leftValue": "={{ $json.permissions.toJsonString() }}",
+              "rightValue": "={{ $('When Executed by Another Workflow').item.json.email }}",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        640,
+        192
+      ],
+      "id": "b70bea8e-1227-4a40-b6bd-8da57612132c",
+      "name": "If email is already shared"
     }
   ],
   "origin": "n8n",
@@ -632,6 +802,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-04-15T19:48:16.940Z",
-  "versionId": "2db90fe5-7d01-42ea-a014-b59ff44cffd6"
+  "updatedAt": "2026-04-16T13:39:46.562Z",
+  "versionId": "52602f31-4602-4473-90e5-06ec853bc306"
 }
