@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-04-16T13:39:09.000Z",
-    "createdAt": "2026-04-16T13:39:03.324Z",
-    "versionId": "52602f31-4602-4473-90e5-06ec853bc306",
+    "updatedAt": "2026-04-20T19:32:20.000Z",
+    "createdAt": "2026-04-20T19:32:17.510Z",
+    "versionId": "d89dfe22-55c7-4806-bc19-23b9187d5736",
     "workflowId": "cOpQJRoIg8IES14xDe89I",
     "nodes": [
       {
@@ -47,12 +47,14 @@
         ],
         "id": "092ecaf8-cae6-4737-a675-b4b4db7d4dcf",
         "name": "Share folder",
+        "retryOnFail": false,
         "credentials": {
           "googleDriveOAuth2Api": {
             "id": "TNSFiziU0Eq9j2bc",
             "name": "Google Drive PolyAI"
           }
-        }
+        },
+        "onError": "continueRegularOutput"
       },
       {
         "parameters": {
@@ -67,6 +69,14 @@
             "mode": "list",
             "cachedResultName": "Feuille 1",
             "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1EDQ_8NQXva_YLktve1ztAQyXRATDxXjwYbOyMR6G2F0/edit#gid=0"
+          },
+          "filtersUI": {
+            "values": [
+              {
+                "lookupColumn": "Role",
+                "lookupValue": "={{ $json.role }}"
+              }
+            ]
           },
           "options": {}
         },
@@ -190,6 +200,9 @@
             "values": [
               {
                 "name": "email"
+              },
+              {
+                "name": "role"
               }
             ]
           }
@@ -388,11 +401,11 @@
       }
     },
     "authors": "Poly Ai",
-    "name": "Version 52602f31",
+    "name": "Version d89dfe22",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "52602f31-4602-4473-90e5-06ec853bc306",
+  "activeVersionId": "d89dfe22-55c7-4806-bc19-23b9187d5736",
   "connections": {
     "Loop Over Items1": {
       "main": [
@@ -524,7 +537,7 @@
   "id": "cOpQJRoIg8IES14xDe89I",
   "isArchived": false,
   "meta": null,
-  "name": "Give or remove perms for a VP for VP-only files/folders",
+  "name": "Give or remove perms for a VP or Member for files/folders",
   "nodes": [
     {
       "parameters": {
@@ -567,12 +580,14 @@
       ],
       "id": "092ecaf8-cae6-4737-a675-b4b4db7d4dcf",
       "name": "Share folder",
+      "retryOnFail": false,
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "TNSFiziU0Eq9j2bc",
           "name": "Google Drive PolyAI"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -587,6 +602,14 @@
           "mode": "list",
           "cachedResultName": "Feuille 1",
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1EDQ_8NQXva_YLktve1ztAQyXRATDxXjwYbOyMR6G2F0/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Role",
+              "lookupValue": "={{ $json.role }}"
+            }
+          ]
         },
         "options": {}
       },
@@ -710,6 +733,9 @@
           "values": [
             {
               "name": "email"
+            },
+            {
+              "name": "role"
             }
           ]
         }
@@ -781,7 +807,19 @@
     }
   ],
   "origin": "n8n",
-  "pinData": {},
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "email": "hamid21jamil@gmail.com",
+          "role": "VP"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "repo": {
     "owner": "operationspolyai",
     "name": "n8n-backup-v2"
@@ -802,6 +840,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-04-16T13:39:46.562Z",
-  "versionId": "52602f31-4602-4473-90e5-06ec853bc306"
+  "updatedAt": "2026-04-20T19:50:12.047Z",
+  "versionId": "47c8abd1-96d3-420a-ae7c-c2f8468c179c"
 }
