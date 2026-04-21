@@ -7,18 +7,7 @@
       "main": [
         [
           {
-            "node": "Get VPs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get VPs": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
+            "node": "Get all VPs and Members",
             "type": "main",
             "index": 0
           }
@@ -41,7 +30,7 @@
       "main": [
         [
           {
-            "node": "Get VPs",
+            "node": "Limit",
             "type": "main",
             "index": 0
           }
@@ -58,6 +47,28 @@
           }
         ]
       ]
+    },
+    "Get all VPs and Members": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Get all VPs and Members",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-04-02T20:38:44.858Z",
@@ -66,7 +77,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Give VP access to these comitepolyai files or folders",
+  "name": "Give VP or Member access to these comitepolyai files or folders",
   "nodes": [
     {
       "parameters": {},
@@ -78,27 +89,6 @@
       ],
       "id": "36f104a5-e6d9-4e0b-acc1-f05394a452e1",
       "name": "When clicking ‘Execute workflow’"
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT DISTINCT ON (\"Members\".\"email\")\n    \"Members\".\"email\", \n    \"Department\".\"driveID\",\n    \"Department\".\"departmentName\"\nFROM \"Members\"\nJOIN \"MemberRole\" ON \"Members\".\"id\" = \"MemberRole\".\"memberID\"\nJOIN \"MemberDepartment\" ON \"Members\".\"id\" = \"MemberDepartment\".\"memberID\"\nJOIN \"Department\" ON \"Department\".\"id\" = \"MemberDepartment\".\"departmentID\"\nWHERE \"MemberRole\".\"roleID\" = 1\nORDER BY \"Members\".\"email\";",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
-      "position": [
-        416,
-        0
-      ],
-      "id": "937c0214-fc60-487a-b467-5d6432297e86",
-      "name": "Get VPs",
-      "credentials": {
-        "postgres": {
-          "id": "tcgfUQhBwsAuROjj",
-          "name": "Postgres account"
-        }
-      }
     },
     {
       "parameters": {
@@ -141,11 +131,13 @@
       "type": "n8n-nodes-base.googleSheetsTrigger",
       "typeVersion": 1,
       "position": [
-        144,
+        48,
         208
       ],
       "id": "13643bd7-793c-4cb7-8e8e-50fc8c64dc28",
       "name": "Google Sheets Trigger",
+      "executeOnce": false,
+      "alwaysOutputData": false,
       "credentials": {
         "googleSheetsTriggerOAuth2Api": {
           "id": "05MTzhNULTxNGQf0",
@@ -160,12 +152,13 @@
           "value": "cOpQJRoIg8IES14xDe89I",
           "mode": "list",
           "cachedResultUrl": "/workflow/cOpQJRoIg8IES14xDe89I",
-          "cachedResultName": "Give or remove perms for a VP for VP-only files/folders"
+          "cachedResultName": "Give or remove perms for a VP or Member for files/folders"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
           "value": {
-            "email": "={{ $json.email }}"
+            "email": "={{ $json.email }}",
+            "role": "={{ $json.roleName }}"
           },
           "matchingColumns": [
             "email"
@@ -180,9 +173,19 @@
               "canBeUsedToMatch": true,
               "type": "string",
               "removed": false
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
             }
           ],
-          "attemptToConvertTypes": false,
+          "attemptToConvertTypes": true,
           "convertFieldsToString": true
         },
         "options": {}
@@ -195,6 +198,38 @@
       ],
       "id": "2ee5efc4-71c0-4782-a381-808feb0703b6",
       "name": "Call 'Give or remove perms for a VP for VP-only files/folders'"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT DISTINCT ON (\"Members\".\"email\", \"Department\".\"driveID\")\n    \"Members\".\"email\", \n    \"Department\".\"driveID\",\n    \"Department\".\"departmentName\",\n    \"MemberRole\".\"roleID\",\n    \"Role\".\"roleName\" AS \"roleName\"\nFROM \"Members\"\nJOIN \"MemberRole\" ON \"Members\".\"id\" = \"MemberRole\".\"memberID\"\nJOIN \"Role\" ON \"Role\".\"id\" = \"MemberRole\".\"roleID\"\nJOIN \"MemberDepartment\" ON \"Members\".\"id\" = \"MemberDepartment\".\"memberID\"\nJOIN \"Department\" ON \"Department\".\"id\" = \"MemberDepartment\".\"departmentID\"\nWHERE \"MemberRole\".\"roleID\" IN (1, 4)\n  AND \"MemberDepartment\".\"departmentID\" IS NOT NULL\nORDER BY \"Members\".\"email\", \"Department\".\"driveID\";",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        416,
+        0
+      ],
+      "id": "937c0214-fc60-487a-b467-5d6432297e86",
+      "name": "Get all VPs and Members",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        240,
+        176
+      ],
+      "id": "1e8269bc-fbc5-4b72-b133-b93e9da79b5b",
+      "name": "Limit"
     }
   ],
   "origin": "n8n",
@@ -218,7 +253,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2026-04-16T13:36:01.681Z",
-  "versionId": "788312ed-6f97-4957-a80c-da4b260b1d73"
+  "triggerCount": 1,
+  "updatedAt": "2026-04-20T19:27:11.880Z",
+  "versionId": "c86288cc-44d7-4a5b-b8e9-e068ae165e73"
 }
