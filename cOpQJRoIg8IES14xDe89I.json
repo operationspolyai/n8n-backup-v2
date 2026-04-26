@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-04-20T19:32:20.000Z",
-    "createdAt": "2026-04-20T19:32:17.510Z",
-    "versionId": "d89dfe22-55c7-4806-bc19-23b9187d5736",
+    "updatedAt": "2026-04-25T22:18:45.000Z",
+    "createdAt": "2026-04-25T22:18:28.205Z",
+    "versionId": "1f544ae6-fe41-4d0f-9209-946483f723e7",
     "workflowId": "cOpQJRoIg8IES14xDe89I",
     "nodes": [
       {
@@ -36,7 +36,7 @@
             }
           },
           "options": {
-            "sendNotificationEmail": false
+            "sendNotificationEmail": true
           }
         },
         "type": "n8n-nodes-base.googleDrive",
@@ -401,11 +401,11 @@
       }
     },
     "authors": "Poly Ai",
-    "name": "Version d89dfe22",
-    "description": "",
+    "name": "Version 1f544ae6",
+    "description": "SENDS NOTIFCATIONS",
     "autosaved": true
   },
-  "activeVersionId": "d89dfe22-55c7-4806-bc19-23b9187d5736",
+  "activeVersionId": "1f544ae6-fe41-4d0f-9209-946483f723e7",
   "connections": {
     "Loop Over Items1": {
       "main": [
@@ -569,7 +569,7 @@
           }
         },
         "options": {
-          "sendNotificationEmail": false
+          "sendNotificationEmail": true
         }
       },
       "type": "n8n-nodes-base.googleDrive",
@@ -840,6 +840,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-04-20T19:50:12.047Z",
-  "versionId": "47c8abd1-96d3-420a-ae7c-c2f8468c179c"
+  "updatedAt": "2026-04-25T22:18:28.204Z",
+  "versionId": "1f544ae6-fe41-4d0f-9209-946483f723e7"
 }
