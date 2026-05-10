@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-04-25T22:18:45.000Z",
-    "createdAt": "2026-04-25T22:18:28.205Z",
-    "versionId": "1f544ae6-fe41-4d0f-9209-946483f723e7",
+    "updatedAt": "2026-05-09T18:14:50.000Z",
+    "createdAt": "2026-05-09T18:14:43.577Z",
+    "versionId": "8dfa9a77-988d-432b-bbee-ecccdbe3890b",
     "workflowId": "cOpQJRoIg8IES14xDe89I",
     "nodes": [
       {
@@ -13,7 +13,7 @@
         "type": "n8n-nodes-base.splitInBatches",
         "typeVersion": 3,
         "position": [
-          -32,
+          176,
           64
         ],
         "id": "b68ff55b-c390-42f8-a1da-aac72527199e",
@@ -42,7 +42,7 @@
         "type": "n8n-nodes-base.googleDrive",
         "typeVersion": 3,
         "position": [
-          896,
+          1104,
           192
         ],
         "id": "092ecaf8-cae6-4737-a675-b4b4db7d4dcf",
@@ -83,11 +83,14 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          -304,
+          -96,
           64
         ],
         "id": "12f1bac2-16a1-4a59-abd1-0f797f3c2b61",
         "name": "Get files and folders with their perms",
+        "retryOnFail": false,
+        "waitBetweenTries": 5000,
+        "maxTries": 2,
         "credentials": {
           "googleSheetsOAuth2Api": {
             "id": "6nN7WKy4HqhioZ6e",
@@ -105,7 +108,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          336,
+          544,
           544
         ],
         "id": "f060a6d3-ce81-4fc9-b8c4-b3762cefcf03",
@@ -128,7 +131,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          736,
+          944,
           544
         ],
         "id": "8e8f240c-dba3-413a-bd74-f8f5e6edeb15",
@@ -152,7 +155,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          544,
+          752,
           544
         ],
         "id": "aed2d061-e7da-4104-a5e8-369c80bf124a",
@@ -188,7 +191,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          192,
+          400,
           176
         ],
         "id": "e6629022-f62a-45a1-98f7-4fa7664c33b3",
@@ -226,7 +229,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          432,
+          640,
           192
         ],
         "id": "faba6353-9e29-4503-b47f-28370f819d62",
@@ -266,11 +269,25 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          640,
+          848,
           192
         ],
         "id": "b70bea8e-1227-4a40-b6bd-8da57612132c",
         "name": "If email is already shared"
+      },
+      {
+        "parameters": {
+          "amount": 20
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          -352,
+          64
+        ],
+        "id": "cbfc6ab3-9b8c-43e4-b645-cd9bd3980f8f",
+        "name": "Wait",
+        "webhookId": "cc8bc735-8d5e-4530-ae8d-bce04f116930"
       }
     ],
     "connections": {
@@ -363,7 +380,7 @@
         "main": [
           [
             {
-              "node": "Get files and folders with their perms",
+              "node": "Wait",
               "type": "main",
               "index": 0
             }
@@ -398,14 +415,25 @@
             }
           ]
         ]
+      },
+      "Wait": {
+        "main": [
+          [
+            {
+              "node": "Get files and folders with their perms",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Poly Ai",
-    "name": "Version 1f544ae6",
-    "description": "SENDS NOTIFCATIONS",
+    "name": "Version 8dfa9a77",
+    "description": "",
     "autosaved": true
   },
-  "activeVersionId": "1f544ae6-fe41-4d0f-9209-946483f723e7",
+  "activeVersionId": "8dfa9a77-988d-432b-bbee-ecccdbe3890b",
   "connections": {
     "Loop Over Items1": {
       "main": [
@@ -496,7 +524,7 @@
       "main": [
         [
           {
-            "node": "Get files and folders with their perms",
+            "node": "Wait",
             "type": "main",
             "index": 0
           }
@@ -531,6 +559,17 @@
           }
         ]
       ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Get files and folders with their perms",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-04-15T19:43:25.046Z",
@@ -546,7 +585,7 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        -32,
+        176,
         64
       ],
       "id": "b68ff55b-c390-42f8-a1da-aac72527199e",
@@ -575,7 +614,7 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        896,
+        1104,
         192
       ],
       "id": "092ecaf8-cae6-4737-a675-b4b4db7d4dcf",
@@ -616,11 +655,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -304,
+        -96,
         64
       ],
       "id": "12f1bac2-16a1-4a59-abd1-0f797f3c2b61",
       "name": "Get files and folders with their perms",
+      "retryOnFail": false,
+      "waitBetweenTries": 5000,
+      "maxTries": 2,
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "6nN7WKy4HqhioZ6e",
@@ -638,7 +680,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        336,
+        544,
         544
       ],
       "id": "f060a6d3-ce81-4fc9-b8c4-b3762cefcf03",
@@ -661,7 +703,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        736,
+        944,
         544
       ],
       "id": "8e8f240c-dba3-413a-bd74-f8f5e6edeb15",
@@ -685,7 +727,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        544,
+        752,
         544
       ],
       "id": "aed2d061-e7da-4104-a5e8-369c80bf124a",
@@ -721,7 +763,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        192,
+        400,
         176
       ],
       "id": "e6629022-f62a-45a1-98f7-4fa7664c33b3",
@@ -759,7 +801,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        432,
+        640,
         192
       ],
       "id": "faba6353-9e29-4503-b47f-28370f819d62",
@@ -799,11 +841,25 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        640,
+        848,
         192
       ],
       "id": "b70bea8e-1227-4a40-b6bd-8da57612132c",
       "name": "If email is already shared"
+    },
+    {
+      "parameters": {
+        "amount": 20
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -352,
+        64
+      ],
+      "id": "cbfc6ab3-9b8c-43e4-b645-cd9bd3980f8f",
+      "name": "Wait",
+      "webhookId": "cc8bc735-8d5e-4530-ae8d-bce04f116930"
     }
   ],
   "origin": "n8n",
@@ -811,7 +867,7 @@
     "When Executed by Another Workflow": [
       {
         "json": {
-          "email": "hamid21jamil@gmail.com",
+          "email": "victoca127@gmail.com",
           "role": "VP"
         },
         "pairedItem": {
@@ -840,6 +896,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-04-25T22:18:28.204Z",
-  "versionId": "1f544ae6-fe41-4d0f-9209-946483f723e7"
+  "updatedAt": "2026-05-09T18:14:43.577Z",
+  "versionId": "8dfa9a77-988d-432b-bbee-ecccdbe3890b"
 }
