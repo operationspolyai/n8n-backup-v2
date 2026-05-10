@@ -1,7 +1,338 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-05-09T18:11:57.000Z",
+    "createdAt": "2026-05-09T18:11:56.198Z",
+    "versionId": "605bfa7a-f533-4062-bf4f-9144b853c7ef",
+    "workflowId": "SlvfBReU78B2t3w4",
+    "nodes": [
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -1152,
+          -80
+        ],
+        "id": "5376f883-bb31-4083-9bc4-452670b251a3",
+        "name": "When clicking ‘Execute workflow’"
+      },
+      {
+        "parameters": {
+          "url": "https://api.clickup.com/api/v2/team/90131880769",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "clickUpOAuth2Api",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          -944,
+          -80
+        ],
+        "id": "1ac854de-7f75-4eea-8c77-f8e6aaf571ce",
+        "name": "Get all members",
+        "credentials": {
+          "clickUpOAuth2Api": {
+            "id": "c6V235Yu48q7DUPg",
+            "name": "ClickUp account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// Read all incoming items\nconst inputItems = $input.all();\nconst out = [];\n\nfor (const { json } of inputItems) {\n  const team = json.team ?? {};\n  const members = Array.isArray(team.members) ? team.members : [];\n\n  for (const m of members) {\n    const u = m.user ?? {};\n    out.push({\n      json: {\n        clickUpId: u.id ?? null,\n        name: u.username ?? null,\n        email: u.email ?? null,\n      }\n    });\n  }\n}\n\nreturn out;\n"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -736,
+          -80
+        ],
+        "id": "d603280e-f40f-4265-b541-a82be613ca0e",
+        "name": "Code"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          -528,
+          -80
+        ],
+        "id": "5cd863b5-1629-4df1-a0c2-c020bf6197e7",
+        "name": "Loop Over Items",
+        "executeOnce": false
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "select count(1) as \"Result\" from \"Members\" where \"ClickUpID\"={{ $json.clickUpId }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -320,
+          208
+        ],
+        "id": "114b75a7-ae41-4ddc-9e43-84717a5e81df",
+        "name": "Check if ClickUpID already exists",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "e94a9284-d9b0-466d-85cb-fccc258b729d",
+                "leftValue": "={{ $json.Result }}",
+                "rightValue": "1",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          -112,
+          128
+        ],
+        "id": "d8c8e48b-dc28-4e5e-bd50-f60f038857e0",
+        "name": "If does exist",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "operation": "upsert",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Members",
+            "mode": "list",
+            "cachedResultName": "Members"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "ClickUpID": "={{ $json.clickUpId }}",
+              "email": "={{ $json.email }}"
+            },
+            "matchingColumns": [
+              "email"
+            ],
+            "schema": [
+              {
+                "id": "id",
+                "displayName": "id",
+                "required": false,
+                "defaultMatch": true,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": false,
+                "removed": true
+              },
+              {
+                "id": "name",
+                "displayName": "name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": false,
+                "removed": true
+              },
+              {
+                "id": "email",
+                "displayName": "email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "phone_number",
+                "displayName": "phone_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false,
+                "removed": true
+              },
+              {
+                "id": "ClickUpID",
+                "displayName": "ClickUpID",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -256,
+          -96
+        ],
+        "id": "9bf2200d-ae13-47aa-b700-8a99d6d8f11f",
+        "name": "Insert or update rows in a table without updating name",
+        "credentials": {
+          "postgres": {
+            "id": "tcgfUQhBwsAuROjj",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "inputSource": "passthrough"
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -1328,
+          160
+        ],
+        "id": "295e2d20-3965-4b3a-9737-7e2eef04d869",
+        "name": "When Executed by Another Workflow"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.limit",
+        "typeVersion": 1,
+        "position": [
+          -1088,
+          144
+        ],
+        "id": "9f1cf95e-3876-49a1-9c24-8c4112799853",
+        "name": "Limit"
+      }
+    ],
+    "connections": {
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "Get all members",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get all members": {
+        "main": [
+          [
+            {
+              "node": "Code",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items": {
+        "main": [
+          [],
+          [
+            {
+              "node": "Insert or update rows in a table without updating name",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Insert or update rows in a table without updating name": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "Limit",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Limit": {
+        "main": [
+          [
+            {
+              "node": "Get all members",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Poly Ai",
+    "name": "Version 605bfa7a",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "605bfa7a-f533-4062-bf4f-9144b853c7ef",
   "connections": {
     "When clicking ‘Execute workflow’": {
       "main": [
@@ -53,6 +384,28 @@
         [
           {
             "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Get all members",
             "type": "main",
             "index": 0
           }
@@ -281,6 +634,30 @@
           "name": "Postgres account"
         }
       }
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1328,
+        160
+      ],
+      "id": "295e2d20-3965-4b3a-9737-7e2eef04d869",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -1088,
+        144
+      ],
+      "id": "9f1cf95e-3876-49a1-9c24-8c4112799853",
+      "name": "Limit"
     }
   ],
   "origin": "n8n",
@@ -304,6 +681,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-04-07T18:13:47.487Z",
-  "versionId": "3d10e132-879e-443f-820b-d31c3b1555ad"
+  "updatedAt": "2026-05-09T18:11:56.197Z",
+  "versionId": "605bfa7a-f533-4062-bf4f-9144b853c7ef"
 }
