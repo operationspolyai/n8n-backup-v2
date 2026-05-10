@@ -1,7 +1,286 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-05-09T18:11:30.000Z",
+    "createdAt": "2026-05-09T18:11:28.620Z",
+    "versionId": "e78d0896-73b9-4188-830c-8d617aeab4cf",
+    "workflowId": "DNAjTmFK20D2p5h4xpBP2",
+    "nodes": [
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          128,
+          0
+        ],
+        "id": "36f104a5-e6d9-4e0b-acc1-f05394a452e1",
+        "name": "When clicking ‘Execute workflow’"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          672,
+          0
+        ],
+        "id": "2262c96f-51ca-4ada-ac63-f360097f78d9",
+        "name": "Loop Over Items"
+      },
+      {
+        "parameters": {
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyMinute"
+              }
+            ]
+          },
+          "documentId": {
+            "__rl": true,
+            "value": "1EDQ_8NQXva_YLktve1ztAQyXRATDxXjwYbOyMR6G2F0",
+            "mode": "list",
+            "cachedResultName": "List of folders / files VP have access to",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1EDQ_8NQXva_YLktve1ztAQyXRATDxXjwYbOyMR6G2F0/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Feuille 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1EDQ_8NQXva_YLktve1ztAQyXRATDxXjwYbOyMR6G2F0/edit#gid=0"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheetsTrigger",
+        "typeVersion": 1,
+        "position": [
+          48,
+          208
+        ],
+        "id": "13643bd7-793c-4cb7-8e8e-50fc8c64dc28",
+        "name": "Google Sheets Trigger",
+        "executeOnce": false,
+        "alwaysOutputData": false,
+        "credentials": {
+          "googleSheetsTriggerOAuth2Api": {
+            "id": "05MTzhNULTxNGQf0",
+            "name": "Google Sheets Trigger PolyAI"
+          }
+        },
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "cOpQJRoIg8IES14xDe89I",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/cOpQJRoIg8IES14xDe89I",
+            "cachedResultName": "Give or remove perms for a VP or Member for files/folders"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "email": "={{ $json.email }}",
+              "role": "={{ $json.roleName }}"
+            },
+            "matchingColumns": [
+              "email"
+            ],
+            "schema": [
+              {
+                "id": "email",
+                "displayName": "email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "role",
+                "displayName": "role",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": true,
+            "convertFieldsToString": true
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          912,
+          16
+        ],
+        "id": "2ee5efc4-71c0-4782-a381-808feb0703b6",
+        "name": "Call 'Give or remove perms for a VP for VP-only files/folders'"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "SELECT DISTINCT ON (\"Members\".\"email\", \"Department\".\"driveID\")\n    \"Members\".\"email\", \n    \"Department\".\"driveID\",\n    \"Department\".\"departmentName\",\n    \"MemberRole\".\"roleID\",\n    \"Role\".\"roleName\" AS \"roleName\"\nFROM \"Members\"\nJOIN \"MemberRole\" ON \"Members\".\"id\" = \"MemberRole\".\"memberID\"\nJOIN \"Role\" ON \"Role\".\"id\" = \"MemberRole\".\"roleID\"\nJOIN \"MemberDepartment\" ON \"Members\".\"id\" = \"MemberDepartment\".\"memberID\"\nJOIN \"Department\" ON \"Department\".\"id\" = \"MemberDepartment\".\"departmentID\"\nWHERE \"MemberRole\".\"roleID\" IN (1, 4)\n  AND \"MemberDepartment\".\"departmentID\" IS NOT NULL\nORDER BY \"Members\".\"email\", \"Department\".\"driveID\";",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          416,
+          0
+        ],
+        "id": "937c0214-fc60-487a-b467-5d6432297e86",
+        "name": "Get all VPs and Members",
+        "credentials": {
+          "postgres": {
+            "id": "tcgfUQhBwsAuROjj",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.limit",
+        "typeVersion": 1,
+        "position": [
+          240,
+          176
+        ],
+        "id": "1e8269bc-fbc5-4b72-b133-b93e9da79b5b",
+        "name": "Limit"
+      },
+      {
+        "parameters": {
+          "inputSource": "passthrough"
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          80,
+          -208
+        ],
+        "id": "78530c5c-826a-4de6-82f8-3b2a564a32fc",
+        "name": "When Executed by Another Workflow"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.limit",
+        "typeVersion": 1,
+        "position": [
+          288,
+          -176
+        ],
+        "id": "6f4ae5a8-589e-4fca-8fc9-f83f4122c708",
+        "name": "Limit1"
+      }
+    ],
+    "connections": {
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "Get all VPs and Members",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items": {
+        "main": [
+          [],
+          [
+            {
+              "node": "Call 'Give or remove perms for a VP for VP-only files/folders'",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Google Sheets Trigger": {
+        "main": [
+          [
+            {
+              "node": "Limit",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Call 'Give or remove perms for a VP for VP-only files/folders'": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get all VPs and Members": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Limit": {
+        "main": [
+          [
+            {
+              "node": "Get all VPs and Members",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "Limit1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Limit1": {
+        "main": [
+          [
+            {
+              "node": "Get all VPs and Members",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Poly Ai",
+    "name": "Version e78d0896",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "e78d0896-73b9-4188-830c-8d617aeab4cf",
   "connections": {
     "When clicking ‘Execute workflow’": {
       "main": [
@@ -60,6 +339,28 @@
       ]
     },
     "Limit": {
+      "main": [
+        [
+          {
+            "node": "Get all VPs and Members",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Limit1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit1": {
       "main": [
         [
           {
@@ -143,7 +444,8 @@
           "id": "05MTzhNULTxNGQf0",
           "name": "Google Sheets Trigger PolyAI"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -230,10 +532,77 @@
       ],
       "id": "1e8269bc-fbc5-4b72-b133-b93e9da79b5b",
       "name": "Limit"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        80,
+        -208
+      ],
+      "id": "78530c5c-826a-4de6-82f8-3b2a564a32fc",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        288,
+        -176
+      ],
+      "id": "6f4ae5a8-589e-4fca-8fc9-f83f4122c708",
+      "name": "Limit1"
     }
   ],
   "origin": "n8n",
-  "pinData": {},
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "Email": "abdraphael@gmail.com",
+          "Department": "Éducation",
+          "Name": "Raphaël Abderrahmani "
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "Email": "cissealbert.d@icloud.com",
+          "Department": "Développement",
+          "Name": "albert"
+        },
+        "pairedItem": {
+          "item": 1
+        }
+      },
+      {
+        "json": {
+          "Email": "dilanengoya@gmail.com",
+          "Department": "Opérations",
+          "Name": " Dilane Ngoya"
+        },
+        "pairedItem": {
+          "item": 2
+        }
+      },
+      {
+        "json": {
+          "Email": "ezzedinehassibkevin@gmail.com",
+          "Department": "Éducation",
+          "Name": "Hassib Kevin Ezzedine"
+        },
+        "pairedItem": {
+          "item": 3
+        }
+      }
+    ]
+  },
   "repo": {
     "owner": "operationspolyai",
     "name": "n8n-backup-v2"
@@ -253,7 +622,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 1,
-  "updatedAt": "2026-04-20T19:27:11.880Z",
-  "versionId": "c86288cc-44d7-4a5b-b8e9-e068ae165e73"
+  "triggerCount": 0,
+  "updatedAt": "2026-05-09T18:11:28.619Z",
+  "versionId": "e78d0896-73b9-4188-830c-8d617aeab4cf"
 }
