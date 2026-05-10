@@ -1,0 +1,368 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Add Member Responses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter so people who added themselves during valid time are added. Or add checkbox to sheets for val": {
+      "main": [
+        [
+          {
+            "node": "Replace with adding members to database automatically, for now will be manual.",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace with adding members to database automatically, for now will be manual.": {
+      "main": [
+        [
+          {
+            "node": "Call 'Update SQL with ClickUp IDs based on emails'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'Update SQL with ClickUp IDs based on emails'": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'Give VP or Member access to these comitepolyai files or folders'": {
+      "main": [
+        []
+      ]
+    },
+    "Call 'List of current Members'": {
+      "main": [
+        [
+          {
+            "node": "Limit1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Member Responses": {
+      "main": [
+        [
+          {
+            "node": "Filter so people who added themselves during valid time are added. Or add checkbox to sheets for val",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'Update department folder permissions'": {
+      "main": [
+        [
+          {
+            "node": "Limit2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Call 'List of current Members'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit1": {
+      "main": [
+        [
+          {
+            "node": "Call 'Update department folder permissions'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit2": {
+      "main": [
+        [
+          {
+            "node": "Call 'Give VP or Member access to these comitepolyai files or folders'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-05-09T15:40:05.745Z",
+  "id": "eTQjOjiIsy5FkcXDJNnGi",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Add member",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "3df49349-ca0d-46b6-875b-a598b9eb2355",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        624,
+        0
+      ],
+      "id": "b9fe1461-77e3-41fb-b506-d182dba4a721",
+      "name": "Replace with adding members to database automatically, for now will be manual."
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        416,
+        0
+      ],
+      "id": "cdd5c158-a9b8-4819-8c87-a2613fb23732",
+      "name": "Filter so people who added themselves during valid time are added. Or add checkbox to sheets for val"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "SlvfBReU78B2t3w4",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/SlvfBReU78B2t3w4",
+          "cachedResultName": "Update SQL with ClickUp IDs based on emails"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        848,
+        0
+      ],
+      "id": "8e27aa83-da22-4a76-ae62-0864efad897b",
+      "name": "Call 'Update SQL with ClickUp IDs based on emails'"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "E_xNP5QOZ-P3x6s5MMPnB",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/E_xNP5QOZ-P3x6s5MMPnB",
+          "cachedResultName": "Update department folder permissions"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        1664,
+        0
+      ],
+      "id": "1628625e-6d8d-4bb5-93fe-653e3d31ed4a",
+      "name": "Call 'Update department folder permissions'",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "DNAjTmFK20D2p5h4xpBP2",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/DNAjTmFK20D2p5h4xpBP2",
+          "cachedResultName": "Give VP or Member access to these comitepolyai files or folders"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        2112,
+        0
+      ],
+      "id": "7fc07bbb-b11a-4b24-8e6c-4857a534825f",
+      "name": "Call 'Give VP or Member access to these comitepolyai files or folders'"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "F3F1akaLzhoKK_3yw3BYx",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/F3F1akaLzhoKK_3yw3BYx",
+          "cachedResultName": "List of current Members"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        1264,
+        0
+      ],
+      "id": "8d6b457a-2191-4db6-9965-b39ff4557a6a",
+      "name": "Call 'List of current Members'"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1cnRcsOVep4LTWzhAsfKrYoKjz6FjCilJA3QDn08sWJ0",
+          "mode": "list",
+          "cachedResultName": "Add Member 2026 (Responses)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cnRcsOVep4LTWzhAsfKrYoKjz6FjCilJA3QDn08sWJ0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 710097246,
+          "mode": "list",
+          "cachedResultName": "Form Responses 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cnRcsOVep4LTWzhAsfKrYoKjz6FjCilJA3QDn08sWJ0/edit#gid=710097246"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "82e85c26-04ee-441b-ae45-9192fc61535b",
+      "name": "Add Member Responses",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J3rnaSuqLzWLHSYz",
+          "name": "Google Sheets account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        1056,
+        0
+      ],
+      "id": "fa33ed06-3fe4-4fe4-ba8c-7880cbb8c811",
+      "name": "Limit"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        1472,
+        0
+      ],
+      "id": "7ea1f8de-b8a1-4aea-83df-0e17cd0046a4",
+      "name": "Limit1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        1872,
+        0
+      ],
+      "id": "59546637-4cb0-4ebb-aeb4-66290754fe03",
+      "name": "Limit2"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-05-09T15:40:05.752Z",
+      "createdAt": "2026-05-09T15:40:05.752Z",
+      "role": "workflow:owner",
+      "workflowId": "eTQjOjiIsy5FkcXDJNnGi",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-05-09T18:18:44.418Z",
+  "versionId": "c2c0c95a-da11-49a2-8437-06341403b0d7"
+}
