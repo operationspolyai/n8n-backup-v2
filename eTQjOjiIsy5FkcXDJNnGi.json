@@ -29,7 +29,7 @@
       "main": [
         [
           {
-            "node": "Call 'Update SQL with ClickUp IDs based on emails'",
+            "node": "Limit3",
             "type": "main",
             "index": 0
           }
@@ -67,7 +67,7 @@
       "main": [
         [
           {
-            "node": "Filter so people who added themselves during valid time are added. Or add checkbox to sheets for val",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -117,6 +117,97 @@
           }
         ]
       ]
+    },
+    "Limit3": {
+      "main": [
+        [
+          {
+            "node": "Call 'Update SQL with ClickUp IDs based on emails'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Filter so people who added themselves during valid time are added. Or add checkbox to sheets for val",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get department row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get department row": {
+      "main": [
+        [
+          {
+            "node": "Insert member",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert member": {
+      "main": [
+        [
+          {
+            "node": "Link member with department",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Link member with department": {
+      "main": [
+        [
+          {
+            "node": "Link member with member role",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Link member with member role": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if member exists": {
+      "main": [
+        []
+      ]
+    },
+    "If they exist": {
+      "main": [
+        [],
+        []
+      ]
     }
   },
   "createdAt": "2026-05-09T15:40:05.745Z",
@@ -143,7 +234,7 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        624,
+        1248,
         0
       ],
       "id": "b9fe1461-77e3-41fb-b506-d182dba4a721",
@@ -154,7 +245,7 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        416,
+        1040,
         0
       ],
       "id": "cdd5c158-a9b8-4819-8c87-a2613fb23732",
@@ -182,7 +273,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        848,
+        1680,
         0
       ],
       "id": "8e27aa83-da22-4a76-ae62-0864efad897b",
@@ -210,7 +301,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        1664,
+        2496,
         0
       ],
       "id": "1628625e-6d8d-4bb5-93fe-653e3d31ed4a",
@@ -239,7 +330,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        2112,
+        2944,
         0
       ],
       "id": "7fc07bbb-b11a-4b24-8e6c-4857a534825f",
@@ -267,7 +358,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        1264,
+        2096,
         0
       ],
       "id": "8d6b457a-2191-4db6-9965-b39ff4557a6a",
@@ -304,15 +395,14 @@
           "id": "J3rnaSuqLzWLHSYz",
           "name": "Google Sheets account"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {},
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
       "position": [
-        1056,
+        1888,
         0
       ],
       "id": "fa33ed06-3fe4-4fe4-ba8c-7880cbb8c811",
@@ -323,7 +413,7 @@
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
       "position": [
-        1472,
+        2304,
         0
       ],
       "id": "7ea1f8de-b8a1-4aea-83df-0e17cd0046a4",
@@ -334,11 +424,374 @@
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
       "position": [
-        1872,
+        2704,
         0
       ],
       "id": "59546637-4cb0-4ebb-aeb4-66290754fe03",
       "name": "Limit2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        1456,
+        0
+      ],
+      "id": "1416606c-63d1-4dcf-a2a7-d0619682b334",
+      "name": "Limit3"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        624,
+        0
+      ],
+      "id": "cc5b787b-4a76-41b5-8ed3-272124aed9c2",
+      "name": "Loop Over Items",
+      "executeOnce": false,
+      "alwaysOutputData": false,
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Department",
+          "mode": "list",
+          "cachedResultName": "Department"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "emoji",
+              "value": "={{ $('Loop Over Items').item.json['Department name'].slice(0, 2) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1264,
+        224
+      ],
+      "id": "bed830b7-396d-4422-9e6c-f1c931f7ea18",
+      "name": "Get department row",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Members",
+          "mode": "list",
+          "cachedResultName": "Members"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $('Loop Over Items').item.json.Name }}",
+            "email": "={{ $('Loop Over Items').item.json['Work email (has to be @gmail.com, cannot be @etud.polymtl.ca)'] }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "phone_number",
+              "displayName": "phone_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ClickUpID",
+              "displayName": "ClickUpID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1472,
+        224
+      ],
+      "id": "cc2a4f60-4a0c-47da-ae5f-11600e5224ce",
+      "name": "Insert member",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "MemberDepartment",
+          "mode": "list",
+          "cachedResultName": "MemberDepartment"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "memberID": "={{ $json.id }}",
+            "departmentID": "={{ $('Get department row').item.json.id }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "memberID",
+              "displayName": "memberID",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "departmentID",
+              "displayName": "departmentID",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1680,
+        224
+      ],
+      "id": "b06ca44f-7ab6-4ddc-b768-4ae2d6327dfa",
+      "name": "Link member with department",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "MemberRole",
+          "mode": "list",
+          "cachedResultName": "MemberRole"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "memberID": "={{ $('Insert member').item.json.id }}",
+            "roleID": 4
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "memberID",
+              "displayName": "memberID",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "roleID",
+              "displayName": "roleID",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1888,
+        224
+      ],
+      "id": "1df505ef-23fd-4f80-b81f-7ee3179f518d",
+      "name": "Link member with member role",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Members",
+          "mode": "list",
+          "cachedResultName": "Members"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "email",
+              "value": "={{ $json['Work email (has to be @gmail.com, cannot be @etud.polymtl.ca)'] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        592,
+        544
+      ],
+      "id": "eae672fd-d937-42dc-91fe-4cdc5822a19b",
+      "name": "Check if member exists",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "016a9534-eb53-4eb1-bd31-58f951dd4c8b",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        784,
+        544
+      ],
+      "id": "d925819f-aa2f-4645-b6ec-59b6b266ba60",
+      "name": "If they exist"
     }
   ],
   "origin": "n8n",
@@ -363,6 +816,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-05-09T18:18:44.418Z",
-  "versionId": "c2c0c95a-da11-49a2-8437-06341403b0d7"
+  "updatedAt": "2026-05-13T01:14:39.086Z",
+  "versionId": "fb290225-c597-4de8-9d8d-380487e07da0"
 }
