@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-05-09T18:17:27.000Z",
-    "createdAt": "2026-05-09T18:17:04.042Z",
-    "versionId": "ceee32f4-3269-4381-a370-2b9e160ebc72",
+    "updatedAt": "2026-05-13T00:21:23.000Z",
+    "createdAt": "2026-05-13T00:21:22.709Z",
+    "versionId": "e300de37-0113-4bc2-b375-329e775807e8",
     "workflowId": "F3F1akaLzhoKK_3yw3BYx",
     "nodes": [
       {
@@ -113,8 +113,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          800,
-          112
+          1120,
+          240
         ],
         "id": "afc62b9d-ba64-42c0-a1c8-785be5ab6f59",
         "name": "Append row in sheet",
@@ -175,6 +175,20 @@
         ],
         "id": "5534b824-3aa7-4ecb-af74-5f49b9b3bb21",
         "name": "When Executed by Another Workflow"
+      },
+      {
+        "parameters": {
+          "amount": 20
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          928,
+          192
+        ],
+        "id": "60e65f38-a412-4e31-a0f4-4407eef61b94",
+        "name": "Wait",
+        "webhookId": "b37daffb-8c55-4d2f-b2f2-04ecc28d1635"
       }
     ],
     "connections": {
@@ -205,7 +219,7 @@
           [],
           [
             {
-              "node": "Append row in sheet",
+              "node": "Wait",
               "type": "main",
               "index": 0
             }
@@ -244,14 +258,25 @@
             }
           ]
         ]
+      },
+      "Wait": {
+        "main": [
+          [
+            {
+              "node": "Append row in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Poly Ai",
-    "name": "Version ceee32f4",
+    "name": "Version e300de37",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "ceee32f4-3269-4381-a370-2b9e160ebc72",
+  "activeVersionId": "e300de37-0113-4bc2-b375-329e775807e8",
   "connections": {
     "When clicking ‘Execute workflow’": {
       "main": [
@@ -280,7 +305,7 @@
         [],
         [
           {
-            "node": "Append row in sheet",
+            "node": "Wait",
             "type": "main",
             "index": 0
           }
@@ -314,6 +339,17 @@
         [
           {
             "node": "Clear list",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
             "type": "main",
             "index": 0
           }
@@ -436,8 +472,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        800,
-        112
+        1120,
+        240
       ],
       "id": "afc62b9d-ba64-42c0-a1c8-785be5ab6f59",
       "name": "Append row in sheet",
@@ -498,10 +534,40 @@
       ],
       "id": "5534b824-3aa7-4ecb-af74-5f49b9b3bb21",
       "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "amount": 20
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        928,
+        192
+      ],
+      "id": "60e65f38-a412-4e31-a0f4-4407eef61b94",
+      "name": "Wait",
+      "webhookId": "b37daffb-8c55-4d2f-b2f2-04ecc28d1635"
     }
   ],
   "origin": "n8n",
-  "pinData": {},
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "id": 10400,
+          "created_at": "2026-05-13T00:15:52.823Z",
+          "name": "Alicia Abderrazik",
+          "email": "ab.aliciaa@gmail.com",
+          "phone_number": null,
+          "ClickUpID": "118059324"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "repo": {
     "owner": "operationspolyai",
     "name": "n8n-backup-v2"
@@ -522,6 +588,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-05-09T18:17:04.041Z",
-  "versionId": "ceee32f4-3269-4381-a370-2b9e160ebc72"
+  "updatedAt": "2026-05-13T00:21:22.708Z",
+  "versionId": "e300de37-0113-4bc2-b375-329e775807e8"
 }
