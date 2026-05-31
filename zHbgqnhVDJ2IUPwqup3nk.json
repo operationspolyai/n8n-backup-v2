@@ -1,0 +1,861 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-05-31T00:20:45.000Z",
+    "createdAt": "2026-05-31T00:20:43.678Z",
+    "versionId": "af81c775-f599-48bd-b71b-34307559d083",
+    "workflowId": "zHbgqnhVDJ2IUPwqup3nk",
+    "nodes": [
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          0,
+          0
+        ],
+        "id": "b5d9f20d-a617-4329-88f7-0181d770f34f",
+        "name": "When clicking ‘Execute workflow’"
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Members",
+            "mode": "list",
+            "cachedResultName": "Members"
+          },
+          "returnAll": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          256,
+          0
+        ],
+        "id": "3f4169ce-aea7-4091-a77e-1ed75167cdd1",
+        "name": "Get Members",
+        "credentials": {
+          "postgres": {
+            "id": "tcgfUQhBwsAuROjj",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          672,
+          0
+        ],
+        "id": "8be5a50f-1e7a-4d0b-a9b9-d1dd8f44721f",
+        "name": "Loop Over Items"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "loose",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "9bbc45ec-7cf5-43dd-9328-123bc280c247",
+                "leftValue": "={{ $json.sentDepartmentEmail }}",
+                "rightValue": false,
+                "operator": {
+                  "type": "boolean",
+                  "operation": "false",
+                  "singleValue": true
+                }
+              },
+              {
+                "id": "9f314296-eef7-4cdc-9ccb-9892df3b5e24",
+                "leftValue": "={{ $json.GoogleAuthenticatorKey }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "exists",
+                  "singleValue": true
+                }
+              },
+              {
+                "id": "42210b57-49fa-424e-9848-f4fcb640ad07",
+                "leftValue": "={{ $json.password }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "exists",
+                  "singleValue": true
+                }
+              },
+              {
+                "id": "a7382b17-e5c1-421f-af17-b02f926c2d83",
+                "leftValue": "={{ $json.gmail }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "exists",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "looseTypeValidation": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1152,
+          96
+        ],
+        "id": "dde04e8e-fcaf-4861-9281-7135fcc96186",
+        "name": "If"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "SELECT \n  m.id AS \"memberID\",\n  m.created_at AS \"memberCreatedAt\",\n  m.name AS \"memberName\",\n  m.email,\n  m.phone_number AS \"memberPhoneNumber\",\n  m.\"ClickUpID\" AS \"memberClickUpID\",\n  m.\"sentDepartmentEmail\",\n  r.\"roleName\",\n  d.id AS \"departmentID\",\n  d.created_at AS \"departmentCreatedAt\",\n  d.\"departmentName\",\n  d.emoji,\n  d.\"ClickUpAssignOtherListID\",\n  d.\"ClickUpFolderID\",\n  d.\"driveID\",\n  d.gmail,\n  d.password,\n  d.\"phoneNumber\" AS \"departmentPhoneNumber\",\n  d.\"backupCodes\",\n  d.\"GoogleAuthenticatorKey\"\nFROM public.\"Members\" m\nLEFT JOIN public.\"MemberDepartment\" md ON m.id = md.\"memberID\"\nLEFT JOIN public.\"Department\" d ON md.\"departmentID\" = d.id\nLEFT JOIN public.\"MemberRole\" mr ON m.id = mr.\"memberID\"\nLEFT JOIN public.\"Role\" r ON mr.\"roleID\" = r.id\nWHERE m.id = {{ $json.id }};",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          960,
+          64
+        ],
+        "id": "fb6fd785-1005-4988-be78-ffd031246de9",
+        "name": "Get member department",
+        "credentials": {
+          "postgres": {
+            "id": "tcgfUQhBwsAuROjj",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $json.email }}",
+          "subject": "Accès au compte départemental / Department Account Access",
+          "message": "=<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Accès à votre compte de département PolyAI / Access Your PolyAI Department Account</title>\n  <style>\n    body {\n      font-family: system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n      background-color: #0b0f19; /* Dark Navy from logo */\n      margin: 0;\n      padding: 20px;\n      color: #ffffff; /* White text */\n    }\n    .email-container {\n      max-width: 650px;\n      margin: 0 auto;\n      background-color: #161c2d; /* Slightly lighter navy for contrast */\n      border-radius: 8px;\n      overflow: hidden;\n      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n      border-top: 5px solid #d9252a; /* PolyAI Red */\n    }\n    .header {\n      background-color: #0b0f19;\n      padding: 30px 20px;\n      text-align: center;\n      border-bottom: 1px solid #2a3147;\n    }\n    .header h1 {\n      margin: 0;\n      font-size: 24px;\n      font-weight: 600;\n      color: #ffffff;\n    }\n    .content {\n      padding: 30px;\n      line-height: 1.6;\n    }\n    .content p {\n      margin-top: 0;\n      margin-bottom: 15px;\n      color: #e0e4eb;\n    }\n    .credentials-box {\n      background-color: #0b0f19;\n      border-left: 4px solid #d9252a; /* PolyAI Red */\n      padding: 15px 20px;\n      margin: 20px 0;\n      border-radius: 4px;\n    }\n    .credentials-box p {\n      margin: 8px 0;\n      font-size: 15px;\n      color: #ffffff;\n    }\n    .highlight {\n      font-family: \"Courier New\", Courier, monospace;\n      background-color: #2a3147;\n      color: #ffffff;\n      padding: 4px 8px;\n      border-radius: 4px;\n      font-weight: bold;\n      word-break: break-all;\n    }\n    .steps {\n      margin-top: 15px;\n      padding-left: 20px;\n      color: #e0e4eb;\n    }\n    .steps li {\n      margin-bottom: 12px;\n    }\n    .alert {\n      background-color: rgba(217, 37, 42, 0.1);\n      border-left: 4px solid #d9252a;\n      padding: 12px 15px;\n      font-size: 14px;\n      margin-top: 20px;\n      color: #ffffff;\n    }\n    a {\n      color: #d9252a; /* PolyAI Red */\n      text-decoration: none;\n      font-weight: bold;\n    }\n    a:hover {\n      text-decoration: underline;\n    }\n    .divider {\n      height: 1px;\n      background-color: #2a3147;\n      margin: 40px 0;\n    }\n    .footer {\n      background-color: #0b0f19;\n      padding: 20px;\n      text-align: center;\n      font-size: 13px;\n      color: #8c9bb0;\n      border-top: 1px solid #2a3147;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"email-container\">\n    \n    <div class=\"header\">\n      <h1>Bienvenue dans votre compte de département PolyAI</h1>\n    </div>\n    \n    <div class=\"content\">\n      <p>Bonjour!</p>\n      <p>Votre compte Google officiel pour votre département PolyAI a été configuré et est prêt à être utilisé. Puisque nous prenons la sécurité au sérieux, ce compte est protégé par la validation en deux étapes.</p>\n      <p>Veuillez utiliser les identifiants ci-dessous pour vous connecter et suivez attentivement les instructions pour configurer l'application Authenticator sur votre téléphone portable.</p>\n\n      <div class=\"credentials-box\">\n        <p><strong>Courriel :</strong> <span class=\"highlight\">{{ $json.gmail }}</span></p>\n        <p><strong>Mot de passe :</strong> <span class=\"highlight\">{{ $json.password }}</span></p>\n        <p><strong>Clé de configuration Authenticator :</strong> <span class=\"highlight\">{{ $json.GoogleAuthenticatorKey }}</span></p>\n      </div>\n\n      <h3 style=\"color: #ffffff;\">Comment se connecter (Première configuration)</h3>\n      <p>Pour passer la validation en deux étapes, vous devrez lier ce compte à l'application Google Authenticator sur votre téléphone personnel en utilisant la clé de configuration fournie ci-dessus.</p>\n      \n      <ol class=\"steps\">\n        <li><strong>Téléchargez l'application :</strong> Si ce n'est pas déjà fait, téléchargez l'application Google Authenticator pour <a href=\"https://apps.apple.com/ca/app/google-authenticator/id388497605?l=fr\" target=\"_blank\">Apple/iOS</a> ou <a href=\"https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=fr_CA\" target=\"_blank\">Android</a>.</li>\n        <li><strong>Ajoutez le compte :</strong> Ouvrez l'application sur votre téléphone, appuyez sur le bouton <strong>\"+\"</strong> coloré dans le coin inférieur droit, et sélectionnez <strong>\"Saisir une clé de configuration\"</strong>.</li>\n        <li><strong>Entrez les détails :</strong>\n          <ul>\n            <li><em>Nom du compte :</em> Écrivez quelque chose de reconnaissable (ex. : PolyAI {{ $json.gmail }}).</li>\n            <li><em>Votre clé :</em> Copiez et collez la <strong>Clé de configuration Authenticator</strong> de la boîte ci-dessus.</li>\n            <li><em>Type de clé :</em> Laissez cette option sur \"Basée sur l'heure\".</li>\n          </ul>\n        </li>\n        <li>Appuyez sur <strong>Ajouter</strong>. Votre téléphone générera désormais en continu des codes à 6 chiffres pour ce compte.</li>\n        <li><strong>Connectez-vous :</strong> Allez sur <a href=\"https://gmail.com\" target=\"_blank\">Gmail.com</a> sur votre ordinateur. Entrez le courriel du département et le mot de passe. Lorsqu'on vous demande un code de validation en deux étapes, ouvrez l'application sur votre téléphone et entrez le code actuel à 6 chiffres.</li>\n      </ol>\n\n      <div class=\"alert\">\n        <strong>Important :</strong> Gardez ces informations en sécurité et ne les partagez pas à l'extérieur de votre département. Le VP aux opérations conserve en toute sécurité les codes de secours d'urgence et l'accès au courriel de récupération. Si vous êtes bloqué hors du compte de façon permanente, veuillez le contacter.\n      </div>\n\n      <p style=\"margin-top: 25px; font-weight: bold;\">N'hésitez pas à répondre directement à ce courriel si vous avez des questions!</p>\n      \n      <div class=\"divider\"></div>\n\n      <h1 style=\"color: #ffffff; text-align: center; margin-bottom: 30px;\">Welcome to your PolyAI Department Account</h1>\n\n      <p>Hello!</p>\n      <p>Your official PolyAI department Google account has been set up and is ready to use. Because we take security seriously, this account is protected by 2-Step Verification.</p>\n      <p>Please use the credentials below to log in, and follow the instructions carefully to set up the Authenticator app on your personal phone so you can access the account.</p>\n\n      <div class=\"credentials-box\">\n        <p><strong>Email:</strong> <span class=\"highlight\">{{ $json.gmail }}</span></p>\n        <p><strong>Password:</strong> <span class=\"highlight\">{{ $json.password }}</span></p>\n        <p><strong>Authenticator Setup Key:</strong> <span class=\"highlight\">{{ $json.GoogleAuthenticatorKey }}</span></p>\n      </div>\n\n      <h3 style=\"color: #ffffff;\">How to log in (First-time setup)</h3>\n      <p>To pass the 2-Step Verification, you will need to link this account to the Google Authenticator app on your phone using the setup key provided above.</p>\n      \n      <ol class=\"steps\">\n        <li><strong>Download the App:</strong> If you haven't already, download the Google Authenticator app for <a href=\"https://apps.apple.com/ca/app/google-authenticator/id388497605\" target=\"_blank\">Apple/iOS</a> or <a href=\"https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2\" target=\"_blank\">Android</a>.</li>\n        <li><strong>Add the Account:</strong> Open the app on your phone, tap the colorful <strong>\"+\"</strong> button in the bottom right corner, and select <strong>\"Enter a setup key\"</strong>.</li>\n        <li><strong>Enter Details:</strong>\n          <ul>\n            <li><em>Account Name:</em> Type something recognizable (e.g., PolyAI {{ $json.gmail }}).</li>\n            <li><em>Your Key:</em> Copy and paste the <strong>Authenticator Setup Key</strong> from the box above.</li>\n            <li><em>Type of Key:</em> Leave this as \"Time-based\".</li>\n          </ul>\n        </li>\n        <li>Tap <strong>Add</strong>. Your phone will now continuously generate 6-digit codes for this account.</li>\n        <li><strong>Log in:</strong> Go to <a href=\"https://gmail.com\" target=\"_blank\">Gmail.com</a> on your computer. Enter the department email and password. When prompted for a 2-Step Verification code, open the app on your phone and type in the current 6-digit number.</li>\n      </ol>\n\n      <div class=\"alert\">\n        <strong>Important:</strong> Keep this information secure and do not share it outside of your department. The VP of Operations securely holds the emergency backup codes and recovery email access. If you ever get permanently locked out, please contact them.\n      </div>\n\n      <p style=\"margin-top: 25px; font-weight: bold;\">Feel free to reply directly to this email if you have any questions!</p>\n    </div>\n\n    <div class=\"footer\">\n      <p>PolyAI</p>\n    </div>\n  </div>\n\n</body>\n</html>",
+          "options": {
+            "appendAttribution": false
+          }
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          1360,
+          0
+        ],
+        "id": "19ffb015-aa9e-4489-8b6b-1556ab5d4118",
+        "name": "Send a message",
+        "webhookId": "79428217-e4b0-4708-94f3-16725c72878b",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "unquhRC3gfJ50lma",
+            "name": "Gmail account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Members",
+            "mode": "list",
+            "cachedResultName": "Members"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "id": "={{ $('Get member department').item.json.memberID }}",
+              "sentDepartmentEmail": true
+            },
+            "matchingColumns": [
+              "id"
+            ],
+            "schema": [
+              {
+                "id": "id",
+                "displayName": "id",
+                "required": false,
+                "defaultMatch": true,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "name",
+                "displayName": "name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "email",
+                "displayName": "email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "phone_number",
+                "displayName": "phone_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "ClickUpID",
+                "displayName": "ClickUpID",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sentDepartmentEmail",
+                "displayName": "sentDepartmentEmail",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "boolean",
+                "canBeUsedToMatch": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1568,
+          0
+        ],
+        "id": "8875c29c-665c-4e31-bc64-99b9d79f6ec0",
+        "name": "Update rows in a table",
+        "credentials": {
+          "postgres": {
+            "id": "tcgfUQhBwsAuROjj",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "inputSource": "passthrough"
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          16,
+          192
+        ],
+        "id": "e96f9eef-d66f-4f06-a6d4-d12c16c19b04",
+        "name": "When Executed by Another Workflow"
+      }
+    ],
+    "connections": {
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "Get Members",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get Members": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items": {
+        "main": [
+          [],
+          [
+            {
+              "node": "Get member department",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "Send a message",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get member department": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send a message": {
+        "main": [
+          [
+            {
+              "node": "Update rows in a table",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update rows in a table": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "Get Members",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Poly Ai",
+    "name": "Version af81c775",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "af81c775-f599-48bd-b71b-34307559d083",
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get Members",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Members": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Get member department",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get member department": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Update rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update rows in a table": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Get Members",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-05-30T19:02:19.193Z",
+  "id": "zHbgqnhVDJ2IUPwqup3nk",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Invite to department gmail account",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b5d9f20d-a617-4329-88f7-0181d770f34f",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Members",
+          "mode": "list",
+          "cachedResultName": "Members"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        256,
+        0
+      ],
+      "id": "3f4169ce-aea7-4091-a77e-1ed75167cdd1",
+      "name": "Get Members",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        672,
+        0
+      ],
+      "id": "8be5a50f-1e7a-4d0b-a9b9-d1dd8f44721f",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "9bbc45ec-7cf5-43dd-9328-123bc280c247",
+              "leftValue": "={{ $json.sentDepartmentEmail }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "9f314296-eef7-4cdc-9ccb-9892df3b5e24",
+              "leftValue": "={{ $json.GoogleAuthenticatorKey }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "42210b57-49fa-424e-9848-f4fcb640ad07",
+              "leftValue": "={{ $json.password }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "a7382b17-e5c1-421f-af17-b02f926c2d83",
+              "leftValue": "={{ $json.gmail }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1152,
+        96
+      ],
+      "id": "dde04e8e-fcaf-4861-9281-7135fcc96186",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n  m.id AS \"memberID\",\n  m.created_at AS \"memberCreatedAt\",\n  m.name AS \"memberName\",\n  m.email,\n  m.phone_number AS \"memberPhoneNumber\",\n  m.\"ClickUpID\" AS \"memberClickUpID\",\n  m.\"sentDepartmentEmail\",\n  r.\"roleName\",\n  d.id AS \"departmentID\",\n  d.created_at AS \"departmentCreatedAt\",\n  d.\"departmentName\",\n  d.emoji,\n  d.\"ClickUpAssignOtherListID\",\n  d.\"ClickUpFolderID\",\n  d.\"driveID\",\n  d.gmail,\n  d.password,\n  d.\"phoneNumber\" AS \"departmentPhoneNumber\",\n  d.\"backupCodes\",\n  d.\"GoogleAuthenticatorKey\"\nFROM public.\"Members\" m\nLEFT JOIN public.\"MemberDepartment\" md ON m.id = md.\"memberID\"\nLEFT JOIN public.\"Department\" d ON md.\"departmentID\" = d.id\nLEFT JOIN public.\"MemberRole\" mr ON m.id = mr.\"memberID\"\nLEFT JOIN public.\"Role\" r ON mr.\"roleID\" = r.id\nWHERE m.id = {{ $json.id }};",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        960,
+        64
+      ],
+      "id": "fb6fd785-1005-4988-be78-ffd031246de9",
+      "name": "Get member department",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "Accès au compte départemental / Department Account Access",
+        "message": "=<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Accès à votre compte de département PolyAI / Access Your PolyAI Department Account</title>\n  <style>\n    body {\n      font-family: system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n      background-color: #0b0f19; /* Dark Navy from logo */\n      margin: 0;\n      padding: 20px;\n      color: #ffffff; /* White text */\n    }\n    .email-container {\n      max-width: 650px;\n      margin: 0 auto;\n      background-color: #161c2d; /* Slightly lighter navy for contrast */\n      border-radius: 8px;\n      overflow: hidden;\n      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n      border-top: 5px solid #d9252a; /* PolyAI Red */\n    }\n    .header {\n      background-color: #0b0f19;\n      padding: 30px 20px;\n      text-align: center;\n      border-bottom: 1px solid #2a3147;\n    }\n    .header h1 {\n      margin: 0;\n      font-size: 24px;\n      font-weight: 600;\n      color: #ffffff;\n    }\n    .content {\n      padding: 30px;\n      line-height: 1.6;\n    }\n    .content p {\n      margin-top: 0;\n      margin-bottom: 15px;\n      color: #e0e4eb;\n    }\n    .credentials-box {\n      background-color: #0b0f19;\n      border-left: 4px solid #d9252a; /* PolyAI Red */\n      padding: 15px 20px;\n      margin: 20px 0;\n      border-radius: 4px;\n    }\n    .credentials-box p {\n      margin: 8px 0;\n      font-size: 15px;\n      color: #ffffff;\n    }\n    .highlight {\n      font-family: \"Courier New\", Courier, monospace;\n      background-color: #2a3147;\n      color: #ffffff;\n      padding: 4px 8px;\n      border-radius: 4px;\n      font-weight: bold;\n      word-break: break-all;\n    }\n    .steps {\n      margin-top: 15px;\n      padding-left: 20px;\n      color: #e0e4eb;\n    }\n    .steps li {\n      margin-bottom: 12px;\n    }\n    .alert {\n      background-color: rgba(217, 37, 42, 0.1);\n      border-left: 4px solid #d9252a;\n      padding: 12px 15px;\n      font-size: 14px;\n      margin-top: 20px;\n      color: #ffffff;\n    }\n    a {\n      color: #d9252a; /* PolyAI Red */\n      text-decoration: none;\n      font-weight: bold;\n    }\n    a:hover {\n      text-decoration: underline;\n    }\n    .divider {\n      height: 1px;\n      background-color: #2a3147;\n      margin: 40px 0;\n    }\n    .footer {\n      background-color: #0b0f19;\n      padding: 20px;\n      text-align: center;\n      font-size: 13px;\n      color: #8c9bb0;\n      border-top: 1px solid #2a3147;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"email-container\">\n    \n    <div class=\"header\">\n      <h1>Bienvenue dans votre compte de département PolyAI</h1>\n    </div>\n    \n    <div class=\"content\">\n      <p>Bonjour!</p>\n      <p>Votre compte Google officiel pour votre département PolyAI a été configuré et est prêt à être utilisé. Puisque nous prenons la sécurité au sérieux, ce compte est protégé par la validation en deux étapes.</p>\n      <p>Veuillez utiliser les identifiants ci-dessous pour vous connecter et suivez attentivement les instructions pour configurer l'application Authenticator sur votre téléphone portable.</p>\n\n      <div class=\"credentials-box\">\n        <p><strong>Courriel :</strong> <span class=\"highlight\">{{ $json.gmail }}</span></p>\n        <p><strong>Mot de passe :</strong> <span class=\"highlight\">{{ $json.password }}</span></p>\n        <p><strong>Clé de configuration Authenticator :</strong> <span class=\"highlight\">{{ $json.GoogleAuthenticatorKey }}</span></p>\n      </div>\n\n      <h3 style=\"color: #ffffff;\">Comment se connecter (Première configuration)</h3>\n      <p>Pour passer la validation en deux étapes, vous devrez lier ce compte à l'application Google Authenticator sur votre téléphone personnel en utilisant la clé de configuration fournie ci-dessus.</p>\n      \n      <ol class=\"steps\">\n        <li><strong>Téléchargez l'application :</strong> Si ce n'est pas déjà fait, téléchargez l'application Google Authenticator pour <a href=\"https://apps.apple.com/ca/app/google-authenticator/id388497605?l=fr\" target=\"_blank\">Apple/iOS</a> ou <a href=\"https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=fr_CA\" target=\"_blank\">Android</a>.</li>\n        <li><strong>Ajoutez le compte :</strong> Ouvrez l'application sur votre téléphone, appuyez sur le bouton <strong>\"+\"</strong> coloré dans le coin inférieur droit, et sélectionnez <strong>\"Saisir une clé de configuration\"</strong>.</li>\n        <li><strong>Entrez les détails :</strong>\n          <ul>\n            <li><em>Nom du compte :</em> Écrivez quelque chose de reconnaissable (ex. : PolyAI {{ $json.gmail }}).</li>\n            <li><em>Votre clé :</em> Copiez et collez la <strong>Clé de configuration Authenticator</strong> de la boîte ci-dessus.</li>\n            <li><em>Type de clé :</em> Laissez cette option sur \"Basée sur l'heure\".</li>\n          </ul>\n        </li>\n        <li>Appuyez sur <strong>Ajouter</strong>. Votre téléphone générera désormais en continu des codes à 6 chiffres pour ce compte.</li>\n        <li><strong>Connectez-vous :</strong> Allez sur <a href=\"https://gmail.com\" target=\"_blank\">Gmail.com</a> sur votre ordinateur. Entrez le courriel du département et le mot de passe. Lorsqu'on vous demande un code de validation en deux étapes, ouvrez l'application sur votre téléphone et entrez le code actuel à 6 chiffres.</li>\n      </ol>\n\n      <div class=\"alert\">\n        <strong>Important :</strong> Gardez ces informations en sécurité et ne les partagez pas à l'extérieur de votre département. Le VP aux opérations conserve en toute sécurité les codes de secours d'urgence et l'accès au courriel de récupération. Si vous êtes bloqué hors du compte de façon permanente, veuillez le contacter.\n      </div>\n\n      <p style=\"margin-top: 25px; font-weight: bold;\">N'hésitez pas à répondre directement à ce courriel si vous avez des questions!</p>\n      \n      <div class=\"divider\"></div>\n\n      <h1 style=\"color: #ffffff; text-align: center; margin-bottom: 30px;\">Welcome to your PolyAI Department Account</h1>\n\n      <p>Hello!</p>\n      <p>Your official PolyAI department Google account has been set up and is ready to use. Because we take security seriously, this account is protected by 2-Step Verification.</p>\n      <p>Please use the credentials below to log in, and follow the instructions carefully to set up the Authenticator app on your personal phone so you can access the account.</p>\n\n      <div class=\"credentials-box\">\n        <p><strong>Email:</strong> <span class=\"highlight\">{{ $json.gmail }}</span></p>\n        <p><strong>Password:</strong> <span class=\"highlight\">{{ $json.password }}</span></p>\n        <p><strong>Authenticator Setup Key:</strong> <span class=\"highlight\">{{ $json.GoogleAuthenticatorKey }}</span></p>\n      </div>\n\n      <h3 style=\"color: #ffffff;\">How to log in (First-time setup)</h3>\n      <p>To pass the 2-Step Verification, you will need to link this account to the Google Authenticator app on your phone using the setup key provided above.</p>\n      \n      <ol class=\"steps\">\n        <li><strong>Download the App:</strong> If you haven't already, download the Google Authenticator app for <a href=\"https://apps.apple.com/ca/app/google-authenticator/id388497605\" target=\"_blank\">Apple/iOS</a> or <a href=\"https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2\" target=\"_blank\">Android</a>.</li>\n        <li><strong>Add the Account:</strong> Open the app on your phone, tap the colorful <strong>\"+\"</strong> button in the bottom right corner, and select <strong>\"Enter a setup key\"</strong>.</li>\n        <li><strong>Enter Details:</strong>\n          <ul>\n            <li><em>Account Name:</em> Type something recognizable (e.g., PolyAI {{ $json.gmail }}).</li>\n            <li><em>Your Key:</em> Copy and paste the <strong>Authenticator Setup Key</strong> from the box above.</li>\n            <li><em>Type of Key:</em> Leave this as \"Time-based\".</li>\n          </ul>\n        </li>\n        <li>Tap <strong>Add</strong>. Your phone will now continuously generate 6-digit codes for this account.</li>\n        <li><strong>Log in:</strong> Go to <a href=\"https://gmail.com\" target=\"_blank\">Gmail.com</a> on your computer. Enter the department email and password. When prompted for a 2-Step Verification code, open the app on your phone and type in the current 6-digit number.</li>\n      </ol>\n\n      <div class=\"alert\">\n        <strong>Important:</strong> Keep this information secure and do not share it outside of your department. The VP of Operations securely holds the emergency backup codes and recovery email access. If you ever get permanently locked out, please contact them.\n      </div>\n\n      <p style=\"margin-top: 25px; font-weight: bold;\">Feel free to reply directly to this email if you have any questions!</p>\n    </div>\n\n    <div class=\"footer\">\n      <p>PolyAI</p>\n    </div>\n  </div>\n\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1360,
+        0
+      ],
+      "id": "19ffb015-aa9e-4489-8b6b-1556ab5d4118",
+      "name": "Send a message",
+      "webhookId": "79428217-e4b0-4708-94f3-16725c72878b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "unquhRC3gfJ50lma",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Members",
+          "mode": "list",
+          "cachedResultName": "Members"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Get member department').item.json.memberID }}",
+            "sentDepartmentEmail": true
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "phone_number",
+              "displayName": "phone_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ClickUpID",
+              "displayName": "ClickUpID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sentDepartmentEmail",
+              "displayName": "sentDepartmentEmail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1568,
+        0
+      ],
+      "id": "8875c29c-665c-4e31-bc64-99b9d79f6ec0",
+      "name": "Update rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        16,
+        192
+      ],
+      "id": "e96f9eef-d66f-4f06-a6d4-d12c16c19b04",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        32,
+        432
+      ],
+      "id": "03cb370d-8826-4976-b6ce-86f2533cda73",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "ycb1PuYTYbgylJV6",
+          "name": "Gmail account 2"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-05-30T19:02:19.200Z",
+      "createdAt": "2026-05-30T19:02:19.200Z",
+      "role": "workflow:owner",
+      "workflowId": "zHbgqnhVDJ2IUPwqup3nk",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-05-31T00:30:30.819Z",
+  "versionId": "167eaeba-a2f8-45ee-babf-8acb42496945"
+}
