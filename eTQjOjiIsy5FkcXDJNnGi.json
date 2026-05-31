@@ -40,7 +40,7 @@
       "main": [
         [
           {
-            "node": "Limit",
+            "node": "Limit4",
             "type": "main",
             "index": 0
           }
@@ -208,6 +208,28 @@
         [],
         []
       ]
+    },
+    "Limit4": {
+      "main": [
+        [
+          {
+            "node": "Call 'Invite to department gmail account'1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'Invite to department gmail account'1": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-05-09T15:40:05.745Z",
@@ -301,7 +323,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        2496,
+        2912,
         0
       ],
       "id": "1628625e-6d8d-4bb5-93fe-653e3d31ed4a",
@@ -330,7 +352,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        2944,
+        3360,
         0
       ],
       "id": "7fc07bbb-b11a-4b24-8e6c-4857a534825f",
@@ -358,7 +380,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        2096,
+        2512,
         0
       ],
       "id": "8d6b457a-2191-4db6-9965-b39ff4557a6a",
@@ -402,7 +424,7 @@
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
       "position": [
-        1888,
+        2304,
         0
       ],
       "id": "fa33ed06-3fe4-4fe4-ba8c-7880cbb8c811",
@@ -413,7 +435,7 @@
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
       "position": [
-        2304,
+        2720,
         0
       ],
       "id": "7ea1f8de-b8a1-4aea-83df-0e17cd0046a4",
@@ -424,7 +446,7 @@
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
       "position": [
-        2704,
+        3120,
         0
       ],
       "id": "59546637-4cb0-4ebb-aeb4-66290754fe03",
@@ -792,6 +814,45 @@
       ],
       "id": "d925819f-aa2f-4645-b6ec-59b6b266ba60",
       "name": "If they exist"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        1888,
+        0
+      ],
+      "id": "384a8a3c-2550-48b7-a815-c01a37360460",
+      "name": "Limit4"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "zHbgqnhVDJ2IUPwqup3nk",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/zHbgqnhVDJ2IUPwqup3nk",
+          "cachedResultName": "Invite to department gmail account"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        2096,
+        0
+      ],
+      "id": "c1c5cfe1-6ba6-4611-892c-eb48d7bbeb64",
+      "name": "Call 'Invite to department gmail account'1"
     }
   ],
   "origin": "n8n",
@@ -816,6 +877,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-05-13T01:14:39.086Z",
-  "versionId": "fb290225-c597-4de8-9d8d-380487e07da0"
+  "updatedAt": "2026-05-31T00:20:15.899Z",
+  "versionId": "ccdeb405-cf77-4ed1-b778-2cda0738bfbc"
 }
