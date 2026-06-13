@@ -1,0 +1,255 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-06-13T01:26:58.000Z",
+    "createdAt": "2026-06-13T01:26:45.973Z",
+    "versionId": "fce7a03c-24cc-476f-a36d-beb524e53ff1",
+    "workflowId": "mpGYSE7gMb8JiyIfkOUbZ",
+    "nodes": [
+      {
+        "parameters": {
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyMinute"
+              }
+            ]
+          },
+          "calendarId": {
+            "__rl": true,
+            "value": "epilsmqb8nhbqs27ng6a3tihug@group.calendar.google.com",
+            "mode": "list",
+            "cachedResultName": "Commandites"
+          },
+          "triggerOn": "eventCreated",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleCalendarTrigger",
+        "typeVersion": 1,
+        "position": [
+          0,
+          0
+        ],
+        "id": "62578b96-afba-434a-95d7-979e06c84db7",
+        "name": "Google Calendar Trigger",
+        "credentials": {
+          "googleCalendarOAuth2Api": {
+            "id": "LDwH2r893j4NrNoB",
+            "name": "Google Calendar main polyai account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "message",
+          "guildId": {
+            "__rl": true,
+            "value": "712747224857182208",
+            "mode": "list",
+            "cachedResultName": "PolyAI",
+            "cachedResultUrl": "https://discord.com/channels/712747224857182208"
+          },
+          "channelId": {
+            "__rl": true,
+            "value": "1515160889806819428",
+            "mode": "list",
+            "cachedResultName": "calendar-notifications",
+            "cachedResultUrl": "https://discord.com/channels/712747224857182208/1515160889806819428"
+          },
+          "content": "=Hello everyone! A new event has been created.\nPlease take a look.\n**[{{ $json.summary }}]({{ $json.htmlLink }})**\nStart: {{ new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'America/New_York' }).format(new Date($json.start.dateTime)) }}\nEnd: {{ new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'America/New_York' }).format(new Date($json.end.dateTime)) }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.discord",
+        "typeVersion": 2,
+        "position": [
+          208,
+          0
+        ],
+        "id": "1b29bb7d-d081-4821-b457-050e14d0efc0",
+        "name": "Send a message",
+        "webhookId": "c4fa3404-b1da-4a8c-90e8-c180d0331c22",
+        "credentials": {
+          "discordBotApi": {
+            "id": "cxGK7pRlQxV7O0GJ",
+            "name": "Discord Bot account"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Google Calendar Trigger": {
+        "main": [
+          [
+            {
+              "node": "Send a message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Poly Ai",
+    "name": "Version fce7a03c",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "fce7a03c-24cc-476f-a36d-beb524e53ff1",
+  "connections": {
+    "Google Calendar Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-06-13T00:27:04.431Z",
+  "id": "mpGYSE7gMb8JiyIfkOUbZ",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "calendarId": {
+          "__rl": true,
+          "value": "epilsmqb8nhbqs27ng6a3tihug@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "Commandites"
+        },
+        "triggerOn": "eventCreated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "62578b96-afba-434a-95d7-979e06c84db7",
+      "name": "Google Calendar Trigger",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "LDwH2r893j4NrNoB",
+          "name": "Google Calendar main polyai account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "712747224857182208",
+          "mode": "list",
+          "cachedResultName": "PolyAI",
+          "cachedResultUrl": "https://discord.com/channels/712747224857182208"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1515160889806819428",
+          "mode": "list",
+          "cachedResultName": "calendar-notifications",
+          "cachedResultUrl": "https://discord.com/channels/712747224857182208/1515160889806819428"
+        },
+        "content": "=Hello everyone! A new event has been created.\nPlease take a look.\n**[{{ $json.summary }}]({{ $json.htmlLink }})**\nStart: {{ new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'America/New_York' }).format(new Date($json.start.dateTime)) }}\nEnd: {{ new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'America/New_York' }).format(new Date($json.end.dateTime)) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "1b29bb7d-d081-4821-b457-050e14d0efc0",
+      "name": "Send a message",
+      "webhookId": "c4fa3404-b1da-4a8c-90e8-c180d0331c22",
+      "credentials": {
+        "discordBotApi": {
+          "id": "cxGK7pRlQxV7O0GJ",
+          "name": "Discord Bot account"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {
+    "Google Calendar Trigger": [
+      {
+        "json": {
+          "kind": "calendar#event",
+          "etag": "\"3562626330858462\"",
+          "id": "196tdgj8omdmeh68aa8tm6j997",
+          "status": "confirmed",
+          "htmlLink": "https://www.google.com/calendar/event?eid=MTk2dGRnajhvbWRtZWg2OGFhOHRtNmo5OTcgZXBpbHNtcWI4bmhicXMyN25nNmEzdGlodWdAZw",
+          "created": "2026-06-13T01:12:45.000Z",
+          "updated": "2026-06-13T01:12:45.429Z",
+          "summary": "Test",
+          "creator": {
+            "email": "comitepolyai@gmail.com"
+          },
+          "organizer": {
+            "email": "epilsmqb8nhbqs27ng6a3tihug@group.calendar.google.com",
+            "displayName": "Commandites",
+            "self": true
+          },
+          "start": {
+            "dateTime": "2026-06-12T16:00:00-04:00",
+            "timeZone": "America/Toronto"
+          },
+          "end": {
+            "dateTime": "2026-06-12T17:00:00-04:00",
+            "timeZone": "America/Toronto"
+          },
+          "iCalUID": "196tdgj8omdmeh68aa8tm6j997@google.com",
+          "sequence": 0,
+          "guestsCanInviteOthers": false,
+          "guestsCanSeeOtherGuests": false,
+          "reminders": {
+            "useDefault": true
+          },
+          "eventType": "default"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-06-13T00:27:04.437Z",
+      "createdAt": "2026-06-13T00:27:04.437Z",
+      "role": "workflow:owner",
+      "workflowId": "mpGYSE7gMb8JiyIfkOUbZ",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-06-13T01:26:45.972Z",
+  "versionId": "fce7a03c-24cc-476f-a36d-beb524e53ff1"
+}
