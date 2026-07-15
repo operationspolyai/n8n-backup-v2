@@ -1,19 +1,867 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
-  "connections": {
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        [
-          {
-            "node": "Add Member Responses",
-            "type": "main",
-            "index": 0
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-07-15T01:41:10.000Z",
+    "createdAt": "2026-07-15T01:40:45.945Z",
+    "versionId": "e1cec2f1-34ef-42b5-a530-8d88d7b6d10e",
+    "workflowId": "eTQjOjiIsy5FkcXDJNnGi",
+    "nodes": [
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1056,
+          0
+        ],
+        "id": "b9fe1461-77e3-41fb-b506-d182dba4a721",
+        "name": "Replace with adding members to database automatically, for now will be manual."
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          832,
+          0
+        ],
+        "id": "cdd5c158-a9b8-4819-8c87-a2613fb23732",
+        "name": "Filter so people who added themselves during valid time are added. Or add checkbox to sheets for val"
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "SlvfBReU78B2t3w4",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/SlvfBReU78B2t3w4",
+            "cachedResultName": "Update SQL with ClickUp IDs based on emails"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {},
+            "matchingColumns": [],
+            "schema": [],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          1504,
+          0
+        ],
+        "id": "8e27aa83-da22-4a76-ae62-0864efad897b",
+        "name": "Call 'Update SQL with ClickUp IDs based on emails'"
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "E_xNP5QOZ-P3x6s5MMPnB",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/E_xNP5QOZ-P3x6s5MMPnB",
+            "cachedResultName": "Update department folder permissions"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {},
+            "matchingColumns": [],
+            "schema": [],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          2848,
+          0
+        ],
+        "id": "1628625e-6d8d-4bb5-93fe-653e3d31ed4a",
+        "name": "Call 'Update department folder permissions'",
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "DNAjTmFK20D2p5h4xpBP2",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/DNAjTmFK20D2p5h4xpBP2",
+            "cachedResultName": "Give VP or Member access to these comitepolyai files or folders"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {},
+            "matchingColumns": [],
+            "schema": [],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          3296,
+          0
+        ],
+        "id": "7fc07bbb-b11a-4b24-8e6c-4857a534825f",
+        "name": "Call 'Give VP or Member access to these comitepolyai files or folders'"
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "F3F1akaLzhoKK_3yw3BYx",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/F3F1akaLzhoKK_3yw3BYx",
+            "cachedResultName": "List of current Members"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {},
+            "matchingColumns": [],
+            "schema": [],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          2400,
+          0
+        ],
+        "id": "8d6b457a-2191-4db6-9965-b39ff4557a6a",
+        "name": "Call 'List of current Members'"
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1cnRcsOVep4LTWzhAsfKrYoKjz6FjCilJA3QDn08sWJ0",
+            "mode": "list",
+            "cachedResultName": "Add Member 2026 (Responses)",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cnRcsOVep4LTWzhAsfKrYoKjz6FjCilJA3QDn08sWJ0/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 710097246,
+            "mode": "list",
+            "cachedResultName": "Form Responses 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cnRcsOVep4LTWzhAsfKrYoKjz6FjCilJA3QDn08sWJ0/edit#gid=710097246"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          384,
+          272
+        ],
+        "id": "82e85c26-04ee-441b-ae45-9192fc61535b",
+        "name": "Add Member Responses",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "J3rnaSuqLzWLHSYz",
+            "name": "Google Sheets account"
           }
+        }
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.limit",
+        "typeVersion": 1,
+        "position": [
+          2176,
+          0
+        ],
+        "id": "fa33ed06-3fe4-4fe4-ba8c-7880cbb8c811",
+        "name": "Limit"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.limit",
+        "typeVersion": 1,
+        "position": [
+          2624,
+          0
+        ],
+        "id": "7ea1f8de-b8a1-4aea-83df-0e17cd0046a4",
+        "name": "Limit1"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.limit",
+        "typeVersion": 1,
+        "position": [
+          3072,
+          0
+        ],
+        "id": "59546637-4cb0-4ebb-aeb4-66290754fe03",
+        "name": "Limit2"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.limit",
+        "typeVersion": 1,
+        "position": [
+          1280,
+          0
+        ],
+        "id": "1416606c-63d1-4dcf-a2a7-d0619682b334",
+        "name": "Limit3"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          608,
+          272
+        ],
+        "id": "cc5b787b-4a76-41b5-8ed3-272124aed9c2",
+        "name": "Loop Over Items",
+        "executeOnce": false,
+        "alwaysOutputData": false,
+        "notesInFlow": false
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Department",
+            "mode": "list",
+            "cachedResultName": "Department"
+          },
+          "where": {
+            "values": [
+              {
+                "column": "emoji",
+                "value": "={{ $('Loop Over Items').item.json['Department name'].slice(0, 2) }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          832,
+          192
+        ],
+        "id": "bed830b7-396d-4422-9e6c-f1c931f7ea18",
+        "name": "Get department row",
+        "credentials": {
+          "postgres": {
+            "id": "tcgfUQhBwsAuROjj",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Members",
+            "mode": "list",
+            "cachedResultName": "Members"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "name": "={{ $('Loop Over Items').item.json.Name }}",
+              "email": "={{ $('Loop Over Items').item.json['Work email (has to be @gmail.com, cannot be @etud.polymtl.ca)'] }}"
+            },
+            "matchingColumns": [
+              "id"
+            ],
+            "schema": [
+              {
+                "id": "id",
+                "displayName": "id",
+                "required": false,
+                "defaultMatch": true,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "name",
+                "displayName": "name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "email",
+                "displayName": "email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "phone_number",
+                "displayName": "phone_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "ClickUpID",
+                "displayName": "ClickUpID",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1056,
+          272
+        ],
+        "id": "cc2a4f60-4a0c-47da-ae5f-11600e5224ce",
+        "name": "Insert member",
+        "credentials": {
+          "postgres": {
+            "id": "tcgfUQhBwsAuROjj",
+            "name": "Postgres account"
+          }
+        },
+        "onError": "continueErrorOutput"
+      },
+      {
+        "parameters": {
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "MemberDepartment",
+            "mode": "list",
+            "cachedResultName": "MemberDepartment"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "memberID": "={{ $json.id }}",
+              "departmentID": "={{ $('Get department row').item.json.id }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "memberID",
+                "displayName": "memberID",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "departmentID",
+                "displayName": "departmentID",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1280,
+          272
+        ],
+        "id": "b06ca44f-7ab6-4ddc-b768-4ae2d6327dfa",
+        "name": "Link member with department",
+        "credentials": {
+          "postgres": {
+            "id": "tcgfUQhBwsAuROjj",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "MemberRole",
+            "mode": "list",
+            "cachedResultName": "MemberRole"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "memberID": "={{ $('Insert member').item.json.id }}",
+              "roleID": 4
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "memberID",
+                "displayName": "memberID",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "roleID",
+                "displayName": "roleID",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1504,
+          336
+        ],
+        "id": "1df505ef-23fd-4f80-b81f-7ee3179f518d",
+        "name": "Link member with member role",
+        "credentials": {
+          "postgres": {
+            "id": "tcgfUQhBwsAuROjj",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Members",
+            "mode": "list",
+            "cachedResultName": "Members"
+          },
+          "where": {
+            "values": [
+              {
+                "column": "email",
+                "value": "={{ $json['Work email (has to be @gmail.com, cannot be @etud.polymtl.ca)'] }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          160,
+          560
+        ],
+        "id": "eae672fd-d937-42dc-91fe-4cdc5822a19b",
+        "name": "Check if member exists",
+        "credentials": {
+          "postgres": {
+            "id": "tcgfUQhBwsAuROjj",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "loose",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "016a9534-eb53-4eb1-bd31-58f951dd4c8b",
+                "leftValue": "={{ $json.id }}",
+                "rightValue": 0,
+                "operator": {
+                  "type": "number",
+                  "operation": "exists",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "looseTypeValidation": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          160,
+          784
+        ],
+        "id": "d925819f-aa2f-4645-b6ec-59b6b266ba60",
+        "name": "If they exist"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.limit",
+        "typeVersion": 1,
+        "position": [
+          1728,
+          0
+        ],
+        "id": "384a8a3c-2550-48b7-a815-c01a37360460",
+        "name": "Limit4"
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "zHbgqnhVDJ2IUPwqup3nk",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/zHbgqnhVDJ2IUPwqup3nk",
+            "cachedResultName": "Invite to department gmail account"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {},
+            "matchingColumns": [],
+            "schema": [],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          1952,
+          0
+        ],
+        "id": "c1c5cfe1-6ba6-4611-892c-eb48d7bbeb64",
+        "name": "Call 'Invite to department gmail account'1"
+      },
+      {
+        "parameters": {
+          "path": "c2f60262-8dbd-4fe3-ae26-d4d8129b05c5",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          160,
+          272
+        ],
+        "id": "c41d2508-17db-4b3b-a1ea-6d28233c331a",
+        "name": "Webhook",
+        "webhookId": "c2f60262-8dbd-4fe3-ae26-d4d8129b05c5"
+      }
+    ],
+    "connections": {
+      "Filter so people who added themselves during valid time are added. Or add checkbox to sheets for val": {
+        "main": [
+          [
+            {
+              "node": "Replace with adding members to database automatically, for now will be manual.",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
-      ]
+      },
+      "Replace with adding members to database automatically, for now will be manual.": {
+        "main": [
+          [
+            {
+              "node": "Limit3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Call 'Update SQL with ClickUp IDs based on emails'": {
+        "main": [
+          [
+            {
+              "node": "Limit4",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Call 'Give VP or Member access to these comitepolyai files or folders'": {
+        "main": [
+          []
+        ]
+      },
+      "Call 'List of current Members'": {
+        "main": [
+          [
+            {
+              "node": "Limit1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Add Member Responses": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Call 'Update department folder permissions'": {
+        "main": [
+          [
+            {
+              "node": "Limit2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Limit": {
+        "main": [
+          [
+            {
+              "node": "Call 'List of current Members'",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Limit1": {
+        "main": [
+          [
+            {
+              "node": "Call 'Update department folder permissions'",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Limit2": {
+        "main": [
+          [
+            {
+              "node": "Call 'Give VP or Member access to these comitepolyai files or folders'",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Limit3": {
+        "main": [
+          [
+            {
+              "node": "Call 'Update SQL with ClickUp IDs based on emails'",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items": {
+        "main": [
+          [
+            {
+              "node": "Filter so people who added themselves during valid time are added. Or add checkbox to sheets for val",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Get department row",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get department row": {
+        "main": [
+          [
+            {
+              "node": "Insert member",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Insert member": {
+        "main": [
+          [
+            {
+              "node": "Link member with department",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Link member with department": {
+        "main": [
+          [
+            {
+              "node": "Link member with member role",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Link member with member role": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Check if member exists": {
+        "main": [
+          []
+        ]
+      },
+      "If they exist": {
+        "main": [
+          [],
+          []
+        ]
+      },
+      "Limit4": {
+        "main": [
+          [
+            {
+              "node": "Call 'Invite to department gmail account'1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Call 'Invite to department gmail account'1": {
+        "main": [
+          [
+            {
+              "node": "Limit",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Add Member Responses",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
     },
+    "authors": "Poly Ai",
+    "name": "Version e1cec2f1",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "e1cec2f1-34ef-42b5-a530-8d88d7b6d10e",
+  "connections": {
     "Filter so people who added themselves during valid time are added. Or add checkbox to sheets for val": {
       "main": [
         [
@@ -230,6 +1078,17 @@
           }
         ]
       ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Add Member Responses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-05-09T15:40:05.745Z",
@@ -242,21 +1101,10 @@
   "nodes": [
     {
       "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        0,
-        0
-      ],
-      "id": "3df49349-ca0d-46b6-875b-a598b9eb2355",
-      "name": "When clicking ‘Execute workflow’"
-    },
-    {
-      "parameters": {},
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        1456,
+        1056,
         0
       ],
       "id": "b9fe1461-77e3-41fb-b506-d182dba4a721",
@@ -267,7 +1115,7 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        1248,
+        832,
         0
       ],
       "id": "cdd5c158-a9b8-4819-8c87-a2613fb23732",
@@ -295,7 +1143,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        1888,
+        1504,
         0
       ],
       "id": "8e27aa83-da22-4a76-ae62-0864efad897b",
@@ -323,7 +1171,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        3120,
+        2848,
         0
       ],
       "id": "1628625e-6d8d-4bb5-93fe-653e3d31ed4a",
@@ -352,7 +1200,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        3568,
+        3296,
         0
       ],
       "id": "7fc07bbb-b11a-4b24-8e6c-4857a534825f",
@@ -380,7 +1228,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        2720,
+        2400,
         0
       ],
       "id": "8d6b457a-2191-4db6-9965-b39ff4557a6a",
@@ -407,8 +1255,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        416,
-        0
+        384,
+        272
       ],
       "id": "82e85c26-04ee-441b-ae45-9192fc61535b",
       "name": "Add Member Responses",
@@ -424,7 +1272,7 @@
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
       "position": [
-        2512,
+        2176,
         0
       ],
       "id": "fa33ed06-3fe4-4fe4-ba8c-7880cbb8c811",
@@ -435,7 +1283,7 @@
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
       "position": [
-        2928,
+        2624,
         0
       ],
       "id": "7ea1f8de-b8a1-4aea-83df-0e17cd0046a4",
@@ -446,7 +1294,7 @@
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
       "position": [
-        3328,
+        3072,
         0
       ],
       "id": "59546637-4cb0-4ebb-aeb4-66290754fe03",
@@ -457,7 +1305,7 @@
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
       "position": [
-        1664,
+        1280,
         0
       ],
       "id": "1416606c-63d1-4dcf-a2a7-d0619682b334",
@@ -470,8 +1318,8 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        832,
-        0
+        608,
+        272
       ],
       "id": "cc5b787b-4a76-41b5-8ed3-272124aed9c2",
       "name": "Loop Over Items",
@@ -506,8 +1354,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1472,
-        224
+        832,
+        192
       ],
       "id": "bed830b7-396d-4422-9e6c-f1c931f7ea18",
       "name": "Get department row",
@@ -608,8 +1456,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1680,
-        224
+        1056,
+        272
       ],
       "id": "cc2a4f60-4a0c-47da-ae5f-11600e5224ce",
       "name": "Insert member",
@@ -669,8 +1517,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1888,
-        224
+        1280,
+        272
       ],
       "id": "b06ca44f-7ab6-4ddc-b768-4ae2d6327dfa",
       "name": "Link member with department",
@@ -729,8 +1577,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        2096,
-        224
+        1504,
+        336
       ],
       "id": "1df505ef-23fd-4f80-b81f-7ee3179f518d",
       "name": "Link member with member role",
@@ -768,8 +1616,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        592,
-        544
+        160,
+        560
       ],
       "id": "eae672fd-d937-42dc-91fe-4cdc5822a19b",
       "name": "Check if member exists",
@@ -809,8 +1657,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        784,
-        544
+        160,
+        784
       ],
       "id": "d925819f-aa2f-4645-b6ec-59b6b266ba60",
       "name": "If they exist"
@@ -820,7 +1668,7 @@
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
       "position": [
-        2096,
+        1728,
         0
       ],
       "id": "384a8a3c-2550-48b7-a815-c01a37360460",
@@ -848,11 +1696,26 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        2304,
+        1952,
         0
       ],
       "id": "c1c5cfe1-6ba6-4611-892c-eb48d7bbeb64",
       "name": "Call 'Invite to department gmail account'1"
+    },
+    {
+      "parameters": {
+        "path": "c2f60262-8dbd-4fe3-ae26-d4d8129b05c5",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        160,
+        272
+      ],
+      "id": "c41d2508-17db-4b3b-a1ea-6d28233c331a",
+      "name": "Webhook",
+      "webhookId": "c2f60262-8dbd-4fe3-ae26-d4d8129b05c5"
     }
   ],
   "origin": "n8n",
@@ -876,7 +1739,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2026-07-12T17:26:01.458Z",
-  "versionId": "5ade7cbc-10b2-410f-bcc4-6d0ad71803e0"
+  "triggerCount": 1,
+  "updatedAt": "2026-07-15T01:40:45.943Z",
+  "versionId": "e1cec2f1-34ef-42b5-a530-8d88d7b6d10e"
 }
