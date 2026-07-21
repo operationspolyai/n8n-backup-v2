@@ -1,33 +1,11 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-07-15T01:41:10.000Z",
-    "createdAt": "2026-07-15T01:40:45.945Z",
-    "versionId": "e1cec2f1-34ef-42b5-a530-8d88d7b6d10e",
+    "updatedAt": "2026-07-20T15:57:08.000Z",
+    "createdAt": "2026-07-20T15:57:01.231Z",
+    "versionId": "8133647d-a43e-42b4-bcd6-0affc0dcacda",
     "workflowId": "eTQjOjiIsy5FkcXDJNnGi",
     "nodes": [
-      {
-        "parameters": {},
-        "type": "n8n-nodes-base.noOp",
-        "typeVersion": 1,
-        "position": [
-          1056,
-          0
-        ],
-        "id": "b9fe1461-77e3-41fb-b506-d182dba4a721",
-        "name": "Replace with adding members to database automatically, for now will be manual."
-      },
-      {
-        "parameters": {},
-        "type": "n8n-nodes-base.noOp",
-        "typeVersion": 1,
-        "position": [
-          832,
-          0
-        ],
-        "id": "cdd5c158-a9b8-4819-8c87-a2613fb23732",
-        "name": "Filter so people who added themselves during valid time are added. Or add checkbox to sheets for val"
-      },
       {
         "parameters": {
           "workflowId": {
@@ -172,7 +150,8 @@
             "id": "J3rnaSuqLzWLHSYz",
             "name": "Google Sheets account"
           }
-        }
+        },
+        "disabled": true
       },
       {
         "parameters": {},
@@ -225,8 +204,8 @@
         "type": "n8n-nodes-base.splitInBatches",
         "typeVersion": 3,
         "position": [
-          608,
-          272
+          624,
+          144
         ],
         "id": "cc5b787b-4a76-41b5-8ed3-272124aed9c2",
         "name": "Loop Over Items",
@@ -523,8 +502,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          160,
-          560
+          64,
+          608
         ],
         "id": "eae672fd-d937-42dc-91fe-4cdc5822a19b",
         "name": "Check if member exists",
@@ -617,37 +596,57 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          160,
-          272
+          144,
+          208
         ],
         "id": "c41d2508-17db-4b3b-a1ea-6d28233c331a",
         "name": "Webhook",
-        "webhookId": "c2f60262-8dbd-4fe3-ae26-d4d8129b05c5"
+        "webhookId": "c2f60262-8dbd-4fe3-ae26-d4d8129b05c5",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyHour"
+              }
+            ]
+          },
+          "documentId": {
+            "__rl": true,
+            "value": "1cnRcsOVep4LTWzhAsfKrYoKjz6FjCilJA3QDn08sWJ0",
+            "mode": "list",
+            "cachedResultName": "Add Member 2026 (Responses)",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cnRcsOVep4LTWzhAsfKrYoKjz6FjCilJA3QDn08sWJ0/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 710097246,
+            "mode": "list",
+            "cachedResultName": "Form Responses 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cnRcsOVep4LTWzhAsfKrYoKjz6FjCilJA3QDn08sWJ0/edit#gid=710097246"
+          },
+          "event": "rowAdded",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheetsTrigger",
+        "typeVersion": 1,
+        "position": [
+          352,
+          64
+        ],
+        "id": "3fdd48f3-f225-4b33-a3d1-cca723518aa3",
+        "name": "Google Sheets Trigger",
+        "credentials": {
+          "googleSheetsTriggerOAuth2Api": {
+            "id": "LabqxSDQ4TdywW8U",
+            "name": "Operations Google Sheets"
+          }
+        }
       }
     ],
     "connections": {
-      "Filter so people who added themselves during valid time are added. Or add checkbox to sheets for val": {
-        "main": [
-          [
-            {
-              "node": "Replace with adding members to database automatically, for now will be manual.",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Replace with adding members to database automatically, for now will be manual.": {
-        "main": [
-          [
-            {
-              "node": "Limit3",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Call 'Update SQL with ClickUp IDs based on emails'": {
         "main": [
           [
@@ -745,7 +744,7 @@
         "main": [
           [
             {
-              "node": "Filter so people who added themselves during valid time are added. Or add checkbox to sheets for val",
+              "node": "Limit3",
               "type": "main",
               "index": 0
             }
@@ -853,37 +852,26 @@
             }
           ]
         ]
+      },
+      "Google Sheets Trigger": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Poly Ai",
-    "name": "Version e1cec2f1",
+    "name": "changed to every hour",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "e1cec2f1-34ef-42b5-a530-8d88d7b6d10e",
+  "activeVersionId": "8133647d-a43e-42b4-bcd6-0affc0dcacda",
   "connections": {
-    "Filter so people who added themselves during valid time are added. Or add checkbox to sheets for val": {
-      "main": [
-        [
-          {
-            "node": "Replace with adding members to database automatically, for now will be manual.",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Replace with adding members to database automatically, for now will be manual.": {
-      "main": [
-        [
-          {
-            "node": "Limit3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Call 'Update SQL with ClickUp IDs based on emails'": {
       "main": [
         [
@@ -981,7 +969,7 @@
       "main": [
         [
           {
-            "node": "Filter so people who added themselves during valid time are added. Or add checkbox to sheets for val",
+            "node": "Limit3",
             "type": "main",
             "index": 0
           }
@@ -1089,6 +1077,17 @@
           }
         ]
       ]
+    },
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-05-09T15:40:05.745Z",
@@ -1099,28 +1098,6 @@
   },
   "name": "Add member",
   "nodes": [
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        1056,
-        0
-      ],
-      "id": "b9fe1461-77e3-41fb-b506-d182dba4a721",
-      "name": "Replace with adding members to database automatically, for now will be manual."
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        832,
-        0
-      ],
-      "id": "cdd5c158-a9b8-4819-8c87-a2613fb23732",
-      "name": "Filter so people who added themselves during valid time are added. Or add checkbox to sheets for val"
-    },
     {
       "parameters": {
         "workflowId": {
@@ -1265,7 +1242,8 @@
           "id": "J3rnaSuqLzWLHSYz",
           "name": "Google Sheets account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {},
@@ -1318,8 +1296,8 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        608,
-        272
+        624,
+        144
       ],
       "id": "cc5b787b-4a76-41b5-8ed3-272124aed9c2",
       "name": "Loop Over Items",
@@ -1616,8 +1594,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        160,
-        560
+        64,
+        608
       ],
       "id": "eae672fd-d937-42dc-91fe-4cdc5822a19b",
       "name": "Check if member exists",
@@ -1710,12 +1688,54 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        160,
-        272
+        144,
+        208
       ],
       "id": "c41d2508-17db-4b3b-a1ea-6d28233c331a",
       "name": "Webhook",
-      "webhookId": "c2f60262-8dbd-4fe3-ae26-d4d8129b05c5"
+      "webhookId": "c2f60262-8dbd-4fe3-ae26-d4d8129b05c5",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyHour"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1cnRcsOVep4LTWzhAsfKrYoKjz6FjCilJA3QDn08sWJ0",
+          "mode": "list",
+          "cachedResultName": "Add Member 2026 (Responses)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cnRcsOVep4LTWzhAsfKrYoKjz6FjCilJA3QDn08sWJ0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 710097246,
+          "mode": "list",
+          "cachedResultName": "Form Responses 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cnRcsOVep4LTWzhAsfKrYoKjz6FjCilJA3QDn08sWJ0/edit#gid=710097246"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        352,
+        64
+      ],
+      "id": "3fdd48f3-f225-4b33-a3d1-cca723518aa3",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "LabqxSDQ4TdywW8U",
+          "name": "Operations Google Sheets"
+        }
+      }
     }
   ],
   "origin": "n8n",
@@ -1740,6 +1760,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-07-15T01:40:45.943Z",
-  "versionId": "e1cec2f1-34ef-42b5-a530-8d88d7b6d10e"
+  "updatedAt": "2026-07-20T15:57:01.230Z",
+  "versionId": "8133647d-a43e-42b4-bcd6-0affc0dcacda"
 }
