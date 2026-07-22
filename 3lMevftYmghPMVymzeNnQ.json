@@ -1,0 +1,74 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Crypto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-07-22T01:26:39.278Z",
+  "id": "3lMevftYmghPMVymzeNnQ",
+  "isArchived": false,
+  "meta": null,
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "36ca61a9-46ed-4287-a6b9-26825b876f8a",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "action": "generate",
+        "encodingType": "hex"
+      },
+      "type": "n8n-nodes-base.crypto",
+      "typeVersion": 1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "a1cdb54b-2e51-4c71-ab23-876f37d1b154",
+      "name": "Crypto"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-07-22T01:26:39.286Z",
+      "createdAt": "2026-07-22T01:26:39.286Z",
+      "role": "workflow:owner",
+      "workflowId": "3lMevftYmghPMVymzeNnQ",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-07-22T01:28:46.580Z",
+  "versionId": "2854c56c-a9ca-4044-875a-67f797982294"
+}
