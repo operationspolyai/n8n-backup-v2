@@ -1,20 +1,580 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-08-01T04:37:47.000Z",
+    "createdAt": "2026-08-01T04:37:35.888Z",
+    "versionId": "29cc631e-ba5e-4279-94bb-fe6ebe28c34d",
+    "workflowId": "pRP8EaZUQjE-XR0YFFOqa",
+    "nodes": [
+      {
+        "parameters": {
+          "inputSource": "passthrough"
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -80,
+          -48
+        ],
+        "id": "9de6fce3-cea9-4795-bff9-c69110d832b0",
+        "name": "When Executed by Another Workflow"
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Members",
+            "mode": "list",
+            "cachedResultName": "Members"
+          },
+          "returnAll": true,
+          "where": {
+            "values": [
+              {
+                "column": "sentDepartmentEmail",
+                "value": "No"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          144,
+          -48
+        ],
+        "id": "ea7a14e7-4dba-4d61-a120-67e6ac3aaf85",
+        "name": "Fetch Unsent Members",
+        "credentials": {
+          "postgres": {
+            "id": "tcgfUQhBwsAuROjj",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "={{$json.email}}",
+          "subject": "Accès au compte départemental / Department Account Access",
+          "message": "=<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Accès à votre compte de département PolyAI / Access Your PolyAI Department Account</title>\n  <style>\n    body {\n      font-family: system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n      background-color: #0b0f19;\n      margin: 0;\n      padding: 20px;\n      color: #ffffff;\n    }\n    .email-container {\n      max-width: 650px;\n      margin: 0 auto;\n      background-color: #161c2d;\n      border-radius: 8px;\n      overflow: hidden;\n      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n      border-top: 5px solid #d9252a;\n    }\n    .header {\n      background-color: #0b0f19;\n      padding: 30px 20px;\n      text-align: center;\n      border-bottom: 1px solid #2a3147;\n    }\n    .header h1 {\n      margin: 0;\n      font-size: 24px;\n      font-weight: 600;\n      color: #ffffff;\n    }\n    .content {\n      padding: 30px;\n      line-height: 1.6;\n    }\n    .content p {\n      margin-top: 0;\n      margin-bottom: 15px;\n      color: #e0e4eb;\n    }\n    .btn-container {\n      text-align: center;\n      margin: 30px 0;\n    }\n    .btn-primary {\n      background-color: #d9252a;\n      color: #ffffff !important;\n      padding: 14px 28px;\n      text-decoration: none;\n      font-weight: bold;\n      border-radius: 4px;\n      display: inline-block;\n      font-size: 16px;\n      box-shadow: 0 2px 5px rgba(0,0,0,0.3);\n    }\n    .btn-primary:hover {\n      background-color: #b81d22;\n      text-decoration: none;\n    }\n    .alert {\n      background-color: rgba(217, 37, 42, 0.1);\n      border-left: 4px solid #d9252a;\n      padding: 12px 15px;\n      font-size: 14px;\n      margin-top: 20px;\n      color: #ffffff;\n    }\n    a {\n      color: #d9252a;\n      text-decoration: none;\n      font-weight: bold;\n    }\n    a:hover {\n      text-decoration: underline;\n    }\n    .divider {\n      height: 1px;\n      background-color: #2a3147;\n      margin: 40px 0;\n    }\n    .footer {\n      background-color: #0b0f19;\n      padding: 20px;\n      text-align: center;\n      font-size: 13px;\n      color: #8c9bb0;\n      border-top: 1px solid #2a3147;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"email-container\">\n    \n    <div class=\"header\">\n      <h1>Bienvenue dans votre compte de département PolyAI</h1>\n    </div>\n    \n    <div class=\"content\">\n      <p>Bonjour!</p>\n      <p>Votre compte Google officiel pour votre département PolyAI a été configuré et est prêt à être utilisé. Puisque nous prenons la sécurité au sérieux, ce compte est protégé par la validation en deux étapes</p>\n      <p>Veuillez cliquer sur le bouton ci-dessous pour accéder de manière sécurisée à vos identifiants de connexion et finaliser la configuration de l'application Authenticator sur votre téléphone portable.</p>\n\n      <div class=\"btn-container\">\n        <a href=\"{{ $('Edit Fields').item.json.claimUrl }}\" class=\"btn-primary\" target=\"_blank\">Accéder aux identifiants du département</a>\n      </div>\n\n      <div class=\"alert\">\n        <strong>Attention :</strong> Pour votre sécurité, ce lien d'accès unique expirera dans <strong>24 heures</strong>. Si le lien expire avant que vous n'ayez pu récupérer vos accès, vous devrez demander un nouveau lien au VP aux opérations.\n      </div>\n\n      <p style=\"margin-top: 25px; font-weight: bold;\">N'hésitez pas à répondre directement à ce courriel si vous avez des questions!</p>\n      \n      <div class=\"divider\"></div>\n\n      <h1 style=\"color: #ffffff; text-align: center; margin-bottom: 30px;\">Welcome to your PolyAI Department Account</h1>\n\n      <p>Hello!</p>\n      <p>Your official PolyAI department Google account has been set up and is ready to use. Because we take security seriously, this account is protected by 2-Step Verification.</p>\n      <p>Please click the button below to securely access your login credentials and view instructions to set up the Authenticator app on your personal phone.</p>\n\n      <div class=\"btn-container\">\n        <a href=\"{{ $('Edit Fields').item.json.claimUrl }}\" class=\"btn-primary\" target=\"_blank\">Access Department Credentials</a>\n      </div>\n\n      <div class=\"alert\">\n        <strong>Important:</strong> For security purposes, this one-time access link will expire in <strong>24 hours</strong>. If the link expires before you claim your account, you will need to contact the VP of Operations to generate a new one.\n      </div>\n\n      <p style=\"margin-top: 25px; font-weight: bold;\">Feel free to reply directly to this email if you have any questions!</p>\n    </div>\n\n    <div class=\"footer\">\n      <p>PolyAI</p>\n    </div>\n  </div>\n\n</body>\n</html>\n",
+          "options": {
+            "appendAttribution": false
+          }
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          1488,
+          -48
+        ],
+        "id": "501c7cf5-2590-4c0b-8cef-2e4fe0eb23a0",
+        "name": "Send a message",
+        "webhookId": "06f7b977-e33b-44ad-8934-09550a00abdd",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "unquhRC3gfJ50lma",
+            "name": "Gmail account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "action": "generate",
+          "dataPropertyName": "claimToken",
+          "encodingType": "hex"
+        },
+        "type": "n8n-nodes-base.crypto",
+        "typeVersion": 1,
+        "position": [
+          816,
+          -48
+        ],
+        "id": "954bed86-be84-4ac6-86c7-eacb32f9c535",
+        "name": "Crypto"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "d2d3ceb7-8bab-480b-9cd9-57209975b663",
+                "name": "claimTokenExpiresAt",
+                "value": "={{ $now.plus({ hours: 24 }).toUTC().toISO()}}\n",
+                "type": "string"
+              },
+              {
+                "id": "223d2114-5e75-4cae-8a8e-c2d9e6b22a7a",
+                "name": "claimUrl",
+                "value": "=https://n8n.n8npolyai.ca/webhook/claim?token={{ $json.claimToken }}",
+                "type": "string"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1040,
+          -48
+        ],
+        "id": "9f5f212a-8185-4e5f-90de-b00ddc43ea08",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "schema": {
+            "__rl": true,
+            "value": "public",
+            "mode": "list",
+            "cachedResultName": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Members",
+            "mode": "list",
+            "cachedResultName": "Members"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "id": "={{ $('Fetch Unsent Members').item.json.id }}",
+              "claimToken": "={{ $json.claimToken }}",
+              "claimTokenExpiresAt": "={{ $json.claimTokenExpiresAt }}"
+            },
+            "matchingColumns": [
+              "id"
+            ],
+            "schema": [
+              {
+                "id": "id",
+                "displayName": "id",
+                "required": false,
+                "defaultMatch": true,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "name",
+                "displayName": "name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "email",
+                "displayName": "email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "phone_number",
+                "displayName": "phone_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "ClickUpID",
+                "displayName": "ClickUpID",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sentDepartmentEmail",
+                "displayName": "sentDepartmentEmail",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "boolean",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "claimToken",
+                "displayName": "claimToken",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "claimTokenExpiresAt",
+                "displayName": "claimTokenExpiresAt",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1264,
+          -48
+        ],
+        "id": "9516a74a-53b2-4949-8122-5c4e3c73712f",
+        "name": "Update rows in a table",
+        "credentials": {
+          "postgres": {
+            "id": "tcgfUQhBwsAuROjj",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Members",
+            "mode": "list",
+            "cachedResultName": "Members"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "sentDepartmentEmail": true,
+              "id": "={{ $('Update rows in a table').item.json.id}}"
+            },
+            "matchingColumns": [
+              "id"
+            ],
+            "schema": [
+              {
+                "id": "id",
+                "displayName": "id",
+                "required": false,
+                "defaultMatch": true,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "name",
+                "displayName": "name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "email",
+                "displayName": "email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "phone_number",
+                "displayName": "phone_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "ClickUpID",
+                "displayName": "ClickUpID",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sentDepartmentEmail",
+                "displayName": "sentDepartmentEmail",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "boolean",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "claimToken",
+                "displayName": "claimToken",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "claimTokenExpiresAt",
+                "displayName": "claimTokenExpiresAt",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1712,
+          -48
+        ],
+        "id": "5710a1ba-f8c4-4b55-8bd1-cccf514d9d94",
+        "name": "Update Sent bool",
+        "credentials": {
+          "postgres": {
+            "id": "tcgfUQhBwsAuROjj",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "SELECT \n  d.gmail,\n  d.password,\n  d.\"GoogleAuthenticatorKey\"\nFROM public.\"Members\" m\nLEFT JOIN public.\"MemberDepartment\" md ON m.id = md.\"memberID\"\nLEFT JOIN public.\"Department\" d ON md.\"departmentID\" = d.id\nWHERE m.id = {{ $json.id }};\n",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          368,
+          -48
+        ],
+        "id": "d33e6d45-cdc1-446e-a044-9a74880883ec",
+        "name": "Get Department",
+        "credentials": {
+          "postgres": {
+            "id": "tcgfUQhBwsAuROjj",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "loose",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "9f314296-eef7-4cdc-9ccb-9892df3b5e24",
+                "leftValue": "={{ $json.GoogleAuthenticatorKey }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "exists",
+                  "singleValue": true
+                }
+              },
+              {
+                "id": "42210b57-49fa-424e-9848-f4fcb640ad07",
+                "leftValue": "={{ $json.password }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "exists",
+                  "singleValue": true
+                }
+              },
+              {
+                "id": "a7382b17-e5c1-421f-af17-b02f926c2d83",
+                "leftValue": "={{ $json.gmail }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "exists",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "looseTypeValidation": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          592,
+          -48
+        ],
+        "id": "ab6a2ce5-536b-4e0e-8106-cd53773b68a2",
+        "name": "If"
+      }
+    ],
+    "connections": {
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "Fetch Unsent Members",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Fetch Unsent Members": {
+        "main": [
+          [
+            {
+              "node": "Get Department",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Crypto": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Update rows in a table",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update rows in a table": {
+        "main": [
+          [
+            {
+              "node": "Send a message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send a message": {
+        "main": [
+          [
+            {
+              "node": "Update Sent bool",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get Department": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "Crypto",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Poly Ai",
+    "name": "Version 29cc631e",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "29cc631e-ba5e-4279-94bb-fe6ebe28c34d",
   "connections": {
     "When Executed by Another Workflow": {
-      "main": [
-        [
-          {
-            "node": "Fetch Unsent Members",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Schedule Trigger": {
       "main": [
         [
           {
@@ -29,7 +589,7 @@
       "main": [
         [
           {
-            "node": "Crypto",
+            "node": "Get Department",
             "type": "main",
             "index": 0
           }
@@ -80,47 +640,7 @@
         ]
       ]
     },
-    "Webhook": {
-      "main": [
-        [
-          {
-            "node": "Query Member by token",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If": {
-      "main": [
-        [
-          {
-            "node": "Invalidate Token",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Failure",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Invalidate Token": {
-      "main": [
-        [
-          {
-            "node": "Get Department",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Query Member by token": {
+    "Get Department": {
       "main": [
         [
           {
@@ -131,16 +651,11 @@
         ]
       ]
     },
-    "Success": {
-      "main": [
-        []
-      ]
-    },
-    "Get Department": {
+    "If": {
       "main": [
         [
           {
-            "node": "Success",
+            "node": "Crypto",
             "type": "main",
             "index": 0
           }
@@ -154,27 +669,8 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Secure invite to department gmail",
+  "name": "Secure invite to Department Gmail through link",
   "nodes": [
-    {
-      "parameters": {
-        "rule": {
-          "interval": [
-            {
-              "triggerAtHour": 7
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.3,
-      "position": [
-        0,
-        0
-      ],
-      "id": "ae9c136c-8803-4b22-9278-33ccb0f1b16f",
-      "name": "Schedule Trigger"
-    },
     {
       "parameters": {
         "inputSource": "passthrough"
@@ -182,8 +678,8 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        0,
-        192
+        -80,
+        -48
       ],
       "id": "9de6fce3-cea9-4795-bff9-c69110d832b0",
       "name": "When Executed by Another Workflow"
@@ -216,8 +712,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        224,
-        96
+        144,
+        -48
       ],
       "id": "ea7a14e7-4dba-4d61-a120-67e6ac3aaf85",
       "name": "Fetch Unsent Members",
@@ -240,8 +736,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1120,
-        96
+        1488,
+        -48
       ],
       "id": "501c7cf5-2590-4c0b-8cef-2e4fe0eb23a0",
       "name": "Send a message",
@@ -262,8 +758,8 @@
       "type": "n8n-nodes-base.crypto",
       "typeVersion": 1,
       "position": [
-        448,
-        96
+        816,
+        -48
       ],
       "id": "954bed86-be84-4ac6-86c7-eacb32f9c535",
       "name": "Crypto"
@@ -281,7 +777,7 @@
             {
               "id": "223d2114-5e75-4cae-8a8e-c2d9e6b22a7a",
               "name": "claimUrl",
-              "value": "=https://n8n.n8npolyai.ca/webhook-test/claim?token={{ $json.claimToken }}",
+              "value": "=https://n8n.n8npolyai.ca/webhook/claim?token={{ $json.claimToken }}",
               "type": "string"
             }
           ]
@@ -292,8 +788,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        672,
-        96
+        1040,
+        -48
       ],
       "id": "9f5f212a-8185-4e5f-90de-b00ddc43ea08",
       "name": "Edit Fields"
@@ -316,7 +812,7 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "id": "={{ $json.id }}",
+            "id": "={{ $('Fetch Unsent Members').item.json.id }}",
             "claimToken": "={{ $json.claimToken }}",
             "claimTokenExpiresAt": "={{ $json.claimTokenExpiresAt }}"
           },
@@ -423,8 +919,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        896,
-        96
+        1264,
+        -48
       ],
       "id": "9516a74a-53b2-4949-8122-5c4e3c73712f",
       "name": "Update rows in a table",
@@ -557,8 +1053,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1344,
-        96
+        1712,
+        -48
       ],
       "id": "5710a1ba-f8c4-4b55-8bd1-cccf514d9d94",
       "name": "Update Sent bool",
@@ -571,19 +1067,24 @@
     },
     {
       "parameters": {
-        "path": "claim",
-        "responseMode": "responseNode",
+        "operation": "executeQuery",
+        "query": "SELECT \n  d.gmail,\n  d.password,\n  d.\"GoogleAuthenticatorKey\"\nFROM public.\"Members\" m\nLEFT JOIN public.\"MemberDepartment\" md ON m.id = md.\"memberID\"\nLEFT JOIN public.\"Department\" d ON md.\"departmentID\" = d.id\nWHERE m.id = {{ $json.id }};\n",
         "options": {}
       },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2.1,
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
       "position": [
-        0,
-        512
+        368,
+        -48
       ],
-      "id": "931d0608-467c-4191-be52-d18819997c6d",
-      "name": "Webhook",
-      "webhookId": "6d12a9da-e9ea-4668-ad2a-c2d02e6f1316"
+      "id": "d33e6d45-cdc1-446e-a044-9a74880883ec",
+      "name": "Get Department",
+      "credentials": {
+        "postgres": {
+          "id": "tcgfUQhBwsAuROjj",
+          "name": "Postgres account"
+        }
+      }
     },
     {
       "parameters": {
@@ -596,22 +1097,33 @@
           },
           "conditions": [
             {
-              "id": "1602ed41-8f7f-4536-aa5b-88a91264ad98",
-              "leftValue": "={{ $json.id }}",
+              "id": "9f314296-eef7-4cdc-9ccb-9892df3b5e24",
+              "leftValue": "={{ $json.GoogleAuthenticatorKey }}",
               "rightValue": "",
               "operator": {
                 "type": "string",
-                "operation": "notEmpty",
+                "operation": "exists",
                 "singleValue": true
               }
             },
             {
-              "id": "6cfe9543-7bbf-4a29-8af0-dc9c01e346fe",
-              "leftValue": "={{ $now.toUTC().toISO() }}",
-              "rightValue": "={{ $json.claimTokenExpiresAt }}",
+              "id": "42210b57-49fa-424e-9848-f4fcb640ad07",
+              "leftValue": "={{ $json.password }}",
+              "rightValue": "",
               "operator": {
-                "type": "dateTime",
-                "operation": "before"
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "a7382b17-e5c1-421f-af17-b02f926c2d83",
+              "leftValue": "={{ $json.gmail }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
               }
             }
           ],
@@ -623,252 +1135,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        448,
-        512
+        592,
+        -48
       ],
-      "id": "8543c78a-4622-49f5-bf8d-b4a8a423eb68",
+      "id": "ab6a2ce5-536b-4e0e-8106-cd53773b68a2",
       "name": "If"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "schema": {
-          "__rl": true,
-          "mode": "list",
-          "value": "public"
-        },
-        "table": {
-          "__rl": true,
-          "value": "Members",
-          "mode": "list",
-          "cachedResultName": "Members"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "id": "={{ $json.id }}",
-            "claimToken": "NULL"
-          },
-          "matchingColumns": [
-            "id"
-          ],
-          "schema": [
-            {
-              "id": "id",
-              "displayName": "id",
-              "required": false,
-              "defaultMatch": true,
-              "display": true,
-              "type": "number",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "created_at",
-              "displayName": "created_at",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "dateTime",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "name",
-              "displayName": "name",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "email",
-              "displayName": "email",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "phone_number",
-              "displayName": "phone_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "ClickUpID",
-              "displayName": "ClickUpID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "sentDepartmentEmail",
-              "displayName": "sentDepartmentEmail",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "boolean",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "claimToken",
-              "displayName": "claimToken",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "claimTokenExpiresAt",
-              "displayName": "claimTokenExpiresAt",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "dateTime",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "claimTokenUsed",
-              "displayName": "claimTokenUsed",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "boolean",
-              "canBeUsedToMatch": true,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {
-          "replaceEmptyStrings": true
-        }
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
-      "position": [
-        672,
-        416
-      ],
-      "id": "ab72c1bc-5241-4d78-8de6-87cbc8c3e55a",
-      "name": "Invalidate Token",
-      "credentials": {
-        "postgres": {
-          "id": "tcgfUQhBwsAuROjj",
-          "name": "Postgres account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT id, email, \"claimToken\", \"claimTokenExpiresAt\" \nFROM public.\"Members\" \nWHERE \"claimToken\" = $1;\n",
-        "options": {
-          "queryReplacement": "={{ $json.query.token }}"
-        }
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
-      "position": [
-        224,
-        512
-      ],
-      "id": "52abe112-4c4c-4701-b5f8-fffe702674d0",
-      "name": "Query Member by token",
-      "alwaysOutputData": true,
-      "credentials": {
-        "postgres": {
-          "id": "tcgfUQhBwsAuROjj",
-          "name": "Postgres account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "respondWith": "text",
-        "responseBody": "=<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n  <meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Vos identifiants PolyAI / Your PolyAI Credentials</title>\n  <style>\n    body { font-family: system-ui, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 20px; margin: 0; display: flex; justify-content: center; }\n    .container { max-width: 650px; width: 100%; background: #161c2d; padding: 30px; border-radius: 8px; margin-top: 20px; border-top: 5px solid #d9252a; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }\n    h1 { font-size: 22px; text-align: center; margin-bottom: 20px; border-bottom: 1px solid #2a3147; padding-bottom: 15px; }\n    .warning-box { background: rgba(217, 37, 42, 0.1); border-left: 4px solid #d9252a; padding: 15px; border-radius: 4px; font-size: 14px; margin-bottom: 25px; line-height: 1.5; }\n    .cred-group { background: #0b0f19; padding: 15px 20px; border-radius: 6px; margin-bottom: 15px; border: 1px solid #2a3147; }\n    .label { font-size: 11px; color: #8c9bb0; text-transform: uppercase; letter-spacing: 0.5px; }\n    .value { font-family: monospace; font-size: 16px; color: #ffffff; margin-top: 5px; word-break: break-all; font-weight: bold; }\n    .lang-section { margin-top: 25px; }\n    h3 { font-size: 16px; color: #ffffff; margin-bottom: 10px; border-bottom: 1px solid #2a3147; padding-bottom: 5px; }\n    ol { padding-left: 20px; color: #e0e4eb; font-size: 14px; line-height: 1.6; }\n    li { margin-bottom: 10px; }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Vos identifiants / Your Credentials</h1>\n    \n    <div class=\"warning-box\">\n      <strong>⚠️ ATTENTION / SECURITY WARNING:</strong><br>\n      (FR) Cette page ne s'affichera qu'<strong>UNE SEULE FOIS</strong>. Le jeton d'accès vient d'être supprimé. Ne fermez pas cet onglet tant que la configuration n'est pas terminée.<br><br>\n      (EN) This page will only load <strong>ONCE</strong>. Your security token has just been burned. Do not close or refresh this tab until setup is complete.\n    </div>\n\n    <!-- Credentials Block -->\n    <div class=\"cred-group\">\n      <div class=\"label\">Courriel / Email Address</div>\n      <div class=\"value\">{{ $json.gmail }}</div>\n    </div>\n    \n    <div class=\"cred-group\">\n      <div class=\"label\">Mot de passe temporaire / Temporary Password</div>\n      <div class=\"value\">{{ $json.password }}</div>\n    </div>\n\n    <div class=\"cred-group\">\n      <div class=\"label\">Clé de configuration Authenticator / Authenticator Secret Key</div>\n      <div class=\"value\">{{ $json.GoogleAuthenticatorKey }}</div>\n    </div>\n\n    <!-- French Instructions -->\n    <div class=\"lang-section\">\n      <h3>Instructions de configuration (Français)</h3>\n      <ol>\n        <li>Ouvrez l'application <strong>Google Authenticator</strong> sur votre téléphone portable.</li>\n        <li>Appuyez sur le bouton <strong>\"+\"</strong> et sélectionnez <strong>\"Saisir une clé de configuration\"</strong>.</li>\n        <li>Entrez un nom reconnaissable (ex. : <code>PolyAI Support</code>) et collez la <strong>Clé de configuration</strong> ci-dessus. Cliquez sur Ajouter.</li>\n        <li>Allez sur <a href=\"https://gmail.com\" target=\"_blank\" style=\"color: #d9252a; text-decoration: none; font-weight: bold;\">Gmail.com</a> sur votre ordinateur. Connectez-vous avec le courriel et le mot de passe ci-dessus.</li>\n        <li>Entrez le code à 6 chiffres qui défile sur votre application Authenticator pour valider la connexion.</li>\n      </ol>\n    </div>\n\n    <!-- English Instructions -->\n    <div class=\"lang-section\">\n      <h3>Setup Instructions (English)</h3>\n      <ol>\n        <li>Open the <strong>Google Authenticator</strong> app on your mobile device.</li>\n        <li>Tap the <strong>\"+\"</strong> button and select <strong>\"Enter a setup key\"</strong>.</li>\n        <li>Set Account Name to something clear (e.g., <code>PolyAI Support</code>). Paste the <strong>Secret Key</strong> shown above into the key field and click Add.</li>\n        <li>Navigate to <a href=\"https://gmail.com\" target=\"_blank\" style=\"color: #d9252a; text-decoration: none; font-weight: bold;\">Gmail.com</a> on your computer. Log in using the Email and Password above.</li>\n        <li>When prompted for 2-Step Verification, enter the active 6-digit rolling code from your app screen.</li>\n      </ol>\n    </div>\n  </div>\n</body>\n</html>\n",
-        "options": {
-          "responseCode": 200,
-          "responseHeaders": {
-            "entries": [
-              {
-                "name": "Content-Type",
-                "value": "text/html; charset=utf-8"
-              }
-            ]
-          }
-        }
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.5,
-      "position": [
-        1120,
-        416
-      ],
-      "id": "1138f783-5b90-4870-a5b2-63a47b3e6e34",
-      "name": "Success"
-    },
-    {
-      "parameters": {
-        "respondWith": "text",
-        "responseBody": "=<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Lien Expiré / Link Expired - PolyAI</title>\n  <style>\n    body { font-family: system-ui, sans-serif; background-color: #0b0f19; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }\n    .card { max-width: 500px; width: 100%; padding: 40px; background: #161c2d; text-align: center; border-radius: 8px; border-top: 5px solid #d9252a; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }\n    h1 { font-size: 22px; margin-bottom: 20px; color: #d9252a; }\n    .lang-block { margin-bottom: 25px; text-align: left; }\n    .lang-block:last-child { margin-bottom: 0; }\n    h2 { font-size: 14px; text-transform: uppercase; color: #8c9bb0; margin: 0 0 8px 0; letter-spacing: 0.5px; }\n    p { color: #e0e4eb; font-size: 15px; line-height: 1.6; margin: 0; }\n    .divider { height: 1px; background-color: #2a3147; margin: 20px 0; }\n  </style>\n</head>\n<body>\n  <div class=\"card\">\n    <h1>Lien Expiré ou Invalide<br>Link Expired or Invalid</h1>\n    \n    <!-- French Error -->\n    <div class=\"lang-block\">\n      <h2>Français</h2>\n      <p>Pour des raisons de sécurité, les liens d'accès aux identifiants départementaux sont à usage unique et expirent exactement 24 heures après leur création.</p>\n      <p style=\"margin-top: 10px;\">Ce jeton a déjà été utilisé ou a expiré. Veuillez contacter le VP aux opérations pour générer un nouveau lien d'accès.</p>\n    </div>\n\n    <div class=\"divider\"></div>\n\n    <!-- English Error -->\n    <div class=\"lang-block\">\n      <h2>English</h2>\n      <p>For security purposes, department credential access links are strictly single-use and expire exactly 24 hours after creation.</p>\n      <p style=\"margin-top: 10px;\">This token has already been burned or has timed out. Please contact the VP of Operations to request a new access link.</p>\n    </div>\n  </div>\n</body>\n</html>\n",
-        "options": {
-          "responseCode": 403,
-          "responseHeaders": {
-            "entries": [
-              {
-                "name": "Content-Type",
-                "value": "text/html; charset=utf-8"
-              }
-            ]
-          }
-        }
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.5,
-      "position": [
-        672,
-        608
-      ],
-      "id": "a454ab1c-9f24-4acf-ae59-d0adba45caed",
-      "name": "Failure"
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT \n  m.id AS \"memberID\",\n  m.created_at AS \"memberCreatedAt\",\n  m.name AS \"memberName\",\n  m.email,\n  m.phone_number AS \"memberPhoneNumber\",\n  m.\"ClickUpID\" AS \"memberClickUpID\",\n  m.\"sentDepartmentEmail\",\n  r.\"roleName\",\n  d.id AS \"departmentID\",\n  d.created_at AS \"departmentCreatedAt\",\n  d.\"departmentName\",\n  d.emoji,\n  d.\"ClickUpAssignOtherListID\",\n  d.\"ClickUpFolderID\",\n  d.\"driveID\",\n  d.gmail,\n  d.password,\n  d.\"phoneNumber\" AS \"departmentPhoneNumber\",\n  d.\"backupCodes\",\n  d.\"GoogleAuthenticatorKey\"\nFROM public.\"Members\" m\nLEFT JOIN public.\"MemberDepartment\" md ON m.id = md.\"memberID\"\nLEFT JOIN public.\"Department\" d ON md.\"departmentID\" = d.id\nLEFT JOIN public.\"MemberRole\" mr ON m.id = mr.\"memberID\"\nLEFT JOIN public.\"Role\" r ON mr.\"roleID\" = r.id\nWHERE m.id = {{ $json.id }};",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
-      "position": [
-        896,
-        416
-      ],
-      "id": "874d0250-98d2-4da5-9de1-655293c8021d",
-      "name": "Get Department",
-      "credentials": {
-        "postgres": {
-          "id": "tcgfUQhBwsAuROjj",
-          "name": "Postgres account"
-        }
-      }
     }
   ],
   "origin": "n8n",
@@ -909,6 +1180,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-08-01T03:58:37.098Z",
-  "versionId": "5610b829-7f17-40bb-a924-16b420eeee58"
+  "updatedAt": "2026-08-01T04:37:35.886Z",
+  "versionId": "29cc631e-ba5e-4279-94bb-fe6ebe28c34d"
 }
