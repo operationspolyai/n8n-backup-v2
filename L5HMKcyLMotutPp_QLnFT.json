@@ -1,0 +1,38 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {},
+  "createdAt": "2026-08-02T19:00:22.498Z",
+  "id": "L5HMKcyLMotutPp_QLnFT",
+  "isArchived": true,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 3",
+  "nodes": [],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "operationspolyai",
+    "name": "n8n-backup-v2"
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-08-02T19:00:22.504Z",
+      "createdAt": "2026-08-02T19:00:22.504Z",
+      "role": "workflow:owner",
+      "workflowId": "L5HMKcyLMotutPp_QLnFT",
+      "projectId": "1KxArspnjifF9NPY"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-08-02T19:00:46.000Z",
+  "versionId": "d6ee1375-b9de-4228-889d-a9d2797e5efc"
+}
